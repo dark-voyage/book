@@ -23,6 +23,7 @@ jobs:
       uses: actions/checkout@master
       with:
         repository: rust-lang-uz/i10n
+        path: i10n
 
     - name: Update the content
       run: |
