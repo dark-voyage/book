@@ -14,13 +14,9 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
-    - name: Check the grep guy
-      run: ls -a | grep -xv ".|..|.github|.git"
-
     - name: Cleaning up the repository
       run: |
-        shopt -s extglob
-        rm -rf -v !(*.git|*.github)
+        [ -d "./content" ] && rm -rf ./content
 
     - name: Clone the current state repo
       uses: actions/checkout@master
@@ -30,18 +26,8 @@ jobs:
 
     - name: Update the content
       run: |
-        # Let's see what we have
-        echo "Current repo"
-        ls -a
-        # Let's check now the i10n repo
-        echo "i10n repo"
-        ls -a ./i10n
-        # Let's clone the rustbook-uz repo
-        ls -a ./i10n/rustbook-uz
         # Move ordinary files first
-        mv -f ./i10/rustbook-uz/* ./
-        # Move dotfiles now
-        mv -f ./i10/rustbook-uz/.* ./
+        mv ./i10n/rustbook-uz ./content
         # Delete the cloned data
         rm -rf ./i10
         
