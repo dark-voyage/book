@@ -29,6 +29,8 @@ jobs:
       run: |
         # Let's see what we have
         ls -a
+        echo now contents of i10n
+        ls -a ./i10n
         # Move ordinary files first
         mv -f ./i10/rustbook-uz/* ./
         # Move dotfiles now
