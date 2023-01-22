@@ -29,7 +29,7 @@ jobs:
         # Move ordinary files first
         mv -f ./i10/rustbook-uz/* ./
         # Move dotfiles now
-        mv -f ./i10/rustbook-uz/* ./
+        mv -f ./i10/rustbook-uz/.* ./
         # Delete the cloned data
         rm -rf ./i10
         
