@@ -21,7 +21,7 @@ jobs:
         [ -d "./content" ] && rm -rf ./content
 
     - name: Clone the current state repo
-      uses: actions/checkout@master
+      uses: actions/checkout@v3
       with:
         repository: rust-lang-uz/i10n
         path: i10n
@@ -32,7 +32,7 @@ jobs:
         mv ./i10n/rustbook-uz ./content
         ls -la
         # Delete the cloned data
-        rm -rf i10
+        sudo rm -rf ./i10
         ls -la
         
     - name: Setup git credentials
