@@ -11,6 +11,9 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
+    - name: Check the grep guy
+      run: ls -a | grep -xv ".github|.git"
+
     - name: Cleaning up the repository
       run: ls -a | grep -xv ".github|.git" | xargs rm -rf
 
