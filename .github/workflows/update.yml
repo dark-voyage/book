@@ -1,6 +1,9 @@
 name: Update
 
 on:
+  push:
+    branches:
+      - main
   schedule:
     - cron: "0 1 * * *"
   workflow_dispatch:
@@ -33,6 +36,8 @@ jobs:
         # Let's check now the i10n repo
         echo "i10n repo"
         ls -a ./i10n
+        # Let's clone the rustbook-uz repo
+        ls -a ./i10n/rustbook-uz
         # Move ordinary files first
         mv -f ./i10/rustbook-uz/* ./
         # Move dotfiles now
