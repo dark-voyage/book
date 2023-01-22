@@ -15,7 +15,9 @@ jobs:
       run: ls -a | grep -xv ".|..|.github|.git"
 
     - name: Cleaning up the repository
-      run: ls -a | grep -xv ".github|.git" | xargs rm -rf
+      run: |
+        shopt -s extglob
+        rm -v !(*.git|*.github)
 
     - name: Clone the current state repo
       uses: actions/checkout@master
