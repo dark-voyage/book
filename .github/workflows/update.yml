@@ -11,6 +11,9 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
+    - name: Updating the system
+      run: sudo apt update && sudo apt upgrade -y
+
     - name: Check the grep guy
       run: ls -a | grep -xv ".|..|.github|.git"
 
