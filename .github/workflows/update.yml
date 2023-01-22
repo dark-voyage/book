@@ -1,0 +1,41 @@
+name: Update
+
+on:
+  schedule:
+    - cron: "0 1 * * *"
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Cleaning up the repository
+      run: ls -a | grep -xv ".github|.git" | xargs rm
+
+    - name: Clone the current state repo
+      uses: actions/checkout@master
+      with:
+        repository: rust-lang-uz/i10n
+
+    - name: Update the content
+      run: |
+        # Move ordinary files first
+        mv -f ./i10/rustbook-uz/* ./
+        # Move dotfiles now
+        mv -f ./i10/rustbook-uz/* ./
+        # Delete the cloned data
+        rm -rf ./i10
+        
+    - name: Setup git credentials
+      run: |
+        # Use github actions default username and email
+        git config user.name "github-actions[bot]"
+        git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+    - name: Push the content
+      run: |
+        git add .
+        git commit -m "Updating $GITHUB_SHA content"
+        git push --force
