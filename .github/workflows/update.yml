@@ -28,8 +28,10 @@ jobs:
     - name: Update the content
       run: |
         # Let's see what we have
+        echo "Current repo"
         ls -a
         # Let's check now the i10n repo
+        echo "i10n repo"
         ls -a ./i10n
         # Move ordinary files first
         mv -f ./i10/rustbook-uz/* ./
