@@ -28,8 +28,10 @@ jobs:
       run: |
         # Move ordinary files first
         mv ./i10n/rustbook-uz ./content
+        ls -la
         # Delete the cloned data
         rm -rf ./i10
+        ls -la
         
     - name: Setup git credentials
       run: |
