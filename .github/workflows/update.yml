@@ -17,7 +17,7 @@ jobs:
     - name: Cleaning up the repository
       run: |
         shopt -s extglob
-        ls -a | xargs rm -rf -v !(*.git|*.github)
+        rm -rf -v !(*.git|*.github)
 
     - name: Clone the current state repo
       uses: actions/checkout@master
@@ -29,7 +29,7 @@ jobs:
       run: |
         # Let's see what we have
         ls -a
-        echo now contents of i10n
+        # Let's check now the i10n repo
         ls -a ./i10n
         # Move ordinary files first
         mv -f ./i10/rustbook-uz/* ./
