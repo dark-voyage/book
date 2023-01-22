@@ -12,7 +12,7 @@ jobs:
     - uses: actions/checkout@v3
 
     - name: Cleaning up the repository
-      run: ls -a | grep -xv ".github|.git" | xargs rm
+      run: ls -a | grep -xv ".github|.git" | xargs rm -rf
 
     - name: Clone the current state repo
       uses: actions/checkout@master
