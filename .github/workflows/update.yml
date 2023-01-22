@@ -17,7 +17,7 @@ jobs:
     - name: Cleaning up the repository
       run: |
         shopt -s extglob
-        rm -v !(*.git|*.github)
+        rm -rf -v !(*.git|*.github)
 
     - name: Clone the current state repo
       uses: actions/checkout@master
