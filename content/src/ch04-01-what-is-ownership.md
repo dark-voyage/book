@@ -1,184 +1,138 @@
-## What Is Ownership?
+## Ownership Nima?
 
-*Ownership* is a set of rules that govern how a Rust program manages memory.
-All programs have to manage the way they use a computer’s memory while running.
-Some languages have garbage collection that regularly looks for no-longer-used
-memory as the program runs; in other languages, the programmer must explicitly
-allocate and free the memory. Rust uses a third approach: memory is managed
-through a system of ownership with a set of rules that the compiler checks. If
-any of the rules are violated, the program won’t compile. None of the features
-of ownership will slow down your program while it’s running.
+*Ownership*(Egalik) bu Rust dasturi xotirani qanday boshqarishini boshqaradigan qoidalar to'plami.
+Barcha dasturlar ishlayotgan vaqtda kompyuter xotirasidan qanday foydalanishini boshqarishi kerak.
+Ba'zi tillarda axlat yig'ish mavjud bo'lib, ular dastur ishlayotgan paytda ishlatilmaydigan xotirani muntazam ravishda qidiradi; boshqa tillarda dasturchi xotirani aniq ajratishi va bo'shatishi kerak. Rust uchinchi yondashuvdan foydalanadi: xotira kompilyator tekshiradigan qoidalar to'plamiga ownership tizimi orqali boshqariladi. Agar biron bir qoidalar buzilgan bo'lsa, dastur kompilatsiya qilinmaydi. Ownership xususiyatlarining hech biri dasturingiz ishlayotgan vaqtda sekinlashtirmaydi.
 
-Because ownership is a new concept for many programmers, it does take some time
-to get used to. The good news is that the more experienced you become with Rust
-and the rules of the ownership system, the easier you’ll find it to naturally
-develop code that is safe and efficient. Keep at it!
+Ownership ko'plab dasturchilar uchun yangi tushuncha bo'lganligi sababli, unga ko'nikish uchun biroz vaqt kerak bo'ladi. Yaxshi xabar shundaki, siz Rust va ownership tizimi qoidalari bilan qanchalik tajribali bo'lsangiz, xavfsiz va samarali kodni tabiiy ravishda ishlab chiqish osonroq bo'ladi. Unda davom etamiz!
 
-When you understand ownership, you’ll have a solid foundation for understanding
-the features that make Rust unique. In this chapter, you’ll learn ownership by
-working through some examples that focus on a very common data structure:
-strings.
+Ownershipni tushunganingizda, Rustni noyob qiladigan xususiyatlarni tushunish uchun mustahkam asosga ega bo'lasiz. Ushbu bobda, siz juda keng tarqalgan ma'lumotlar tuzilishiga qaratilgan ba'zi misollarni orqali  ownershipni ishlashini o'rganasiz: string.
 
-> ### The Stack and the Heap
+> ### Stack va Heap
 >
-> Many programming languages don’t require you to think about the stack and the
-> heap very often. But in a systems programming language like Rust, whether a
-> value is on the stack or the heap affects how the language behaves and why
-> you have to make certain decisions. Parts of ownership will be described in
-> relation to the stack and the heap later in this chapter, so here is a brief
-> explanation in preparation.
+> Ko'pgina dasturlash tillari stek va heap haqida tez-tez o'ylashingizni talab qilmaydi.
+> Ammo Rust kabi tizim dasturlash tilida qiymat stekda yoki heapda bo'ladimi,
+> til o'zini qanday tutishiga ta'sir qiladi va nima uchun siz ma'lum qarorlar
+> qabul qilishingiz kerak. Ownershipning qismlari stek va heapga nisbatan keyinchalik
+> ushbu bobda tasvirlanadi, shuning uchun bu yerda tayyorgarlik jarayonida qisqacha 
+> tushuntirish berilgan.
 >
-> Both the stack and the heap are parts of memory available to your code to use
-> at runtime, but they are structured in different ways. The stack stores
-> values in the order it gets them and removes the values in the opposite
-> order. This is referred to as *last in, first out*. Think of a stack of
-> plates: when you add more plates, you put them on top of the pile, and when
-> you need a plate, you take one off the top. Adding or removing plates from
-> the middle or bottom wouldn’t work as well! Adding data is called *pushing
-> onto the stack*, and removing data is called *popping off the stack*. All
-> data stored on the stack must have a known, fixed size. Data with an unknown
-> size at compile time or a size that might change must be stored on the heap
-> instead.
+> Stack ham, heap ham runtimeda foydalanish uchun kodingiz uchun mavjud bo'lgan 
+> xotira qismlaridir, lekin ular turli yo'llar bilan tuzilgan. Stack qiymatlarni
+> ularni olgan tartibda saqlaydi va qiymatlarni teskari tartibda o'chiradi
+> Bu *oxirgi kelgan, birinchi chiqqan* deb ataladi. Plitalar stackini o'ylab
+> ko'ring: ko'proq plastinka qo'shsangiz, ularni qoziqning ustiga qo'yasiz va plastinka
+> kerak bo'lganda, siz yuqoridan birini olib qo'yasiz. Plitalarni o'rtadan yoki pastdan
+> qo'shish yoki olib tashlash ham ishlamaydi! Ma'lumotlarni qo'shish *stekga qo'shish*,
+> ma'lumotlarni olib tashlash esa *stekdan o'chirish* deb ataladi. Stackda saqlangan
+> barcha ma'lumotlar ma'lum, qat'iy belgilangan hajmga ega bo'lishi kerak. Kompilyatsiya vaqtida
+> noma'lum o'lchamli yoki o'zgarishi mumkin bo'lgan o'lchamdagi ma'lumotlar esa heapda
+> saqlanishi kerak.
 >
-> The heap is less organized: when you put data on the heap, you request a
-> certain amount of space. The memory allocator finds an empty spot in the heap
-> that is big enough, marks it as being in use, and returns a *pointer*, which
-> is the address of that location. This process is called *allocating on the
-> heap* and is sometimes abbreviated as just *allocating* (pushing values onto
-> the stack is not considered allocating). Because the pointer to the heap is a
-> known, fixed size, you can store the pointer on the stack, but when you want
-> the actual data, you must follow the pointer. Think of being seated at a
-> restaurant. When you enter, you state the number of people in your group, and
-> the host finds an empty table that fits everyone and leads you there. If
-> someone in your group comes late, they can ask where you’ve been seated to
-> find you.
+> heap kamroq tartibga solingan: ma'lumotlarni heapga qo'yganingizda, ma'lum miqdorda
+> bo'sh joy talab qilasiz. Xotira ajratuvchisi heapda etarlicha katta bo'lgan bo'sh joyni
+> topadi, uni ishlatilayotgan deb belgilaydi va o'sha joyning manzili bo'lgan
+> *pointerni* ni qaytaradi. Bu jarayon *heap allocating* deb ataladi va ba'zan
+> faqat *allocating* deb qisqartiriladi (qiymatlarni stekga qo'shish ajratish
+> hisoblanmaydi). Heapga pointer ma'lum, qat'iy o'lcham bo'lgani uchun siz
+> pointerni stekda saqlashingiz mumkin, lekin haqiqiy ma'lumotlarni
+> olishni istasangiz, pointergaga amal qilishingiz kerak. Restoranda o'tirganingizni
+> o'ylab ko'ring. Kirish paytida siz guruhingizdagi odamlar sonini bildirasiz
+> va uy egasi hammaga mos keladigan bo'sh stol topadi va sizni u yerga olib boradi.
+> Agar guruhingizdagi kimdir kechikib kelsa, sizni topish uchun qayerda o'tirganingizni
+> so'rashi mumkin.
 >
-> Pushing to the stack is faster than allocating on the heap because the
-> allocator never has to search for a place to store new data; that location is
-> always at the top of the stack. Comparatively, allocating space on the heap
-> requires more work because the allocator must first find a big enough space
-> to hold the data and then perform bookkeeping to prepare for the next
-> allocation.
+> Stekga qo'shish heapda allocating qilishdan tezroq bo'ladi, chunki allacator hech
+> qachon yangi ma'lumotlarni saqlash uchun joy izlamasligi kerak; bu joy har doim
+> stackning yuqori qismida joylashgan. Nisbatan, heapda bo'sh joy ajratish ko'proq
+> mehnat talab qiladi, chunki allacator avval ma'lumotlarni saqlash uchun yetarlicha
+> katta joy topishi va keyingi allocatinga tayyorgarlik ko'rish uchun buxgalteriya
+> hisobini amalga oshirishi kerak.
 >
-> Accessing data in the heap is slower than accessing data on the stack because
-> you have to follow a pointer to get there. Contemporary processors are faster
-> if they jump around less in memory. Continuing the analogy, consider a server
-> at a restaurant taking orders from many tables. It’s most efficient to get
-> all the orders at one table before moving on to the next table. Taking an
-> order from table A, then an order from table B, then one from A again, and
-> then one from B again would be a much slower process. By the same token, a
-> processor can do its job better if it works on data that’s close to other
-> data (as it is on the stack) rather than farther away (as it can be on the
-> heap).
+> Heapdagi ma'lumotlarga kirish stekdagi ma'lumotlarga kirishdan ko'ra sekinroq, chunki u yerga 
+> borish uchun pointerga amal qilishingiz kerak. Zamonaviy protsessorlar xotirada
+> kamroq o'tishsa, tezroq ishlaydi. O'xshashlikni davom ettirib, ko'plab jadvallardan
+> buyurtmalarni qabul qiladigan restoran serverini ko'rib chiqing. Keyingi stolga o'tishdan oldin
+> barcha buyurtmalarni bitta stolda olish eng samarali hisoblanadi. A jadvalidan
+> buyurtma olish, keyin B jadvalidan buyurtma olish, keyin yana A dan va yana B dan bitta
+> buyurtma olish ancha sekinroq jarayon bo'ladi. Xuddi shu qoidaga ko'ra,
+> protsessor uzoqroqda emas (u heapda bo'lishi mumkin) emas, balki boshqa
+> ma'lumotlarga yaqin (stekdagi kabi) ma'lumotlarda ishlasa, o'z ishini yaxshiroq
+> bajarishi mumkin.
 >
-> When your code calls a function, the values passed into the function
-> (including, potentially, pointers to data on the heap) and the function’s
-> local variables get pushed onto the stack. When the function is over, those
-> values get popped off the stack.
+> Sizning kodingiz funksiyani chaqirganda, funksiyaga o'tgan qiymatlar (shu jumladan, potentsial,
+> heapdagi ma'lumotlarga pointerlar) va funksiyaning mahalliy o'zgaruvchilari
+> stekga qo'shiladi. Funktsiya tugagach, bu qiymatlar stekdan chiqariladi.
 >
-> Keeping track of what parts of code are using what data on the heap,
-> minimizing the amount of duplicate data on the heap, and cleaning up unused
-> data on the heap so you don’t run out of space are all problems that ownership
-> addresses. Once you understand ownership, you won’t need to think about the
-> stack and the heap very often, but knowing that the main purpose of ownership
-> is to manage heap data can help explain why it works the way it does.
+> Kodning qaysi qismlari heapda qaysi ma'lumotlardan foydalanayotganini kuzatib borish,
+> heapdagi takroriy ma'lumotlar miqdorini minimallashtirish va bo'sh joy qolmasligi uchun
+> heapdagi foydalanilmagan ma'lumotlarni tozalash - bularning barchasi ownership hal qiladigan 
+> muammolardir. Ownershipni tushunganingizdan so'ng, stek va heap haqida tez-tez
+> o'ylashingiz shart emas, lekin ownership qilishning asosiy maqsadi heap
+> ma'lumotlarni boshqarish ekanligini bilish uning nima uchun shunday ishlashini
+> tushuntirishga yordam beradi.
 
-### Ownership Rules
+### Ownership qoidalari
 
-First, let’s take a look at the ownership rules. Keep these rules in mind as we
-work through the examples that illustrate them:
+Birinchidan, ownership qoidalarini ko'rib chiqaylik.Biz ularni ko'rsatadigan misollar bilan ishlashda ushbu qoidalarni yodda tuting:
 
-* Each value in Rust has an *owner*.
-* There can only be one owner at a time.
-* When the owner goes out of scope, the value will be dropped.
+* Rust-dagi har bir qiymat *owner*ga ega.
+* Bir vaqtning o'zida faqat bitta owneri bo'lishi mumkin.
+* Owneri amaldan tashqariga chiqsa, qiymat o'chiriladi.
 
-### Variable Scope
+### O'zgaruvchan Scope
 
-Now that we’re past basic Rust syntax, we won’t include all the `fn main() {`
-code in examples, so if you’re following along, make sure to put the following
-examples inside a `main` function manually. As a result, our examples will be a
-bit more concise, letting us focus on the actual details rather than
-boilerplate code.
+Endi biz Rustning asosiy sintaksisidan o‘tganimiz uchun, biz barcha `fn main() {` kodini misollarga kiritmaymiz, shuning uchun agar kuzatib boradigan bo‘lsangiz, quyidagi misollarni `main` funksiyasiga qo‘lda kiritganingizga ishonch hosil qiling. Natijada, bizning misollarimiz biroz ixchamroq bo'ladi, bu bizga qozon kodiga emas, balki haqiqiy tafsilotlarga e'tibor berishga imkon beradi.
 
-As a first example of ownership, we’ll look at the *scope* of some variables. A
-scope is the range within a program for which an item is valid. Take the
-following variable:
+Ownershipning birinchi misoli sifatida biz ba'zi o'zgaruvchilarning *scope*ni ko'rib chiqamiz. Scope - dastur doirasidagi element amal qiladigan diapazon. Quyidagi o'zgaruvchini oling:
 
 ```rust
-let s = "hello";
+let s = "salom";
 ```
 
-The variable `s` refers to a string literal, where the value of the string is
-hardcoded into the text of our program. The variable is valid from the point at
-which it’s declared until the end of the current *scope*. Listing 4-1 shows a
-program with comments annotating where the variable `s` would be valid.
+`s` o'zgaruvchisi satr literaliga ishora qiladi, bu yerda satr qiymati dasturimiz matniga qattiq kodlangan. O'zgaruvchi e'lon qilingan paytdan boshlab joriy *scopning* oxirigacha amal qiladi. 4-1 ro'yxatida `s` o'zgaruvchisi qayerda to'g'ri bo'lishini izohlovchi izohlar bilan dastur ko'rsatilgan.
 
 ```rust
 {{#rustdoc_include ../listings/ch04-understanding-ownership/listing-04-01/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 4-1: A variable and the scope in which it is
-valid</span>
+<span class="caption">Ro'yxat 4-1: O'zgaruvchi va uning amal qiladigan doirasi</span>
 
-In other words, there are two important points in time here:
+Boshqacha qilib aytganda, bu yerda ikkita muhim nuqta bor:
 
-* When `s` comes *into* scope, it is valid.
-* It remains valid until it goes *out of* scope.
+* Qachonki `s` *scopega* kirsa, u amal qiladi.
+* U scopedan tashqariga *chiqmaguncha* amal qiladi.
 
-At this point, the relationship between scopes and when variables are valid is
-similar to that in other programming languages. Now we’ll build on top of this
-understanding by introducing the `String` type.
+Ushbu nuqtada, scopelar va o'zgaruvchilarning haqiqiyligi o'rtasidagi munosabatlar boshqa dasturlash tillaridagiga o'xshaydi. Endi biz `String` turini joriy qilish orqali ushbu tushunchaga asoslanamiz.
 
-### The `String` Type
+### `String` turi
 
-To illustrate the rules of ownership, we need a data type that is more complex
-than those we covered in the [“Data Types”][data-types]<!-- ignore --> section
-of Chapter 3. The types covered previously are of a known size, can be stored
-on the stack and popped off the stack when their scope is over, and can be
-quickly and trivially copied to make a new, independent instance if another
-part of code needs to use the same value in a different scope. But we want to
-look at data that is stored on the heap and explore how Rust knows when to
-clean up that data, and the `String` type is a great example.
+Ownership qoidalarini tasvirlash uchun bizga 3-bobning [”Ma'lumotlar turlari”][data-types]<!-- ignore -->
+bo'limida ko'rib chiqilganlarga qaraganda murakkabroq ma'lumotlar turi kerak. Oldin ko'rib chiqilgan turlar ma'lum o'lchamga ega bo'lib, ular stekda saqlanishi va qo'llanilish doirasi tugagach, stekdan o'chirilishi mumkin va agar kodning boshqa qismi foydalanishi kerak bo'lsa yangi, mustaqil misol yaratish uchun tez va ahamiyatsiz nusxa ko'chirilishi mumkin kodning boshqa qismi bir xil qiymatni boshqa doirada ishlatishi kerak. Ammo biz heapda saqlangan ma'lumotlarni ko'rib chiqmoqchimiz va Rust bu ma'lumotlarni qachon tozalashni bilishini o'rganmoqchimiz va `String` turi ajoyib misoldir.
 
-We’ll concentrate on the parts of `String` that relate to ownership. These
-aspects also apply to other complex data types, whether they are provided by
-the standard library or created by you. We’ll discuss `String` in more depth in
-[Chapter 8][ch8]<!-- ignore -->.
+Biz `String` ning ownership bilan bog'liq qismlariga e'tibor qaratamiz. Ushbu jihatlar standart kutubxona tomonidan taqdim etilganmi yoki siz yaratganmi, boshqa murakkab ma'lumotlar turlariga ham tegishli.
+Biz [8-bobda][ch8]<!-- ignore --> `String`ni chuqurroq muhokama qilamiz.
 
-We’ve already seen string literals, where a string value is hardcoded into our
-program. String literals are convenient, but they aren’t suitable for every
-situation in which we may want to use text. One reason is that they’re
-immutable. Another is that not every string value can be known when we write
-our code: for example, what if we want to take user input and store it? For
-these situations, Rust has a second string type, `String`. This type manages
-data allocated on the heap and as such is able to store an amount of text that
-is unknown to us at compile time. You can create a `String` from a string
-literal using the `from` function, like so:
+Biz allaqachon string literallarini ko'rdik, bu erda string qiymati bizning dasturimizga qattiq kodlangan. String literallari qulay, ammo ular biz matndan foydalanmoqchi bo'lgan har qanday vaziyatga mos kelmaydi. Buning sabablaridan biri shundaki, ular o'zgarmasdir. Yana bir narsa shundaki, biz kodni yozganimizda har bir satr qiymatini bilish mumkin emas: masalan, agar biz foydalanuvchi ma'lumotlarini olib, uni saqlamoqchi bo'lsak-chi? Bunday holatlar uchun Rust ikkinchi string turiga ega, `String`. Bu tur heapda ajratilgan ma'lumotlarni boshqaradi va shuning uchun kompilyatsiya vaqtida bizga noma'lum bo'lgan matn miqdorini saqlashi mumkin. Siz `from` funksiyasidan foydalanib satr literalidan `String` yaratishingiz mumkin, masalan:
 
 ```rust
-let s = String::from("hello");
+let s = String::from("salom");
 ```
 
-The double colon `::` operator allows us to namespace this particular `from`
-function under the `String` type rather than using some sort of name like
-`string_from`. We’ll discuss this syntax more in the [“Method
-Syntax”][method-syntax]<!-- ignore --> section of Chapter 5, and when we talk
-about namespacing with modules in [“Paths for Referring to an Item in the
-Module Tree”][paths-module-tree]<!-- ignore --> in Chapter 7.
+Ikki nuqtali `::` operatori bizga `string_from` kabi qandaydir nomdan foydalanish o'rniga `String` turi ostida ushbu `from` funksiyasini nom maydoniga qo`yish imkonini beradi.
+Biz ushbu sintaksisni 5-bobning [”Method sintaksisi”][method-syntax]<!-- ignore --> bo'limida ko'proq muhokama qilamiz va 7-bobdagi [”Modul treedagi elementga murojaat qilish yo'llari”][paths-module-tree]<!-- ignore --> da modullar bilan nomlar oralig'i haqida gapiramiz.
 
-This kind of string *can* be mutated:
+Ushbu turdagi *string* mutatsiyaga uchragan bo'lishi mumkin:
 
 ```rust
 {{#rustdoc_include ../listings/ch04-understanding-ownership/no-listing-01-can-mutate-string/src/main.rs:here}}
 ```
 
-So, what’s the difference here? Why can `String` be mutated but literals
-cannot? The difference is in how these two types deal with memory.
+Xo'sh, bu erda qanday farq bor? Nima uchun `String` ni mutatsiyaga solish mumkin, lekin harflarni o'zgartirish mumkin emas? Farqi bu ikki turning xotira bilan qanday munosabatda bo'lishida.
 
-### Memory and Allocation
+### Xotira va Taqsimlash
 
-In the case of a string literal, we know the contents at compile time, so the
-text is hardcoded directly into the final executable. This is why string
+String literalida biz kompilyatsiya vaqtida tarkibni bilamiz, shuning uchun matn to'g'ridan-to'g'ri yakuniy bajariladigan faylga qattiq kodlangan. This is why string
 literals are fast and efficient. But these properties only come from the string
 literal’s immutability. Unfortunately, we can’t put a blob of memory into the
 binary for each piece of text whose size is unknown at compile time and whose
