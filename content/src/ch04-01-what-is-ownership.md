@@ -132,95 +132,58 @@ Xo'sh, bu erda qanday farq bor? Nima uchun `String` ni mutatsiyaga solish mumkin
 
 ### Xotira va Taqsimlash
 
-String literalida biz kompilyatsiya vaqtida tarkibni bilamiz, shuning uchun matn to'g'ridan-to'g'ri yakuniy bajariladigan faylga qattiq kodlangan. This is why string
-literals are fast and efficient. But these properties only come from the string
-literal’s immutability. Unfortunately, we can’t put a blob of memory into the
-binary for each piece of text whose size is unknown at compile time and whose
-size might change while running the program.
+String literalida biz kompilyatsiya vaqtida tarkibni bilamiz, shuning uchun matn to'g'ridan-to'g'ri yakuniy bajariladigan faylga qattiq kodlangan.Shuning uchun string literallari tez va samarali. Ammo bu xususiyatlar faqat satr literalining o'zgarmasligidan kelib chiqadi. Afsuski, kompilyatsiya vaqtida hajmi noma'lum bo'lgan va dasturni ishga tushirishda hajmi o'zgarishi mumkin bo'lgan har bir matn bo'lagi uchun biz binary faylga bir bo'lak xotira qo'ya olmaymiz.
 
-With the `String` type, in order to support a mutable, growable piece of text,
-we need to allocate an amount of memory on the heap, unknown at compile time,
-to hold the contents. This means:
+`String` turida o'zgaruvchan, o'sib boradigan matn qismini qo'llab-quvvatlash uchun tarkibni saqlash uchun kompilyatsiya vaqtida noma'lum bo'lgan xotira hajmini yig'ishda ajratishimiz kerak. Buning ma'nosi:
 
-* The memory must be requested from the memory allocator at runtime.
-* We need a way of returning this memory to the allocator when we’re done with
-  our `String`.
+* Xotira runtimeda xotira allactoridan so'ralishi kerak.
+* `String` bilan ishlashni tugatgandan so'ng, bizga ushbu xotirani allacatoriga qaytarish usuli kerak.
 
-That first part is done by us: when we call `String::from`, its implementation
-requests the memory it needs. This is pretty much universal in programming
-languages.
+Bu birinchi qism biz tomonimizdan amalga oshiriladi: biz `String::from` deb chaqirganimizda, uni implementi kerakli xotirani talab qiladi. Bu dasturlash tillarida deyarli universaldir.
 
-However, the second part is different. In languages with a *garbage collector
-(GC)*, the GC keeps track of and cleans up memory that isn’t being used
-anymore, and we don’t need to think about it. In most languages without a GC,
-it’s our responsibility to identify when memory is no longer being used and to
-call code to explicitly free it, just as we did to request it. Doing this
-correctly has historically been a difficult programming problem. If we forget,
-we’ll waste memory. If we do it too early, we’ll have an invalid variable. If
-we do it twice, that’s a bug too. We need to pair exactly one `allocate` with
-exactly one `free`.
+Biroq, ikkinchi qism boshqacha. *Garbage Collector (GC)* bo'lgan tillarda GC endi ishlatilmayotgan xotirani kuzatib boradi va tozalaydi va bu haqda o'ylashimiz shart emas. Ko'pgina tillarda GC bo'lmaganda, xotiradan qachon foydalanilmayotganini aniqlash va uni aniq bo'shatish uchun kodni chaqirish, xuddi biz so'raganimizdek, bizning burchimizdir. Buni to'g'ri bajarish tarixan qiyin dasturlash muammosi bo'lgan. Agar unutsak, xotirani behuda sarflaymiz. Agar biz buni juda erta qilsak, bizda noto'g'ri o'zgaruvchi bo'ladi. Agar buni ikki marta qilsak, bu ham xato. Aynan bitta `allocate`ni bitta `bo'sh` bilan birlashtirishimiz kerak.
 
-Rust takes a different path: the memory is automatically returned once the
-variable that owns it goes out of scope. Here’s a version of our scope example
-from Listing 4-1 using a `String` instead of a string literal:
+Rust boshqa yo'lni egallaydi: unga ega bo'lgan o'zgaruvchi amaldan tashqariga chiqqandan so'ng xotira avtomatik ravishda qaytariladi. Bu yerda 4-1 roʻyxatdagi misolimiz satr harfi oʻrniga `String` yordamida berilgan:
 
 ```rust
 {{#rustdoc_include ../listings/ch04-understanding-ownership/no-listing-02-string-scope/src/main.rs:here}}
 ```
 
-There is a natural point at which we can return the memory our `String` needs
-to the allocator: when `s` goes out of scope. When a variable goes out of
-scope, Rust calls a special function for us. This function is called
-[`drop`][drop]<!-- ignore -->, and it’s where the author of `String` can put
-the code to return the memory. Rust calls `drop` automatically at the closing
-curly bracket.
+Biz `String` kerak bo'lgan xotirani ajratuvchiga qaytarishimiz mumkin bo'lgan tabiiy nuqta bor: `s` scopedan chiqib ketganda. O'zgaruvchi scopedan chiqib ketganda, Rust biz uchun maxsus funksiyani chaqiradi.Ushbu funktsiya [`drop`][drop]<!-- ignore --> deb ataladi va u erda `String` muallifi xotirani qaytarish uchun kodni qo'yishi mumkin. Rust yopilgan jingalak qavsda avtomatik ravishda `drop` ni chaqiradi.
 
-> Note: In C++, this pattern of deallocating resources at the end of an item’s
-> lifetime is sometimes called *Resource Acquisition Is Initialization (RAII)*.
-> The `drop` function in Rust will be familiar to you if you’ve used RAII
-> patterns.
+> Eslatma: C++ da, elementning ishlash muddati oxirida resurslarni taqsimlashning bunday sxemasi ba'zan
+> *Resource Acquisition Is Initialization (RAII)*(Resurslarni yig'ish - ishga tushirish (RAII) deb ataladi.
+> Agar siz RAII patternlaridan foydalangan bo'lsangiz, Rust-dagi `drop`
+> funksiyasi sizga tanish bo'ladi.
 
-This pattern has a profound impact on the way Rust code is written. It may seem
-simple right now, but the behavior of code can be unexpected in more
-complicated situations when we want to have multiple variables use the data
-we’ve allocated on the heap. Let’s explore some of those situations now.
+Ushbu pattern Rust kodini yozish usuliga chuqur ta'sir qiladi. Bu hozir oddiy bo'lib tuyulishi mumkin, ammo biz bir nechta o'zgaruvchilar biz yig'ilgan ma'lumotlardan foydalanishni xohlayotganimizda, murakkabroq holatlarda kodning harakati kutilmagan bo'lishi mumkin. Keling, ushbu vaziyatlarning ba'zilarini ko'rib chiqaylik.
 
 <!-- Old heading. Do not remove or links may break. -->
 <a id="ways-variables-and-data-interact-move"></a>
 
-#### Variables and Data Interacting with Move
+#### Move bilan o'zaro ta'sir qiluvchi o'zgaruvchilar va ma'lumotlar
 
-Multiple variables can interact with the same data in different ways in Rust.
-Let’s look at an example using an integer in Listing 4-2.
+Rustda bir nechta o'zgaruvchilar bir xil ma'lumotlar bilan turli yo'llar bilan o'zaro ta'sir qilishi mumkin.
+4-2 ro'yxatda integer sondan foydalanish misolini ko'rib chiqaylik.
 
 ```rust
 {{#rustdoc_include ../listings/ch04-understanding-ownership/listing-04-02/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 4-2: Assigning the integer value of variable `x`
-to `y`</span>
+<span class="caption">4-2 roʻyxat: `x` oʻzgaruvchisining butun qiymatini `y` ga belgilash</span>
 
-We can probably guess what this is doing: “bind the value `5` to `x`; then make
-a copy of the value in `x` and bind it to `y`.” We now have two variables, `x`
-and `y`, and both equal `5`. This is indeed what is happening, because integers
-are simple values with a known, fixed size, and these two `5` values are pushed
-onto the stack.
+Bu nima qilayotganini taxmin qilishimiz mumkin: `5` qiymatini `x` ga bog‘lang; keyin `x` dagi qiymatdan nusxa oling va uni `y` ga bog'lang. Endi bizda ikkita o'zgaruvchi bor, `x` va `y` va ikkalasi ham `5` ga teng. Bu haqiqatan ham sodir bo'lmoqda, chunki butun sonlar ma'lum, qat'iy o'lchamga ega oddiy qiymatlardir va bu ikkita `5` qiymat stekga qo'shiladi.
 
-Now let’s look at the `String` version:
+Endi `String` versiyasini ko'rib chiqamiz:
 
 ```rust
 {{#rustdoc_include ../listings/ch04-understanding-ownership/no-listing-03-string-move/src/main.rs:here}}
 ```
 
-This looks very similar, so we might assume that the way it works would be the
-same: that is, the second line would make a copy of the value in `s1` and bind
-it to `s2`. But this isn’t quite what happens.
+Bu juda o'xshash ko'rinadi, shuning uchun biz uning ishlash usuli bir xil bo'ladi deb taxmin qilishimiz mumkin: ya'ni ikkinchi qator `s1` qiymatining nusxasini yaratadi va uni `s2` bilan bog'laydi. Ammo bu sodir bo'ladigan narsa emas.
 
-Take a look at Figure 4-1 to see what is happening to `String` under the
-covers. A `String` is made up of three parts, shown on the left: a pointer to
-the memory that holds the contents of the string, a length, and a capacity.
-This group of data is stored on the stack. On the right is the memory on the
-heap that holds the contents.
+Qopqoq ostidagi `String` bilan nima sodir bo'layotganini ko'rish uchun 4-1-rasmga qarang. `String` chap tomonda ko'rsatilgan uchta qismdan iborat: satr tarkibini saqlaydigan xotiraga ko'rsatgich, uzunlik(len) va sig'im(capacity).
+Ushbu ma'lumotlar guruhi stekda saqlanadi. O'ng tomonda tarkibni saqlaydigan heap xotira joylashgan.
 
 <img alt="Two tables: the first table contains the representation of s1 on the
 stack, consisting of its length (5), capacity (5), and a pointer to the first
@@ -228,69 +191,41 @@ value in the second table. The second table contains the representation of the
 string data on the heap, byte by byte." src="img/trpl04-01.svg" class="center"
 style="width: 50%;" />
 
-<span class="caption">Figure 4-1: Representation in memory of a `String`
-holding the value `"hello"` bound to `s1`</span>
+<span class="caption">4-1-rasm: `s1` ga bog‘langan `salom` qiymatiga ega `String` xotirasidagi tasvir</span>
 
-The length is how much memory, in bytes, the contents of the `String` are
-currently using. The capacity is the total amount of memory, in bytes, that the
-`String` has received from the allocator. The difference between length and
-capacity matters, but not in this context, so for now, it’s fine to ignore the
-capacity.
+Uzunlik - `String` mazmuni hozirda qancha xotira, baytlarda foydalanayotganligi. Sig'im(capacity) - bu `String` allacatordan olgan xotiraning umumiy hajmi, baytlarda. Uzunlik va si'gimlar o'rtasidagi farq muhim, ammo bu kontekstda emas, shuning uchun hozircha si'gimlarni e'tiborsiz qoldirish yaxshi.
 
-When we assign `s1` to `s2`, the `String` data is copied, meaning we copy the
-pointer, the length, and the capacity that are on the stack. We do not copy the
-data on the heap that the pointer refers to. In other words, the data
-representation in memory looks like Figure 4-2.
+`s1` ni `s2` ga belgilaganimizda, `String` ma'lumotlari nusxalanadi, ya'ni biz stekdagi pointer, uzunlik va sig`imdan nusxa olamiz. Biz pointer(ko'rsatkich) ko'rsatgan to'plamdagi ma'lumotlarni ko'chirmaymiz. Boshqacha qilib aytganda, ma'lumotlarning xotirada ko'rinishi 4-2-rasmga o'xshaydi.
 
 <img alt="Three tables: tables s1 and s2 representing those strings on the
 stack, respectively, and both pointing to the same string data on the heap."
 src="img/trpl04-02.svg" class="center" style="width: 50%;" />
 
-<span class="caption">Figure 4-2: Representation in memory of the variable `s2`
-that has a copy of the pointer, length, and capacity of `s1`</span>
+<span class="caption">4-2-rasm: `s1` pointeri, uzunligi va sigʻimi nusxasiga ega `s2` oʻzgaruvchisi xotirasida koʻrsatilishi</span>
 
-The representation does *not* look like Figure 4-3, which is what memory would
-look like if Rust instead copied the heap data as well. If Rust did this, the
-operation `s2 = s1` could be very expensive in terms of runtime performance if
-the data on the heap were large.
+Tasvir 4-3-rasmga *o'xshamaydi*, agar Rust o'rniga heap ma'lumotlarni ko'chirsa, xotira qanday ko'rinishga ega bo'lardi. Agar Rust buni amalga oshirgan bo'lsa, `s2 = s1` operatsiyasi, agar heapdagi ma'lumotlar katta bo'lsa, runtimening ishlashi nuqtai nazaridan juda qimmat bo'lishi mumkin.
 
 <img alt="Four tables: two tables representing the stack data for s1 and s2,
 and each points to its own copy of string data on the heap."
 src="img/trpl04-03.svg" class="center" style="width: 50%;" />
 
-<span class="caption">Figure 4-3: Another possibility for what `s2 = s1` might
-do if Rust copied the heap data as well</span>
+<span class="caption">4-3-rasm: Rust heap ma'lumotlarni ham nusxalagan bo'lsa, `s2 = s1` nima qilishi mumkin bo'lgan yana bir imkoniyat</span>
 
-Earlier, we said that when a variable goes out of scope, Rust automatically
-calls the `drop` function and cleans up the heap memory for that variable. But
-Figure 4-2 shows both data pointers pointing to the same location. This is a
-problem: when `s2` and `s1` go out of scope, they will both try to free the
-same memory. This is known as a *double free* error and is one of the memory
-safety bugs we mentioned previously. Freeing memory twice can lead to memory
-corruption, which can potentially lead to security vulnerabilities.
+Avvalroq biz aytgan edikki, o‘zgaruvchi qo‘llanish doirasidan chiqib ketganda, Rust avtomatik ravishda `drop` funksiyasini chaqiradi va bu o‘zgaruvchi uchun heap xotirani tozalaydi. Ammo 4-2-rasmda ikkala ma'lumot pointeri bir xil joyga ishora qiladi. Bu muammo: `s2` va `s1` scopedan chiqib ketganda, ikkalasi ham bir xil xotirani bo'shatishga harakat qiladi. Bu *double free*(ikki marta bo'sh)xato sifatida tanilgan va biz avval aytib o'tgan xotira xavfsizligi xatolaridan biridir. Xotirani ikki marta bo'shatish xotira buzilishiga olib kelishi mumkin, bu esa xavfsizlik zaifliklariga olib kelishi mumkin.
 
-To ensure memory safety, after the line `let s2 = s1;`, Rust considers `s1` as
-no longer valid. Therefore, Rust doesn’t need to free anything when `s1` goes
-out of scope. Check out what happens when you try to use `s1` after `s2` is
-created; it won’t work:
+Xotira xavfsizligini ta'minlash uchun `let s2 = s1;` qatoridan keyin Rust `s1` ni endi yaroqsiz deb hisoblaydi. Shuning uchun, `s1` qo'llanilgandan tashqariga chiqqanda Rust hech narsani bo'shatishi shart emas. `s2` yaratilgandan keyin `s1` dan foydalanmoqchi bo'lganingizda nima sodir bo`lishini tekshiring; u ishlamaydi:
 
 ```rust,ignore,does_not_compile
 {{#rustdoc_include ../listings/ch04-understanding-ownership/no-listing-04-cant-use-after-move/src/main.rs:here}}
 ```
 
-You’ll get an error like this because Rust prevents you from using the
-invalidated reference:
+Siz shunday xatoga yo'l qo'yasiz, chunki Rust bekor qilingan havoladan foydalanishga to'sqinlik qiladi:
 
 ```console
 {{#include ../listings/ch04-understanding-ownership/no-listing-04-cant-use-after-move/output.txt}}
 ```
 
-If you’ve heard the terms *shallow copy* and *deep copy* while working with
-other languages, the concept of copying the pointer, length, and capacity
-without copying the data probably sounds like making a shallow copy. But
-because Rust also invalidates the first variable, instead of being called a
-shallow copy, it’s known as a *move*. In this example, we would say that `s1`
-was *moved* into `s2`. So, what actually happens is shown in Figure 4-4.
+Agar siz boshqa tillar bilan ishlashda *shallow copy* va *deep copy* so‘zlarini eshitgan bo‘lsangiz, pointerni nusxalash tushunchasi, ma'lumotlardan nusxa ko'chirmasdan uzunligi va sig'imi olish, ehtimol shallow copy kabi eshitiladi. Ammo Rust birinchi o'zgaruvchini ham bekor qilganligi sababli, shallow copy deb nomlanish o'rniga u *move*(ko'chirish) deb nomlanadi. Bu misolda `s1` `s2` ga *ko'chirilgan* deb aytamiz. Shunday qilib, aslida nima sodir bo'lishi 4-4-rasmda ko'rsatilgan.
 
 <img alt="Three tables: tables s1 and s2 representing those strings on the
 stack, respectively, and both pointing to the same string data on the heap.
@@ -298,20 +233,16 @@ Table s1 is grayed out be-cause s1 is no longer valid; only s2 can be used to
 access the heap data." src="img/trpl04-04.svg" class="center" style="width:
 50%;" />
 
-<span class="caption">Figure 4-4: Representation in memory after `s1` has been
-invalidated</span>
+<span class="caption">4-4-rasm: `s1` dan keyin xotiradagi ko`rinish bekor qilingan</span>
 
-That solves our problem! With only `s2` valid, when it goes out of scope it
-alone will free the memory, and we’re done.
+Bu bizning muammomizni hal qiladi! Faqatgina `s2` amal qilganda, u scopedan tashqariga chiqsa, u faqat xotirani bo'shatadi va biz tugatdik.
 
-In addition, there’s a design choice that’s implied by this: Rust will never
-automatically create “deep” copies of your data. Therefore, any *automatic*
-copying can be assumed to be inexpensive in terms of runtime performance.
+Bundan tashqari, dizayn tanlovi ham mavjud: Rust hech qachon avtomatik ravishda ma'lumotlaringizning "deep copyni" yaratmaydi. Shuning uchun, har qanday *avtomatik* nusxa ko'chirish runtimening ishlashi nuqtai nazaridan arzon deb taxmin qilish mumkin.
 
 <!-- Old heading. Do not remove or links may break. -->
 <a id="ways-variables-and-data-interact-clone"></a>
 
-#### Variables and Data Interacting with Clone
+#### Clone bilan o'zaro ta'sir qiluvchi o'zgaruvchilar va ma'lumotlar
 
 If we *do* want to deeply copy the heap data of the `String`, not just the
 stack data, we can use a common method called `clone`. We’ll discuss method
