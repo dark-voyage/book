@@ -71,12 +71,13 @@ jobs:
           cd content
           mdbook build
           git worktree add gh-pages
-          git config user.name "Deploy from CI"
-          git config user.email ""
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           cd gh-pages
           git update-ref -d refs/heads/gh-pages
           rm -rf *
           mv ../book/* .
+          echo "book.rust-lang.uz" >> CNAME
           git add .
           git commit -m "Deploy $GITHUB_SHA to gh-pages"
           git push --force --set-upstream origin gh-pages
