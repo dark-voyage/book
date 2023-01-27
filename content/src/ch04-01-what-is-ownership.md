@@ -244,129 +244,84 @@ Bundan tashqari, dizayn tanlovi ham mavjud: Rust hech qachon avtomatik ravishda 
 
 #### Clone bilan o'zaro ta'sir qiluvchi o'zgaruvchilar va ma'lumotlar
 
-If we *do* want to deeply copy the heap data of the `String`, not just the
-stack data, we can use a common method called `clone`. We’ll discuss method
-syntax in Chapter 5, but because methods are a common feature in many
-programming languages, you’ve probably seen them before.
+Agar biz faqat stack ma'lumotlarini emas, balki `String` ning heap ma'lumotlarini deeply copyni istasak, `clone` deb nomlangan umumiy methoddan foydalanishimiz mumkin. Method sintaksisini 5-bobda muhokama qilamiz, lekin methodlar ko‘p dasturlash tillarida umumiy xususiyat bo‘lgani uchun siz ularni avval ko‘rgan bo‘lsangiz kerak.
 
-Here’s an example of the `clone` method in action:
+Mana amaldagi `clone` usuliga misol:
 
 ```rust
 {{#rustdoc_include ../listings/ch04-understanding-ownership/no-listing-05-clone/src/main.rs:here}}
 ```
 
-This works just fine and explicitly produces the behavior shown in Figure 4-3,
-where the heap data *does* get copied.
+Bu juda yaxshi ishlaydi va 4-3-rasmda ko'rsatilgan xatti-harakatni aniq ishlab chiqaradi, bu erda heap ma'lumotlar nusxalanadi.
 
-When you see a call to `clone`, you know that some arbitrary code is being
-executed and that code may be expensive. It’s a visual indicator that something
-different is going on.
+`clone` ga murojatni ko'rsangiz, ba'zi bir ixtiyoriy kod bajarilayotganini va bu kod qimmat bo'lishi mumkinligini bilasiz. Bu boshqa narsa sodir bo'layotganining vizual ko'rsatkichidir.
 
-#### Stack-Only Data: Copy
+#### Faqat stack ma'lumotlari: nusxalash
 
-There’s another wrinkle we haven’t talked about yet. This code using
-integers—part of which was shown in Listing 4-2—works and is valid:
+Biz hali gapirmagan yana bir narsa bor. Integer sonlardan foydalanadigan ushbu kod - bir qismi 4-2 ro'yxatda ko'rsatilgan - ishlaydi va amal qiladi:
 
 ```rust
 {{#rustdoc_include ../listings/ch04-understanding-ownership/no-listing-06-copy/src/main.rs:here}}
 ```
 
-But this code seems to contradict what we just learned: we don’t have a call to
-`clone`, but `x` is still valid and wasn’t moved into `y`.
+Ammo bu kod biz bilib olgan narsaga zid ko'rinadi: bizda `clone` uchun murojat yo'q, lekin `x` hali ham amal qiladi va `y` ga o'tkazilmagan.
 
-The reason is that types such as integers that have a known size at compile
-time are stored entirely on the stack, so copies of the actual values are quick
-to make. That means there’s no reason we would want to prevent `x` from being
-valid after we create the variable `y`. In other words, there’s no difference
-between deep and shallow copying here, so calling `clone` wouldn’t do anything
-different from the usual shallow copying, and we can leave it out.
+Sababi, kompilyatsiya vaqtida ma'lum o'lchamga ega bo'lgan integer sonlar kabi turlar to'liq stekda saqlanadi, shuning uchun haqiqiy qiymatlarning nusxalari tezda tayyorlanadi. Bu shuni anglatadiki, biz `y` o'zgaruvchisini yaratganimizdan keyin `x` ning haqiqiy bo'lishiga to'sqinlik qilish uchun hech qanday sabab yo'q. Boshqacha qilib aytadigan bo'lsak, bu erda deep va shallow nusxa ko'chirish o'rtasida farq yo'q, shuning uchun `clone` ni chaqirish odatdagi shallow copydan farq qilmaydi va biz uni tark etishimiz mumkin.
 
-Rust has a special annotation called the `Copy` trait that we can place on
-types that are stored on the stack, as integers are (we’ll talk more about
-traits in [Chapter 10][traits]<!-- ignore -->). If a type implements the `Copy`
-trait, variables that use it do not move, but rather are trivially copied,
-making them still valid after assignment to another variable.
+Rust `Copy` traiti deb nomlangan maxsus izohga ega bo'lib, uni butun sonlar kabi stekda saqlanadigan turlarga joylashtirishimiz mumkin (biz [10-bobda][traits]<!-- ignore --> traitlar haqida ko'proq gaplashamiz). Agar tur  `Copy` traitini amalga oshirsa, undan foydalanadigan o‘zgaruvchilar harakatlanmaydi, aksincha, ahamiyatsiz tarzda ko‘chiriladi, bu esa boshqa o‘zgaruvchiga tayinlangandan keyin ham amal qiladi.
 
-Rust won’t let us annotate a type with `Copy` if the type, or any of its parts,
-has implemented the `Drop` trait. If the type needs something special to happen
-when the value goes out of scope and we add the `Copy` annotation to that type,
-we’ll get a compile-time error. To learn about how to add the `Copy` annotation
-to your type to implement the trait, see [“Derivable
-Traits”][derivable-traits]<!-- ignore --> in Appendix C.
+Rust turi yoki uning biron bir qismi `Drop` traitini qo‘llagan bo‘lsa, `Copy` bilan turga annotation qo‘yishimizga ruxsat bermaydi. Qiymat doirasidan chiqib ketganda turga maxsus biror narsa kerak bo'lsa va biz ushbu turga `Copy` annotationni qo'shsak, biz kompilyatsiya vaqtida xatolikni olamiz. Traitni amalga oshirish uchun turingizga `Copy` annotationni qanday qo‘shish haqida bilish uchun C ilovasidagi [“Derivable Traitlar”][derivable-traits]<!-- ignore -->ga qarang.
 
-So, what types implement the `Copy` trait? You can check the documentation for
-the given type to be sure, but as a general rule, any group of simple scalar
-values can implement `Copy`, and nothing that requires allocation or is some
-form of resource can implement `Copy`. Here are some of the types that
-implement `Copy`:
+Xo'sh, `Copy` traitini qaysi turlar amalga oshiradi? Ishonch hosil qilish uchun berilgan tur uchun texnik hujjatlarni tekshirishingiz mumkin, lekin umumiy qoida sifatida har qanday oddiy skalyar qiymatlar guruhi `Copy` ni amalga oshirishi mumkin va ajratishni talab qiladigan yoki biron bir manba shakli bo‘lgan hech narsa `Copy` ni amalga oshira olmaydi. `Copy` ni amalga oshiradigan ba'zi turlar:
 
-* All the integer types, such as `u32`.
-* The Boolean type, `bool`, with values `true` and `false`.
-* All the floating-point types, such as `f64`.
-* The character type, `char`.
-* Tuples, if they only contain types that also implement `Copy`. For example,
-  `(i32, i32)` implements `Copy`, but `(i32, String)` does not.
+* `u32` kabi barcha integer turlari.
+* Boolean turi, `bool`, `true` va `false` qiymatlari bilan.
+* Barcha floating-point turlari, masalan, `f64`.
+* Belgi turi, `char`.
+* Tuplelar, agar ular faqat `Copy` ni ham implement qiladigan turlarni o'z ichiga olsa. Masalan, `(i32, i32)` `Copy` ni implement qiladi, lekin `(i32, String)` bajarmaydi.
 
-### Ownership and Functions
+### Ownership va Funksiyalar
 
-The mechanics of passing a value to a function are similar to those when
-assigning a value to a variable. Passing a variable to a function will move or
-copy, just as assignment does. Listing 4-3 has an example with some annotations
-showing where variables go into and out of scope.
+Funksiyaga qiymat berish mexanikasi o'zgaruvchiga qiymat berish mexanikasiga o'xshaydi. O'zgaruvchini funksiyaga o'tkazish, xuddi assignment kabi ko'chiriladi yoki nusxalanadi. 4-3 ro'yxatda o'zgaruvchilarning qayerga kirishi va tashqariga chiqishini ko'rsatadigan ba'zi izohlar bilan misol mavjud.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">Fayl nomi: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch04-understanding-ownership/listing-04-03/src/main.rs}}
 ```
 
-<span class="caption">Listing 4-3: Functions with ownership and scope
-annotated</span>
+<span class="caption">Ro'yxat 4-3: ownership va scope izohlangan funksiyalar</span>
 
-If we tried to use `s` after the call to `takes_ownership`, Rust would throw a
-compile-time error. These static checks protect us from mistakes. Try adding
-code to `main` that uses `s` and `x` to see where you can use them and where
-the ownership rules prevent you from doing so.
+Agar biz `ownershiplik_qiladi` chaqiruvidan keyin `s` dan foydalanmoqchi bo'lsak, Rust kompilyatsiya vaqtida xatolikka yo'l qo'yadi. Ushbu statik tekshiruvlar bizni xatolardan himoya qiladi. `s` va `x` dan foydalanadigan `main` ga kod qo‘shib ko‘ring va ulardan qayerda foydalanishingiz mumkinligini va ownership qoidalari bunga xalaqit beradigan joyni ko‘ring.
 
-### Return Values and Scope
+### Return qiymatlari va Scope
 
-Returning values can also transfer ownership. Listing 4-4 shows an example of a
-function that returns some value, with similar annotations as those in Listing
-4-3.
+Return qilingan qiymatlar ownershipni ham o'tkazishi mumkin. 4-4 ro'yxatda 4-3 ro'yxatdagi kabi izohlar bilan ba'zi qiymatlarni qaytaradigan funksiya misoli ko'rsatilgan.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">Fayl nomi: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch04-understanding-ownership/listing-04-04/src/main.rs}}
 ```
 
-<span class="caption">Listing 4-4: Transferring ownership of return
-values</span>
+<span class="caption">Ro'yxat 4-4: Return ownershipni o'tkazish
+qiymatlar</span>
 
-The ownership of a variable follows the same pattern every time: assigning a
-value to another variable moves it. When a variable that includes data on the
-heap goes out of scope, the value will be cleaned up by `drop` unless ownership
-of the data has been moved to another variable.
+O'zgaruvchiga ownership har safar bir xil aotternga amal qiladi: boshqa o'zgaruvchiga qiymat berish uni ko'chiradi. Heapdagi maʼlumotlarni oʻz ichiga olgan oʻzgaruvchi scopedan tashqariga chiqsa, agar maʼlumotlarga ownership boshqa oʻzgaruvchiga oʻtkazilmagan boʻlsa, qiymat `drop` orqali tozalanadi.
 
-While this works, taking ownership and then returning ownership with every
-function is a bit tedious. What if we want to let a function use a value but
-not take ownership? It’s quite annoying that anything we pass in also needs to
-be passed back if we want to use it again, in addition to any data resulting
-from the body of the function that we might want to return as well.
+Bu ishlayotganda, ownership va keyin har bir funksiyaga ownershipini qaytarish biroz zerikarli. Agar funksiyaga qiymatdan foydalanishiga ruxsat bermoqchi bo'lsak, lekin ownershiplik qilmasak nima bo'ladi? Bu juda zerikarli, agar biz uni qayta ishlatmoqchi bo'lsak, biz kiritgan har qanday narsa, shuningdek, biz qaytarishni xohlashimiz mumkin bo'lgan funktsiya tanasidan kelib chiqadigan har qanday ma'lumotlarga qo'shimcha ravishda qaytarib berilishi kerak.
 
-Rust does let us return multiple values using a tuple, as shown in Listing 4-5.
+Rust 4-5 ro'yxatda ko'rsatilganidek, tuple yordamida bir nechta qiymatlarni return qilish imkon beradi.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">Fayl nomi: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch04-understanding-ownership/listing-04-05/src/main.rs}}
 ```
 
-<span class="caption">Listing 4-5: Returning ownership of parameters</span>
+<span class="caption">Ro'yxat 4-5: Parametrlarga ownershipni qaytarish</span>
 
-But this is too much ceremony and a lot of work for a concept that should be
-common. Luckily for us, Rust has a feature for using a value without
-transferring ownership, called *references*.
+Ammo bu umumiy bo'lishi kerak bo'lgan kontseptsiya uchun juda ko'p funksiya va juda ko'p ish. Yaxshiyamki, Rustda qiymatni ownershipni o'tkazmasdan ishlatish xususiyati mavjud, uni *reference* deb atashadi.
 
 [data-types]: ch03-02-data-types.html#data-types
 [ch8]: ch08-02-strings.html
