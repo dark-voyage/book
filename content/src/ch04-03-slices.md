@@ -88,164 +88,127 @@ src="img/trpl04-06.svg" class="center" style="width: 50%;" />
 
 <span class="caption">4-6-rasm: `String`ning bir qismiga referal qiluvchi String slice</span>
 
-With Rust’s `..` range syntax, if you want to start at index 0, you can drop
-the value before the two periods. In other words, these are equal:
+Rustning `..` diapazoni sintaksisi bilan, agar siz 0 indeksidan boshlamoqchi bo'lsangiz, qiymatni ikki davr oldidan tushirishingiz mumkin. Boshqacha qilib aytganda, ular tengdir:
 
 ```rust
-let s = String::from("hello");
+let s = String::from("salom");
 
 let slice = &s[0..2];
 let slice = &s[..2];
 ```
 
-By the same token, if your slice includes the last byte of the `String`, you
-can drop the trailing number. That means these are equal:
+Xuddi shu qoidaga ko'ra, agar sizning slicesingiz `String` ning oxirgi baytini o'z ichiga olgan bo'lsa, siz keyingi raqamni qo'yishingiz mumkin. Bu shuni anglatadiki, ular tengdir:
 
 ```rust
-let s = String::from("hello");
+let s = String::from("salom");
 
-let len = s.len();
+let uzunlik = s.len();
 
-let slice = &s[3..len];
+let slice = &s[3..uzunlik];
 let slice = &s[3..];
 ```
 
-You can also drop both values to take a slice of the entire string. So these
-are equal:
+Shuningdek, butun satrning bir qismini olish uchun ikkala qiymatni ham tashlab qo'yishingiz mumkin. Shunday qilib, ular teng:
 
 ```rust
-let s = String::from("hello");
+let s = String::from("salom");
 
-let len = s.len();
+let uzunlik = s.len();
 
-let slice = &s[0..len];
+let slice = &s[0..uzunlik];
 let slice = &s[..];
 ```
 
-> Note: String slice range indices must occur at valid UTF-8 character
-> boundaries. If you attempt to create a string slice in the middle of a
-> multibyte character, your program will exit with an error. For the purposes
-> of introducing string slices, we are assuming ASCII only in this section; a
-> more thorough discussion of UTF-8 handling is in the [“Storing UTF-8 Encoded
-> Text with Strings”][strings]<!-- ignore --> section of Chapter 8.
+> Eslatma: String diapazoni indekslari yaroqli UTF-8 belgilar chegaralarida
+> bo'lishi kerak. Agar siz ko'p baytli belgi o'rtasida string slice yaratishga
+> harakat qilsangiz, dasturingiz xato bilan chiqadi. String slicelarini kiritish uchun
+> biz faqat ushbu bo'limda ASCII ni qabul qilamiz; UTF-8 bilan ishlash bo'yicha batafsilroq
+> muhokama 8-bobning [”UTF-8 kodlangan matnni satrlar bilan saqlash”][strings]<!-- ignore -->
+> bo'limida keltirilgan.
 
-With all this information in mind, let’s rewrite `first_word` to return a
-slice. The type that signifies “string slice” is written as `&str`:
 
-<span class="filename">Filename: src/main.rs</span>
+Ushbu ma'lumotlarning barchasini hisobga olgan holda, sliceni qaytarish uchun `birinchi_soz` ni qayta yozamiz. “String slice”ni bildiruvchi tur `&str` sifatida yoziladi:
+
+<span class="filename">Fayl nomi: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch04-understanding-ownership/no-listing-18-first-word-slice/src/main.rs:here}}
 ```
 
-We get the index for the end of the word the same way we did in Listing 4-7, by
-looking for the first occurrence of a space. When we find a space, we return a
-string slice using the start of the string and the index of the space as the
-starting and ending indices.
+Biz so'z oxiri indeksini 4-7 ro'yxatdagi kabi bo'shliqning birinchi marta paydo bo'lishini qidirib olamiz. Bo'shliqni topganimizda, satrning boshi va bo'sh joy indeksidan boshlang'ich va yakuniy indekslar sifatida foydalanib, satr bo'lagini qaytaramiz.
 
-Now when we call `first_word`, we get back a single value that is tied to the
-underlying data. The value is made up of a reference to the starting point of
-the slice and the number of elements in the slice.
+Endi biz `birinchi_soz` ni chaqirganimizda, biz asosiy ma'lumotlarga bog'langan bitta qiymatni olamiz. Qiymat slicening boshlang'ich nuqtasiga va bo'limdagi elementlar soniga referencedan iborat.
 
-Returning a slice would also work for a `second_word` function:
+Sliceni return qilish `ikkinchi_soz` funksiyasi uchun ham ishlaydi:
 
 ```rust,ignore
-fn second_word(s: &String) -> &str {
+fn ikkinchi_soz(s: &String) -> &str {
 ```
 
-We now have a straightforward API that’s much harder to mess up because the
-compiler will ensure the references into the `String` remain valid. Remember
-the bug in the program in Listing 4-8, when we got the index to the end of the
-first word but then cleared the string so our index was invalid? That code was
-logically incorrect but didn’t show any immediate errors. The problems would
-show up later if we kept trying to use the first word index with an emptied
-string. Slices make this bug impossible and let us know we have a problem with
-our code much sooner. Using the slice version of `first_word` will throw a
-compile-time error:
+Endi bizda oddiy API mavjud, uni buzish ancha qiyin, chunki kompilyator `String` ga referencelar haqiqiyligini ta'minlaydi. 4-8 ro'yxatdagi dasturdagi xatoni eslaysizmi, biz indeksni birinchi so'zning oxirigacha olib, keyin qatorni o'chirib tashlaganimizda, indeksimiz yaroqsiz edi? Bu kod mantiqan noto'g'ri edi, lekin darhol xatoliklarni ko'rsatmadi. Agar biz birinchi so'z indeksini bo'shatilgan qator bilan ishlatishga harakat qilsak, muammolar keyinroq paydo bo'ladi. Slicelar bu xatoni imkonsiz qiladi va kodimiz bilan bog'liq muammo borligini bizga tezroq bildiradi. `birinchi_soz` slice versiyasidan foydalanish kompilyatsiya vaqtida xatolikka olib keladi:
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">Fayl nomi: src/main.rs</span>
 
 ```rust,ignore,does_not_compile
 {{#rustdoc_include ../listings/ch04-understanding-ownership/no-listing-19-slice-error/src/main.rs:here}}
 ```
 
-Here’s the compiler error:
+Mana kompilyator xatosi:
 
 ```console
 {{#include ../listings/ch04-understanding-ownership/no-listing-19-slice-error/output.txt}}
 ```
 
-Recall from the borrowing rules that if we have an immutable reference to
-something, we cannot also take a mutable reference. Because `clear` needs to
-truncate the `String`, it needs to get a mutable reference. The `println!`
-after the call to `clear` uses the reference in `word`, so the immutable
-reference must still be active at that point. Rust disallows the mutable
-reference in `clear` and the immutable reference in `word` from existing at the
-same time, and compilation fails. Not only has Rust made our API easier to use,
-but it has also eliminated an entire class of errors at compile time!
+Borrowing qoidalarini eslang, agar bizda biror narsaga o'zgarmas reference bo'lsa, biz o'zgaruvchan referenceni ham qabul qila olmaymiz. Chunki `clear` `String`ni qisqartirishi kerak, u o'zgaruvchan referenceni olishi kerak. `clear` chaqiruvidan keyingi `println!` `soz` dagi referencedan foydalanadi, shuning uchun o‘zgarmas reference shu nuqtada faol bo‘lishi kerak. Rust bir vaqtning o'zida `clear` va `soz` dagi o'zgarmas referenceni bir vaqtning o'zida mavjud bo'lishiga yo'l qo'ymaydi va kompilyatsiya bajarilmaydi. Rust nafaqat API-dan foydalanishni osonlashtirdi, balki kompilyatsiya vaqtidagi xatolarning butun sinfini ham yo'q qildi!
 
 <!-- Old heading. Do not remove or links may break. -->
 <a id="string-literals-are-slices"></a>
 
-#### String Literals as Slices
+#### String literallar Slice sifatida
 
-Recall that we talked about string literals being stored inside the binary. Now
-that we know about slices, we can properly understand string literals:
+Eslatib o'tamiz, biz binary tizimda saqlanadigan string literallari haqida gapirgan edik. Endi biz slicelar haqida bilganimizdan so'ng, biz string literallarini to'g'ri tushunishimiz mumkin:
 
 ```rust
 let s = "Hello, world!";
 ```
 
-The type of `s` here is `&str`: it’s a slice pointing to that specific point of
-the binary. This is also why string literals are immutable; `&str` is an
-immutable reference.
+Bu erda `s` turi `&str`: bu binary faylning o'ziga xos nuqtasiga ishora qiluvchi slice. Shu sababli ham string literallari o'zgarmasdir; `&str` - o'zgarmas reference.
 
-#### String Slices as Parameters
+#### Parametrlar sifatida String Slicelar
 
-Knowing that you can take slices of literals and `String` values leads us to
-one more improvement on `first_word`, and that’s its signature:
+Siz literal va `String` qiymatlarini olish mumkinligini bilish bizni `birinchi_soz`ni yana bir takomillashtirishga olib keladi va bu uning signaturesi:
 
 ```rust,ignore
-fn first_word(s: &String) -> &str {
+fn birinchi_soz(s: &String) -> &str {
 ```
 
-A more experienced Rustacean would write the signature shown in Listing 4-9
-instead because it allows us to use the same function on both `&String` values
-and `&str` values.
+Tajribali Rustacean buni o'rniga 4-9 ro'yxatda ko'rsatilgan signatureni yozadi, chunki bu bizga `&String` qiymatlari va `&str` qiymatlarida bir xil funksiyadan foydalanishga imkon beradi.
 
 ```rust,ignore
 {{#rustdoc_include ../listings/ch04-understanding-ownership/listing-04-09/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 4-9: Improving the `first_word` function by using
-a string slice for the type of the `s` parameter</span>
+<span class="caption">Ro'yxat 4-9: `birinchi_soz` funksiyasini `s` parametri turi uchun string slicedan foydalanish orqali yaxshilash</span>
 
-If we have a string slice, we can pass that directly. If we have a `String`, we
-can pass a slice of the `String` or a reference to the `String`. This
-flexibility takes advantage of *deref coercions*, a feature we will cover in
-[“Implicit Deref Coercions with Functions and
-Methods”][deref-coercions]<!--ignore--> section of Chapter 15.
+Agar bizda string slice bo'lsa, biz uni to'g'ridan-to'g'ri o'tkazishimiz mumkin. Agar bizda `String` bo'lsa, biz `String` slicesini yoki `String` ga referenceni o'tkazishimiz mumkin. Ushbu moslashuvchanlik *deref coercionlari* dan foydalanadi, bu xususiyatni biz 15-bobning [“Funktsiyalar va methodlar bilan Implicit Deref Coercionlari”][deref-coercions]<!--ignore-->  da ko‘rib chiqamiz.
 
-Defining a function to take a string slice instead of a reference to a `String`
-makes our API more general and useful without losing any functionality:
+`String` ga reference o‘rniga string sliceni olish funksiyasini belgilash bizning API’ni hech qanday funksionallikni yo‘qotmasdan umumiyroq va foydali qiladi:
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">Fayl nomi: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch04-understanding-ownership/listing-04-09/src/main.rs:usage}}
 ```
 
-### Other Slices
+### Boshqa Slicelar
 
-String slices, as you might imagine, are specific to strings. But there’s a
-more general slice type too. Consider this array:
+String slicelari, siz tasavvur qilganingizdek, stringlarga xosdir. Ammo yana umumiy slice turi ham bor. Ushbu arrayni ko'rib chiqing:
 
 ```rust
 let a = [1, 2, 3, 4, 5];
 ```
 
-Just as we might want to refer to part of a string, we might want to refer to
-part of an array. We’d do so like this:
+Xuddi biz satrning bir qismiga murojaat qilishni xohlaganimizdek, arrayning bir qismiga murojaat qilishni xohlashimiz mumkin. Biz shunday qilamiz:
 
 ```rust
 let a = [1, 2, 3, 4, 5];
@@ -255,22 +218,13 @@ let slice = &a[1..3];
 assert_eq!(slice, &[2, 3]);
 ```
 
-This slice has the type `&[i32]`. It works the same way as string slices do, by
-storing a reference to the first element and a length. You’ll use this kind of
-slice for all sorts of other collections. We’ll discuss these collections in
-detail when we talk about vectors in Chapter 8.
+Ushbu slice `&[i32]` turiga ega. U birinchi element va uzunlikka referenceni saqlash orqali string slicelari kabi ishlaydi. Siz boshqa barcha turdagi to'plamlar uchun bunday slicedan foydalanasiz. 8-bobda vektorlar haqida gapirganda, biz ushbu to'plamlarni batafsil muhokama qilamiz.
 
-## Summary
+## Xulosa
 
-The concepts of ownership, borrowing, and slices ensure memory safety in Rust
-programs at compile time. The Rust language gives you control over your memory
-usage in the same way as other systems programming languages, but having the
-owner of data automatically clean up that data when the owner goes out of scope
-means you don’t have to write and debug extra code to get this control.
+Ownership, borrowing va slicelar tushunchalari kompilyatsiya vaqtida Rust dasturlarida xotira xavfsizligini ta'minlaydi. Rust tili sizga boshqa tizim dasturlash tillari kabi xotiradan foydalanishni boshqarish imkonini beradi, lekin egasi amal qilish doirasidan chiqib ketganda maʼlumotlar egasi avtomatik ravishda ushbu maʼlumotlarni tozalaydi, bu boshqaruvni olish uchun qoʻshimcha kod yozish va debug qilish shart emasligini anglatadi.
 
-Ownership affects how lots of other parts of Rust work, so we’ll talk about
-these concepts further throughout the rest of the book. Let’s move on to
-Chapter 5 and look at grouping pieces of data together in a `struct`.
+Ownership Rustning boshqa ko'plab qismlari qanday ishlashiga ta'sir qiladi, shuning uchun biz bu tushunchalar haqida kitobning qolgan qismida batafsilroq gaplashamiz. Keling, 5-bobga o'tamiz va ma'lumotlar bo'laklarini `struct`da birga guruhlashni ko'rib chiqamiz.
 
 [ch13]: ch13-02-iterators.html
 [ch6]: ch06-02-match.html#patterns-that-bind-to-values
