@@ -11,123 +11,82 @@ Structni aniqlash uchun biz `struct` kalit so`zini kiritamiz va butun tuzilishga
 {{#rustdoc_include ../listings/ch05-using-structs-to-structure-related-data/listing-05-01/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 5-1: A `User` struct definition</span>
+<span class="caption">Ro'yxat 5-1: `Foydalanuvchi` structi ta'rifi</span>
 
-To use a struct after we’ve defined it, we create an *instance* of that struct
-by specifying concrete values for each of the fields. We create an instance by
-stating the name of the struct and then add curly brackets containing *key:
-value* pairs, where the keys are the names of the fields and the values are the
-data we want to store in those fields. We don’t have to specify the fields in
-the same order in which we declared them in the struct. In other words, the
-struct definition is like a general template for the type, and instances fill
-in that template with particular data to create values of the type. For
-example, we can declare a particular user as shown in Listing 5-2.
+Struct aniqlangandan so'ng, tegishli ma'lumotlar turiga ega bo'lgan har bir maydonga ma'lum bir qiymat berish orqali uni yaratish mumkin. Biz structning nomini ko'rsatish orqali misol yaratamiz va keyin *kalit: qiymat*(key: value) juftlarini o'z ichiga olgan jingalak qavslarni qo'shamiz, bu erda kalitlar maydonlarning nomlari va qiymatlar biz o'sha maydonlarda saqlamoqchi bo'lgan ma'lumotlardir.Biz maydonlarni structda e'lon qilgan tartibda ko'rsatishimiz shart emas. Boshqacha qilib aytganda, structning ta'rifi tur uchun umumiy shablonga o'xshaydi va misollar tur qiymatlarini yaratish uchun ushbu shablonni ma'lum ma'lumotlar bilan to'ldiradi. Misol uchun, biz 5-2 ro'yxatda ko'rsatilganidek, ma'lum bir foydalanuvchini e'lon qilishimiz mumkin.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">Fayl nomi: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch05-using-structs-to-structure-related-data/listing-05-02/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 5-2: Creating an instance of the `User`
-struct</span>
+<span class="caption">Ro'yxat 5-2: `Foydalanuvchi` nusxasini yaratish
+structi</span>
 
-To get a specific value from a struct, we use dot notation. For example, to
-access this user’s email address, we use `user1.email`. If the instance is
-mutable, we can change a value by using the dot notation and assigning into a
-particular field. Listing 5-3 shows how to change the value in the `email`
-field of a mutable `User` instance.
+Structdan ma'lum bir qiymat olish uchun biz nuqta belgilaridan foydalanamiz. Masalan, ushbu foydalanuvchining elektron pochta manziliga kirish uchun biz `foydalanuvchi1.email` dan foydalanamiz. Agar misol o'zgaruvchan bo'lsa, biz nuqta belgisi yordamida qiymatni o'zgartirishimiz va ma'lum bir maydonga belgilashimiz mumkin. 5-3 ro'yxatda o'zgaruvchan `Foydalanuvchi` misolining `email` maydonidagi qiymatni qanday o'zgartirish mumkinligi ko'rsatilgan.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">Fayl nomi: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch05-using-structs-to-structure-related-data/listing-05-03/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 5-3: Changing the value in the `email` field of a
-`User` instance</span>
+<span class="caption">Ro'yxat 5-3: `Foydalanuvchi` misolining `email` maydonidagi qiymatni o'zgartirish</span>
 
-Note that the entire instance must be mutable; Rust doesn’t allow us to mark
-only certain fields as mutable. As with any expression, we can construct a new
-instance of the struct as the last expression in the function body to
-implicitly return that new instance.
+E'tibor bering, butun misol o'zgaruvchan bo'lishi kerak; Rust bizga faqat ma'lum maydonlarni o'zgaruvchan deb belgilashga ruxsat bermaydi. Har qanday ifodada bo'lgani kabi, biz ushbu yangi misolni bilvosita qaytarish uchun funksiya tanasidagi oxirgi ifoda sifatida structning yangi nusxasini qurishimiz mumkin.
 
-Listing 5-4 shows a `build_user` function that returns a `User` instance with
-the given email and username. The `active` field gets the value of `true`, and
-the `sign_in_count` gets a value of `1`.
+5-4 roʻyxatda berilgan email va foydalanuvchi nomi bilan `Foydalanuvchi` misolini qaytaruvchi `foydalanuvchi_yaratish` funksiyasi koʻrsatilgan. `faollik` maydoni `true` qiymatini, `kirish_hisobi` esa `1` qiymatini oladi.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">Fayl nomi: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch05-using-structs-to-structure-related-data/listing-05-04/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 5-4: A `build_user` function that takes an email
-and username and returns a `User` instance</span>
+<span class="caption">Roʻyxat 5-4: `foydalanuvchi_yaratish` funksiyasi email va foydalanuvchi nomini oladi va `Foydalanuvchi` misolini qaytaradi</span>
 
-It makes sense to name the function parameters with the same name as the struct
-fields, but having to repeat the `email` and `username` field names and
-variables is a bit tedious. If the struct had more fields, repeating each name
-would get even more annoying. Luckily, there’s a convenient shorthand!
-
+Funksiya parametrlarini struct maydonlari bilan bir xil nom bilan nomlash mantiqan to‘g‘ri keladi, lekin `email` va `foydalanuvchi` maydon nomlari va o‘zgaruvchilarini takrorlash biroz zerikarli. Agar structda ko'proq maydonlar bo'lsa, har bir nomni takrorlash yanada zerikarli bo'ladi. Yaxshiyamki, qulay Shorthand bor!
 <!-- Old heading. Do not remove or links may break. -->
 <a id="using-the-field-init-shorthand-when-variables-and-fields-have-the-same-name"></a>
 
-### Using the Field Init Shorthand
+### Field Init Shorthandan foydalanish
 
-Because the parameter names and the struct field names are exactly the same in
-Listing 5-4, we can use the *field init shorthand* syntax to rewrite
-`build_user` so it behaves exactly the same but doesn’t have the repetition of
-`username` and `email`, as shown in Listing 5-5.
+Parametr nomlari va struct maydonlarining nomlari 5-4 ro'yxatda aynan bir xil bo'lgani uchun, `foydalanuvchi_yaratish`ni qayta yozish uchun *init shorthand* sintaksisidan foydalanishimiz mumkin, shuning uchun u xuddi shunday ishlaydi, lekin `foydalanuvchi` va `email`ni takrorlamaydi, 5-5 ro'yxatda ko'rsatilganidek.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">Fayl nomi: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch05-using-structs-to-structure-related-data/listing-05-05/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 5-5: A `build_user` function that uses field init
-shorthand because the `username` and `email` parameters have the same name as
-struct fields</span>
+<span class="caption">Roʻyxat 5-5: `foydalanuvchi` va `email` parametrlari struct maydonlari bilan bir xil nomga ega boʻlgani uchun init shorthanddan foydalanadigan `foydalanuvchi_yaratish` funksiyasi</span>
 
-Here, we’re creating a new instance of the `User` struct, which has a field
-named `email`. We want to set the `email` field’s value to the value in the
-`email` parameter of the `build_user` function. Because the `email` field and
-the `email` parameter have the same name, we only need to write `email` rather
-than `email: email`.
+Bu yerda biz `Foydalanuvchi` structining yangi nusxasini yaratmoqdamiz, unda `email` deb nomlangan maydon mavjud. Biz `email` maydonining qiymatini `foydalanuvchi_yaratish` funksiyasining `email` parametridagi qiymatga o‘rnatmoqchimiz. `email` maydoni va `email` parametri bir xil nomga ega bo'lgani uchun biz `email: email` emas, balki `email` yozishimiz kerak.
 
-### Creating Instances from Other Instances with Struct Update Syntax
+### Structni update sintaksisidan foydalanib, boshqa tuzilma nusxasidan tuzilma namunasini yaratish
 
-It’s often useful to create a new instance of a struct that includes most of
-the values from another instance, but changes some. You can do this using
-*struct update syntax*.
+Ko'pincha boshqa namunadagi qiymatlarning ko'pini o'z ichiga olgan, lekin ularning ba'zilarini o'zgartiradigan structning yangi nusxasini yaratish foydali bo'ladi. Buni *struct update sintaksisi* yordamida amalga oshirishingiz mumkin.
 
-First, in Listing 5-6 we show how to create a new `User` instance in `user2`
-regularly, without the update syntax. We set a new value for `email` but
-otherwise use the same values from `user1` that we created in Listing 5-2.
+Birinchidan, 5-6 ro'yxatda biz yangilanish sintaksisisiz muntazam ravishda `foydalanuvchi2` da yangi `Foydalanuvchi` misolini qanday yaratishni ko'rsatamiz. Biz `email` uchun yangi qiymat o‘rnatdik, lekin aks holda 5-2 ro‘yxatda yaratgan `foydalanuvchi1` qiymatidan foydalanamiz.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">Fayl nomi: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch05-using-structs-to-structure-related-data/listing-05-06/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 5-6: Creating a new `User` instance using one of
-the values from `user1`</span>
+<span class="caption">Roʻyxat 5-6: foydalanuvchi1 qiymatlaridan biri yordamida yangi `Foydalanuvchi` namunasini yaratish</span>
 
-Using struct update syntax, we can achieve the same effect with less code, as
-shown in Listing 5-7. The syntax `..` specifies that the remaining fields not
-explicitly set should have the same value as the fields in the given instance.
+Strukturani yangilash sintaksisidan foydalanib, biz 5-7 ro'yxatda ko'rsatilganidek, kamroq kod bilan bir xil effektga erishishimiz mumkin. `..` sintaksisi qolgan maydonlar aniq o'rnatilganligini va belgilangan namunadagi qiymatlarga ega bo'lishi kerakligini ko'rsatadi.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">Fayl nomi: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch05-using-structs-to-structure-related-data/listing-05-07/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 5-7: Using struct update syntax to set a new
-`email` value for a `User` instance but to use the rest of the values from
-`user1`</span>
+<span class="caption">Ro'yxat 5-7: `Foydalanuvchi` misoli uchun yangi `email` qiymatini o'rnatish, lekin `foydalanuvchi1` dagi qolgan qiymatlardan foydalanish uchun structni yangilash sintaksisidan foydalanish</span>
 
 The code in Listing 5-7 also creates an instance in `user2` that has a
 different value for `email` but has the same values for the `username`,
