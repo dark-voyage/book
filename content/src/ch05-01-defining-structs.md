@@ -88,115 +88,73 @@ Strukturani yangilash sintaksisidan foydalanib, biz 5-7 ro'yxatda ko'rsatilganid
 
 <span class="caption">Ro'yxat 5-7: `Foydalanuvchi` misoli uchun yangi `email` qiymatini o'rnatish, lekin `foydalanuvchi1` dagi qolgan qiymatlardan foydalanish uchun structni yangilash sintaksisidan foydalanish</span>
 
-The code in Listing 5-7 also creates an instance in `user2` that has a
-different value for `email` but has the same values for the `username`,
-`active`, and `sign_in_count` fields from `user1`. The `..user1` must come last
-to specify that any remaining fields should get their values from the
-corresponding fields in `user1`, but we can choose to specify values for as
-many fields as we want in any order, regardless of the order of the fields in
-the struct’s definition.
+5-7 roʻyxatdagi kod `foydalanuvchi2` da `email` uchun boshqa qiymatga ega, lekin `foydalanuvchi1` dan `foydalanuvchi`, `faollik` va `kirish_hisobi` maydonlari uchun bir xil qiymatlarga ega boʻlgan misol yaratadi. `..foydalanuvchi1` qolgan maydonlar o‘z qiymatlarini `foydalanuvchi1` dagi tegishli maydonlardan olishi kerakligini ko‘rsatish uchun oxirgi o‘rinda turishi kerak, lekin biz istalgan tartibda xohlagancha ko'p maydonlar uchun qiymatlarni belgilashni tanlashimiz mumkin, strukturaning ta'rifidagi maydonlar tartibidan qat'i nazar.
 
-Note that the struct update syntax uses `=` like an assignment; this is because
-it moves the data, just as we saw in the [“Variables and Data Interacting with
-Move”][move]<!-- ignore --> section. In this example, we can no longer use
-`user1` as a whole after creating `user2` because the `String` in the
-`username` field of `user1` was moved into `user2`. If we had given `user2` new
-`String` values for both `email` and `username`, and thus only used the
-`active` and `sign_in_count` values from `user1`, then `user1` would still be
-valid after creating `user2`. Both `active` and `sign_in_count` are types that
-implement the `Copy` trait, so the behavior we discussed in the [“Stack-Only
-Data: Copy”][copy]<!-- ignore --> section would apply.
+E'tibor bering, strukturani yangilash sintaksisi topshiriq kabi `=` dan foydalanadi; Buning sababi, biz [”O'zgaruvchilar va ma'lumotlarni ko'chirish bilan o'zaro ta'sir qilish”][move]<!-- ignore --> bo'limida ko'rganimizdek, u ma'lumotlarni harakatlantiradi. Ushbu misolda biz `foydalanuvchi2` ni yaratganimizdan keyin `foydalanuvchi1` dan bir butun sifatida foydalana olmaymiz, chunki `foydalanuvchi1`ning `foydalanuvchi` maydonidagi `String` `foydalanuvchi2` ga koʻchirilgan. Agar biz `foydalanuvchi2` ga `email` va `foydalanuvchi` uchun yangi `String` qiymatlarini bergan bo‘lsak va shuning uchun `foydalanuvchi1`dan faqat `faollik` va `kirish_hisobi` qiymatlarini ishlatgan bo‘lsak, keyin `foydalanuvchi1` `foydalanuvchi2` yaratilgandan keyin ham amal qiladi. `faollik` va `kirish_hisobi` turlari nusxa ko'chirish xususiyatini amalga oshiradigan turlardir, shuning uchun biz [”Stek ma'lumotlari: Nusxalash”][copy]<!-- ignore --> bo'limida muhokama qilgan xatti-harakatlar qo'llaniladi.
 
-### Using Tuple Structs Without Named Fields to Create Different Types
+### Har xil turlarni yaratish uchun nomli maydonlarsiz tuplelardan foydalanish
 
-Rust also supports structs that look similar to tuples, called *tuple structs*.
-Tuple structs have the added meaning the struct name provides but don’t have
-names associated with their fields; rather, they just have the types of the
-fields. Tuple structs are useful when you want to give the whole tuple a name
-and make the tuple a different type from other tuples, and when naming each
-field as in a regular struct would be verbose or redundant.
+Rust shuningdek, *tuple struct*lar deb ataladigan tuplelarga o'xshash structlarni qo'llab-quvvatlaydi.
+Tuple structlari struct nomi taqdim etadigan qo'shimcha ma'noga ega, ammo ularning maydonlari bilan bog'langan nomlari yo'q; aksincha, ular faqat maydonlarning turlariga ega. Tuple structlari butun tuplega nom berish va tupleni boshqa tuplelardan farqli turga aylantirish zarur bo‘lganda foydali bo‘ladi va har bir maydonni oddiy structdagi kabi nomlashda batafsil yoki ortiqcha bo‘ladi.
 
-To define a tuple struct, start with the `struct` keyword and the struct name
-followed by the types in the tuple. For example, here we define and use two
-tuple structs named `Color` and `Point`:
+Tuple structini aniqlash uchun `struct` kalit so‘zi va struct nomidan keyin tupledagi turlardan boshlang. Masalan, bu yerda biz `Rang` va `Nuqta` nomli ikkita tuple structini aniqlaymiz va foydalanamiz:
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">Fayl nomi: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch05-using-structs-to-structure-related-data/no-listing-01-tuple-structs/src/main.rs}}
 ```
 
-Note that the `black` and `origin` values are different types because they’re
-instances of different tuple structs. Each struct you define is its own type,
-even though the fields within the struct might have the same types. For
-example, a function that takes a parameter of type `Color` cannot take a
-`Point` as an argument, even though both types are made up of three `i32`
-values. Otherwise, tuple struct instances are similar to tuples in that you can
-destructure them into their individual pieces, and you can use a `.` followed
-by the index to access an individual value.
+Esda tutingki, `qora` va `kelib_chiqishi` qiymatlari har xil turdagi, chunki ular turli xil tuple structlarining namunalaridir. Structdagi maydonlar bir xil turlarga ega bo'lishi mumkin bo'lsa ham, siz belgilagan har bir struct o'z turiga ega. Masalan, `Rang` turidagi parametrni qabul qiladigan funksiya, har ikkala tur ham uchta `i32` qiymatidan iborat bo‘lsa ham, `Nuqta`ni argument sifatida qabul qila olmaydi. Aks holda, tuple structi namunalari tupelarga o'xshaydi, chunki siz ularni alohida qismlarga ajratishingiz mumkin va individual qiymatga kirish uchun `.` va keyin indeksdan foydalanishingiz mumkin.
 
-### Unit-Like Structs Without Any Fields
+### Hech qanday maydonsiz unit kabi structlar
 
-You can also define structs that don’t have any fields! These are called
-*unit-like structs* because they behave similarly to `()`, the unit type that
-we mentioned in [“The Tuple Type”][tuples]<!-- ignore --> section. Unit-like
-structs can be useful when you need to implement a trait on some type but don’t
-have any data that you want to store in the type itself. We’ll discuss traits
-in Chapter 10. Here’s an example of declaring and instantiating a unit struct
-named `AlwaysEqual`:
+Shuningdek, siz hech qanday maydonga ega bo'lmagan structlarni belgilashingiz mumkin! Ular *unita o'xshash structlar* deb ataladi, chunki ular biz [”Tuple turi”][tuples]<!-- ignore --> bo'limida aytib o'tgan unit turiga `()` o'xshash harakat qiladilar. Unitga o'xshash structlar qaysidir turdagi traitni qo'llash kerak bo'lganda foydali bo'lishi mumkin, ammo sizda turning o'zida saqlash uchun ma'lumotlaringiz yo'q. Traitlarni 10-bobda muhokama qilamiz. Mana `AlwaysEqual` nomli unit structini e’lon qilish va instantsiyalash misoli:
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">Fayl nomi: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch05-using-structs-to-structure-related-data/no-listing-04-unit-like-structs/src/main.rs}}
 ```
 
-To define `AlwaysEqual`, we use the `struct` keyword, the name we want, and
-then a semicolon. No need for curly brackets or parentheses! Then we can get an
-instance of `AlwaysEqual` in the `subject` variable in a similar way: using the
-name we defined, without any curly brackets or parentheses. Imagine that later
-we’ll implement behavior for this type such that every instance of
-`AlwaysEqual` is always equal to every instance of any other type, perhaps to
-have a known result for testing purposes. We wouldn’t need any data to
-implement that behavior! You’ll see in Chapter 10 how to define traits and
-implement them on any type, including unit-like structs.
+`AlwaysEqual` ni aniqlash uchun biz `struct` kalit so'zidan, kerakli nomdan va keyin nuqta-verguldan foydalanamiz. Jingalak qavslar yoki qavslar kerak emas! Shunda biz `subject` o'zgaruvchisida `AlwaysEqual` misolini xuddi shunday tarzda olishimiz mumkin: biz belgilagan nomdan foydalanib, hech qanday jingalak qavs yoki qavslarsiz. Tasavvur qiling-a, keyinchalik biz ushbu turdagi xatti-harakatlarni shunday amalga oshiramizki, `AlwaysEqual` ning har bir nusxasi har doim boshqa turdagi har bir misolga teng bo'ladi, ehtimol sinov uchun ma'lum natijaga ega bo'lishi mumkin. Ushbu xatti-harakatni amalga oshirish uchun bizga hech qanday ma'lumot kerak emas! Traitlarni qanday aniqlash va ularni har qanday turdagi, shu jumladan unitga o'xshash structlarda amalga oshirishni 10-bobda ko'rasiz.
 
-> ### Ownership of Struct Data
+> ### Strukturaviy ma'lumotlarga ownershiplik qilish
 >
-> In the `User` struct definition in Listing 5-1, we used the owned `String`
-> type rather than the `&str` string slice type. This is a deliberate choice
-> because we want each instance of this struct to own all of its data and for
-> that data to be valid for as long as the entire struct is valid.
+> 5-1 roʻyxatdagi `Foydalanuvchi` structi taʼrifida biz `&str` string slice turidan
+> koʻra tegishli `String` turidan foydalandik. Bu ataylab qilingan tanlov, chunki
+> biz ushbu structning har bir nusxasi uning barcha maʼlumotlariga ega boʻlishini
+> va bu maʼlumotlar butun struct amalda boʻlgunga qadar amal qilishini istaymiz.
 >
-> It’s also possible for structs to store references to data owned by something
-> else, but to do so requires the use of *lifetimes*, a Rust feature that we’ll
-> discuss in Chapter 10. Lifetimes ensure that the data referenced by a struct
-> is valid for as long as the struct is. Let’s say you try to store a reference
-> in a struct without specifying lifetimes, like the following; this won’t work:
+> Structlar boshqa narsaga tegishli maʼlumotlarga referencelarni saqlashi ham mumkin,
+> ammo buning uchun biz 10-bobda muhokama qiladigan Rust xususiyatidan  *lifetimelar*
+> foydalanishni talab qiladi. Lifetime struct tomonidan reference qilingan ma'lumotlar
+> struct mavjud bo'lgunga qadar amal qilishini ta'minlaydi. Aytaylik, siz ma'lumotnomani
+> lifetimeni ko'rsatmasdan structda saqlashga harakat qildingiz, quyidagi kabi; bu ishlamaydi:
 >
-> <span class="filename">Filename: src/main.rs</span>
+> <span class="filename">Fayl nomi: src/main.rs</span>
 >
 > <!-- CAN'T EXTRACT SEE https://github.com/rust-lang/mdBook/issues/1127 -->
 >
 > ```rust,ignore,does_not_compile
-> struct User {
->     active: bool,
->     username: &str,
+> struct Foydalanuvchi {
+>     faollik: bool,
+>     foydalanuvchi: &str,
 >     email: &str,
->     sign_in_count: u64,
+>     kirish_hisobi: u64,
 > }
 >
 > fn main() {
->     let user1 = User {
->         active: true,
->         username: "someusername123",
->         email: "someone@example.com",
->         sign_in_count: 1,
+>     let foydalanuvchi1 = Foydalanuvchi {
+>         faollik: true,
+>         foydalanuvchi: "ismoilovdev",
+>         email: "ismoilovdev@example.com",
+>         kirish_hisobi: 1,
 >     };
 > }
 > ```
 >
-> The compiler will complain that it needs lifetime specifiers:
+> Kompilyator referencelarning lifetimeni aniqlash zarurati haqida shikoyat qiladi:
 >
 > ```console
 > $ cargo run
@@ -204,14 +162,14 @@ implement them on any type, including unit-like structs.
 > error[E0106]: missing lifetime specifier
 >  --> src/main.rs:3:15
 >   |
-> 3 |     username: &str,
+> 3 |     foydalanuvchi: &str,
 >   |               ^ expected named lifetime parameter
 >   |
 > help: consider introducing a named lifetime parameter
 >   |
-> 1 ~ struct User<'a> {
-> 2 |     active: bool,
-> 3 ~     username: &'a str,
+> 1 ~ struct Foydalanuvchi<'a> {
+> 2 |     faollik: bool,
+> 3 ~     foydalanuvchi: &'a str,
 >   |
 >
 > error[E0106]: missing lifetime specifier
@@ -222,9 +180,9 @@ implement them on any type, including unit-like structs.
 >   |
 > help: consider introducing a named lifetime parameter
 >   |
-> 1 ~ struct User<'a> {
-> 2 |     active: bool,
-> 3 |     username: &str,
+> 1 ~ struct Foydalanuvchi<'a> {
+> 2 |     faollik: bool,
+> 3 |     foydalanuvchi: &str,
 > 4 ~     email: &'a str,
 >   |
 >
@@ -232,9 +190,9 @@ implement them on any type, including unit-like structs.
 > error: could not compile `structs` due to 2 previous errors
 > ```
 >
-> In Chapter 10, we’ll discuss how to fix these errors so you can store
-> references in structs, but for now, we’ll fix errors like these using owned
-> types like `String` instead of references like `&str`.
+> 10-bobda biz ushbu xatolarni qanday tuzatishni muhokama qilamiz, shunda siz
+> referencelarni structlarda saqlashingiz mumkin, ammo hozircha biz bu kabi
+> xatolarni `&str` kabi referencelar oʻrniga `String` kabi tegishli turlardan foydalanib tuzatamiz.
 
 <!-- manual-regeneration
 for the error above
