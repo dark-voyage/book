@@ -1,105 +1,66 @@
-## An Example Program Using Structs
+## Structlar yordamida namunaviy dastur
 
-To understand when we might want to use structs, let’s write a program that
-calculates the area of a rectangle. We’ll start by using single variables, and
-then refactor the program until we’re using structs instead.
+Structlarni qachon ishlatishimiz mumkinligini tushunish uchun to'rtburchakning maydonini hisoblaydigan dastur yozaylik. Biz bitta o'zgaruvchilardan foydalanishni boshlaymiz, so'ngra uning o'rniga structlardan foydalanmagunimizcha dasturni qayta yaxshilab boramiz.
 
-Let’s make a new binary project with Cargo called *rectangles* that will take
-the width and height of a rectangle specified in pixels and calculate the area
-of the rectangle. Listing 5-8 shows a short program with one way of doing
-exactly that in our project’s *src/main.rs*.
+Keling, cargo bilan *kvadratlar* deb nomlangan yangi binary loyihani yarataylik, u piksellarda ko'rsatilgan to'rtburchakning kengligi va balandligini oladi va to'rtburchakning maydonini hisoblaydi. 5-8 ro'yxatda loyihaning *src/main.rs* faylida nima qilishimiz kerakligini aniq bajarishga imkon beradigan bitta qisqa kod ko'rsatilgan.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">Fayl nomi: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch05-using-structs-to-structure-related-data/listing-05-08/src/main.rs:all}}
 ```
 
-<span class="caption">Listing 5-8: Calculating the area of a rectangle
-specified by separate width and height variables</span>
+<span class="caption">Ro'yxat 5-8: Alohida kenglik va balandlik o'zgaruvchilari bilan belgilangan to'rtburchaklar maydonini hisoblash</span>
 
-Now, run this program using `cargo run`:
+Endi ushbu dasturni `cargo run` yordamida ishga tushiring:
 
 ```console
 {{#include ../listings/ch05-using-structs-to-structure-related-data/listing-05-08/output.txt}}
 ```
 
-This code succeeds in figuring out the area of the rectangle by calling the
-`area` function with each dimension, but we can do more to make this code clear
-and readable.
+Ushbu kod har bir o'lcham bilan `area` funksiyasini chaqirish orqali to'rtburchakning maydonini aniqlashga muvaffaq bo'ladi, ammo biz ushbu kodni aniq va o'qilishi uchun ko'proq narsani qilishimiz mumkin.
 
-The issue with this code is evident in the signature of `area`:
+Ushbu kod bilan bog'liq muammo `area` signaturesida aniq ko'rinadi:
 
 ```rust,ignore
 {{#rustdoc_include ../listings/ch05-using-structs-to-structure-related-data/listing-05-08/src/main.rs:here}}
 ```
 
-The `area` function is supposed to calculate the area of one rectangle, but the
-function we wrote has two parameters, and it’s not clear anywhere in our
-program that the parameters are related. It would be more readable and more
-manageable to group width and height together. We’ve already discussed one way
-we might do that in [“The Tuple Type”][the-tuple-type]<!-- ignore --> section
-of Chapter 3: by using tuples.
+`area` funksiyasi bitta to'rtburchakning maydonini hisoblashi kerak, lekin biz yozgan funksiya ikkita parametrga ega va bizning dasturimizning hech bir joyida parametrlar o'zaro bog'liqligi aniq emas. Kenglik va balandlikni birgalikda guruhlash yanada o'qilishi va boshqarilishi oson bo'lishi mumkin edi.3-bobning [”Tuple Turi”][the-tuple-type]<!-- ignore --> bo'limida biz buni amalga oshirishning bir usulini, ya'ni tuplelardan foydalanishni muhokama qildik.
 
-### Refactoring with Tuples
+### Tuplelar yordamida Refaktoring
 
-Listing 5-9 shows another version of our program that uses tuples.
+5-9 ro'yxatda tuplelardan foydalanadigan dasturimizning boshqa versiyasi ko'rsatilgan.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">Fayl nomi: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch05-using-structs-to-structure-related-data/listing-05-09/src/main.rs}}
 ```
 
-<span class="caption">Listing 5-9: Specifying the width and height of the
-rectangle with a tuple</span>
+<span class="caption">Ro'yxat 5-9: To'rtburchakning kengligi va balandligini tuple yordamida aniqlash</span>
 
-In one way, this program is better. Tuples let us add a bit of structure, and
-we’re now passing just one argument. But in another way, this version is less
-clear: tuples don’t name their elements, so we have to index into the parts of
-the tuple, making our calculation less obvious.
+Bir tomondan, bu dastur yaxshiroq. Tuplar bizga biroz struct qo'shishga imkon beradi va biz hozir faqat bitta argumentni keltiramiz. Ammo boshqa yo'l bilan, bu versiya unchalik aniq emas: tuplelar o'z elementlarini nomlamaydi, shuning uchun biz hisob-kitobimizni kamroq aniq qilib, tuple qismlariga indeks qilishimiz kerak.
 
-Mixing up the width and height wouldn’t matter for the area calculation, but if
-we want to draw the rectangle on the screen, it would matter! We would have to
-keep in mind that `width` is the tuple index `0` and `height` is the tuple
-index `1`. This would be even harder for someone else to figure out and keep in
-mind if they were to use our code. Because we haven’t conveyed the meaning of
-our data in our code, it’s now easier to introduce errors.
+Kenglik va balandlikni aralashtirish maydonni hisoblash uchun muhim emas, lekin agar biz ekranda to'rtburchak chizmoqchi bo'lsak, bu muhim bo'ladi! Shuni yodda tutishimiz kerakki, `kenglik` indeks `0` da, `balandlik` esa `1` indeksda. Agar kimdir bizning kodimizdan foydalansa, buni tushunish va yodda tutish qiyinroq bo'ladi. Kodimizda ma'lumotlarimizning ma'nosini etkazmaganimiz sababli, endi xatolarni kiritish osonroq.
 
-### Refactoring with Structs: Adding More Meaning
+### Struktuctlar bilan Refaktoring: ko'proq ma'no qo'shish
 
-We use structs to add meaning by labeling the data. We can transform the tuple
-we’re using into a struct with a name for the whole as well as names for the
-parts, as shown in Listing 5-10.
+Biz ma'lumotlarni etiketlash orqali ma'no qo'shish uchun structlardan foydalanamiz. Biz foydalanayotgan tupleni 5-10 ro'yxatda ko'rsatilganidek, butun nomi bilan bir qatorda qismlar nomlari bilan tuzilishga aylantirishimiz mumkin.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">Fayl nomi: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch05-using-structs-to-structure-related-data/listing-05-10/src/main.rs}}
 ```
 
-<span class="caption">Listing 5-10: Defining a `Rectangle` struct</span>
+<span class="caption">Ro'yxat 5-10: `Kvadrat` strukturasini aniqlash</span>
 
-Here we’ve defined a struct and named it `Rectangle`. Inside the curly
-brackets, we defined the fields as `width` and `height`, both of which have
-type `u32`. Then, in `main`, we created a particular instance of `Rectangle`
-that has a width of `30` and a height of `50`.
+Bu erda biz structi aniqladik va uni `Kvadrat` deb nomladik. Jingalak qavslar ichida biz maydonlarni `kenglik` va `balandlik` sifatida belgiladik, ularning ikkalasi ham `u32` turiga ega. Keyin, `main` da biz `Kvadrat` ning ma'lum bir misolini yaratdik, uning kengligi `30` va balandligi `50`.
 
-Our `area` function is now defined with one parameter, which we’ve named
-`rectangle`, whose type is an immutable borrow of a struct `Rectangle`
-instance. As mentioned in Chapter 4, we want to borrow the struct rather than
-take ownership of it. This way, `main` retains its ownership and can continue
-using `rect1`, which is the reason we use the `&` in the function signature and
-where we call the function.
+Bizning `area` funksiyamiz endi biz `kvadrat` deb nomlagan bitta parametr bilan aniqlanadi, uning turi `Kvadrat` structi misolining o‘zgarmas borrowidir. 4-bobda aytib o'tilganidek, biz unga ownershiplik qilishdan ko'ra, structi borrow qilishni xohlaymiz. Shunday qilib, `main` o'z ownershipini saqlab qoladi va `kvadrat1` dan foydalanishni davom ettirishi mumkin, shuning uchun biz funktsiya signaturesida `&` dan foydalanamiz va biz funktiyani chaqiramiz.
 
-The `area` function accesses the `width` and `height` fields of the `Rectangle`
-instance (note that accessing fields of a borrowed struct instance does not
-move the field values, which is why you often see borrows of structs). Our
-function signature for `area` now says exactly what we mean: calculate the area
-of `Rectangle`, using its `width` and `height` fields. This conveys that the
-width and height are related to each other, and it gives descriptive names to
-the values rather than using the tuple index values of `0` and `1`. This is a
-win for clarity.
+`area` funksiyasi `Kvadrat` misolining `kenglik` va `balandlik`  maydonlariga kiradi (esda tutingki, borrow qilingan struct misolining maydonlariga kirish maydon qiymatlarini ko'chirmaydi, shuning uchun siz ko'pincha structlarning borrowlarini ko'rasiz). Endi `area` funksiyasi signaturesi biz nimani nazarda tutayotganimizni aniq aytadi: `Kvadrat` maydonini uning `kenglik` va `balandlik` maydonlaridan foydalanib hisoblang. Bu kenglik va balandlik bir-biri bilan bog'liqligini bildiradi va `0` va `1` qator indeks qiymatlarini ishlatishdan ko'ra, qiymatlarga tavsiflovchi nomlar beradi. Bu aniqlik uchun g'alaba.
 
 ### Adding Useful Functionality with Derived Traits
 
