@@ -56,150 +56,102 @@ Biz ma'lumotlarni etiketlash orqali ma'no qo'shish uchun structlardan foydalanam
 
 <span class="caption">Ro'yxat 5-10: `Kvadrat` strukturasini aniqlash</span>
 
-Bu erda biz structi aniqladik va uni `Kvadrat` deb nomladik. Jingalak qavslar ichida biz maydonlarni `kenglik` va `balandlik` sifatida belgiladik, ularning ikkalasi ham `u32` turiga ega. Keyin, `main` da biz `Kvadrat` ning ma'lum bir misolini yaratdik, uning kengligi `30` va balandligi `50`.
+Bu yerda biz structni aniqladik va uni `Kvadrat` deb nomladik. Jingalak qavslar ichida biz maydonlarni `kenglik` va `balandlik` sifatida belgiladik, ularning ikkalasi ham `u32` turiga ega. Keyin, `main` da biz `Kvadrat` ning ma'lum bir misolini yaratdik, uning kengligi `30` va balandligi `50`.
 
 Bizning `area` funksiyamiz endi biz `kvadrat` deb nomlagan bitta parametr bilan aniqlanadi, uning turi `Kvadrat` structi misolining o‘zgarmas borrowidir. 4-bobda aytib o'tilganidek, biz unga ownershiplik qilishdan ko'ra, structi borrow qilishni xohlaymiz. Shunday qilib, `main` o'z ownershipini saqlab qoladi va `kvadrat1` dan foydalanishni davom ettirishi mumkin, shuning uchun biz funktsiya signaturesida `&` dan foydalanamiz va biz funktiyani chaqiramiz.
 
 `area` funksiyasi `Kvadrat` misolining `kenglik` va `balandlik`  maydonlariga kiradi (esda tutingki, borrow qilingan struct misolining maydonlariga kirish maydon qiymatlarini ko'chirmaydi, shuning uchun siz ko'pincha structlarning borrowlarini ko'rasiz). Endi `area` funksiyasi signaturesi biz nimani nazarda tutayotganimizni aniq aytadi: `Kvadrat` maydonini uning `kenglik` va `balandlik` maydonlaridan foydalanib hisoblang. Bu kenglik va balandlik bir-biri bilan bog'liqligini bildiradi va `0` va `1` qator indeks qiymatlarini ishlatishdan ko'ra, qiymatlarga tavsiflovchi nomlar beradi. Bu aniqlik uchun g'alaba.
 
-### Adding Useful Functionality with Derived Traits
+### Olingan Traitlar bilan foydali funksionallikni qo'shish
 
-It’d be useful to be able to print an instance of `Rectangle` while we’re
-debugging our program and see the values for all its fields. Listing 5-11 tries
-using the [`println!` macro][println]<!-- ignore --> as we have used in
-previous chapters. This won’t work, however.
+Dasturimizni debug qilish va uning barcha maydonlari uchun qiymatlarni ko'rish paytida `Kvadrat` misolini chop etish foydali bo'lar edi. 5-11 ro'yxatda biz avvalgi boblarda foydalanganimizdek [`println!` makrosidan][println]<!-- ignore --> foydalanishga harakat qiladi. Biroq, bu ishlamaydi.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">Fayl nomi: src/main.rs</span>
 
 ```rust,ignore,does_not_compile
 {{#rustdoc_include ../listings/ch05-using-structs-to-structure-related-data/listing-05-11/src/main.rs}}
 ```
 
-<span class="caption">Listing 5-11: Attempting to print a `Rectangle`
-instance</span>
+<span class="caption">Ro'yxat 5-11: `Kvadrat`ni chop etishga urinish
+misoli</span>
 
-When we compile this code, we get an error with this core message:
+Ushbu kodni kompilyatsiya qilishda, biz ushbu asosiy xabar bilan xatoga duch kelamiz:
 
 ```text
 {{#include ../listings/ch05-using-structs-to-structure-related-data/listing-05-11/output.txt:3}}
 ```
 
-The `println!` macro can do many kinds of formatting, and by default, the curly
-brackets tell `println!` to use formatting known as `Display`: output intended
-for direct end user consumption. The primitive types we’ve seen so far
-implement `Display` by default because there’s only one way you’d want to show
-a `1` or any other primitive type to a user. But with structs, the way
-`println!` should format the output is less clear because there are more
-display possibilities: Do you want commas or not? Do you want to print the
-curly brackets? Should all the fields be shown? Due to this ambiguity, Rust
-doesn’t try to guess what we want, and structs don’t have a provided
-implementation of `Display` to use with `println!` and the `{}` placeholder.
+`println!` makrosi ko'plab formatlash turlarini amalga oshirishi mumkin va standart bo'yicha jingalak qavslar `println!`ga `Display` deb nomlanuvchi formatlashdan foydalanishni bildiradi: to'g'ridan-to'g'ri oxirgi foydalanuvchi iste'moli uchun mo'ljallangan chiqish. Biz hozirgacha ko'rgan primitiv turlar standart bo'yicha `Display` ni qo'llaydi, chunki foydalanuvchiga `1` yoki boshqa primitiv turni ko'rsatishning faqat bitta usuli bor. Lekin structlar bilan `println!` ning chiqishni formatlash usuli unchalik aniq emas, chunki koʻproq koʻrsatish imkoniyatlari mavjud: vergul qoʻyishni xohlaysizmi yoki yoʻqmi? Jingalak qavslarni chop qilmoqchimisiz? Barcha maydonlar ko'rsatilishi kerakmi? Ushbu noaniqlik tufayli Rust biz xohlagan narsani taxmin qilishga urinmaydi va structlarda `println!` va `{}` to'ldiruvchisi bilan foydalanish uchun `Display` ning taqdim etilgan ilovasi yo'q.
 
-If we continue reading the errors, we’ll find this helpful note:
+Agar xatolarni o'qishda davom etsak, biz ushbu foydali eslatmani topamiz:
 
 ```text
 {{#include ../listings/ch05-using-structs-to-structure-related-data/listing-05-11/output.txt:9:10}}
 ```
 
-Let’s try it! The `println!` macro call will now look like `println!("rect1 is
-{:?}", rect1);`. Putting the specifier `:?` inside the curly brackets tells
-`println!` we want to use an output format called `Debug`. The `Debug` trait
-enables us to print our struct in a way that is useful for developers so we can
-see its value while we’re debugging our code.
+Keling, sinab ko'raylik! `println!` macro chaqiruvi endi `println!("kvadrat1 bu {}", kvadrat1);` kabi ko'rinadi. `:?` spetsifikatsiyasini jingalak qavslar ichiga qo'yish `println!` biz `Debug` deb nomlangan chiqish formatidan foydalanmoqchi ekanligimizni bildiradi. `Debug` traiti bizga sturctni ishlab chiquvchilar uchun foydali bo'lgan tarzda chop etish imkonini beradi, shuning uchun biz kodimizni tuzatish paytida uning qiymatini ko'rishimiz mumkin.
 
-Compile the code with this change. Drat! We still get an error:
+Keling, ushbu o'zgarishlar bilan kodni kompilyatsiya qilaylik. Ehh! Biz hali ham xatoni olamiz:
 
 ```text
 {{#include ../listings/ch05-using-structs-to-structure-related-data/output-only-01-debug/output.txt:3}}
 ```
 
-But again, the compiler gives us a helpful note:
+Ammo yana, kompilyator bizga foydali eslatma beradi:
 
 ```text
 {{#include ../listings/ch05-using-structs-to-structure-related-data/output-only-01-debug/output.txt:9:10}}
 ```
 
-Rust *does* include functionality to print out debugging information, but we
-have to explicitly opt in to make that functionality available for our struct.
-To do that, we add the outer attribute `#[derive(Debug)]` just before the
-struct definition, as shown in Listing 5-12.
+Rust debug ma'lumotlarini chop etish funksiyasini o'z ichiga oladi, lekin biz ushbu funksiyani structimiz uchun mavjud qilish uchun ochiqdan-ochiq rozi bo'lishimiz kerak.
+Buni amalga oshirish uchun 5-12 ro'yxatda ko'rsatilganidek, struct ta'rifidan oldin `#[derive(Debug)]` tashqi atributini qo'shamiz.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">Fayl nomi: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch05-using-structs-to-structure-related-data/listing-05-12/src/main.rs}}
 ```
 
-<span class="caption">Listing 5-12: Adding the attribute to derive the `Debug`
-trait and printing the `Rectangle` instance using debug formatting</span>
+<span class="caption">Ro'yxat 5-12: `Debug` traitini olish uchun atribut qo‘shish va debug formatlash yordamida `Kvadrat` misolini chop etish</span>
 
-Now when we run the program, we won’t get any errors, and we’ll see the
-following output:
+Endi dasturni ishga tushirganimizda, biz hech qanday xatolikka yo'l qo'ymaymiz va biz quyidagi natijani ko'ramiz:
 
 ```console
 {{#include ../listings/ch05-using-structs-to-structure-related-data/listing-05-12/output.txt}}
 ```
 
-Nice! It’s not the prettiest output, but it shows the values of all the fields
-for this instance, which would definitely help during debugging. When we have
-larger structs, it’s useful to have output that’s a bit easier to read; in
-those cases, we can use `{:#?}` instead of `{:?}` in the `println!` string. In
-this example, using the `{:#?}` style will output the following:
+Yaxshi! Bu eng yaxshi natija emas, lekin u ushbu misol uchun barcha maydonlarning qiymatlarini ko'rsatadi, bu disk raskadrovka paytida albatta yordam beradi. Kattaroq structlarga ega bo'lsak, o'qishni biroz osonlashtiradigan chiqishga ega bo'lish foydalidir; bunday hollarda `println!` qatoridagi `{:?}` o'rniga `{:#?}` dan foydalanishimiz mumkin. Ushbu misolda `{:#?}` uslubidan foydalanish quyidagi natijalarni beradi:
 
 ```console
 {{#include ../listings/ch05-using-structs-to-structure-related-data/output-only-02-pretty-debug/output.txt}}
 ```
 
-Another way to print out a value using the `Debug` format is to use the [`dbg!`
-macro][dbg]<!-- ignore -->, which takes ownership of an expression (as opposed
-to `println!`, which takes a reference), prints the file and line number of
-where that `dbg!` macro call occurs in your code along with the resultant value
-of that expression, and returns ownership of the value.
+`Debug` formati yordamida qiymatni chop etishning yana bir usuli [`dbg!` macro][dbg]<!-- ignore --> Ifodaga egalik qiluvchi macro (mos referencelar oladigan println! dan farqli o'laroq) o'sha `dbg!` qayerda fayl va satr raqamini chop etadi! macro murojati sizning kodingizda ushbu ifodaning natijaviy qiymati bilan birga sodir bo'ladi va qiymatga egalik huquqini qaytaradi.
 
-> Note: Calling the `dbg!` macro prints to the standard error console stream
-> (`stderr`), as opposed to `println!`, which prints to the standard output
-> console stream (`stdout`). We’ll talk more about `stderr` and `stdout` in the
-> [“Writing Error Messages to Standard Error Instead of Standard Output”
-> section in Chapter 12][err]<!-- ignore -->.
+> Eslatma: `dbg!` makrosini chaqirish standart chiqish konsoli stremiga
+> (`stdout`) chop qiluvchi `println!`dan farqli ravishda standart xato
+> konsoli stremiga (`stderr`) chop etadi. Biz 12-bobdagi [”Xato xabarlarini standart
+> chiqish o‘rniga standart xatoga yozish”][err]<!-- ignore --> bo‘limida `stderr` va `stdout` haqida ko‘proq
+> gaplashamiz.
 
-Here’s an example where we’re interested in the value that gets assigned to the
-`width` field, as well as the value of the whole struct in `rect1`:
+Mana bizni `kenglik` maydoniga tayinlanadigan qiymat, shuningdek `kvadrat1`dagi butun structning qiymati qiziqtiradigan misol:
 
 ```rust
 {{#rustdoc_include ../listings/ch05-using-structs-to-structure-related-data/no-listing-05-dbg-macro/src/main.rs}}
 ```
 
-We can put `dbg!` around the expression `30 * scale` and, because `dbg!`
-returns ownership of the expression’s value, the `width` field will get the
-same value as if we didn’t have the `dbg!` call there. We don’t want `dbg!` to
-take ownership of `rect1`, so we use a reference to `rect1` in the next call.
-Here’s what the output of this example looks like:
+Biz `30 * masshtab` iborasi atrofida `dbg!` qo'yishimiz mumkin va `dbg!` ifoda qiymatiga egalik huquqini qaytargani uchun, `kenglik` maydoni bizda `dbg!` chaqiruvi bo'lmagani kabi bir xil qiymatga ega bo'ladi. Biz `dbg!` `kvadrat1`ga egalik qilishini istamaymiz, shuning uchun keyingi chaqiruvda `kvadrat1` ga referencedan foydalanamiz.
+Ushbu misolning natijasi quyidagicha ko'rinadi:
 
 ```console
 {{#include ../listings/ch05-using-structs-to-structure-related-data/no-listing-05-dbg-macro/output.txt}}
 ```
 
-We can see the first bit of output came from *src/main.rs* line 10 where we’re
-debugging the expression `30 * scale`, and its resultant value is `60` (the
-`Debug` formatting implemented for integers is to print only their value). The
-`dbg!` call on line 14 of *src/main.rs* outputs the value of `&rect1`, which is
-the `Rectangle` struct. This output uses the pretty `Debug` formatting of the
-`Rectangle` type. The `dbg!` macro can be really helpful when you’re trying to
-figure out what your code is doing!
+Biz birinchi debuggingda *src/main.rs* ning 10-qatoridan kelganini ko'rishimiz mumkin, bu erda biz *30 * masshtab* ifodani debugging qilamiz va uning natijaviy qiymati `60` (butun sonlar uchun `Debug` formati faqat ularning qiymatini chop etish uchun ishlatiladi). *src/main.rs* ning 14-qatoridagi `dbg!` chaqiruvi `&kvadrat1` qiymatini chiqaradi, bu `Kvadrat` structidir. Ushbu chiqishda `Kvadrat` turidagi chiroyli `Debug` formatlash qo'llaniladi. `dbg!` makrosi sizning kodingiz nima qilayotganini aniqlashga harakat qilayotganingizda juda foydali bo'lishi mumkin!
 
-In addition to the `Debug` trait, Rust has provided a number of traits for us
-to use with the `derive` attribute that can add useful behavior to our custom
-types. Those traits and their behaviors are listed in [Appendix C][app-c]<!--
-ignore -->. We’ll cover how to implement these traits with custom behavior as
-well as how to create your own traits in Chapter 10. There are also many
-attributes other than `derive`; for more information, see [the “Attributes”
-section of the Rust Reference][attributes].
+Rust `Debug` traitiga qo‘shimcha ravishda `derive` atributi bilan foydalanishimiz uchun bir qancha taritlarni taqdim etdi, ular bizning odatiy turlarimizga foydali xatti-harakatlar qo‘shishi mumkin.Ushbu traitlar va ularning xatti-harakatlari [C ilovasida][app-c]<!-- ignore --> keltirilgan. Biz 10-bobda ushbu traittlarni odatiy xatti-harakatlar bilan qanday implement qilishni, shuningdek, o'z traitlaringizni qanday yaratishni ko'rib chiqamiz.Bundan tashqari, 'derive' dan boshqa ko'plab atributlar mavjud; qo'shimcha ma'lumot olish uchun [Rust Referencening "Atributlar" bo'limiga][attributes] qarang.
 
-Our `area` function is very specific: it only computes the area of rectangles.
-It would be helpful to tie this behavior more closely to our `Rectangle` struct
-because it won’t work with any other type. Let’s look at how we can continue to
-refactor this code by turning the `area` function into an `area` *method*
-defined on our `Rectangle` type.
+Bizning `area` funksiyamiz juda aniq: u faqat to'rtburchaklar maydonini hisoblaydi. Ushbu xatti-harakatni `Kvadrat` structimiz bilan yaqinroq bog'lash foydali bo'ladi, chunki u boshqa turlar bilan ishlamaydi. Keling, ushbu kodni qanday qilib qayta ishlashni davom ettirishimiz mumkinligini ko'rib chiqaylik, bu `area` funksiyasini `Kvadrat` turida aniqlangan `area` *method* ga aylantiradi.
 
 [the-tuple-type]: ch03-02-data-types.html#the-tuple-type
 [app-c]: appendix-03-derivable-traits.md
