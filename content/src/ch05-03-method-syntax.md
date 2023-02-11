@@ -84,7 +84,7 @@ Ko'pincha, lekin har doim emas, biz metodga maydon bilan bir xil nom berganimizd
 ### Ko'proq parametrlarga ega metodlar
 
 `Kvadrat` structida ikkinchi metodni implement qilish orqali metodlardan foydalanishni mashq qilaylik. Bu safar biz `Kvadrat` misoli `Kvadrat` ning boshqa nusxasini olishini va agar ikkinchi `Kvadrat` to'liq o'ziga (birinchi `Kvadrat`) sig'ishi mumkin bo'lsa, `true` qiymatini qaytarishini istaymiz; aks holda u `false`ni qaytarishi kerak.
-Ya'ni, `can_hold` metodini aniqlaganimizdan so'ng, biz 5-14 ro'yxatda ko'rsatilgan dasturni yozish imkoniyatiga ega bo'lishni xohlaymiz.
+Ya'ni, `ushlab_tur` metodini aniqlaganimizdan so'ng, biz 5-14 ro'yxatda ko'rsatilgan dasturni yozish imkoniyatiga ega bo'lishni xohlaymiz.
 
 <span class="filename">Fayl nomi: src/main.rs</span>
 
@@ -92,107 +92,62 @@ Ya'ni, `can_hold` metodini aniqlaganimizdan so'ng, biz 5-14 ro'yxatda ko'rsatilg
 {{#rustdoc_include ../listings/ch05-using-structs-to-structure-related-data/listing-05-14/src/main.rs}}
 ```
 
-<span class="caption">Listing 5-14: Using the as-yet-unwritten `can_hold`
-method</span>
+<span class="caption">Ro'yxat 5-14: Hali yozilmagan `ushlab_tur` dan foydalanish
+metodi</span>
 
-The expected output would look like the following because both dimensions of
-`rect2` are smaller than the dimensions of `rect1`, but `rect3` is wider than
-`rect1`:
+Kutilgan natija quyidagicha ko‘rinadi, chunki `kvadrat2` ning ikkala o‘lchami `kvadrat1` o‘lchamidan kichikroq, lekin `kvadrat3` `kvadrat1` dan kengroq:
 
 ```text
-Can rect1 hold rect2? true
-Can rect1 hold rect3? false
+kvadrat1 kvadrat2ni ushlab turadimi? true
+kvadrat1 kvadrat3ni ushlab turadimi? false
 ```
 
-We know we want to define a method, so it will be within the `impl Rectangle`
-block. The method name will be `can_hold`, and it will take an immutable borrow
-of another `Rectangle` as a parameter. We can tell what the type of the
-parameter will be by looking at the code that calls the method:
-`rect1.can_hold(&rect2)` passes in `&rect2`, which is an immutable borrow to
-`rect2`, an instance of `Rectangle`. This makes sense because we only need to
-read `rect2` (rather than write, which would mean we’d need a mutable borrow),
-and we want `main` to retain ownership of `rect2` so we can use it again after
-calling the `can_hold` method. The return value of `can_hold` will be a
-Boolean, and the implementation will check whether the width and height of
-`self` are greater than the width and height of the other `Rectangle`,
-respectively. Let’s add the new `can_hold` method to the `impl` block from
-Listing 5-13, shown in Listing 5-15.
+Biz metodni aniqlamoqchi ekanligimizni bilamiz, shuning uchun u `impl Kvadrat` blokida bo'ladi. Metod nomi `ushlab_tur` bo'ladi va u parametr sifatida boshqa `Kvadrat` ning o'zgarmas borrowini oladi. Parametrning turi qanday bo'lishini metodni chaqiruvchi kodga qarab aniqlashimiz mumkin: `kvadrat1.ushlab_tur(&kvadrat2)` `&kvadrat2` da o'tadi, bu `kvadrat2` ga o'zgarmas borrow, `Kvadrat` misoli. Bu mantiqqa to'g'ri keladi, chunki biz faqat `kvadrat2` ni o'qishimiz kerak (yozishdan ko'ra, bu bizga o'zgaruvchan borrow kerak degan ma'noni anglatadi), va biz `main` `kvadrat2` ownershipligini saqlab qolishini istaymiz, shuning uchun `ushlab_tur` metodini chaqirganimizdan keyin uni qayta ishlatishimiz mumkin. `ushlab_tur` ning return qiymati mantiqiy qiymat bo'ladi va implement `self` ning kengligi va balandligi mos ravishda boshqa `Kvadrat` ning kengligi va balandligidan katta ekanligini tekshiradi. Keling, 5-15 ro'yxatda ko'rsatilgan 5-13 ro'yxatdagi `impl` blokiga yangi `ushlab_tur` metodini qo'shamiz.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">Fayl nomi: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch05-using-structs-to-structure-related-data/listing-05-15/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 5-15: Implementing the `can_hold` method on
-`Rectangle` that takes another `Rectangle` instance as a parameter</span>
+<span class="caption">Ro'yxat 5-15: Parametr sifatida boshqa `Kvadrat` misolini oladigan `ushlab_tur` metodini `Kvadrat`da qo'llash</span>
 
-When we run this code with the `main` function in Listing 5-14, we’ll get our
-desired output. Methods can take multiple parameters that we add to the
-signature after the `self` parameter, and those parameters work just like
-parameters in functions.
+Ushbu kodni 5-14 ro'yxatdagi `main` funksiya bilan ishga tushirganimizda, biz kerakli natijani olamiz. Metodlar biz signaturega `self` parametridan keyin qo'shadigan bir nechta parametrlarni olishi mumkin va bu parametrlar funksiyalardagi parametrlar kabi ishlaydi.
 
-### Associated Functions
+### Associate Funksiyalar
 
-All functions defined within an `impl` block are called *associated functions*
-because they’re associated with the type named after the `impl`. We can define
-associated functions that don’t have `self` as their first parameter (and thus
-are not methods) because they don’t need an instance of the type to work with.
-We’ve already used one function like this: the `String::from` function that’s
-defined on the `String` type.
+Associate Funksiyalar (Bog'langan Funktsiyalar).`impl` blokida aniqlangan barcha funksiyalar *associated funksiyalar* deb ataladi, chunki ular `impl` nomi bilan atalgan tur bilan bog‘langan. Biz birinchi parametr sifatida `self` ega bo'lmagan associated funksiyalarni belgilashimiz mumkin (va shuning uchun metodlar emas), chunki ular bilan ishlash uchun turdagi namuna kerak emas.
+Biz allaqachon shunday funksiyadan foydalanganmiz: `String` turida aniqlangan `String::from` funksiyasi.
 
-Associated functions that aren’t methods are often used for constructors that
-will return a new instance of the struct. These are often called `new`, but
-`new` isn’t a special name and isn’t built into the language. For example, we
-could choose to provide an associated function named `square` that would have
-one dimension parameter and use that as both width and height, thus making it
-easier to create a square `Rectangle` rather than having to specify the same
-value twice:
+Metod bo'lmagan associated funktsiyalar ko'pincha structning yangi nusxasini qaytaradigan konstruktorlar uchun ishlatiladi. Ular ko'pincha `new` deb ataladi, ammo `new` maxsus nom emas va tilga kiritilmagan. Masalan, biz bir o‘lchamli parametrga ega bo‘lgan `kvadrat` nomli associated funksiyani taqdim etishimiz va undan kenglik va balandlik sifatida foydalanishimiz mumkin, bu esa bir xil qiymatni ikki marta belgilashdan ko‘ra `Kvadrat` kvadratini yaratishni osonlashtiradi. :
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">Fayl nomi: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch05-using-structs-to-structure-related-data/no-listing-03-associated-functions/src/main.rs:here}}
 ```
 
-The `Self` keywords in the return type and in the body of the function are
-aliases for the type that appears after the `impl` keyword, which in this case
-is `Rectangle`.
+Return turidagi va funksiya tanasidagi `Self` kalit so'zlari `impl` kalit so'zidan keyin paydo bo'ladigan turning taxalluslari bo'lib, bu holda `Kvadrat` bo'ladi.We’ll discuss modules in [Chapter 7][modules]<!-- ignore -->.
 
-To call this associated function, we use the `::` syntax with the struct name;
-`let sq = Rectangle::square(3);` is an example. This function is namespaced by
-the struct: the `::` syntax is used for both associated functions and
-namespaces created by modules. We’ll discuss modules in [Chapter
-7][modules]<!-- ignore -->.
+Ushbu associated funktsiyani chaqirish uchun biz struct nomi bilan `::` sintaksisidan foydalanamiz; `let kv = Kvadrat::kvadrat(3);` misol bo'la oladi. Bu funksiya struct tomonidan nom maydoniga ega: `::` sintaksisi ham associated funksiyalar, ham modullar tomonidan yaratilgan nomlar bo'shliqlari uchun ishlatiladi. Biz modullarni [7-bobda][modules]<!-- ignore --> muhokama qilamiz.
 
-### Multiple `impl` Blocks
+### Bir nechta `impl` bloklari
 
-Each struct is allowed to have multiple `impl` blocks. For example, Listing
-5-15 is equivalent to the code shown in Listing 5-16, which has each method in
-its own `impl` block.
+Har bir structga bir nechta `impl` bloklari ruxsat etiladi. Masalan, 5-15 ro'yxati 5-16 ro'yxatida ko'rsatilgan kodga ekvivalent bo'lib, har bir metod o'zining `impl` blokiga ega yani har bir metod o'z `impl` blokida.
 
 ```rust
 {{#rustdoc_include ../listings/ch05-using-structs-to-structure-related-data/listing-05-16/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 5-16: Rewriting Listing 5-15 using multiple `impl`
-blocks</span>
+<span class="caption">Ro'yxat 5-16: Bir nechta `impl` bloklari yordamida 5-15 ro'yxatini qayta yozish</span>
 
-There’s no reason to separate these methods into multiple `impl` blocks here,
-but this is valid syntax. We’ll see a case in which multiple `impl` blocks are
-useful in Chapter 10, where we discuss generic types and traits.
+Bu metodlarni bir nechta `impl` bloklariga ajratish uchun hech qanday sabab yo'q, lekin bu to'g'ri sintaksis. Biz 10-bobda bir nechta `impl` bloklari foydali bo'lgan holatni ko'rib chiqamiz, bu yerda biz umumiy turlar va taritlarni muhokama qilamiz.
 
-## Summary
+## Xulosa
 
-Structs let you create custom types that are meaningful for your domain. By
-using structs, you can keep associated pieces of data connected to each other
-and name each piece to make your code clear. In `impl` blocks, you can define
-functions that are associated with your type, and methods are a kind of
-associated function that let you specify the behavior that instances of your
-structs have.
+Structlar sizning domeningiz uchun mazmunli bo'lgan maxsus turlarni yaratishga imkon beradi. Structlardan foydalanib, siz bog'langan ma'lumotlar qismlarini bir-biriga bog'lab qo'yishingiz va kodingizni aniq qilish uchun har bir qismga nom berishingiz mumkin. `impl` bloklarida siz o'zingizning turingiz bilan bog'liq bo'lgan funksiyalarni belgilashingiz mumkin va metodlar - bu sizning structlaringiz misollarining xatti-harakatlarini belgilashga imkon beruvchi associated funksiyaning bir turi.
 
-But structs aren’t the only way you can create custom types: let’s turn to
-Rust’s enum feature to add another tool to your toolbox.
+Ammo structlar maxsus turlarni yaratishning yagona usuli emas: toolboxga boshqa toolni qo'shish uchun Rust enum xususiyatiga murojaat qilaylik.
 
 [enums]: ch06-00-enums.html
 [trait-objects]: ch17-02-trait-objects.md
