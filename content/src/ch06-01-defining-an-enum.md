@@ -86,67 +86,42 @@ Keling, 6-2 ro'yxatdagi enumning yana bir misolini ko'rib chiqaylik: bu o'z vari
 {{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/listing-06-02/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 6-2: A `Message` enum whose variants each store
-different amounts and types of values</span>
+<span class="caption">Ro'yxat 6-2: `Xabar` enumi, uning variantlari har xil miqdor va qiymat turlarini saqlaydi</span>
 
-This enum has four variants with different types:
+Ushbu enum har xil turdagi to'rtta variantga ega:
 
-* `Quit` has no data associated with it at all.
-* `Move` has named fields, like a struct does.
-* `Write` includes a single `String`.
-* `ChangeColor` includes three `i32` values.
+* `Chiqish`da u bilan bogʻliq hech qanday maʼlumot yoʻq.
+* `Kochirish` da struct kabi maydonlarni nomlagan.
+* `Yozish` bitta `String` ni o'z ichiga oladi.
+* `RangTanla` uchta `i32` qiymatini o'z ichiga oladi.
 
-Defining an enum with variants such as the ones in Listing 6-2 is similar to
-defining different kinds of struct definitions, except the enum doesn’t use the
-`struct` keyword and all the variants are grouped together under the `Message`
-type. The following structs could hold the same data that the preceding enum
-variants hold:
+Enumni 6-2-roʻyxatdagi kabi variantlar bilan belgilash strukturaviy definitionlarning har xil turlarini aniqlashga oʻxshaydi, faqat enum `struct` kalit soʻzidan foydalanmaydi va barcha variantlar `Xabar` turi ostida birlashtiriladi. Quyidagi structlar oldingi enum variantlari bilan bir xil ma'lumotlarni saqlashi mumkin:
 
 ```rust
 {{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/no-listing-04-structs-similar-to-message-enum/src/main.rs:here}}
 ```
 
-But if we used the different structs, each of which has its own type, we
-couldn’t as easily define a function to take any of these kinds of messages as
-we could with the `Message` enum defined in Listing 6-2, which is a single type.
+Lekin biz o'z turlariga ega bo'lgan turli structlardan foydalanganimizda, biz har qanday xabar turini qabul qiladigan funksiyalarni osonlikcha aniqlay olmadik, buni bitta tur bo'lgan 6-2 ro'yxatda e'lon qilingan `Xabar` turini enum bilan amalga oshirish mumkin.
 
-There is one more similarity between enums and structs: just as we’re able to
-define methods on structs using `impl`, we’re also able to define methods on
-enums. Here’s a method named `call` that we could define on our `Message` enum:
+Enumlar va structlar o'rtasida yana bir o'xshashlik bor: biz `impl` yordamida structlarda metodlarni aniqlay olganimizdek, enumlarda ham metodlarni belgilashimiz mumkin. Bu yerda biz `Xabar` enumimizda aniqlashimiz mumkin bo'lgan `chaqiruv` deb nomlangan metod:
 
 ```rust
 {{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/no-listing-05-methods-on-enums/src/main.rs:here}}
 ```
 
-The body of the method would use `self` to get the value that we called the
-method on. In this example, we’ve created a variable `m` that has the value
-`Message::Write(String::from("hello"))`, and that is what `self` will be in the
-body of the `call` method when `m.call()` runs.
+Metod tanasi biz metod deb atagan qiymatni olish uchun `self` ishlatadi. Ushbu misolda biz `Xabar::Yozish(String::from("salom"))` qiymatini o'z ichiga olgan `m` o'zgaruvchisini yaratdik va `m.chaqiruv()` ishga tushganda `chaqiruv` metodining tanasida aynan shunday bo`ladi.
+Keling, standart kutubxonadagi juda keng tarqalgan va foydali bo'lgan yana bir enumni ko'rib chiqaylik: `Option`.
 
-Let’s look at another enum in the standard library that is very common and
-useful: `Option`.
+### `Option` Enum va uning null qiymatlardan ustunligi
 
-### The `Option` Enum and Its Advantages Over Null Values
+Ushbu bo'lim standart kutubxona tomonidan aniqlangan yana bir enum bo'lgan `Option` ning misolini o'rganadi.`Option` turi qiymat nimadir yoki hech narsa bo'lmasligi mumkin bo'lgan juda keng tarqalgan senariyni kodlaydi.
 
-This section explores a case study of `Option`, which is another enum defined
-by the standard library. The `Option` type encodes the very common scenario in
-which a value could be something or it could be nothing.
+Misol uchun, agar siz bo'sh bo'lmagan ro'yxatdagi birinchi elementni so'rasangiz, qiymat olasiz. Agar siz bo'sh ro'yxatdagi birinchi elementni so'rasangiz, hech narsa olmaysiz.
+Ushbu kontseptsiyani turdagi tizim nuqtai nazaridan ifodalash kompilyator siz ko'rib chiqishingiz kerak bo'lgan barcha ishlarni ko'rib chiqqaningizni tekshirishi mumkinligini anglatadi; bu funksiya boshqa dasturlash tillarida juda keng tarqalgan xatolarni oldini oladi.
 
-For example, if you request the first item in a non-empty list, you would get
-a value. If you request the first item in an empty list, you would get nothing.
-Expressing this concept in terms of the type system means the compiler can
-check whether you’ve handled all the cases you should be handling; this
-functionality can prevent bugs that are extremely common in other programming
-languages.
+Dasturlash tilining dizayni ko'pincha siz qaysi xususiyatlarni o'z ichiga olganligingiz nuqtai nazaridan o'ylanadi, ammo siz chiqarib tashlagan xususiyatlar ham muhimdir. Rust ko'plab boshqa tillarda mavjud bo'lgan null xususiyatiga ega emas. *Null* - bu qiymat yo'qligini bildiradi. Null bo'lgan tillarda o'zgaruvchilar har doim ikkita holatdan birida bo'lishi mumkin: null yoki null emas.
 
-Programming language design is often thought of in terms of which features you
-include, but the features you exclude are important too. Rust doesn’t have the
-null feature that many other languages have. *Null* is a value that means there
-is no value there. In languages with null, variables can always be in one of
-two states: null or not-null.
-
-In his 2009 presentation “Null References: The Billion Dollar Mistake,” Tony
-Hoare, the inventor of null, has this to say:
+2009 yilgi "Null References: The Million Dollar Mistake" taqdimotida null ixtirochisi Tony Hoare shunday deydi:
 
 > I call it my billion-dollar mistake. At that time, I was designing the first
 > comprehensive type system for references in an object-oriented language. My
