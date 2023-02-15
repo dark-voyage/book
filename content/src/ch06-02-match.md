@@ -1,96 +1,51 @@
 <!-- Old heading. Do not remove or links may break. -->
 <a id="the-match-control-flow-operator"></a>
-## The `match` Control Flow Construct
+## `match` Control Flow konstruksiyasi
 
-Rust has an extremely powerful control flow construct called `match` that
-allows you to compare a value against a series of patterns and then execute
-code based on which pattern matches. Patterns can be made up of literal values,
-variable names, wildcards, and many other things; [Chapter
-18][ch18-00-patterns]<!-- ignore --> covers all the different kinds of patterns
-and what they do. The power of `match` comes from the expressiveness of the
-patterns and the fact that the compiler confirms that all possible cases are
-handled.
+Rust `match` deb nomlangan juda kuchli control flow konstruksiyasiga ega, bu sizga qiymatni bir qator patternlar bilan solishtirish va keyin qaysi pattern mos kelishiga qarab kodni bajarish imkonini beradi. Patternlar literal qiymatlar, o'zgaruvchilar nomlari, wildcardlar va boshqa ko'plab narsalardan iborat bo'lishi mumkin; [18-bobda][ch18-00-patterns]<!-- ignore --> har xil turdagi patternlar va ular bajaradigan ishlar yoritilgan. `match`ning kuchi patternlarning ifodaliligidan va kompilyator barcha mumkin bo'lgan holatlar ko'rib chiqilishini tasdiqlashidan kelib chiqadi.
 
-Think of a `match` expression as being like a coin-sorting machine: coins slide
-down a track with variously sized holes along it, and each coin falls through
-the first hole it encounters that it fits into. In the same way, values go
-through each pattern in a `match`, and at the first pattern the value “fits,”
-the value falls into the associated code block to be used during execution.
+`match` iborasini tanga saralash mashinasiga o'xshatib tasavvur qiling: tangalar bo'ylab turli o'lchamdagi teshiklari bo'lgan yo'ldan pastga siljiydi va har bir tanga o'zi mos keladigan birinchi teshikdan tushadi. Xuddi shu tarzda, qiymatlar `match` dagi har bir patterndan o'tadi va birinchi patternda qiymat “fits,”, qiymat bajarish paytida ishlatiladigan tegishli kod blokiga tushadi.
 
-Speaking of coins, let’s use them as an example using `match`! We can write a
-function that takes an unknown US coin and, in a similar way as the counting
-machine, determines which coin it is and returns its value in cents, as shown
-in Listing 6-3.
+Tangalar haqida gap ketganda, keling, ularni `match` yordamida misol qilib olaylik! Biz noma'lum AQSH tangasini oladigan funksiyani yozishimiz mumkin va xuddi sanash mashinasiga o'xshab uning qaysi tanga ekanligini aniqlaydi va 6-3 ro'yxatda ko'rsatilganidek, uning qiymatini sentlarda qaytaradi.
 
 ```rust
 {{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/listing-06-03/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 6-3: An enum and a `match` expression that has
-the variants of the enum as its patterns</span>
+<span class="caption">Ro'yxat 6-3: Enum va `match` ifodasi, uning namunalari sifatida enumning variantlari mavjud</span>
 
-Let’s break down the `match` in the `value_in_cents` function. First we list
-the `match` keyword followed by an expression, which in this case is the value
-`coin`. This seems very similar to a conditional expression used with `if`, but
-there’s a big difference: with `if`, the condition needs to evaluate to a
-Boolean value, but here it can be any type. The type of `coin` in this example
-is the `Coin` enum that we defined on the first line.
+Keling, `sentdagi_qiymat` funksiyasidagi `match` ni ajratamiz. Avval biz `match` kalit so'zidan keyin ifodani keltiramiz, bu holda bu qiymat `tanga` bo'ladi. Bu `if` bilan ishlatiladigan shartli ifodaga juda o'xshaydi, lekin
+katta farq bor: `if` bilan shart mantiqiy qiymatga baholanishi kerak, ammo bu yerda u har qanday turdagi bo'lishi mumkin. Ushbu misoldagi `tanga` turi biz birinchi qatorda belgilagan `Tanga` enumidir.
 
-Next are the `match` arms. An arm has two parts: a pattern and some code. The
-first arm here has a pattern that is the value `Coin::Penny` and then the `=>`
-operator that separates the pattern and the code to run. The code in this case
-is just the value `1`. Each arm is separated from the next with a comma.
+Keyingi `match` armlari. Arm ikki qismdan iborat: pattern va ba'zi kod. Bu yerdagi birinchi arm `Tanga::Penny` qiymati boʻlgan patternga ega, soʻngra ishlash uchun pattern va kodni ajratuvchi `=>` operatori. Bu holatda kod faqat `1` qiymatidan iborat. Har bir arm keyingisidan vergul bilan ajratiladi.
 
-When the `match` expression executes, it compares the resultant value against
-the pattern of each arm, in order. If a pattern matches the value, the code
-associated with that pattern is executed. If that pattern doesn’t match the
-value, execution continues to the next arm, much as in a coin-sorting machine.
-We can have as many arms as we need: in Listing 6-3, our `match` has four arms.
+`match` ifodasi bajarilganda, natijaviy qiymatni har bir armning patterniga solishtiradi. Agar pattern qiymatga mos kelsa, ushbu pattern bilan bog'langan kod bajariladi. Agar bu pattern qiymatga mos kelmasa, ijro tanga saralash mashinasida bo'lgani kabi keyingi armda davom etadi.
+Bizda qancha arm kerak bo'lsa, shuncha arm bo'lishi mumkin: 6-3 ro'yxatda bizning `match`imizda to'rtta arm bor.
 
-The code associated with each arm is an expression, and the resultant value of
-the expression in the matching arm is the value that gets returned for the
-entire `match` expression.
+Har bir arm bilan bog'langan kod ifodadir va mos keladigan qismdagi ifodaning natijaviy qiymati butun `match` ifodasi uchun qaytariladigan qiymatdir.
 
-We don’t typically use curly brackets if the match arm code is short, as it is
-in Listing 6-3 where each arm just returns a value. If you want to run multiple
-lines of code in a match arm, you must use curly brackets, and the comma
-following the arm is then optional. For example, the following code prints
-“Lucky penny!” every time the method is called with a `Coin::Penny`, but still
-returns the last value of the block, `1`:
+Agar mos keladigan arm kodi qisqa bo'lsa, biz odatda jingalak qavslardan foydalanmaymiz, chunki bu ro'yxat 6-3da bo'lgani kabi, har bir arm shunchaki qiymat qaytaradi. Agar siz mos keladigan chiziqda bir nechta kod qatorlarini ishlatmoqchi bo'lsangiz, jingalak qavslardan foydalaning va armdan keyingi vergul ixtiyoriy bo'ladi. Masalan, quyidagi kodda `Omadli tanga!` metod har safar `Tanga::Penny` bilan chaqirilganda, lekin baribir blokning oxirgi qiymatini qaytaradi, `1`:
 
 ```rust
 {{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/no-listing-08-match-arm-multiple-lines/src/main.rs:here}}
 ```
 
-### Patterns That Bind to Values
+### Qiymatlarni bog'laydigan patternlar
 
-Another useful feature of match arms is that they can bind to the parts of the
-values that match the pattern. This is how we can extract values out of enum
-variants.
+match armlarining yana bir foydali xususiyati shundaki, ular patternga mos keladigan qiymatlarning qismlarini bog'lashlari mumkin. Enum variantlaridan qiymatlarni shunday chiqarishimiz mumkin.
 
-As an example, let’s change one of our enum variants to hold data inside it.
-From 1999 through 2008, the United States minted quarters with different
-designs for each of the 50 states on one side. No other coins got state
-designs, so only quarters have this extra value. We can add this information to
-our `enum` by changing the `Quarter` variant to include a `UsState` value
-stored inside it, which we’ve done in Listing 6-4.
+Misol tariqasida, uning ichida ma'lumotlarni saqlash uchun enum variantlarimizdan birini o'zgartiraylik.
+1999 yildan 2008 yilgacha Qo'shma Shtatlar bir tomondan 50 shtatning har biri uchun turli dizayndagi tangalarni bosib chiqardi. Boshqa hech qanday tangalar davlat dizayniga ega emas, shuning uchun faqat quarterlarda bunday qo'shimcha qiymat mavjud. Biz ushbu maʼlumotni `Quarter` variantini uning ichida saqlangan `UsState` qiymatini kiritish uchun oʻzgartirish orqali `enum`ga qoʻshishimiz mumkin, biz buni 6-4 roʻyxatda qilganmiz.
 
 ```rust
 {{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/listing-06-04/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 6-4: A `Coin` enum in which the `Quarter` variant
-also holds a `UsState` value</span>
+<span class="caption">Roʻyxat 6-4: `Quarter` varianti ham `UsState` qiymatiga ega boʻlgan `Tanga` enumi</span>
 
-Let’s imagine that a friend is trying to collect all 50 state quarters. While
-we sort our loose change by coin type, we’ll also call out the name of the
-state associated with each quarter so that if it’s one our friend doesn’t have,
-they can add it to their collection.
+Tasavvur qiling-a, sizning do'stingiz barcha 50 shtatdan quarter yig'ishga harakat qilmoqda. Biz tangalar turi bo'yicha saralashimiz bilan birga, agar do'stimizda yo'q bo'lsa, ular uni o'z kollektsiyasiga qo'shishlari uchun har quarter bilan bog'liq shtat nomini ham chaqiramiz.
 
-In the match expression for this code, we add a variable called `state` to the
-pattern that matches values of the variant `Coin::Quarter`. When a
-`Coin::Quarter` matches, the `state` variable will bind to the value of that
-quarter’s state. Then we can use `state` in the code for that arm, like so:
+Ushbu kod uchun match ifodasida biz `Tanga::Quarter` varianti qiymatlariga mos keladigan patternga `shtat` deb nomlangan o'zgaruvchini qo‘shamiz. `Tanga::Quarter` mos kelganda, `shtat` o'zgaruvchisi o'sha quarter holati qiymatiga bog'lanadi. Keyin biz ushbu arm uchun kodda `shtat` dan foydalanishimiz mumkin, masalan:
 
 ```rust
 {{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/no-listing-09-variable-in-pattern/src/main.rs:here}}
