@@ -51,78 +51,49 @@ Ushbu kod uchun match ifodasida biz `Tanga::Quarter` varianti qiymatlariga mos k
 {{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/no-listing-09-variable-in-pattern/src/main.rs:here}}
 ```
 
-If we were to call `value_in_cents(Coin::Quarter(UsState::Alaska))`, `coin`
-would be `Coin::Quarter(UsState::Alaska)`. When we compare that value with each
-of the match arms, none of them match until we reach `Coin::Quarter(state)`. At
-that point, the binding for `state` will be the value `UsState::Alaska`. We can
-then use that binding in the `println!` expression, thus getting the inner
-state value out of the `Coin` enum variant for `Quarter`.
+Agar biz `sentdagi_qiymat(Tanga::Quarter(UsState::Alaska))` deb ataydigan bo'lsak, `tanga` `Tanga::Quarter(UsState::Alaska)` bo'ladi. Ushbu qiymatni har bir match armi bilan solishtirganda, biz `Tanga::Quarter(shtat)` ga yetguncha ularning hech biri mos kelmaydi. O'sha paytda `shtat` uchun majburiy `UsState::Alaska` qiymati bo'ladi. Keyin biz bu bog'lanishni `println!` ifodasida qo'llashimiz mumkin, shu bilan `Quarter` uchun `Tanga` enum variantidan ichki holat qiymatini olamiz.
 
-### Matching with `Option<T>`
+### `Option<T>` uchun Match
 
-In the previous section, we wanted to get the inner `T` value out of the `Some`
-case when using `Option<T>`; we can also handle `Option<T>` using `match`, as
-we did with the `Coin` enum! Instead of comparing coins, we’ll compare the
-variants of `Option<T>`, but the way the `match` expression works remains the
-same.
+Oldingi bo'limda biz `Option<T>` dan foydalanilganda `Some` holatidan ichki `T` qiymatini olishni xohladik; Biz, shuningdek, `Tanga` enum bilan qilganimizdek, `match` yordamida `Option<T>`ni boshqarishimiz mumkin! Tangalarni solishtirish o'rniga, biz `Option<T>` variantlarini solishtiramiz, lekin `match` ifodasining ishlash usuli bir xil bo'lib qoladi.
 
-Let’s say we want to write a function that takes an `Option<i32>` and, if
-there’s a value inside, adds 1 to that value. If there isn’t a value inside,
-the function should return the `None` value and not attempt to perform any
-operations.
+Aytaylik, biz `Option<i32>` ni oladigan funksiya yozmoqchimiz va agar ichida qiymat bo'lsa, bu qiymatga 1 qo'shiladi. Agar ichida qiymat bo'lmasa, funktsiya `None` qiymatini qaytarishi va hech qanday operatsiyani bajarishga urinmasligi kerak.
 
-This function is very easy to write, thanks to `match`, and will look like
-Listing 6-5.
+Ushbu funktsiyani yozish juda oson,  `match` tufayli va 6-5-Ro'yxatga o'xshaydi.
 
 ```rust
 {{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/listing-06-05/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 6-5: A function that uses a `match` expression on
-an `Option<i32>`</span>
+<span class="caption">Roʻyxat 6-5: `Option`da `match` ifodasidan foydalanadigan funksiya<i32>`</span>
 
-Let’s examine the first execution of `plus_one` in more detail. When we call
-`plus_one(five)`, the variable `x` in the body of `plus_one` will have the
-value `Some(5)`. We then compare that against each match arm:
+Keling, `bir_qoshish` ning birinchi bajarilishini batafsilroq ko'rib chiqamiz. Biz `bir_qoshish(besh)` ni chaqirganimizda, `bir_qoshish` tanasidagi `x` o'zgaruvchisi `Some(5)` qiymatiga ega bo'ladi. Keyin biz buni har bir matchning armi bilan taqqoslaymiz:
 
 ```rust,ignore
 {{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/listing-06-05/src/main.rs:first_arm}}
 ```
 
-The `Some(5)` value doesn’t match the pattern `None`, so we continue to the
-next arm:
+`Some(5)` qiymati `None` patterniga mos kelmaydi, shuning uchun keyingi armga o'tamiz:
 
 ```rust,ignore
 {{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/listing-06-05/src/main.rs:second_arm}}
 ```
 
-Does `Some(5)` match `Some(i)`? It does! We have the same variant. The `i`
-binds to the value contained in `Some`, so `i` takes the value `5`. The code in
-the match arm is then executed, so we add 1 to the value of `i` and create a
-new `Some` value with our total `6` inside.
+`Some(5)` ga `Some(i)` pattern mos keladimi? Ha bu shunday! Bizda ham xuddi shunday variant bor. Keyin `i` o'zgaruvchisi `Some` ichidagi qiymatga bog'lanadi, shuning uchun `i` `5` qiymatini oladi. Shundan so'ng match armidagi kod bajariladi, shuning uchun biz `i` qiymatiga 1 qo'shamiz va ichida jami `6` bo'lgan yangi `Some` qiymatini yaratamiz.
 
-Now let’s consider the second call of `plus_one` in Listing 6-5, where `x` is
-`None`. We enter the `match` and compare to the first arm:
+Keling, 6-5-Ro'yxatdagi `bir_qoshish` ning ikkinchi chaqiruvini ko'rib chiqaylik, bunda `x` `None`. Biz `match` ga kiramiz va birinchi arm bilan taqqoslaymiz:
 
 ```rust,ignore
 {{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/listing-06-05/src/main.rs:first_arm}}
 ```
 
-It matches! There’s no value to add to, so the program stops and returns the
-`None` value on the right side of `=>`. Because the first arm matched, no other
-arms are compared.
+Bu mos keladi! Qo'shiladigan qiymat yo'q, shuning uchun dastur to'xtaydi va `=>` o'ng tomonidagi `None` qiymatini qaytaradi. Birinchi arm mos kelganligi sababli, boshqa armlar taqqoslanmaydi.
 
-Combining `match` and enums is useful in many situations. You’ll see this
-pattern a lot in Rust code: `match` against an enum, bind a variable to the
-data inside, and then execute code based on it. It’s a bit tricky at first, but
-once you get used to it, you’ll wish you had it in all languages. It’s
-consistently a user favorite.
+`match` va enumlarni birlashtirish ko'p holatlarda foydalidir. Rust kodida siz ushbu patterni juda ko'p ko'rasiz: enum bilan `match`, o'zgaruvchini ichidagi ma'lumotlarga bog'lang va keyin unga asoslangan kodni bajaring. Avvaliga bu biroz qiyin, lekin ko'nikkaningizdan so'ng uni barcha tillarda bo'lishini xohlaysiz. Bu har doim foydalanuvchilarning sevimli texnikasi.
 
-### Matches Are Exhaustive
+### Match barcha qiymat variantlarini qamrab oladi
 
-There’s one other aspect of `match` we need to discuss: the arms’ patterns must
-cover all possibilities. Consider this version of our `plus_one` function,
-which has a bug and won’t compile:
+Biz muhokama qilishimiz kerak bo'lgan `match` ning yana bir jihati bor: arm patterlari barcha imkoniyatlarni qamrab olishi kerak. Xatoga ega va kompilyatsiya qilinmaydigan `bir_qoshish` funksiyamizning ushbu versiyasini ko'rib chiqing:
 
 ```rust,ignore,does_not_compile
 {{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/no-listing-10-non-exhaustive-match/src/main.rs:here}}
