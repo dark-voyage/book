@@ -15,7 +15,7 @@ Bu so'rash bilan bir xil: `navbat_listiga_qoshish` funksiyasining yo'li nima?
 
 Biz crate ildizida belgilangan yangi `restoranda_ovqatlanish` funksiyasidan `navbat_listiga_qoshish` funksiyasini chaqirishning ikkita usulini ko‘rsatamiz. Bu yoʻllar toʻgʻri, ammo bu misolni avvalgidek tuzishga toʻsqinlik qiladigan yana bir muammo bor. Sababini birozdan keyin tushuntiramiz.
 
-`restoranda_ovqatlanish` funksiyasi kutubxonamizning umumiy API-ning bir qismidir, shuning uchun biz uni `pub` kalit so'zi bilan belgilaymiz. [“`pub` kalit so'zi bilan yo'llarni ochish”][pub]<!-- ignore --> bo‘limida biz `pub` haqida batafsilroq to‘xtalib o'tamiz.
+`restoranda_ovqatlanish` funksiyasi kutubxonamizning ommaviy API-ning bir qismidir, shuning uchun biz uni `pub` kalit so'zi bilan belgilaymiz. [“`pub` kalit so'zi bilan yo'llarni ochish”][pub]<!-- ignore --> bo‘limida biz `pub` haqida batafsilroq to‘xtalib o'tamiz.
 
 <span class="filename">Fayl nomi: src/lib.rs</span>
 
@@ -67,130 +67,72 @@ Afsuski, 7-5 ro'yxatdagi kod hali ham 7-6 ro'yxatda ko'rsatilganidek xatolikka o
 
 <span class="caption">Ro'yxat 7-6: 7-5 ro'yxatdagi kodni build qilishda kompilyator xatolari</span>
 
-What happened? Adding the `pub` keyword in front of `mod hosting` makes the
-module public. With this change, if we can access `front_of_house`, we can
-access `hosting`. But the *contents* of `hosting` are still private; making the
-module public doesn’t make its contents public. The `pub` keyword on a module
-only lets code in its ancestor modules refer to it, not access its inner code.
-Because modules are containers, there’s not much we can do by only making the
-module public; we need to go further and choose to make one or more of the
-items within the module public as well.
+Nima bo'ldi? `mod xizmat` oldiga `pub` kalit so‘zini qo‘shish modulni hammaga ochiq qiladi. Ushbu o'zgarish bilan, agar biz `uyning_oldi` ga kira olsak, biz `xizmat` ga kira olamiz. Lekin `xizmat` ning *tarkibi* hamon shaxsiy; modulni ommaviy qilish uning mazmunini ochiq qilmaydi. Moduldagi `pub` kalit so‘zi faqat uning ota-modullaridagi kodni unga murojaat qilish imkonini beradi, uning ichki kodiga kirishga ruxsat bermaydi.
+Modullar konteyner bo'lgani uchun modulni faqat ommaviy qilish orqali biz ko'p narsa qila olmaymiz; biz oldinga borishimiz va modul ichidagi bir yoki bir nechta narsalarni ham hammaga ochiq qilishni tanlashimiz kerak.
 
-The errors in Listing 7-6 say that the `add_to_waitlist` function is private.
-The privacy rules apply to structs, enums, functions, and methods as well as
-modules.
+7-6 roʻyxatdagi xatolar `navbat_listiga_qoshish` funksiyasi shaxsiy ekanligini bildiradi.
+Maxfiylik qoidalari structlar, enumlar, funksiyalar va metodlar hamda modullarga nisbatan qo'llaniladi.
 
-Let’s also make the `add_to_waitlist` function public by adding the `pub`
-keyword before its definition, as in Listing 7-7.
+7-7 ro'yxatda ko'rsatilganidek, definitiondan oldin `pub` kalit so'zini qo'shish orqali `navbat_listiga_qoshish` funksiyasini ham hammaga ochiq qilaylik.
 
-<span class="filename">Filename: src/lib.rs</span>
+<span class="filename">Fayl nomi: src/lib.rs</span>
 
 ```rust,noplayground,test_harness
 {{#rustdoc_include ../listings/ch07-managing-growing-projects/listing-07-07/src/lib.rs}}
 ```
 
-<span class="caption">Listing 7-7: Adding the `pub` keyword to `mod hosting`
-and `fn add_to_waitlist` lets us call the function from
-`eat_at_restaurant`</span>
+<span class="caption">Ro'yxat 7-7: `mod xizmat` va `fn navbat_listiga_qoshish` ga `pub` kalit so'zini qo'shish bizga `restoranda_ovqatlanish` funksiyasini chaqirish imkonini beradi.</span>
 
-Now the code will compile! To see why adding the `pub` keyword lets us use
-these paths in `add_to_waitlist` with respect to the privacy rules, let’s look
-at the absolute and the relative paths.
+Endi kod kompilyatsiya qilinadi! Nima uchun`pub` kalit soʻzini qoʻshish ushbu yoʻllardan `navbat_listiga_qoshish` da maxfiylik qoidalariga nisbatan foydalanish imkonini berishini bilish uchun mutlaq va nisbiy yoʻllarni koʻrib chiqamiz.
 
-In the absolute path, we start with `crate`, the root of our crate’s module
-tree. The `front_of_house` module is defined in the crate root. While
-`front_of_house` isn’t public, because the `eat_at_restaurant` function is
-defined in the same module as `front_of_house` (that is, `eat_at_restaurant`
-and `front_of_house` are siblings), we can refer to `front_of_house` from
-`eat_at_restaurant`. Next is the `hosting` module marked with `pub`. We can
-access the parent module of `hosting`, so we can access `hosting`. Finally, the
-`add_to_waitlist` function is marked with `pub` and we can access its parent
-module, so this function call works!
+Mutlaq yo'lda biz crate modul daraxtining ildizi bo'lgan `crate` dan boshlaymiz. `uyning_oldi` moduli crate ildizida belgilangan. `uyning_oldi` ochiq boʻlmasa-da, `restoranda_ovqatlanish` funksiyasi `uyning_oldi` bilan bir xil modulda aniqlanganligi sababli (yaʼni, `restoranda_ovqatlanish` va `uyning_oldi` siblingdir ya'ni aka-uka), biz `restoranda_ovqatlanish` dan `uyning_oldi`ga murojaat qilishimiz mumkin. Keyingi o'rinda `pub` bilan belgilangan `xizmat` moduli. Biz `xizmat` ning ota-moduliga kira olamiz, shuning uchun biz `xizmat` ga kira olamiz. Nihoyat, `navbat_listiga_qoshish` funksiyasi `pub` bilan belgilangan va biz uning asosiy moduliga kira olamiz, shuning uchun bu funksiya chaqiruvi ishlaydi!
 
-In the relative path, the logic is the same as the absolute path except for the
-first step: rather than starting from the crate root, the path starts from
-`front_of_house`. The `front_of_house` module is defined within the same module
-as `eat_at_restaurant`, so the relative path starting from the module in which
-`eat_at_restaurant` is defined works. Then, because `hosting` and
-`add_to_waitlist` are marked with `pub`, the rest of the path works, and this
-function call is valid!
+Nisbiy yo'lda mantiq birinchi qadamdan tashqari mutlaq yo'l bilan bir xil bo'ladi: yo'l crate ildizidan emas, `uyning_oldi`dan boshlanadi. `uyning_oldi` moduli `restoranda_ovqatlanish` bilan bir xil modul ichida aniqlanadi, shuning uchun `restoranda_ovqatlanish` belgilangan moduldan boshlanadigan nisbiy yo‘l ishlaydi. Keyin, `xizmat` va `navbat_listiga_qoshish` `pub` bilan belgilanganligi sababli, qolgan yo‘l ishlaydi va bu funksiya chaqiruvi amal qiladi!
 
-If you plan on sharing your library crate so other projects can use your code,
-your public API is your contract with users of your crate that determines how
-they can interact with your code. There are many considerations around managing
-changes to your public API to make it easier for people to depend on your
-crate. These considerations are out of the scope of this book; if you’re
-interested in this topic, see [The Rust API Guidelines][api-guidelines].
+Agar siz kutubxona crateyingizni boshqa loyihalar sizning kodingizdan foydalanishi uchun baham ko'rishni rejalashtirmoqchi bo'lsangiz, ommaviy API sizning crateyingiz foydalanuvchilari bilan tuzilgan shartnoma bo'lib, ular sizning kodingiz bilan qanday aloqada bo'lishini belgilaydi. Odamlar sizning crateyingizga bog'liq bo'lishini osonlashtirish uchun ommaviy API-ga o'zgartirishlarni boshqarish bo'yicha ko'plab fikrlar mavjud. Bu mulohazalar ushbu kitob doirasidan tashqarida; agar sizni ushbu mavzu qiziqtirsa, [Rust API ko'rsatmalari][api-guidelines]ga qarang.
 
-> #### Best Practices for Packages with a Binary and a Library
+> #### Binary va kutubxonaga ega paketlar uchun eng yaxshi amaliyotlar
 >
-> We mentioned a package can contain both a *src/main.rs* binary crate root as
-> well as a *src/lib.rs* library crate root, and both crates will have the
-> package name by default. Typically, packages with this pattern of containing
-> both a library and a binary crate will have just enough code in the binary
-> crate to start an executable that calls code with the library crate. This
-> lets other projects benefit from the most functionality that the package
-> provides, because the library crate’s code can be shared.
+> Paketda *src/main.rs* binary crate ildizi ham, *src/lib.rs* kutubxona cratesi ildizi
+> ham bo‘lishi mumkinligini aytib o'tdik va ikkala crate ham standart bo‘yicha
+> paket nomiga ega bo‘ladi. Odatda, kutubxona va binary crateni o'z ichiga olgan
+> ushbu patternli paketlar kutubxona cratesi bilan kod chaqiradigan bajariladigan
+> faylni ishga tushirish uchun binary crateda yetarli kodga ega bo'ladi. Bu boshqa
+> loyihalarga paket taqdim etadigan eng ko'p funksiyalardan foydalanish imkonini
+> beradi, chunki kutubxona cratesi kodi ommaviy bo'lishi mumkin.
 >
-> The module tree should be defined in *src/lib.rs*. Then, any public items can
-> be used in the binary crate by starting paths with the name of the package.
-> The binary crate becomes a user of the library crate just like a completely
-> external crate would use the library crate: it can only use the public API.
-> This helps you design a good API; not only are you the author, you’re also a
-> client!
+> Modul daraxti *src/lib.rs* da aniqlanishi kerak. Keyin har qanday ommaviy obyektlar
+> binary crateda paket nomi bilan yo'llarni boshlash orqali ishlatilishi mumkin.
+> Binary crate kutubxona cratesidan foydalanuvchiga aylanadi, xuddi butunlay tashqi
+> crate kutubxona cratesidan foydalanadi: u faqat ommaviy APIdan foydalanishi mumkin.
+> Bu sizga yaxshi API yaratishga yordam beradi; Siz nafaqat muallif, balki
+> mijoz hamsiz!
 >
-> In [Chapter 12][ch12]<!-- ignore -->, we’ll demonstrate this organizational
-> practice with a command-line program that will contain both a binary crate
-> and a library crate.
+> [12-bobda][ch12]<!-- ignore --> biz ushbu tashkiliy amaliyotni binary crate va
+> kutubxona cratesini o'z ichiga olgan buyruq qatori dasturi bilan ko'rsatamiz.
 
-### Starting Relative Paths with `super`
+### Nisbiy yo'llarni `super` bilan boshlash
 
-We can construct relative paths that begin in the parent module, rather than
-the current module or the crate root, by using `super` at the start of the
-path. This is like starting a filesystem path with the `..` syntax. Using
-`super` allows us to reference an item that we know is in the parent module,
-which can make rearranging the module tree easier when the module is closely
-related to the parent, but the parent might be moved elsewhere in the module
-tree someday.
+Yo'l boshida `super` dan foydalanib, joriy modul yoki crate ildizi emas, balki ota-modulda boshlanadigan nisbiy yo'llarni qurishimiz mumkin. Bu fayl tizimi yoʻlini `..` sintaksisi bilan boshlashga oʻxshaydi. `super` dan foydalanish bizga ota-modulda ekanligini biladigan elementga murojaat qilish imkonini beradi, bu modul ota-ona bilan chambarchas bog'liq bo'lsa, modul daraxtini qayta tartibga solishni osonlashtiradi, lekin ota-ona bir kun kelib modul daraxtining boshqa joyiga ko'chirilishi mumkin.
 
-Consider the code in Listing 7-8 that models the situation in which a chef
-fixes an incorrect order and personally brings it out to the customer. The
-function `fix_incorrect_order` defined in the `back_of_house` module calls the
-function `deliver_order` defined in the parent module by specifying the path to
-`deliver_order` starting with `super`:
+7-8 ro'yxatdagi kodni ko'rib chiqing, unda oshpaz noto'g'ri buyurtmani tuzatgan va uni mijozga shaxsan yetkazgan vaziyatni modellashtiradi. `uyning_orqasi` modulida aniqlangan `buyurtmani_tuzatish` funksiyasi `super` bilan boshlanadigan `yetkazib_berish` yo‘lini belgilash orqali asosiy modulda belgilangan `yetkazib_berish` funksiyasini chaqiradi:
 
-<span class="filename">Filename: src/lib.rs</span>
+<span class="filename">Fayl nomi: src/lib.rs</span>
 
 ```rust,noplayground,test_harness
 {{#rustdoc_include ../listings/ch07-managing-growing-projects/listing-07-08/src/lib.rs}}
 ```
 
-<span class="caption">Listing 7-8: Calling a function using a relative path
-starting with `super`</span>
+<span class="caption">Ro'yxat 7-8: `super` bilan boshlanadigan nisbiy yo'l yordamida funksiyani chaqirish</span>
 
-The `fix_incorrect_order` function is in the `back_of_house` module, so we can
-use `super` to go to the parent module of `back_of_house`, which in this case
-is `crate`, the root. From there, we look for `deliver_order` and find it.
-Success! We think the `back_of_house` module and the `deliver_order` function
-are likely to stay in the same relationship to each other and get moved
-together should we decide to reorganize the crate’s module tree. Therefore, we
-used `super` so we’ll have fewer places to update code in the future if this
-code gets moved to a different module.
+`buyurtmani_tuzatish` funksiyasi `uyning_orqasi` modulida joylashgan, shuning uchun biz `super` dan `uyning_orqasi` ota-moduliga o'tishimiz mumkin. U yerdan `yetkazib_berish` ni qidiramiz va uni topamiz.
+Muvaffaqiyat! Bizning fikrimizcha, `uyning_orqasi` moduli va `yetkazib_berish` funksiyasi bir-biri bilan bir xil munosabatda bo'lib qoladi va agar biz cratening modul daraxtini qayta tashkil etishga qaror qilsak, birgalikda harakatlanadi. Shu sababli, biz `super` dan foydalandik, shuning uchun kelajakda bu kod boshqa modulga ko‘chirilsa, kodni yangilash uchun kamroq joylarga ega bo‘lamiz.
 
-### Making Structs and Enums Public
+### Structlar va Enumlarni ommaviy qilish(Public)
 
-We can also use `pub` to designate structs and enums as public, but there are a
-few details extra to the usage of `pub` with structs and enums. If we use `pub`
-before a struct definition, we make the struct public, but the struct’s fields
-will still be private. We can make each field public or not on a case-by-case
-basis. In Listing 7-9, we’ve defined a public `back_of_house::Breakfast` struct
-with a public `toast` field but a private `seasonal_fruit` field. This models
-the case in a restaurant where the customer can pick the type of bread that
-comes with a meal, but the chef decides which fruit accompanies the meal based
-on what’s in season and in stock. The available fruit changes quickly, so
-customers can’t choose the fruit or even see which fruit they’ll get.
+Shuningdek, structlar va enumlarni ommaviy sifatida belgilash uchun `pub` dan foydalanishimiz mumkin, ammo `pub` dan structlar va enumlar bilan foydalanish uchun qo'shimcha tafsilotlar mavjud. Agar struct definitiondan oldin `pub` dan foydalansak, biz structni hammaga ommaviy qilamiz, lekin structning maydonlari hali ham shaxsiy bo'lib qoladi. Biz har bir sohani alohida-alohida ommaviy qilishimiz yoki qilmasligimiz mumkin. 7-9 roʻyxatda biz ommaviy `qizdirilgan_non` maydoni, lekin shaxsiy `mavsumiy_meva` maydoni bilan ommaviy `uyning_orqasi:: nonushta` structini belgilab oldik. Bu restoranda mijoz ovqat bilan birga keladigan non turini tanlashi mumkin bo'lgan holatni modellashtiradi, ammo oshpaz qaysi meva mavsumda va omborda borligiga qarab ovqatga hamroh bo'lishini hal qiladi. Mavjud mevalar tezda o'zgaradi, shuning uchun mijozlar mevani tanlay olmaydi yoki hatto qaysi mevani olishini ko'ra olmaydi.
 
-<span class="filename">Filename: src/lib.rs</span>
+<span class="filename">Fayl nomi: src/lib.rs</span>
 
 ```rust,noplayground
 {{#rustdoc_include ../listings/ch07-managing-growing-projects/listing-07-09/src/lib.rs}}
