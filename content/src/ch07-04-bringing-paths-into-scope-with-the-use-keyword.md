@@ -44,84 +44,54 @@ E'tibor bering, `use` endi uning doirasida qo'llanilmasligi haqida ogohlantirish
 
 <span class="caption">Ro'yxat 7-13: `navbat_listiga_qoshish` funksiyasini `use` bilan qamrab olish, bu unidiomatikdir</span>
 
-Although both Listing 7-11 and 7-13 accomplish the same task, Listing 7-11 is
-the idiomatic way to bring a function into scope with `use`. Bringing the
-function’s parent module into scope with `use` means we have to specify the
-parent module when calling the function. Specifying the parent module when
-calling the function makes it clear that the function isn’t locally defined
-while still minimizing repetition of the full path. The code in Listing 7-13 is
-unclear as to where `add_to_waitlist` is defined.
+Garchi 7-11 va 7-13 ro'yxatlari bir xil vazifani bajarsa-da, 7-11 ro'yxat funksiyani `use` bilan qamrab olishning idiomatik usulidir. Funksiyaning ota-modulini `use` bilan qamrab olish funksiyani chaqirishda ota-modulni belgilashimiz kerakligini anglatadi. Funksiyani chaqirishda ota-modulni ko'rsatish, to'liq yo'lning takrorlanishini minimallashtirish bilan birga, funksiya mahalliy sifatida aniqlanmaganligini aniq ko'rsatadi. 7-13 ro'yxatda `navbat_listiga_qoshish` qayerda aniqlangani aniq emas.
 
-On the other hand, when bringing in structs, enums, and other items with `use`,
-it’s idiomatic to specify the full path. Listing 7-14 shows the idiomatic way
-to bring the standard library’s `HashMap` struct into the scope of a binary
-crate.
+Boshqa tomondan, `use` bilan structlar, enumlar va boshqa elementlarni keltirishda to'liq yo'lni ko'rsatish idiomatikdir. 7-14 ro'yxat standart kutubxonaning `HashMap` structini binary crate doirasiga olib kirishning idiomatik usulini ko'rsatadi.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">Fayl nomi: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch07-managing-growing-projects/listing-07-14/src/main.rs}}
 ```
 
-<span class="caption">Listing 7-14: Bringing `HashMap` into scope in an
-idiomatic way</span>
+<span class="caption">Ro'yxat 7-14: `HashMap` ni idiomatik tarzda qamrab olish</span>
 
-There’s no strong reason behind this idiom: it’s just the convention that has
-emerged, and folks have gotten used to reading and writing Rust code this way.
+Bu idioma ortida hech qanday yaxshi sabab yo'q: Bu shunchaki konventsiya paydo bo'ldi va odamlar Rust kodini shu tarzda o'qish va yozishga o'rganib qolgan.
 
-The exception to this idiom is if we’re bringing two items with the same name
-into scope with `use` statements, because Rust doesn’t allow that. Listing 7-15
-shows how to bring two `Result` types into scope that have the same name but
-different parent modules and how to refer to them.
+Bu idiomadan istisno shundaki, biz bir xil nomdagi ikkita elementni `use` statementi yordamida doiraga kiritganimizda - Rust bunga yo'l qo'ymaydi. 7-15 ro'yxatda bir xil nomga ega, ammo har xil ota-modullarga ega bo'lgan ikkita `Result` turini qanday ko'rinishga kiritish va ularga qanday murojaat qilish kerakligi ko'rsatilgan.
 
-<span class="filename">Filename: src/lib.rs</span>
+<span class="filename">Fayl nomi: src/lib.rs</span>
 
 ```rust,noplayground
 {{#rustdoc_include ../listings/ch07-managing-growing-projects/listing-07-15/src/lib.rs:here}}
 ```
 
-<span class="caption">Listing 7-15: Bringing two types with the same name into
-the same scope requires using their parent modules.</span>
+<span class="caption">Ro'yxat 7-15: Bir xil nomdagi ikkita turni bir xil doiraga kiritish uchun ularning ota-modullaridan foydalanish talab etiladi.</span>
 
-As you can see, using the parent modules distinguishes the two `Result` types.
-If instead we specified `use std::fmt::Result` and `use std::io::Result`, we’d
-have two `Result` types in the same scope and Rust wouldn’t know which one we
-meant when we used `Result`.
+Ko'rib turganingizdek, ota-modullardan foydalanish ikkita `Result` turini ajratib turadi.
+Buning o'rniga `use std::fmt::Result` va `us std::io::Result` ni belgilagan bo'lsak, bizda bir xil miqyosda ikkita `Result` turi bo'lar edi va Rust `Result` dan foydalanganda qaysi birini nazarda tutganimizni bilmas edi.
 
-### Providing New Names with the `as` Keyword
+### `as` kalit so'zi bilan yangi nomlarni taqdim etish
 
-There’s another solution to the problem of bringing two types of the same name
-into the same scope with `use`: after the path, we can specify `as` and a new
-local name, or *alias*, for the type. Listing 7-16 shows another way to write
-the code in Listing 7-15 by renaming one of the two `Result` types using `as`.
+Bir xil nomdagi ikkita turni `use` bilan bir xil doiraga olib kirish muammosining yana bir yechimi bor: yoʻldan soʻng biz `as` va yangi mahalliy nom yoki tur uchun *taxallus* belgilashimiz mumkin. 7-16 ro'yxatda ikkita `Result` turidan birini `as` yordamida qayta nomlash orqali 7-15 ro'yxatdagi kodni yozishning yana bir usuli ko'rsatilgan.
 
-<span class="filename">Filename: src/lib.rs</span>
+<span class="filename">Fayl nomi: src/lib.rs</span>
 
 ```rust,noplayground
 {{#rustdoc_include ../listings/ch07-managing-growing-projects/listing-07-16/src/lib.rs:here}}
 ```
 
-<span class="caption">Listing 7-16: Renaming a type when it’s brought into
-scope with the `as` keyword</span>
+<span class="caption">Ro'yxat 7-16: `as` kalit so'zi bilan qamrovga kiritilgan tur nomini o'zgartirish</span>
 
-In the second `use` statement, we chose the new name `IoResult` for the
-`std::io::Result` type, which won’t conflict with the `Result` from `std::fmt`
-that we’ve also brought into scope. Listing 7-15 and Listing 7-16 are
-considered idiomatic, so the choice is up to you!
+Ikkinchi `use` statementida biz `std::io::Result` turi uchun yangi `IoResult` nomini tanladik, bu endi `std::fmt` dan `Result` turiga zid kelmaydi, u ham doiraga kiradi. 7-15 va 7-16 ro'yxatlar idiomatik hisoblanadi, shuning uchun tanlov sizga bog'liq!
 
-### Re-exporting Names with `pub use`
+### `pub use` bilan nomlarni qayta eksport(re-eksport) qilish
 
-When we bring a name into scope with the `use` keyword, the name available in
-the new scope is private. To enable the code that calls our code to refer to
-that name as if it had been defined in that code’s scope, we can combine `pub`
-and `use`. This technique is called *re-exporting* because we’re bringing
-an item into scope but also making that item available for others to bring into
-their scope.
+`use` kalit so'zidan foydalanib, nomni qamrovga kiritganimizda, yangi doirada mavjud bo'lgan nom shaxsiy bo'ladi. Bizning kodimizni chaqiradigan kodni xuddi shu kod doirasida aniqlangandek ushbu nomga murojaat qilishini yoqish uchun biz `pub` va `use` ni birlashtira olamiz. Bu usul *re-eksport* deb nomlanadi, chunki biz obyektni qamrovga kiritmoqdamiz, lekin elementni boshqa qamrovlarga kiritish uchun ham mavjud qilamiz.
 
-Listing 7-17 shows the code in Listing 7-11 with `use` in the root module
-changed to `pub use`.
+7-17 ro'yxatda 7-11 ro'yxatdagi kod ko'rsatilgan, ildiz modulidagi `use` `pub use` ga o'zgartirilgan.
 
-<span class="filename">Filename: src/lib.rs</span>
+<span class="filename">Fayl nomi: src/lib.rs</span>
 
 ```rust,noplayground,test_harness
 {{#rustdoc_include ../listings/ch07-managing-growing-projects/listing-07-17/src/lib.rs}}
