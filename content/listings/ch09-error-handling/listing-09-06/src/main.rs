@@ -2,8 +2,8 @@
 use std::fs::File;
 use std::io::{self, Read};
 
-fn fayldan_foydalanuvchi_nomini_olis() -> Result<String, io::Error> {
-    let foydalanuvchi_fayli_natijasi = File::open("hello.txt");
+fn fayldan_foydalanuvchi_nomini_olish() -> Result<String, io::Error> {
+    let foydalanuvchi_fayli_natijasi = File::open("olma.txt");
 
     let mut foydalanuvchi_fayli = match foydalanuvchi_fayli_natijasi {
         Ok(file) => file,
@@ -20,5 +20,5 @@ fn fayldan_foydalanuvchi_nomini_olis() -> Result<String, io::Error> {
 // ANCHOR_END: here
 
 fn main() {
-    let foydalanuvchi = fayldan_foydalanuvchi_nomini_olis().expect("Foydalanuvchi nomini olish imkonsiz");
+    let foydalanuvchi = fayldan_foydalanuvchi_nomini_olish().expect("Foydalanuvchi nomini olish imkonsiz");
 }

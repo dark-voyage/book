@@ -187,13 +187,11 @@ Ushbu kodni chaqiruvchi kod foydalanuvchi nomini o'z ichiga olgan `Ok`  qiymatin
 
 Xatolarni propagating qilish namunasi Rustda shu qadar keng tarqalganki, Rust buni osonlashtirish uchun savol belgisi operatori `?` beradi.
 
-#### A Shortcut for Propagating Errors: the `?` Operator
+#### Propagating xatolar uchun qisqa kod: `?` operatori
 
-Listing 9-7 shows an implementation of `read_username_from_file` that has the
-same functionality as in Listing 9-6, but this implementation uses the
-`?` operator.
+9-7 ro'yxatda 9-6 ro'yxatdagi kabi funksiyaga ega bo'lgan `foydalanuvchi_fayli` ilovasi ko'rsatilgan, ammo bu dastur `?` operatoridan foydalanadi.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">Fayl nomi: src/main.rs</span>
 
 <!-- Deliberately not using rustdoc_include here; the `main` function in the
 file panics. We do want to include it for reader experimentation purposes, but
@@ -203,45 +201,19 @@ don't want to include it for rustdoc testing purposes. -->
 {{#include ../listings/ch09-error-handling/listing-09-07/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 9-7: A function that returns errors to the
-calling code using the `?` operator</span>
+<span class="caption">Ro'yxat 9-7: `?` operatori yordamida chaqiruvchi kodga xatoliklarni qaytaruvchi funksiya</span>
 
-The `?` placed after a `Result` value is defined to work in almost the same way
-as the `match` expressions we defined to handle the `Result` values in Listing
-9-6. If the value of the `Result` is an `Ok`, the value inside the `Ok` will
-get returned from this expression, and the program will continue. If the value
-is an `Err`, the `Err` will be returned from the whole function as if we had
-used the `return` keyword so the error value gets propagated to the calling
-code.
+`Result` qiymatidan keyin qoʻyilgan `?` 9-6 roʻyxatdagi `Result` qiymatlarini boshqarish uchun biz belgilagan `match` iboralari bilan deyarli bir xil ishlaydi. Agar `Result` qiymati `Ok` bo'lsa, `Ok` ichidagi qiymat ushbu ifodadan qaytariladi va dastur davom etadi. Agar qiymat `Err` bo'lsa, `Err` butun funktsiyadan qaytariladi, xuddi biz `return` kalit so'zidan foydalanganimizdek, xato qiymati chaqiruvchi kodga propagate qiladi.
 
-There is a difference between what the `match` expression from Listing 9-6 does
-and what the `?` operator does: error values that have the `?` operator called
-on them go through the `from` function, defined in the `From` trait in the
-standard library, which is used to convert values from one type into another.
-When the `?` operator calls the `from` function, the error type received is
-converted into the error type defined in the return type of the current
-function. This is useful when a function returns one error type to represent
-all the ways a function might fail, even if parts might fail for many different
-reasons.
+9-6 roʻyxatdagi `match` ifodasi va `?` operatori nima qilishi oʻrtasida farq bor: `?` operatori chaqirilgan xato qiymatlari `from` funksiyasidan oʻtadi, qiymatlarni bir turdan ikkinchi turga aylantirish uchun foydalaniladigan standart kutubxonadagi `From` traitida aniqlanadi.
+`?` operatori `from` funksiyasini chaqirganda, qabul qilingan xato turi joriy funksiyaning qaytish turida aniqlangan xato turiga aylanadi. Bu funksiya muvaffaqiyatsiz bo'lishi mumkin bo'lgan barcha usullarni ifodalash uchun bitta xato turini qaytarganda foydalidir, agar qismlar turli sabablarga ko'ra ishlamay qolsa ham.
 
-For example, we could change the `read_username_from_file` function in Listing
-9-7 to return a custom error type named `OurError` that we define. If we also
-define `impl From<io::Error> for OurError` to construct an instance of
-`OurError` from an `io::Error`, then the `?` operator calls in the body of
-`read_username_from_file` will call `from` and convert the error types without
-needing to add any more code to the function.
+Misol uchun, biz 9-7 ro'yxatdagi `fayldan_foydalanuvchi_nomini_olish` funksiyasini o'zgartirishimiz mumkin, bu biz aniqlagan `OurError`  nomli maxsus xato turini qaytarishimiz mumkin. Agar `io::Error` dan `OurError` misolini yaratish uchun `OurError` uchun `impl From<io::Error> for OurError` ni ham aniqlasak, keyin `fayldan_foydalanuvchi_nomini_olish` asosiy qismidagi `?` operatori chaqiruvlari `from`ga murojaat qiladi va funksiyaga boshqa kod qo'shmasdan xato turlarini o'zgartiradi.
+`foydalanuvchi_fayli` o'zgaruvchisiga qaytaradi.Agar xatolik yuzaga kelsa, `?` operatori butun funksiyadan erta qaytadi va chaqiruvchi kodga istalgan `Err` qiymatini beradi. Xuddi shu narsa `read_to_string` chaqiruvi oxiridagi `?` uchun ham amal qiladi.
 
-In the context of Listing 9-7, the `?` at the end of the `File::open` call will
-return the value inside an `Ok` to the variable `username_file`. If an error
-occurs, the `?` operator will return early out of the whole function and give
-any `Err` value to the calling code. The same thing applies to the `?` at the
-end of the `read_to_string` call.
+`?` operatori ko'plab nosozliklarni bartaraf qiladi va bu funksiyani amalga oshirishni soddalashtiradi. 9-8 ro'yxatda ko'rsatilganidek, biz ushbu kodni `?` dan keyin metod chaqiruvlar zanjiridan foydalansak, bu kodni yanada qisqartirishimiz mumkin.
 
-The `?` operator eliminates a lot of boilerplate and makes this function’s
-implementation simpler. We could even shorten this code further by chaining
-method calls immediately after the `?`, as shown in Listing 9-8.
-
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">Fayl nomi: src/main.rs</span>
 
 <!-- Deliberately not using rustdoc_include here; the `main` function in the
 file panics. We do want to include it for reader experimentation purposes, but
@@ -251,21 +223,13 @@ don't want to include it for rustdoc testing purposes. -->
 {{#include ../listings/ch09-error-handling/listing-09-08/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 9-8: Chaining method calls after the `?`
-operator</span>
+<span class="caption">Ro'yxat 9-8: `?` operatoridan keyin zanjirlash(chaining) metodi chaqiruvlari</span>
 
-We’ve moved the creation of the new `String` in `username` to the beginning of
-the function; that part hasn’t changed. Instead of creating a variable
-`username_file`, we’ve chained the call to `read_to_string` directly onto the
-result of `File::open("hello.txt")?`. We still have a `?` at the end of the
-`read_to_string` call, and we still return an `Ok` value containing `username`
-when both `File::open` and `read_to_string` succeed rather than returning
-errors. The functionality is again the same as in Listing 9-6 and Listing 9-7;
-this is just a different, more ergonomic way to write it.
+Biz `foydalanuvchi` da yangi `String` yaratishni funksiya boshiga o‘tkazdik; bu qism o'zgarmagan. `foydalanuvchi_fayli` oʻzgaruvchisini yaratish oʻrniga, `File::open("olma.txt")?` natijasiga toʻgʻridan-toʻgʻri `read_to_string` chaqiruvlarini bogʻladik. Bizda `read_to_string`  chaqiruvi oxirida hali ham `?` bor va biz xatoliklarni qaytarish oʻrniga `File::open` va `read_to_string` muvaffaqiyatli boʻlganda ham `foydalanuvchi`ni oʻz ichiga olgan `OK` qiymatini qaytaramiz. Funksionallik yana 9-6 va 9-7 ro'yxatdagi kabi; Bu uni yozishning boshqacha, ergonomik usuli.
 
-Listing 9-9 shows a way to make this even shorter using `fs::read_to_string`.
+9-9 ro'yxati `fs::read_to_string` yordamida buni yanada qisqartirish yo'lini ko'rsatadi.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">Fayl nomi: src/main.rs</span>
 
 <!-- Deliberately not using rustdoc_include here; the `main` function in the
 file panics. We do want to include it for reader experimentation purposes, but
@@ -275,25 +239,13 @@ don't want to include it for rustdoc testing purposes. -->
 {{#include ../listings/ch09-error-handling/listing-09-09/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 9-9: Using `fs::read_to_string` instead of
-opening and then reading the file</span>
+<span class="caption">Roʻyxat 9-9: faylni ochish va keyin oʻqish oʻrniga `fs::read_to_string` dan foydalanish</span>
 
-Reading a file into a string is a fairly common operation, so the standard
-library provides the convenient `fs::read_to_string` function that opens the
-file, creates a new `String`, reads the contents of the file, puts the contents
-into that `String`, and returns it. Of course, using `fs::read_to_string`
-doesn’t give us the opportunity to explain all the error handling, so we did it
-the longer way first.
+Faylni stringda o'qish juda keng tarqalgan operatsiya, shuning uchun standart kutubxona faylni ochadigan, yangi `String` yaratadigan qulay `fs::read_to_string` funksiyasini ta'minlaydi fayl mazmunini o'qiydi, mazmunini o'sha `String` ga qo'yadi va uni qaytaradi. Albatta, `fs::read_to_string` dan foydalanish bizga xatolarni qanday hal qilishni tushuntirishga imkon bermaydi, shuning uchun biz birinchi navbatda uzoq yo'lni o'rgandik.
 
-#### Where The `?` Operator Can Be Used
+#### `?` Operatoridan qayerda foydalanish mumkin
 
-The `?` operator can only be used in functions whose return type is compatible
-with the value the `?` is used on. This is because the `?` operator is defined
-to perform an early return of a value out of the function, in the same manner
-as the `match` expression we defined in Listing 9-6. In Listing 9-6, the
-`match` was using a `Result` value, and the early return arm returned an
-`Err(e)` value. The return type of the function has to be a `Result` so that
-it’s compatible with this `return`.
+`?` operatori faqat qaytarish turi `?` ishlatiladigan qiymatga mos keladigan funksiyalarda ishlatilishi mumkin. Buning sababi, `?` operatori biz 9-6 ro'yxatda belgilagan `match` ifodasi kabi funksiyadan tashqari qiymatni erta qaytarish uchun belgilangan. 9-6 roʻyxatda `match` `Result` qiymatidan foydalanilgan va erta qaytish armi `Err(e)` qiymatini qaytargan. Funksiyaning qaytish turi `Result` bo'lishi kerak, shunda u ushbu `return` bilan mos keladi.
 
 In Listing 9-10, let’s look at the error we’ll get if we use the `?` operator
 in a `main` function with a return type incompatible with the type of the value
