@@ -247,126 +247,61 @@ Faylni stringda o'qish juda keng tarqalgan operatsiya, shuning uchun standart ku
 
 `?` operatori faqat qaytarish turi `?` ishlatiladigan qiymatga mos keladigan funksiyalarda ishlatilishi mumkin. Buning sababi, `?` operatori biz 9-6 ro'yxatda belgilagan `match` ifodasi kabi funksiyadan tashqari qiymatni erta qaytarish uchun belgilangan. 9-6 roʻyxatda `match` `Result` qiymatidan foydalanilgan va erta qaytish armi `Err(e)` qiymatini qaytargan. Funksiyaning qaytish turi `Result` bo'lishi kerak, shunda u ushbu `return` bilan mos keladi.
 
-In Listing 9-10, let’s look at the error we’ll get if we use the `?` operator
-in a `main` function with a return type incompatible with the type of the value
-we use `?` on:
+9-10 ro'yxatda, agar biz `?` dan foydalanadigan qiymat turiga mos kelmaydigan qaytish turi bilan `main` funksiyada `?` operatoridan foydalansak, qanday xatoga duch kelamiz:
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">Fayl nomi: src/main.rs</span>
 
 ```rust,ignore,does_not_compile
 {{#rustdoc_include ../listings/ch09-error-handling/listing-09-10/src/main.rs}}
 ```
 
-<span class="caption">Listing 9-10: Attempting to use the `?` in the `main`
-function that returns `()` won’t compile</span>
+<span class="caption">Roʻyxat 9-10: `()` qaytaradigan `main`  funksiyadagi `?` dan foydalanishga urinish kompilyatsiya qilinmaydi.</span>
 
-This code opens a file, which might fail. The `?` operator follows the `Result`
-value returned by `File::open`, but this `main` function has the return type of
-`()`, not `Result`. When we compile this code, we get the following error
-message:
+Ushbu kod faylni ochadi, bu muvaffaqiyatsiz bo'lishi mumkin. `?` operatori `File::open` tomonidan qaytarilgan `Result` qiymatiga amal qiladi, lekin bu `main` funksiya `Result` emas, `()` qaytish turiga ega. Ushbu kodni kompilyatsiya qilganimizda, biz quyidagi xato xabarini olamiz:
+
 
 ```console
 {{#include ../listings/ch09-error-handling/listing-09-10/output.txt}}
 ```
 
-This error points out that we’re only allowed to use the `?` operator in a
-function that returns `Result`, `Option`, or another type that implements
-`FromResidual`.
+Bu xato bizga `?` operatoridan faqat `Result`, `Option` yoki `FromResidual`ni qo'llaydigan boshqa turdagi qaytaruvchi funksiyada foydalanishga ruxsat berilganligini ko`rsatadi.
 
-To fix the error, you have two choices. One choice is to change the return type
-of your function to be compatible with the value you’re using the `?` operator
-on as long as you have no restrictions preventing that. The other technique is
-to use a `match` or one of the `Result<T, E>` methods to handle the `Result<T,
-E>` in whatever way is appropriate.
+Xatoni tuzatish uchun sizda ikkita variant bor. Tanlovlardan biri, funksiyangizning qaytish turini `?` operatoridan foydalanayotgan qiymatga mos keladigan qilib o'zgartirish, agar bunga hech qanday cheklovlar bo'lmasa. Boshqa usul esa, `Result<T, E>` ni mos keladigan usulda boshqarish uchun `match` yoki `Result<T, E>` metodlaridan birini qo`llashdir.
 
-The error message also mentioned that `?` can be used with `Option<T>` values
-as well. As with using `?` on `Result`, you can only use `?` on `Option` in a
-function that returns an `Option`. The behavior of the `?` operator when called
-on an `Option<T>` is similar to its behavior when called on a `Result<T, E>`:
-if the value is `None`, the `None` will be returned early from the function at
-that point. If the value is `Some`, the value inside the `Some` is the
-resulting value of the expression and the function continues. Listing 9-11 has
-an example of a function that finds the last character of the first line in the
-given text:
+Xato xabarida, shuningdek, `?` ni `Option<T>` qiymatlari bilan ham foydalanish mumkinligi aytilgan. `Result`da `?` dan foydalanish kabi, siz `?` dan faqat `Option` ni qaytaradigan funksiyada foydalanishingiz mumkin. `?` operatorining `Option<T>` bo'yicha chaqirilgandagi xatti-harakati `Result<T, E>` da chaqirilgandagi xatti-harakatiga o'xshaydi: agar qiymat `None` bo'lsa `None` bo'ladi o'sha paytda  funksiyadan erta qaytariladi. Agar qiymat `Some` bo'lsa, `Some` ichidagi qiymat ifodaning natijaviy qiymati bo`lib, funksiya davom etadi. 9-11 ro'yxatda berilgan matndagi birinchi qatorning oxirgi belgisini topadigan funksiya misoli mavjud:
 
 ```rust
 {{#rustdoc_include ../listings/ch09-error-handling/listing-09-11/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 9-11: Using the `?` operator on an `Option<T>`
+<span class="caption">Roʻyxat 9-11: `Option`da `?` operatoridan foydalanish<T>`
 value</span>
 
-This function returns `Option<char>` because it’s possible that there is a
-character there, but it’s also possible that there isn’t. This code takes the
-`text` string slice argument and calls the `lines` method on it, which returns
-an iterator over the lines in the string. Because this function wants to
-examine the first line, it calls `next` on the iterator to get the first value
-from the iterator. If `text` is the empty string, this call to `next` will
-return `None`, in which case we use `?` to stop and return `None` from
-`last_char_of_first_line`. If `text` is not the empty string, `next` will
-return a `Some` value containing a string slice of the first line in `text`.
+Bu funksiya `Option<char>`ni qaytaradi, chunki u yerda belgi(character) boʻlishi mumkin, lekin yoʻq boʻlishi ham mumkin. Bu kod `matn` string argumentini oladi va undagi `lines` metodini chaqiradi, bu esa satrdagi satrlar ustidan iteratorni qaytaradi. Ushbu funksiya birinchi qatorni tekshirmoqchi bo'lganligi sababli, iteratordan birinchi qiymatni olish uchun iteratorda `next` ni chaqiradi. Agar `matn` boʻsh qator boʻlsa, `next` ga murojat qilish `None`ni qaytaradi, bu holda biz `birinchi_satrning_oxirgi_belgisi`dan `None`ni toʻxtatish va qaytarish uchun `?` operatoridan foydalanamiz. Agar `matn` bo'sh qator bo'lmasa, `next` `matn`dagi birinchi qatorning string sliceni o'z ichiga olgan `Some` qiymatini qaytaradi.
 
-The `?` extracts the string slice, and we can call `chars` on that string slice
-to get an iterator of its characters. We’re interested in the last character in
-this first line, so we call `last` to return the last item in the iterator.
-This is an `Option` because it’s possible that the first line is the empty
-string, for example if `text` starts with a blank line but has characters on
-other lines, as in `"\nhi"`. However, if there is a last character on the first
-line, it will be returned in the `Some` variant. The `?` operator in the middle
-gives us a concise way to express this logic, allowing us to implement the
-function in one line. If we couldn’t use the `?` operator on `Option`, we’d
-have to implement this logic using more method calls or a `match` expression.
+`?` operatori satr bo'lagini chiqaradi va biz uning belgilarining iteratorini olish uchun ushbu qator bo'limidagi `chars`larni chaqirishimiz mumkin. Bizni ushbu birinchi qatordagi oxirgi belgi qiziqtiradi, shuning uchun biz iteratordagi oxirgi elementni qaytarish uchun `last` deb chaqiramiz.
+Bu `Option`dir, chunki birinchi qator boʻsh satr boʻlishi mumkin, masalan, `matn` boʻsh satr bilan boshlansa, lekin `"\nhi"`dagi kabi boshqa qatorlarda belgilar boʻlsa. Biroq, agar birinchi qatorda oxirgi belgi bo'lsa, u `Some` variantida qaytariladi. O'rtadagi `?` operatori bu mantiqni ifodalashning ixcham usulini beradi, bu funksiyani bir qatorda amalga oshirish imkonini beradi. Agar biz `Option` da`?` operatoridan foydalana olmasak, biz bu mantiqni ko'proq metod chaqiruvlari yoki `match` ifodasi yordamida amalga oshirishimiz kerak edi.
 
-Note that you can use the `?` operator on a `Result` in a function that returns
-`Result`, and you can use the `?` operator on an `Option` in a function that
-returns `Option`, but you can’t mix and match. The `?` operator won’t
-automatically convert a `Result` to an `Option` or vice versa; in those cases,
-you can use methods like the `ok` method on `Result` or the `ok_or` method on
-`Option` to do the conversion explicitly.
+Esda tutingki, `?` operatoridan `Result` qaytaruvchi funksiyada `Result`da foydalanishingiz mumkin, va `?` operatoridan `Option` qaytaradigan funksiyada `Option`da foydalanishingiz mumkin, lekin siz aralashtirib, moslashtira olmaysiz. `?` operatori `Result`ni avtomatik ravishda `Option`ga yoki aksincha o'zgartirmaydi; Bunday hollarda konvertatsiyani aniq amalga oshirish uchun `Result`dagi `ok` metodi yoki `Option`dagi `ok_or` kabi metodlardan foydalanishingiz mumkin.
 
-So far, all the `main` functions we’ve used return `()`. The `main` function is
-special because it’s the entry and exit point of executable programs, and there
-are restrictions on what its return type can be for the programs to behave as
-expected.
+Hozirgacha biz ishlatgan barcha `main` funksiyalar `()` ni qaytaradi. `main` funksiya maxsus, chunki u bajariladigan dasturlarning kirish va chiqish nuqtasi bo'lib, dasturlar kutilgandek harakat qilishi uchun uning qaytish(return) turi qanday bo'lishi mumkinligiga cheklovlar mavjud.
 
-Luckily, `main` can also return a `Result<(), E>`. Listing 9-12 has the
-code from Listing 9-10 but we’ve changed the return type of `main` to be
-`Result<(), Box<dyn Error>>` and added a return value `Ok(())` to the end. This
-code will now compile:
+Yaxshiyamki, `main` `Result<(), E>`ni ham qaytarishi mumkin. 9-12 ro'yxatda 9-10 ro'yxatdagi kod mavjud, biroq biz `main` ning qaytish turini `Result<(),  Box<dyn Error>>` qilib o'zgartirdik va oxiriga `Ok(())`  qaytish qiymatini qo'shdik. Ushbu kod endi kompilyatsiya qilinadi:
 
 ```rust,ignore
 {{#rustdoc_include ../listings/ch09-error-handling/listing-09-12/src/main.rs}}
 ```
 
-<span class="caption">Listing 9-12: Changing `main` to return `Result<(), E>`
-allows the use of the `?` operator on `Result` values</span>
+<span class="caption">Roʻyxat 9-12: `main`ni `Result<(), E>` qaytarishga oʻzgartirish `Result` qiymatlarida `?` operatoridan foydalanish imkonini beradi.</span>
 
-The `Box<dyn Error>` type is a *trait object*, which we’ll talk about in the
-[“Using Trait Objects that Allow for Values of Different
-Types”][trait-objects]<!-- ignore --> section in Chapter 17. For now, you can
-read `Box<dyn Error>` to mean “any kind of error.” Using `?` on a `Result`
-value in a `main` function with the error type `Box<dyn Error>` is allowed,
-because it allows any `Err` value to be returned early. Even though the body of
-this `main` function will only ever return errors of type `std::io::Error`, by
-specifying `Box<dyn Error>`, this signature will continue to be correct even if
-more code that returns other errors is added to the body of `main`.
+`Box<dyn Error>` turi bu *trait ob'ekti* bo'lib, biz 17-bobning ["Turli turdagi qiymatlarga ruxsat beruvchi trait ob'ektlaridan foydalanish"][trait-objects]<!-- ignore -->  bo'limida gaplashamiz. Hozircha siz `Box<dyn Error>`ni “har qanday xato” degan ma'noni anglatadi deb o'ylashingiz mumkin. `Box<dyn Error>` xato turi bilan `main` funksiyadagi `Result` qiymatida `?` dan foydalanishga ruxsat beriladi, chunki bu har qanday `Err` qiymatini erta qaytarish imkonini beradi. Garchi bu `main` funksiyaning tanasi faqat `std::io::Error` turidagi xatolarni qaytarsa ham, `Box<dyn Error>` ni belgilab, `main` funksiyaga boshqa xatolarni qaytaruvchi ko'proq kod qo'shilsa ham, bu kod to'g'ri bo'lib qoladi.
 
-When a `main` function returns a `Result<(), E>`, the executable will
-exit with a value of `0` if `main` returns `Ok(())` and will exit with a
-nonzero value if `main` returns an `Err` value. Executables written in C return
-integers when they exit: programs that exit successfully return the integer
-`0`, and programs that error return some integer other than `0`. Rust also
-returns integers from executables to be compatible with this convention.
+`main`  funksiya `Result<(), E>`ni qaytarsa, bajariladigan fayl(executable file) `0` qiymati bilan chiqadi, agar `main` `Ok(())` qaytarsa va `main` `Err` qiymatini qaytarsa nolga teng bo'lmagan qiymat bilan chiqadi. C tilida yozilgan bajariladigan fayllar(executable file) chiqqanda butun sonlarni qaytaradi: muvaffaqiyatli chiqqan dasturlar `0` butun sonini qaytaradi, xatoga yo'l qo'ygan dasturlar esa `0` dan boshqa butun sonni qaytaradi. Rust shuningdek, ushbu konventsiyaga mos kelishi uchun bajariladigan fayllardan butun(integer) sonlarni qaytaradi.
 
-The `main` function may return any types that implement [the
-`std::process::Termination` trait][termination]<!-- ignore -->, which contains
-a function `report` that returns an `ExitCode`. Consult the standard library
-documentation for more information on implementing the `Termination` trait for
-your own types.
 
-Now that we’ve discussed the details of calling `panic!` or returning `Result`,
-let’s return to the topic of how to decide which is appropriate to use in which
-cases.
+`main` funksiya [`std::process::Termination` traitini][termination]<!-- ignore --> amalga oshiradigan har qanday turlarni qaytarishi mumkin, bunda `ExitCode` qaytaruvchi `report` funksiyasi mavjud. O'zingizning turlaringiz uchun `Termination` traitini qo'llash bo'yicha qo'shimcha ma'lumot olish uchun standart kutubxona texnik hujjatlariga murojaat qiling.
+
+Endi biz `panic!` chaqirish yoki `Result`ni qaytarish tafsilotlarini muhokama qilganimizdan so‘ng, keling, qaysi hollarda qaysi biri to‘g‘ri kelishini hal qilish mavzusiga qaytaylik.
 
 [handle_failure]: ch02-00-guessing-game-tutorial.html#handling-potential-failure-with-result
 [trait-objects]: ch17-02-trait-objects.html#using-trait-objects-that-allow-for-values-of-different-types

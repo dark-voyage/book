@@ -1,75 +1,32 @@
-## To `panic!` or Not to `panic!`
+## `panic!` yoki `panic!` qo'ymaslik
 
-So how do you decide when you should call `panic!` and when you should return
-`Result`? When code panics, there’s no way to recover. You could call `panic!`
-for any error situation, whether there’s a possible way to recover or not, but
-then you’re making the decision that a situation is unrecoverable on behalf of
-the calling code. When you choose to return a `Result` value, you give the
-calling code options. The calling code could choose to attempt to recover in a
-way that’s appropriate for its situation, or it could decide that an `Err`
-value in this case is unrecoverable, so it can call `panic!` and turn your
-recoverable error into an unrecoverable one. Therefore, returning `Result` is a
-good default choice when you’re defining a function that might fail.
+Xo'sh, qachon `panic!` deb murojat qilish va qachon `Result`ni qaytarish kerakligini qanday hal qilasiz? Kodda panic paydo bo'lganda, uni tiklashning iloji yo'q. Qayta tiklashning mumkin bo'lgan yo'li bormi yoki yo'qmi, har qanday xatolik uchun `panic!` deb chaiqruv qilishingiz mumkin, lekin siz chaqiruv kodi nomidan vaziyatni tuzatib bo'lmaydi degan qarorga kelasiz. `Result` qiymatini qaytarishni tanlaganingizda, siz chaqiruv kodini tanlash imkoniyatini berasiz. Chaqiruv kodi vaziyatga mos keladigan tarzda tiklashga urinishi mumkin yoki `Err`dagi xatoni qayta tiklab bo'lmaydi, deb qaror qilishi va `panic!` qo'yishi mumkin, bu sizning tiklanadigan xatongizni tuzatib bo'lmaydiganga aylantiradi. Shuning uchun, muvaffaqiyatsiz bo'lishi mumkin bo'lgan funksiyani belgilashda `Result` ni qaytarish yaxshi standart tanlovdir.
 
-In situations such as examples, prototype code, and tests, it’s more
-appropriate to write code that panics instead of returning a `Result`. Let’s
-explore why, then discuss situations in which the compiler can’t tell that
-failure is impossible, but you as a human can. The chapter will conclude with
-some general guidelines on how to decide whether to panic in library code.
+Misollar, prototip kodi va testlar kabi holatlarda `Result`ni qaytarish o'rniga panic qo'yadigan kodni yozish maqsadga muvofiqdir. Keling, nima uchun ekanligini ko'rib chiqaylik, keyin kompilyator muvaffaqiyatsizlik mumkin emasligini ayta olmaydigan vaziyatlarni muhokama qilaylik, lekin siz inson sifatida buni qila olasiz. Bob kutubxona kodida panic qo'yish yoki yo'qligini hal qilish bo'yicha ba'zi umumiy ko'rsatmalar bilan yakunlanadi.
 
-### Examples, Prototype Code, and Tests
+### Misollar, Prototip Kodi va Testlar
 
-When you’re writing an example to illustrate some concept, also including robust
-error-handling code can make the example less clear. In
-examples, it’s understood that a call to a method like `unwrap` that could
-panic is meant as a placeholder for the way you’d want your application to
-handle errors, which can differ based on what the rest of your code is doing.
+Ba'zi bir kontseptsiyani tasvirlash uchun misol yozayotganingizda, shuningdek, xatolarni qayta ishlash kodini o'z ichiga olgan holda, misolni kamroq tushunarli qilish mumkin. Misollarda, panic qo'zg'atishi mumkin bo'lgan `unwrap` kabi metodga murojaat qilish sizning ilovangiz xatoliklarni qanday hal qilishini xohlayotganingiz uchun to'ldiruvchi sifatida tushuniladi, bu sizning kodingizning qolgan qismi nima qilayotganiga qarab farq qilishi mumkin.
 
-Similarly, the `unwrap` and `expect` methods are very handy when prototyping,
-before you’re ready to decide how to handle errors. They leave clear markers in
-your code for when you’re ready to make your program more robust.
+Xuddi shunday, prototiplashda xatolarni qanday hal qilishni hal qilishdan oldin `unwrap` va `expect` metodllari juda qulaydir.
+Dasturingizni yanada mustahkamroq qilishga tayyor bo'lganingizda ular kodingizda aniq belgilar qoldiradilar.
 
-If a method call fails in a test, you’d want the whole test to fail, even if
-that method isn’t the functionality under test. Because `panic!` is how a test
-is marked as a failure, calling `unwrap` or `expect` is exactly what should
-happen.
+Agar testda metod chaqiruvi muvaffaqiyatsiz bo'lsa, bu metod sinovdan o'tkazilayotgan funksiya bo'lmasa ham, butun test muvaffaqiyatsiz bo'lishini xohlaysiz. Chunki `panic!` – bu sinovning muvaffaqiyatsiz deb belgilanishi, `unwrap` yoki `expect` deb atalgan narsa aynan shunday bo'lishi kerak.
 
-### Cases in Which You Have More Information Than the Compiler
+### Siz kompilyatordan ko'ra ko'proq ma'lumotga ega bo'lgan holatlar
 
-It would also be appropriate to call `unwrap` or `expect` when you have some
-other logic that ensures the `Result` will have an `Ok` value, but the logic
-isn’t something the compiler understands. You’ll still have a `Result` value
-that you need to handle: whatever operation you’re calling still has the
-possibility of failing in general, even though it’s logically impossible in
-your particular situation. If you can ensure by manually inspecting the code
-that you’ll never have an `Err` variant, it’s perfectly acceptable to call
-`unwrap`, and even better to document the reason you think you’ll never have an
-`Err` variant in the `expect` text. Here’s an example:
+Agar sizda `Result` `Ok` qiymatiga ega bo'lishini ta'minlaydigan boshqa mantiqqa ega bo'lsangiz, `unwrap` yoki `expect` ni chaqirish ham o'rinli bo'lardi, ammo mantiq kompilyator tushunadigan narsa emas. Siz hali ham `Result` qiymatiga ega bo'lasiz, uni hal qilishingiz kerak: siz murojaat qilayotgan har qanday operatsiya sizning vaziyatingizda mantiqan imkonsiz bo'lsa ham, umuman muvaffaqiyatsiz bo'lish ehtimoli bor. Agar siz kodni qo‘lda tekshirish orqali sizda hech qachon `Err` varianti bo‘lmasligiga ishonch hosil qilsangiz, `unwrap` deb nomlash juda maqbuldir, va `expect` matnida hech qachon `Err` varianti bo'lmaydi deb o'ylagan sababni hujjatlash yaxshiroqdir. Mana bir misol:
 
 ```rust
 {{#rustdoc_include ../listings/ch09-error-handling/no-listing-08-unwrap-that-cant-fail/src/main.rs:here}}
 ```
 
-We’re creating an `IpAddr` instance by parsing a hardcoded string. We can see
-that `127.0.0.1` is a valid IP address, so it’s acceptable to use `expect`
-here. However, having a hardcoded, valid string doesn’t change the return type
-of the `parse` method: we still get a `Result` value, and the compiler will
-still make us handle the `Result` as if the `Err` variant is a possibility
-because the compiler isn’t smart enough to see that this string is always a
-valid IP address. If the IP address string came from a user rather than being
-hardcoded into the program and therefore *did* have a possibility of failure,
-we’d definitely want to handle the `Result` in a more robust way instead.
-Mentioning the assumption that this IP address is hardcoded will prompt us to
-change `expect` to better error handling code if in the future, we need to get
-the IP address from some other source instead.
+Qattiq kodlangan stringni tahlil qilish orqali `IpAddr` misolini yaratmoqdamiz. Biz `127.0.0.1` to‘g‘ri IP manzil ekanligini ko‘ramiz, shuning uchun bu yerda `expect` dan foydalanish mumkin. Biroq, qattiq kodlangan, yaroqli satrga ega bo'lish `parse` metodining qaytish turini o'zgartirmaydi: biz hali ham `Result` qiymatini olamiz va kompilyator bizni `Result` bilan ishlashga majbur qiladi, go‘yo `Err` varianti mumkin, chunki kompilyator bu satr har doim haqiqiy IP manzil ekanligini ko‘rish uchun yetarlicha aqlli emas. Agar IP-manzillar qatori dasturga qattiq kodlanganidan ko'ra foydalanuvchidan kelgan bo'lsa va shuning uchun muvaffaqiyatsizlikka uchragan bo'lsa, biz, albatta, `Result` ni yanada ishonchli tarzda boshqarishni xohlaymiz.
+Ushbu IP-manzil qattiq kodlangan degan taxminni eslatib o'tsak, agar kelajakda IP-manzilni boshqa manbadan olishimiz kerak bo'lsa, bizni `expect` ni xatolarni boshqarish kodini yaxshiroq o'zgartirishga undaydi.
 
-### Guidelines for Error Handling
+### Xatolarni bartaraf etish bo'yicha ko'rsatmalar
 
-It’s advisable to have your code panic when it’s possible that your code
-could end up in a bad state. In this context, a *bad state* is when some
-assumption, guarantee, contract, or invariant has been broken, such as when
-invalid values, contradictory values, or missing values are passed to your
-code—plus one or more of the following:
+Agar kodingiz yomon holatda bo'lishi mumkin bo'lsa, kodingiz panic qo'yishi tavsiya etiladi. Shu nuqtai nazardan, *yomon holat* deganda baʼzi taxminlar(assumption), kafolatlar(guarantee), shartnomalar(contract,) yoki oʻzgarmasliklar buzilganda, masalan, notoʻgʻri qiymatlar, qarama-qarshi qiymatlar yoki yetishmayotgan qiymatlar kodingizga oʻtkazilganda, shuningdek quyidagilardan biri yoki bir nechtasi:
 
 * The bad state is something that is unexpected, as opposed to something that
   will likely happen occasionally, like a user entering data in the wrong
