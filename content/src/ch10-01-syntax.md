@@ -45,86 +45,53 @@ Agar dasturni hozir kompilyatsiya qilsak, biz quyidagi xatolikni olamiz:
 {{#include ../listings/ch10-generic-types-traits-and-lifetimes/listing-10-05/output.txt}}
 ```
 
-The help text mentions `std::cmp::PartialOrd`, which is a *trait*, and we’re
-going to talk about traits in the next section. For now, know that this error
-states that the body of `largest` won’t work for all possible types that `T`
-could be. Because we want to compare values of type `T` in the body, we can
-only use types whose values can be ordered. To enable comparisons, the standard
-library has the `std::cmp::PartialOrd` trait that you can implement on types
-(see Appendix C for more on this trait). By following the help text's
-suggestion, we restrict the types valid for `T` to only those that implement
-`PartialOrd` and this example will compile, because the standard library
-implements `PartialOrd` on both `i32` and `char`.
+Yordam matnida `std::cmp::PartialOrd` qayd etilgan, bu *trait* va biz keyingi bo'limda traitlar haqida gaplashamiz. Hozircha shuni bilingki, bu xato `eng_katta` tanasi `T` bo'lishi mumkin bo'lgan barcha mumkin bo'lgan turlar uchun ishlamasligini bildiradi. Kod tanasidagi `T` turidagi qiymatlarni solishtirmoqchi bo'lganimiz uchun biz faqat qiymatlari ordere qilinadigan turlardan foydalanishimiz mumkin. Taqqoslashni yoqish uchun standart kutubxona `std::cmp::PartialOrd` traitiga ega bo'lib, uni turlarga tatbiq etishingiz mumkin (bu trait haqida batafsil ma'lumot uchun C ilovasiga qarang). Yordam matnining taklifiga amal qilib, biz `T` uchun amal qiladigan turlarni faqat `PartialOrd`-ni qo'llaydiganlar bilan cheklaymiz va bu misol kompilyatsiya qilinadi, chunki standart kutubxona `PartialOrd`ni ham `i32` va `char` da qo'llaydi.
 
-### In Struct Definitions
+### Struktura Definitionlarida
 
-We can also define structs to use a generic type parameter in one or more
-fields using the `<>` syntax. Listing 10-6 defines a `Point<T>` struct to hold
-`x` and `y` coordinate values of any type.
+Shuningdek, biz `<>` sintaksisi yordamida bir yoki bir nechta maydonlarda umumiy turdagi parametrlardan foydalanish uchun structlarni belgilashimiz mumkin. Ro'yxat 10-6 har qanday turdagi `x` va `y` koordinata qiymatlarini saqlash uchun `Point<T>` structni belgilaydi.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">Fayl nomi: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/listing-10-06/src/main.rs}}
 ```
 
-<span class="caption">Listing 10-6: A `Point<T>` struct that holds `x` and `y`
-values of type `T`</span>
+<span class="caption">10-6 roʻyxat: `T` turidagi `x` va `y` qiymatlarini oʻz ichiga olgan `Point<T>` structi</span>
 
-The syntax for using generics in struct definitions is similar to that used in
-function definitions. First, we declare the name of the type parameter inside
-angle brackets just after the name of the struct. Then we use the generic type
-in the struct definition where we would otherwise specify concrete data types.
+Struktura ta'riflarida generiklardan foydalanish sintaksisi funksiya ta'riflarida qo'llaniladigan sintaksisiga juda oʻxshaydi. Birinchidan, burchakli qavslar ichida strukturaning nomidan keyin tur parametrining nomini e'lon qilamiz. Keyin biz aniq ma'lumotlar turlarini ko'rsatadigan struct ta'rifida umumiy turdan foydalanamiz.
 
-Note that because we’ve used only one generic type to define `Point<T>`, this
-definition says that the `Point<T>` struct is generic over some type `T`, and
-the fields `x` and `y` are *both* that same type, whatever that type may be. If
-we create an instance of a `Point<T>` that has values of different types, as in
-Listing 10-7, our code won’t compile.
+Esda tutingki, biz `Point<T>`ni aniqlash uchun faqat bitta umumiy turdan foydalanganmiz, bu taʼrifda aytilishicha, `Point<T>` structi ba'zi bir `T` turiga nisbatan umumiy boʻlib, `x` va `y` maydonlari qaysi turdagi boʻlishidan qatʼi nazar bir xil turdagi dir. Agar biz 10-7 ro'yxatdagi kabi har xil turdagi qiymatlarga ega bo'lgan `Point<T>` nusxasini yaratsak, bizning kodimiz kompilyatsiya qilinmaydi.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">Fayl nomi: src/main.rs</span>
 
 ```rust,ignore,does_not_compile
 {{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/listing-10-07/src/main.rs}}
 ```
 
-<span class="caption">Listing 10-7: The fields `x` and `y` must be the same
-type because both have the same generic data type `T`.</span>
+<span class="caption">Roʻyxat 10-7: `x` va `y` maydonlari bir xil turdagi boʻlishi kerak, chunki ikkalasi ham bir xil umumiy maʼlumotlar turi `T`ga ega.</span>
 
-In this example, when we assign the integer value 5 to `x`, we let the compiler
-know that the generic type `T` will be an integer for this instance of
-`Point<T>`. Then when we specify 4.0 for `y`, which we’ve defined to have the
-same type as `x`, we’ll get a type mismatch error like this:
+Ushbu misolda, biz `x` ga 5 butun qiymatini belgilaganimizda, kompilyatorga `T` umumiy turi `Point<T>` misoli uchun butun son bo'lishini bildiramiz. Keyin biz `x` bilan bir xil turga ega ekanligini aniqlagan `y` uchun 4.0 ni belgilaganimizda, biz quyidagi turdagi nomuvofiqlik xatosini olamiz:
 
 ```console
 {{#include ../listings/ch10-generic-types-traits-and-lifetimes/listing-10-07/output.txt}}
 ```
 
-To define a `Point` struct where `x` and `y` are both generics but could have
-different types, we can use multiple generic type parameters. For example, in
-Listing 10-8, we change the definition of `Point` to be generic over types `T`
-and `U` where `x` is of type `T` and `y` is of type `U`.
+`x` va `y` ikkalasi ham umumiy bo'lgan, lekin har xil turlarga ega bo'lishi mumkin bo'lgan `Point` strukturasini aniqlash uchun biz bir nechta umumiy turdagi parametrlardan foydalanishimiz mumkin. Masalan, 10-8 roʻyxatda biz `Point` taʼrifini `T` va `U` turlari boʻyicha umumiy qilib oʻzgartiramiz, bunda `x` `T` turiga, `y` esa `U` turiga tegishli.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">Fayl nomi: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/listing-10-08/src/main.rs}}
 ```
 
-<span class="caption">Listing 10-8: A `Point<T, U>` generic over two types so
-that `x` and `y` can be values of different types</span>
+<span class="caption">Roʻyxat 10-8: `x` va `y` har xil turdagi qiymatlar boʻlishi uchun ikki turdagi umumiy `Point<T, U>`.</span>
 
-Now all the instances of `Point` shown are allowed! You can use as many generic
-type parameters in a definition as you want, but using more than a few makes
-your code hard to read. If you're finding you need lots of generic types in
-your code, it could indicate that your code needs restructuring into smaller
-pieces.
+Endi ko'rsatilgan `Point` ning barcha misollariga ruxsat berilgan! Ta'rifda siz xohlagancha umumiy turdagi parametrlardan foydalanishingiz mumkin, lekin bir nechtadan ko'proq foydalanish kodingizni o'qishni qiyinlashtiradi. Agar siz kodingizda ko'plab umumiy turlar kerakligini aniqlasangiz, bu sizning kodingizni kichikroq qismlarga qayta qurish kerakligini ko'rsatishi mumkin.
 
-### In Enum Definitions
+### Enum Definitionlarida
 
-As we did with structs, we can define enums to hold generic data types in their
-variants. Let’s take another look at the `Option<T>` enum that the standard
-library provides, which we used in Chapter 6:
+Structlar bilan qilganimizdek, ularning variantlarida umumiy ma'lumotlar turlarini saqlash uchun enumlarni belgilashimiz mumkin. Biz 6-bobda foydalanilgan standart kutubxona taqdim etadigan `Option<T>` enumini yana bir ko'rib chiqamiz:
 
 ```rust
 enum Option<T> {
@@ -133,15 +100,10 @@ enum Option<T> {
 }
 ```
 
-This definition should now make more sense to you. As you can see, the
-`Option<T>` enum is generic over type `T` and has two variants: `Some`, which
-holds one value of type `T`, and a `None` variant that doesn’t hold any value.
-By using the `Option<T>` enum, we can express the abstract concept of an
-optional value, and because `Option<T>` is generic, we can use this abstraction
-no matter what the type of the optional value is.
+Bu ta'rif endi siz uchun yanada ma'noli bo'lishi kerak. Ko'rib turganingizdek, `Option<T>` enum `T` turiga nisbatan umumiy va ikkita variantga ega: `T` turidagi bitta qiymatga ega `Some` va hech qanday qiymatga ega bo'lmagan `None` varianti.
+`Option<T>` enum yordamida biz ixtiyoriy qiymatning mavhum kontseptsiyasini ifodalashimiz mumkin va `Option<T>` umumiy bo'lgani uchun biz ixtiyoriy qiymatning turi qanday bo'lishidan qat`i nazar, bu abstraktsiyadan foydalanishimiz mumkin.
 
-Enums can use multiple generic types as well. The definition of the `Result`
-enum that we used in Chapter 9 is one example:
+Enumlar bir nechta generik turlardan ham foydalanishi mumkin. Biz 9-bobda aytib o'tgan `Result` enumining ta'rifi ushbu foydalanishga misoldir:
 
 ```rust
 enum Result<T, E> {
@@ -150,26 +112,15 @@ enum Result<T, E> {
 }
 ```
 
-The `Result` enum is generic over two types, `T` and `E`, and has two variants:
-`Ok`, which holds a value of type `T`, and `Err`, which holds a value of type
-`E`. This definition makes it convenient to use the `Result` enum anywhere we
-have an operation that might succeed (return a value of some type `T`) or fail
-(return an error of some type `E`). In fact, this is what we used to open a
-file in Listing 9-3, where `T` was filled in with the type `std::fs::File` when
-the file was opened successfully and `E` was filled in with the type
-`std::io::Error` when there were problems opening the file.
+`Result` enumlari ikki xil, `T` va `E` uchun generikdir va ikkita variantga ega: `T` turidagi qiymatga ega `OK` va `E` turidagi qiymatga ega bo'lgan `Err`. Bu taʼrif `Result` enumidan bizda muvaffaqiyatli boʻlishi mumkin boʻlgan (`T` turidagi qiymatni qaytarish) yoki muvaffaqiyatsiz boʻlishi mumkin boʻlgan (`E` turidagi xatolikni qaytarish) istalgan joyda foydalanishni qulay qiladi. Aslida, biz 9-3 ro'yxatdagi faylni shunday ochar edik, bu yerda fayl muvaffaqiyatli ochilganda `T` `std::fs::File` turi bilan to'ldirilgan va faylni ochishda muammolar yuzaga kelganda `E` `std::io::Error` turi bilan to`ldirilgan.
 
-When you recognize situations in your code with multiple struct or enum
-definitions that differ only in the types of the values they hold, you can
-avoid duplication by using generic types instead.
+Kodingizdagi vaziyatlarni faqat ular ega bo'lgan qiymatlar turlarida farq qiluvchi bir nechta tuzilma yoki enum ta'riflari bilan tanib olganingizda, uning o'rniga generik turlardan foydalanish orqali takrorlanishdan qochishingiz mumkin.
 
-### In Method Definitions
+### Metod Definitionlarida
 
-We can implement methods on structs and enums (as we did in Chapter 5) and use
-generic types in their definitions, too. Listing 10-9 shows the `Point<T>`
-struct we defined in Listing 10-6 with a method named `x` implemented on it.
+Biz tuzilmalar va raqamlar bo'yicha usullarni qo'llashimiz mumkin (5-bobda qilganimiz kabi) va ularning ta'riflarida umumiy turlardan ham foydalanishimiz mumkin. 10-9 ro'yxatda biz 10-6 ro'yxatda belgilagan "Point<T>" tuzilmasi ko'rsatilgan va unda "x" nomli usul qo'llaniladi.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">Fayl nomi: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/listing-10-09/src/main.rs}}
