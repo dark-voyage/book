@@ -39,122 +39,70 @@ Endi biz `Xulosa` traiti metodlarining kerakli imzolarini aniqlaganimizdan so‘
 
 <span class="caption">Roʻyxat 10-13: `Xulosa` traitini `YangiMaqola` va `Maqola` turlariga joriy qilish</span>
 
-Implementing a trait on a type is similar to implementing regular methods. The
-difference is that after `impl`, we put the trait name we want to implement,
-then use the `for` keyword, and then specify the name of the type we want to
-implement the trait for. Within the `impl` block, we put the method signatures
-that the trait definition has defined. Instead of adding a semicolon after each
-signature, we use curly brackets and fill in the method body with the specific
-behavior that we want the methods of the trait to have for the particular type.
+Traitni turga tatbiq etish odatiy usullarni amalga oshirishga o'xshaydi. Farqi shundaki, `impl` dan so'ng biz amalga oshirmoqchi bo'lgan trait nomini qo'yamiz, so'ng `for` kalit so'zidan foydalanamiz va keyin traitni amalga oshirmoqchi bo'lgan tur nomini belgilaymiz. `impl` blokida biz trait ta'rifi belgilagan metod imzolarini qo'yamiz. Har bir imzodan keyin nuqta-vergul qo'yish o'rniga, biz jingalak qavslardan foydalanamiz va metod tanasini o'ziga xos xatti-harakat bilan to'ldiramiz, biz traitning metodlari ma'lum bir turga ega bo'lishini xohlaymiz.
 
-Now that the library has implemented the `Summary` trait on `NewsArticle` and
-`Tweet`, users of the crate can call the trait methods on instances of
-`NewsArticle` and `Tweet` in the same way we call regular methods. The only
-difference is that the user must bring the trait into scope as well as the
-types. Here’s an example of how a binary crate could use our `aggregator`
-library crate:
+Kutubxona `YangiMaqola` va `Maqola`da `Xulosa` traitini joriy qilganligi sababli, crate foydalanuvchilari `YangiMaqola` va `Maqola` misollaridagi xususiyat metodlarini biz odatdagi metodlar deb ataganimizdek chaqirishlari mumkin. Yagona farq shundaki, foydalanuvchi o'ziga xos traitni turlari bilan bir qatorda qamrab olishi kerak. Binary crate bizning `aggregator` kutubxonamiz cratesidan qanday foydalanishi mumkinligiga misol:
 
 ```rust,ignore
 {{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/no-listing-01-calling-trait-method/src/main.rs}}
 ```
 
-This code prints `1 new tweet: horse_ebooks: of course, as you probably already
-know, people`.
+Bu kod `1 ta yangi xabar: ismoilovdev: Rust kitobi juda foydali ekan, men juda ko'p bilimlarni o'zlashtirdim` chop etadi.
 
-Other crates that depend on the `aggregator` crate can also bring the `Summary`
-trait into scope to implement `Summary` on their own types. One restriction to
-note is that we can implement a trait on a type only if at least one of the
-trait or the type is local to our crate. For example, we can implement standard
-library traits like `Display` on a custom type like `Tweet` as part of our
-`aggregator` crate functionality, because the type `Tweet` is local to our
-`aggregator` crate. We can also implement `Summary` on `Vec<T>` in our
-`aggregator` crate, because the trait `Summary` is local to our `aggregator`
-crate.
+`aggregator` cratesiga bog'liq bo'lgan boshqa cratelar ham `Xulosa` traitini o'z turlari bo'yicha `Xulosa`ni amalga oshirish uchun qamrab olishi mumkin. E'tiborga olish kerak bo'lgan cheklashlardan biri shundaki, biz trait yoki turning hech bo'lmaganda bittasi bizning cratemiz uchun mahalliy(local) bo'lsa, biz traitni turga qo'llashimiz mumkin. Misol uchun, biz `Maqola` kabi maxsus turdagi `Display` kabi standart kutubxona traitlarini `aggregator` crate funksiyamizning bir qismi sifatida amalga oshirishimiz mumkin, chunki `Maqola` turi `aggregator` cratemiz uchun mahalliydir. Shuningdek, biz  `Vec<T>` da `Xulosa`ni `aggregator` cratemizda ham qo‘llashimiz mumkin, chunki `Xulosa` traiti `aggregator` cratemiz uchun mahalliydir.
 
-But we can’t implement external traits on external types. For example, we can’t
-implement the `Display` trait on `Vec<T>` within our `aggregator` crate,
-because `Display` and `Vec<T>` are both defined in the standard library and
-aren’t local to our `aggregator` crate. This restriction is part of a property
-called *coherence*, and more specifically the *orphan rule*, so named because
-the parent type is not present. This rule ensures that other people’s code
-can’t break your code and vice versa. Without the rule, two crates could
-implement the same trait for the same type, and Rust wouldn’t know which
-implementation to use.
+Ammo biz tashqi turlarga tashqi traitlarni amalga oshira olmaymiz. Masalan, biz `aggregator` cratemiz ichida `Vec<T>` da `Display` traitini amalga oshira olmaymiz, chunki `Display` va `Vec<T>` ikkalasi ham standart kutubxonada belgilangan va bizning `aggregator` cratemiz uchun mahalliy emas. Bu cheklash *kogerentlik(coherence)* deb nomlangan xususiyatning bir qismi va aniqrog'i *yetim qoidasi(orphan rule)*, chunki ota-ona turi mavjud emasligi sababli shunday nomlangan. Bu qoida boshqa odamlarning kodi sizning kodingizni buzmasligini ta'minlaydi va aksincha. Qoidalarsiz ikkita crate bir xil turdagi bir xil traitni amalga oshirishi mumkin edi va Rust qaysi dasturdan foydalanishni bilmaydi.
 
-### Default Implementations
+### Standart ilovalar
 
-Sometimes it’s useful to have default behavior for some or all of the methods
-in a trait instead of requiring implementations for all methods on every type.
-Then, as we implement the trait on a particular type, we can keep or override
-each method’s default behavior.
+Ba'zan har bir turdagi barcha metodlarni amalga oshirishni talab qilish o'rniga, traitdagi ba'zi yoki barcha metodlar uchun standart xatti-harakatlarga ega bo'lish foydali bo'ladi.
+Keyin, biz traitni ma'lum bir turga qo'llaganimizda, har bir metodning standart xatti-harakatlarini saqlab qolishimiz yoki bekor qilishimiz mumkin.
 
-In Listing 10-14 we specify a default string for the `summarize` method of the
-`Summary` trait instead of only defining the method signature, as we did in
-Listing 10-12.
+Roʻyxat 10-14da biz 10-12 ro'yxatda bo'lgani kabi faqat metod imzosini belgilash o'rniga `Xulosa` traitining `umumiy_xulosa` metodi uchun standart qatorni belgilaymiz.
 
-<span class="filename">Filename: src/lib.rs</span>
+<span class="filename">Fayl nomi: src/lib.rs</span>
 
 ```rust,noplayground
 {{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/listing-10-14/src/lib.rs:here}}
 ```
 
-<span class="caption">Listing 10-14: Defining a `Summary` trait with a default
-implementation of the `summarize` method</span>
+<span class="caption">Roʻyxat 10-14: `Xulosa` traitini `umumiy_xulosa` metodini standart boʻyicha amalga oshirish bilan aniqlash</span>
 
-To use a default implementation to summarize instances of `NewsArticle`, we
-specify an empty `impl` block with `impl Summary for NewsArticle {}`.
+`YangiMaqola` misollarini umumlashtirish uchun standart ilovadan foydalanish uchun biz bo'sh `impl` blokini `impl Xulosa for YangiMaqola {}` bilan belgilaymiz.
 
-Even though we’re no longer defining the `summarize` method on `NewsArticle`
-directly, we’ve provided a default implementation and specified that
-`NewsArticle` implements the `Summary` trait. As a result, we can still call
-the `summarize` method on an instance of `NewsArticle`, like this:
+Biz `YangiMaqola`da to‘g‘ridan-to‘g‘ri `umumiy_xulosa` metodini endi aniqlamasak ham, biz standart bo‘yicha dasturni taqdim etdik va `YangiMaqola` `Xulosa` traitini amalga oshirishini belgilab oldik. Natijada, biz hali ham `YangiMaqola` misolida `umumiy_xulosa` metodini quyidagicha chaqirishimiz mumkin:
 
 ```rust,ignore
 {{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/no-listing-02-calling-default-impl/src/main.rs:here}}
 ```
 
-This code prints `New article available! (Read more...)`.
+Bu kod `Yangi maqola mavjud! (Batafsil...)`ni chop etadi.
 
-Creating a default implementation doesn’t require us to change anything about
-the implementation of `Summary` on `Tweet` in Listing 10-13. The reason is that
-the syntax for overriding a default implementation is the same as the syntax
-for implementing a trait method that doesn’t have a default implementation.
+Standart dasturni yaratish bizdan 10-13 roʻyxatdagi `Maqola`dagi `Xulosa`ni amalga oshirish haqida biror narsani oʻzgartirishimizni talab qilmaydi. Buning sababi, standart dasturni bekor qilish sintaksisi standart dasturga ega bo'lmagan trait metodini amalga oshirish sintaksisi bilan bir xil.
 
-Default implementations can call other methods in the same trait, even if those
-other methods don’t have a default implementation. In this way, a trait can
-provide a lot of useful functionality and only require implementors to specify
-a small part of it. For example, we could define the `Summary` trait to have a
-`summarize_author` method whose implementation is required, and then define a
-`summarize` method that has a default implementation that calls the
-`summarize_author` method:
+Standart ilovalar bir xil traitga ega bo'lgan boshqa metodlarni chaqirishi mumkin, hatto bu boshqa metodlarda standart dastur bo'lmasa ham. Shunday qilib, trait juda ko'p foydali funksiyalarni taqdim etishi mumkin va amalga oshiruvchilardan faqat uning kichik qismini ko'rsatishni talab qiladi. Misol uchun, biz `Xulosa` traitini amalga oshirish zarur bo'lgan `muallif_haqida` metodiga ega bo'lish uchun belgilashimiz va keyin `muallif_haqida` metodini chaqiradigan standart amalga oshirishga ega bo'lgan `umumiy_xulosa` metodini belgilashimiz mumkin:
 
 ```rust,noplayground
 {{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/no-listing-03-default-impl-calls-other-methods/src/lib.rs:here}}
 ```
 
-To use this version of `Summary`, we only need to define `summarize_author`
-when we implement the trait on a type:
+`Xulosa` ning ushbu versiyasidan foydalanish uchun biz faqat bir turdagi traitni amalga oshirganimizda `muallif_haqida` ni aniqlashimiz kerak:
 
 ```rust,ignore
 {{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/no-listing-03-default-impl-calls-other-methods/src/lib.rs:impl}}
 ```
 
-After we define `summarize_author`, we can call `summarize` on instances of the
-`Tweet` struct, and the default implementation of `summarize` will call the
-definition of `summarize_author` that we’ve provided. Because we’ve implemented
-`summarize_author`, the `Summary` trait has given us the behavior of the
-`summarize` method without requiring us to write any more code.
+`muallif_haqida` ni aniqlaganimizdan so'ng, biz `Maqola` structi misollarida `umumiy_xulosa` deb atashimiz mumkin va `umumiy_xulosa` standart bajarilishi biz taqdim etgan `muallif_haqida` ta'rifini chaqiradi. Biz `muallif_haqida` ni qo'llaganimiz sababli, `Xulosa` traiti bizga boshqa kod yozishni talab qilmasdan `umumiy_xulosa` metodining harakatini berdi.
 
 ```rust,ignore
 {{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/no-listing-03-default-impl-calls-other-methods/src/main.rs:here}}
 ```
 
-This code prints `1 new tweet: (Read more from @horse_ebooks...)`.
+Bu kod `1 ta yangi xabar: (Batafsil: @ismoilovdev...)` ni chop etadi.
 
-Note that it isn’t possible to call the default implementation from an
-overriding implementation of that same method.
+Shuni esda tutingki, xuddi shu metodni bekor qilish orqali standart dasturni chaqirish mumkin emas.
 
-### Traits as Parameters
+### Traitlar parametr sifatida
 
 Now that you know how to define and implement traits, we can explore how to use
 traits to define functions that accept many different types. We'll use the
