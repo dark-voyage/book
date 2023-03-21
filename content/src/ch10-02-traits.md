@@ -104,112 +104,78 @@ Shuni esda tutingki, xuddi shu metodni bekor qilish orqali standart dasturni cha
 
 ### Traitlar parametr sifatida
 
-Now that you know how to define and implement traits, we can explore how to use
-traits to define functions that accept many different types. We'll use the
-`Summary` trait we implemented on the `NewsArticle` and `Tweet` types in
-Listing 10-13 to define a `notify` function that calls the `summarize` method
-on its `item` parameter, which is of some type that implements the `Summary`
-trait. To do this, we use the `impl Trait` syntax, like this:
+Endi siz traitlarni qanday aniqlash va amalga oshirishni bilganingizdan so'ng, biz ko'plab turlarni qabul qiladigan funksiyalarni aniqlash uchun traitlardan qanday foydalanishni o'rganishimiz mumkin. Biz 10-13 roʻyxatdagi `YangiMaqola` va `Maqola` turlari uchun joriy qilingan `Xulosa` traitidan foydalanamiz, uning `element` parametri boʻyicha umumlashtirish metodlini chaqiradigan `xabar_berish` funksiyasini belgilaymiz, u `Xulosa` traitini amalga oshiradi. Buning uchun biz `impl Trait` sintaksisidan foydalanamiz, masalan:
 
 ```rust,ignore
 {{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/no-listing-04-traits-as-parameters/src/lib.rs:here}}
 ```
 
-Instead of a concrete type for the `item` parameter, we specify the `impl`
-keyword and the trait name. This parameter accepts any type that implements the
-specified trait. In the body of `notify`, we can call any methods on `item`
-that come from the `Summary` trait, such as `summarize`. We can call `notify`
-and pass in any instance of `NewsArticle` or `Tweet`. Code that calls the
-function with any other type, such as a `String` or an `i32`, won’t compile
-because those types don’t implement `Summary`.
+`element` parametri uchun aniq tur o'rniga biz `impl` kalit so'zini va trait nomini belgilaymiz. Ushbu parametr belgilangan traitni amalga oshiradigan har qanday turni qabul qiladi. `xabar_berish` qismida biz `Xulosa` traitidan kelib chiqadigan `element` bo‘yicha har qanday metodlarni chaqirishimiz mumkin, masalan, `umumiy_xulosa`. Biz `xabar_berish` ga chaiqruv  qilishimiz va `YangiMaqola` yoki `Maqola` ning istalgan misolida o'tishimiz mumkin. Funksiyani `String` yoki `i32` kabi boshqa har qanday turdagi chaqiruvchi kod kompilyatsiya qilinmaydi, chunki bu turlar `Xulosa` ni amalga oshirmaydi.
 
 <!-- Old headings. Do not remove or links may break. -->
 <a id="fixing-the-largest-function-with-trait-bounds"></a>
 
-#### Trait Bound Syntax
+#### Traitlarni cheklash sintaksisi
 
-The `impl Trait` syntax works for straightforward cases but is actually syntax
-sugar for a longer form known as a *trait bound*; it looks like this:
+`impl Trait` sintaksisi oddiy holatlar uchun ishlaydi, lekin aslida *trait bound* deb nomlanuvchi uzunroq shakl uchun sintaksis shakaridir; bu shunday ko'rinadi:
 
 ```rust,ignore
-pub fn notify<T: Summary>(item: &T) {
-    println!("Breaking news! {}", item.summarize());
+pub fn xabar_berish<T: Xulosa>(element: &T) {
+    println!("Tezkor xabarlar! {}", element.umumiy_xulosa());
 }
 ```
 
-This longer form is equivalent to the example in the previous section but is
-more verbose. We place trait bounds with the declaration of the generic type
-parameter after a colon and inside angle brackets.
+Ushbu uzunroq shakl oldingi bo'limdagi misolga teng, ammo batafsilroq. Trait chegaralarini ikki nuqta va ichki burchakli qavslardan keyin umumiy tur parametri e'lon qilingan holda joylashtiramiz.
 
-The `impl Trait` syntax is convenient and makes for more concise code in simple
-cases, while the fuller trait bound syntax can express more complexity in other
-cases. For example, we can have two parameters that implement `Summary`. Doing
-so with the `impl Trait` syntax looks like this:
+`impl Trait` sintaksisi qulay va oddiy holatlarda ixchamroq kodni yaratadi, to'liqroq traitlar bilan bog'langan sintaksisi esa boshqa holatlarda ko'proq murakkablikni ifodalashi mumkin. Misol uchun, bizda `Xulosa` ni amalga oshiradigan ikkita parametr bo'lishi mumkin. Buni `impl Trait` sintaksisi bilan bajarish quyidagicha ko'rinadi:
 
 ```rust,ignore
-pub fn notify(item1: &impl Summary, item2: &impl Summary) {
+pub fn xabar_berish(element1: &impl Xulosa, element2: &impl Xulosa) {
 ```
 
-Using `impl Trait` is appropriate if we want this function to allow `item1` and
-`item2` to have different types (as long as both types implement `Summary`). If
-we want to force both parameters to have the same type, however, we must use a
-trait bound, like this:
+Agar biz ushbu funksiya `element1` va `element2` turli xil turlarga ega bo'lishini istasak, `impl Trait` dan foydalanish maqsadga muvofiqdir (agar ikkala tur ham `Xulosa`ni qo'llasa). Agar biz ikkala parametrni bir xil turga ega bo'lishga majburlamoqchi bo'lsak, quyidagi kabi trait bounddan foydalanishimiz kerak:
 
 ```rust,ignore
-pub fn notify<T: Summary>(item1: &T, item2: &T) {
+pub fn xabar_berish<T: Xulosa>(element1: &T, element2: &T) {
 ```
 
-The generic type `T` specified as the type of the `item1` and `item2`
-parameters constrains the function such that the concrete type of the value
-passed as an argument for `item1` and `item2` must be the same.
+`element1` va `element2` parametrlarining turi sifatida belgilangan umumiy `T` turi funksiyani shunday cheklaydiki, `element1` va `element2` uchun argument sifatida berilgan qiymatning aniq turi bir xil bo`lishi kerak.
 
-#### Specifying Multiple Trait Bounds with the `+` Syntax
+#### `+` sintaksisi bilan bir nechta trait chegaralarini belgilash
 
-We can also specify more than one trait bound. Say we wanted `notify` to use
-display formatting as well as `summarize` on `item`: we specify in the `notify`
-definition that `item` must implement both `Display` and `Summary`. We can do
-so using the `+` syntax:
+Bundan tashqari, biz bir nechta traitlarni belgilashimiz mumkin. Aytaylik, biz `xabar_berish` funksiyasidan display formatlash hamda `element` bo‘yicha `umumiy_xulosa`dan foydalanishni xohladik: biz `xabar_berish` ta'rifida `element` `Display` va `Xulosa` ni ham amalga oshirishi kerakligini belgilaymiz. Buni `+` sintaksisi yordamida amalga oshirishimiz mumkin:
 
 ```rust,ignore
-pub fn notify(item: &(impl Summary + Display)) {
+pub fn xabar_berish(element: &(impl Xulosa + Display)) {
 ```
 
-The `+` syntax is also valid with trait bounds on generic types:
+`+` sintaksisi generik turdagi belgilar chegaralari bilan ham amal qiladi:
 
 ```rust,ignore
-pub fn notify<T: Summary + Display>(item: &T) {
+pub fn xabar_berish<T: Xulosa+ Display>(element: &T) {
 ```
 
-With the two trait bounds specified, the body of `notify` can call `summarize`
-and use `{}` to format `item`.
+Belgilangan ikkita trait chegarasi bilan `xabar_berish` asosiy qismi `umumiy_xulosa` deb chaqirishi va `element`ni formatlash uchun `{}` dan foydalanishi mumkin.
 
-#### Clearer Trait Bounds with `where` Clauses
+#### `where` bandlari bilan aniqroq trait bounds(chegaralari)
 
-Using too many trait bounds has its downsides. Each generic has its own trait
-bounds, so functions with multiple generic type parameters can contain lots of
-trait bound information between the function’s name and its parameter list,
-making the function signature hard to read. For this reason, Rust has alternate
-syntax for specifying trait bounds inside a `where` clause after the function
-signature. So instead of writing this:
+Haddan tashqari ko'p belgilar boundlaridan foydalanish o'zining salbiy tomonlariga ega. Har bir generikning o'ziga xos trait boundlari bor, shuning uchun bir nechta umumiy turdagi parametrlarga ega funksiyalar funksiya nomi va uning parametrlar ro'yxati o'rtasida ko'plab belgilar bilan bog'liq ma'lumotlarni o'z ichiga olishi mumkin, bu funksiya imzosini o'qishni qiyinlashtiradi. Shu sababli, Rust funksiya imzosidan keyin `where` bandida trait boundlarini belgilash uchun muqobil sintaksisga ega.
 
 ```rust,ignore
-fn some_function<T: Display + Clone, U: Clone + Debug>(t: &T, u: &U) -> i32 {
+fn boshqa_funksiya<T: Display + Clone, U: Clone + Debug>(t: &T, u: &U) -> i32 {
 ```
 
-we can use a `where` clause, like this:
+biz `where` bandidan foydalanishimiz mumkin, masalan:
 
 ```rust,ignore
 {{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/no-listing-07-where-clause/src/lib.rs:here}}
 ```
 
-This function’s signature is less cluttered: the function name, parameter list,
-and return type are close together, similar to a function without lots of trait
-bounds.
+Bu funksiya imzosi kamroq chalkash: funksiya nomi, parametrlar ro'yxati va qaytish turi bir-biriga yaqin bo'lib, ko'p trait boundlari bo'lmagan funksiyaga o'xshaydi.
 
-### Returning Types that Implement Traits
+### Traitlarni amalga oshiradigan Return(qaytaruvchi) turlar
 
-We can also use the `impl Trait` syntax in the return position to return a
-value of some type that implements a trait, as shown here:
+Bu yerda ko'rsatilganidek, traitni amalga oshiradigan ba'zi turdagi qiymatni qaytarish(return) uchun `impl Trait` sintaksisini return holatida ham ishlatishimiz mumkin:
 
 ```rust,ignore
 {{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/no-listing-05-returning-impl-trait/src/lib.rs:here}}
