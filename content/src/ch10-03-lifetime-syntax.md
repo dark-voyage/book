@@ -106,191 +106,104 @@ Mana bir nechta misollar: lifetime parametri bo'lmagan `i32` ga reference, `'a` 
 &'a mut i32 // aniq lifetimega ega o'zgaruvchan reference
 ```
 
-One lifetime annotation by itself doesn’t have much meaning, because the annotations are meant to tell Rust how generic lifetime parameters of multiple references relate to each other. Let’s examine how the lifetime annotations relate to each other in the context of the `longest` function.
+Bir umrlik lifetime annotatsiyaning o'zi katta ma'noga ega emas, chunki annotatsiyalar Rustga bir nechta referencelalarning lifetime generik parametrlari bir-biriga qanday bog'liqligini aytib berish uchun mo'ljallangan. Keling, `eng_uzun` funksiya kontekstida lifetime annotatsiyalarning bir-biriga qanday bog'liqligini ko'rib chiqaylik.
 
-### Lifetime Annotations in Function Signatures
+### Funktsiya imzolaridagi lifetime annotatsiyalar
 
-To use lifetime annotations in function signatures, we need to declare the
-generic *lifetime* parameters inside angle brackets between the function name
-and the parameter list, just as we did with generic *type* parameters.
+Funksiya imzolarida lifetime annotatsiyalardan foydalanish uchun biz generik *tur* parametrlari bilan qilganimiz kabi, funksiya nomi va parametrlar ro'yxati o'rtasida burchak qavslar ichida generik *lifetime* parametrlarini e'lon qilishimiz kerak.
 
-We want the signature to express the following constraint: the returned
-reference will be valid as long as both the parameters are valid. This is the
-relationship between lifetimes of the parameters and the return value. We’ll
-name the lifetime `'a` and then add it to each reference, as shown in Listing
-10-21.
+Biz imzo quyidagi cheklovni ifodalashini istaymiz: qaytarilgan(return) reference ikkala parametr ham to'g'ri bo'lsa, haqiqiy bo'ladi. Bu parametrlarning lifetime(ishlash muddati) va qaytariladigan(return) qiymat o'rtasidagi bog'liqlikdir. 10-21 ro'yxatda ko'rsatilganidek, biz lifetimega `'a` deb nom beramiz va keyin uni har bir referencega qo'shamiz.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">Fayl nomi: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/listing-10-21/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 10-21: The `longest` function definition
-specifying that all the references in the signature must have the same lifetime
-`'a`</span>
+<span class="caption">Ro'yxat 10-21: Imzodagi barcha referencelar bir xil lifetimega(ishlash muddati) ega bo'lishi kerakligini ko'rsatuvchi `eng_uzun` funksiya ta'rifi `'a`</span>
 
-This code should compile and produce the result we want when we use it with the
-`main` function in Listing 10-19.
+Ushbu kod 10-19-sonli ro'yxatdagi `main` funksiyadan foydalanganda biz xohlagan natijani kompilyatsiya qilishi va ishlab chiqarishi kerak.
 
-The function signature now tells Rust that for some lifetime `'a`, the function
-takes two parameters, both of which are string slices that live at least as
-long as lifetime `'a`. The function signature also tells Rust that the string
-slice returned from the function will live at least as long as lifetime `'a`.
-In practice, it means that the lifetime of the reference returned by the
-`longest` function is the same as the smaller of the lifetimes of the values
-referred to by the function arguments. These relationships are what we want
-Rust to use when analyzing this code.
+Funktsiya imzosi endi Rustga ma'lum bir lifetimeda `'a` funksiyasi ikkita parametrni qabul qilishini aytadi, ularning har ikkalasi ham kamida lifetime `'a` bo'lgan string bo'laklaridir. Funktsiya imzosi, shuningdek, Rustga funksiyadan qaytarilgan string bo'lagi hech bo'lmaganda `'a` lifetimegacha yashashini aytadi.
+Amalda, bu `eng_uzun` funksiya tomonidan qaytarilgan referencening lifetime, funksiya argumentlari bilan bog'liq bo'lgan qiymatlarning eng kichik lifetimesi bilan bir xil ekanligini anglatadi. Bu munosabatlar Rust ushbu kodni tahlil qilishda foydalanishini xohlaydigan narsadir.
 
-Remember, when we specify the lifetime parameters in this function signature,
-we’re not changing the lifetimes of any values passed in or returned. Rather,
-we’re specifying that the borrow checker should reject any values that don’t
-adhere to these constraints. Note that the `longest` function doesn’t need to
-know exactly how long `x` and `y` will live, only that some scope can be
-substituted for `'a` that will satisfy this signature.
+Esda tutingki, biz ushbu funksiya imzosida lifetime parametrlarini belgilaganimizda, biz kiritilgan yoki qaytarilgan qiymatlarning lifetimeni o'zgartirmaymiz. Aksincha, biz borrowni tekshiruvchi(borrow checker) ushbu cheklovlarga rioya qilmaydigan har qanday qiymatlarni rad etishi kerakligini ta'kidlaymiz. Shuni esda tutingki, `eng_uzun` funksiya `x` va `y` qancha vaqt ishlashini aniq bilishi shart emas, faqat ushbu imzoni qondiradigan `'a` ga baʼzi bir qamrovni almashtirish mumkin.
 
-When annotating lifetimes in functions, the annotations go in the function
-signature, not in the function body. The lifetime annotations become part of
-the contract of the function, much like the types in the signature. Having
-function signatures contain the lifetime contract means the analysis the Rust
-compiler does can be simpler. If there’s a problem with the way a function is
-annotated or the way it is called, the compiler errors can point to the part of
-our code and the constraints more precisely. If, instead, the Rust compiler
-made more inferences about what we intended the relationships of the lifetimes
-to be, the compiler might only be able to point to a use of our code many steps
-away from the cause of the problem.
+Funksiyalarda lifetimeni izohlashda annotationlar funksiya tanasida emas, balki funksiya imzosida bo'ladi. Imzodagi turlar singari, lifetime annotationlar funksiya shartnomasining bir qismiga aylanadi. Funktsiya imzolari lifetime shartnomani o'z ichiga oladi, degan ma'noni anglatadi Rust kompilyatori tahlil qilish osonroq bo'lishi mumkin. Agar funksiyaga izoh berish yoki uni chaqirish bilan bog'liq muammo bo'lsa, kompilyator xatolari kodimizning bir qismiga va cheklovlarga aniqroq ishora qilishi mumkin. Buning o'rniga, Rust kompilyatori biz lifetime munosabatlari haqida ko'proq taxminlar qilgan bo'lsa, kompilyator faqat muammoning sababidan bir necha qadam uzoqda bizning kodimizdan foydalanishni ko'rsatishi mumkin.
 
-When we pass concrete references to `longest`, the concrete lifetime that is
-substituted for `'a` is the part of the scope of `x` that overlaps with the
-scope of `y`. In other words, the generic lifetime `'a` will get the concrete
-lifetime that is equal to the smaller of the lifetimes of `x` and `y`. Because
-we’ve annotated the returned reference with the same lifetime parameter `'a`,
-the returned reference will also be valid for the length of the smaller of the
-lifetimes of `x` and `y`.
+Biz `eng_uzun` ga aniq referencelar berganimizda, `'a` o‘rniga qo‘yilgan aniq lifetime `x` doirasining `y` doirasiga to‘g‘ri keladigan qismidir. Boshqacha qilib aytadigan bo'lsak, `'a` generik lifetimesi `x` va `y` ning eng kichik lifetimaga teng bo'lgan aniq lifetimeni oladi. Biz qaytarilgan(return) referencega bir xil lifetime parametri `'a` bilan izoh berganimiz sababli, qaytarilgan reference `x` va `y` lifetimening kichikroq uzunligi uchun ham amal qiladi.
 
-Let’s look at how the lifetime annotations restrict the `longest` function by
-passing in references that have different concrete lifetimes. Listing 10-22 is
-a straightforward example.
+Keling, turli xil aniq lifetimelarga ega bo'lgan referencelarni o'tkazish orqali `eng_uzun` funksiyani qanday cheklashini ko'rib chiqaylik. Ro'yxat 10-22 - bu oddiy misol.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">Fayl nomi: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/listing-10-22/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 10-22: Using the `longest` function with
-references to `String` values that have different concrete lifetimes</span>
+<span class="caption">Ro'yxat 10-22: `eng_uzun` funksiyasidan foydalanish, turli xil aniq lifetimega ega `String` qiymatlariga referencelar</span>
 
-In this example, `string1` is valid until the end of the outer scope, `string2`
-is valid until the end of the inner scope, and `result` references something
-that is valid until the end of the inner scope. Run this code, and you’ll see
-that the borrow checker approves; it will compile and print `The longest string
-is long string is long`.
+Bu misolda `string1` tashqi qamrov oxirigacha amal qiladi, `string2` ichki qamrov oxirigacha amal qiladi va `natija` ichki doiraning oxirigacha amal qiladigan narsaga ishora qiladi. Ushbu kodni ishga tushiring va siz borrowni tekshiruvchi tasdiqlaganini ko'rasiz; u kompilyatsiya qiladi va `Eng uzun satr - uzundan uzun string` ni yaratadi.
 
-Next, let’s try an example that shows that the lifetime of the reference in
-`result` must be the smaller lifetime of the two arguments. We’ll move the
-declaration of the `result` variable outside the inner scope but leave the
-assignment of the value to the `result` variable inside the scope with
-`string2`. Then we’ll move the `println!` that uses `result` to outside the
-inner scope, after the inner scope has ended. The code in Listing 10-23 will
-not compile.
+Keyinchalik, `natija`dagi referencening lifetime ikkita argumentning kichikroq lifetime bo'lishi kerakligini ko'rsatadigan misolni ko'rib chiqaylik. Biz `natija` o'zgaruvchisi deklaratsiyasini ichki doiradan tashqariga o'tkazamiz, lekin qiymatni belgilashni `string2` bilan doiradagi `natija` o'zgaruvchisiga qoldiramiz. Keyin, `natija`ni ishlatadigan `println!`ni ichki doira tugagandan so‘ng, ichki doiradan tashqariga o‘tkazamiz. 10-23 ro'yxatdagi kod kompilyatsiya qilinmaydi.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">Fayl nomi: src/main.rs</span>
 
 ```rust,ignore,does_not_compile
 {{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/listing-10-23/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 10-23: Attempting to use `result` after `string2`
-has gone out of scope</span>
+<span class="caption">Ro'yxat 10-23: `string2` dan keyin `natija` dan foydalanishga urinish</span>
 
-When we try to compile this code, we get this error:
+Ushbu kodni kompilyatsiya qilmoqchi bo'lganimizda, biz quyidagi xatoni olamiz:
 
 ```console
 {{#include ../listings/ch10-generic-types-traits-and-lifetimes/listing-10-23/output.txt}}
 ```
 
-The error shows that for `result` to be valid for the `println!` statement,
-`string2` would need to be valid until the end of the outer scope. Rust knows
-this because we annotated the lifetimes of the function parameters and return
-values using the same lifetime parameter `'a`.
+Xato shuni ko'rsatadiki, `natija` `println!` bayonoti uchun haqiqiy bo'lishi uchun `string2` tashqi doiraning oxirigacha amal qilishi kerak. Rust buni biladi, chunki biz funksiya parametrlarining lifetimeni(ishlash muddati) va qiymatlarni bir xil `'a` parametridan foydalangan holda izohladik.
 
-As humans, we can look at this code and see that `string1` is longer than
-`string2` and therefore `result` will contain a reference to `string1`.
-Because `string1` has not gone out of scope yet, a reference to `string1` will
-still be valid for the `println!` statement. However, the compiler can’t see
-that the reference is valid in this case. We’ve told Rust that the lifetime of
-the reference returned by the `longest` function is the same as the smaller of
-the lifetimes of the references passed in. Therefore, the borrow checker
-disallows the code in Listing 10-23 as possibly having an invalid reference.
+Inson sifatida biz ushbu kodni ko'rib chiqamiz va `string1` `string2` dan uzunroq ekanligini ko'rishimiz mumkin va shuning uchun `natija` `string1` ga referenceni o'z ichiga oladi.
+`string1` hali amaldan tashqariga chiqmaganligi sababli, `string1`ga reference `println!` bayonoti uchun amal qiladi. Biroq, kompilyator bu holatda reference haqiqiy ekanligini ko'ra olmaydi. Biz Rustga aytdikki, `eng_uzun` funksiya tomonidan qaytarilgan referencening lifetime uzatilgan referencelarning lifetimesidan kichikroq vaqt bilan bir xil. Shuning uchun, borrowni tekshirish vositasi 10-23 ro'yxatdagi kodga ruxsat bermaydi, chunki noto'g'ri reference mavjud.
 
-Try designing more experiments that vary the values and lifetimes of the
-references passed in to the `longest` function and how the returned reference
-is used. Make hypotheses about whether or not your experiments will pass the
-borrow checker before you compile; then check to see if you’re right!
+`eng_uzun` funksiyaga oʻtkazilgan referencelarning qiymatlari va amal lifetime va qaytarilgan(return) referencedan qanday foydalanishni oʻzgartiruvchi koʻproq tajribalar ishlab chiqishga harakat qiling. Kompilyatsiya qilishdan oldin tajribalaringiz borrow tekshiruvidan o'tadimi yoki yo'qmi haqida faraz qiling; keyin siz haq ekanligingizni tekshiring!
 
-### Thinking in Terms of Lifetimes
+### Lifetime nuqtai nazaridan fikrlash
 
-The way in which you need to specify lifetime parameters depends on what your
-function is doing. For example, if we changed the implementation of the
-`longest` function to always return the first parameter rather than the longest
-string slice, we wouldn’t need to specify a lifetime on the `y` parameter. The
-following code will compile:
+Lifetime parametrlarini belgilashingiz kerak bo'lgan metod sizning funksiyangiz nima qilayotganiga bog'liq. Misol uchun, agar biz `eng_uzun` funksiyasini amalga oshirishni har doim eng uzun satr bo'lagini emas, balki birinchi parametrni qaytarish uchun o'zgartirgan bo'lsak, `y` parametrida lifetimeni belgilashimiz shart emas. Quyidagi kod kompilyatsiya qilinadi:
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">Fayl nomi: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/no-listing-08-only-one-reference-with-lifetime/src/main.rs:here}}
 ```
 
-We’ve specified a lifetime parameter `'a` for the parameter `x` and the return
-type, but not for the parameter `y`, because the lifetime of `y` does not have
-any relationship with the lifetime of `x` or the return value.
+Biz `x` parametri va qaytarish(return) turi uchun lifetime `'a` parametrini belgiladik, lekin `y` parametri uchun emas, chunki `y` ning lifetimesi `x` yoki qaytarish qiymati bilan hech qanday aloqasi yo'q.
 
-When returning a reference from a function, the lifetime parameter for the
-return type needs to match the lifetime parameter for one of the parameters. If
-the reference returned does *not* refer to one of the parameters, it must refer
-to a value created within this function. However, this would be a dangling
-reference because the value will go out of scope at the end of the function.
-Consider this attempted implementation of the `longest` function that won’t
-compile:
+Funksiyadan mos yozuvlar qaytarilganda, qaytarish turi uchun lifetime parametri parametrlardan birining lifetime parametriga mos kelishi kerak. Agar qaytarilgan reference parametrlardan biriga tegishli bo'lmasa, u ushbu funksiya doirasida yaratilgan qiymatga murojaat qilishi kerak. Biroq, bu dangling reference bo'ladi, chunki funksiya oxirida qiymat doiradan chiqib ketadi.
+Kompilyatsiya qilmaydigan `eng_uzun` funksiyani amalga oshirishga urinishlarni ko'rib chiqing:
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">Fayl nomi: src/main.rs</span>
 
 ```rust,ignore,does_not_compile
 {{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/no-listing-09-unrelated-lifetime/src/main.rs:here}}
 ```
 
-Here, even though we’ve specified a lifetime parameter `'a` for the return
-type, this implementation will fail to compile because the return value
-lifetime is not related to the lifetime of the parameters at all. Here is the
-error message we get:
+Bu erda, biz qaytish turi uchun lifetime parametr `'a` ni belgilagan bo'lsak ham, bu dastur kompilyatsiya qilinmaydi, chunki qaytish qiymatining lifetime parametrlarning lifetime bilan umuman bog'liq emas. Mana biz olgan xato xabari:
 
 ```console
 {{#include ../listings/ch10-generic-types-traits-and-lifetimes/no-listing-09-unrelated-lifetime/output.txt}}
 ```
 
-The problem is that `result` goes out of scope and gets cleaned up at the end
-of the `longest` function. We’re also trying to return a reference to `result`
-from the function. There is no way we can specify lifetime parameters that
-would change the dangling reference, and Rust won’t let us create a dangling
-reference. In this case, the best fix would be to return an owned data type
-rather than a reference so the calling function is then responsible for
-cleaning up the value.
+Muammo shundaki, `natija` ishchi ko'lamdan tashqariga chiqadi va `eng_uzun` funksiya oxirida tozalanadi. Shuningdek, biz funksiyadan `natija`ga referenceni qaytarishga harakat qilyapmiz. Dangling referenceni o'zgartiradigan lifetime parametrlarini belgilashning iloji yo'q va Rust bizga dangling reference yaratishga ruxsat bermaydi. Bunday holda, eng yaxshi tuzatish mos yozuvlar emas, balki tegishli referencelar turini qaytarish bo'ladi, shuning uchun chaqiruv funksiyasi qiymatni tozalash uchun javobgar bo'ladi.
 
-Ultimately, lifetime syntax is about connecting the lifetimes of various
-parameters and return values of functions. Once they’re connected, Rust has
-enough information to allow memory-safe operations and disallow operations that
-would create dangling pointers or otherwise violate memory safety.
+Oxir oqibat, lifetime sintaksisi turli parametrlarning ishlash muddatini va funktsiyalarning qaytish qiymatlarini bog'lashdir. Ular ulangandan so'ng, Rust xotira xavfsizligini ta'minlaydigan operatsiyalarga ruxsat berish va dangling pointerlarni yaratish yoki xotira xavfsizligini boshqa tarzda buzadigan operatsiyalarga ruxsat berish uchun yetarli ma'lumotga ega.
 
-### Lifetime Annotations in Struct Definitions
+### Struktura ta'riflarida lifetime annotationlar
 
-So far, the structs we’ve defined all hold owned types. We can define structs to
-hold references, but in that case we would need to add a lifetime annotation on
-every reference in the struct’s definition. Listing 10-24 has a struct named
-`ImportantExcerpt` that holds a string slice.
+Hozirgacha biz belgilagan structlar barcha egalik turlariga ega. Biz referencelarni saqlash uchun structlarni belgilashimiz mumkin, ammo bu holda structning ta'rifidagi har bir referencega lifetime annotation qo'shishimiz kerak bo'ladi. 10-24 roʻyxatda `ImportantExcerpt` nomli struktura mavjud boʻlib, u string sliceni saqlaydi.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">Fayl nomi: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/listing-10-24/src/main.rs}}
