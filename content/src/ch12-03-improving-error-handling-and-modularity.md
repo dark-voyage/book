@@ -109,225 +109,125 @@ Endi biz xatolarimizni tuzatish ustida ishlaymiz. Eslatib o'tamiz, `args` vector
 {{#include ../listings/ch12-an-io-project/listing-12-07/output.txt}}
 ```
 
-The line `index out of bounds: the len is 1 but the index is 1` is an error
-message intended for programmers. It won’t help our end users understand what
-they should do instead. Let’s fix that now.
+`index out of bounds: the len is 1 but the index is 1`(indeks chegaradan tashqarida: len 1, lekin indeks 1) qatori dasturchilar uchun moʻljallangan xato xabaridir. Bu bizning oxirgi foydalanuvchilarga nima qilish kerakligini tushunishga yordam bermaydi. Keling, buni hozir tuzatamiz.
 
-#### Improving the Error Message
+#### Xato xabarini yaxshilash
 
-In Listing 12-8, we add a check in the `new` function that will verify that the
-slice is long enough before accessing index 1 and 2. If the slice isn’t long
-enough, the program panics and displays a better error message.
+Ro'yxat 12-8da biz `new` funksiyasiga chek qo'shamiz, bu 1 va 2 indekslarga kirishdan oldin bo'lakning yetarlicha uzunligini tasdiqlaydi. Agar bo'lak yetarlicha uzun bo'lmasa, dastur panic chiqaradi va yaxshiroq xato xabarini ko'rsatadi.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">Fayl nomi: src/main.rs</span>
 
 ```rust,ignore
 {{#rustdoc_include ../listings/ch12-an-io-project/listing-12-08/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 12-8: Adding a check for the number of
-arguments</span>
+<span class="caption">Ro'yxat 12-8: Argumentlar soni uchun chek qo'shish</span>
 
-This code is similar to [the `Guess::new` function we wrote in Listing
-9-13][ch9-custom-types]<!-- ignore -->, where we called `panic!` when the
-`value` argument was out of the range of valid values. Instead of checking for
-a range of values here, we’re checking that the length of `args` is at least 3
-and the rest of the function can operate under the assumption that this
-condition has been met. If `args` has fewer than three items, this condition
-will be true, and we call the `panic!` macro to end the program immediately.
+Bu kod biz 9-13 roʻyxatda yozgan [`Taxmin::new` funksiyasiga oʻxshaydi,][ch9-custom-types]<!-- ignore --> bu yerda `qiymat` argumenti amaldagi qiymatlar oraligʻidan tashqarida boʻlganida `panic!` deb chaqirdik. Bu yerda bir qator qiymatlar mavjudligini tekshirish o‘rniga, biz `args` uzunligi kamida 3 ekanligini va funksiyaning qolgan qismi ushbu shart bajarilgan deb taxmin qilingan holda ishlashini tekshiramiz. Agar `args` uchta elementdan kam boʻlsa, bu shart toʻgʻri boʻladi va dasturni darhol tugatish uchun `panic!` makrosini chaqiramiz.
 
-With these extra few lines of code in `new`, let’s run the program without any
-arguments again to see what the error looks like now:
+`new` da qoʻshimcha bir necha qator kodlar mavjud boʻlsa, keling, xatolik qanday koʻrinishini koʻrish uchun dasturni argumentlarsiz yana ishga tushiramiz:
 
 ```console
 {{#include ../listings/ch12-an-io-project/listing-12-08/output.txt}}
 ```
 
-This output is better: we now have a reasonable error message. However, we also
-have extraneous information we don’t want to give to our users. Perhaps using
-the technique we used in Listing 9-13 isn’t the best to use here: a call to
-`panic!` is more appropriate for a programming problem than a usage problem,
-[as discussed in Chapter 9][ch9-error-guidelines]<!-- ignore -->. Instead,
-we’ll use the other technique you learned about in Chapter 9—[returning a
-`Result`][ch9-result]<!-- ignore --> that indicates either success or an error.
+Bu chiqish yaxshiroq: endi bizda oqilona xato xabari bor. Biroq, bizda foydalanuvchilarga berishni istamaydigan begona ma'lumotlar ham bor. Ehtimol, biz 9-13 roʻyxatda qoʻllagan texnikamizdan foydalanish bu yerda eng yaxshisi emas: `panic!` chaqiruvi [9-bobda muhokama qilinganidek][ch9-error-guidelines]<!-- ignore -->, foydalanish muammosidan koʻra dasturlash muammosiga koʻproq mos keladi. Buning o'rniga biz 9-bobda o'rgangan boshqa texnikadan foydalanamiz - muvaffaqiyat yoki xatoni ko'rsatadigan [`Result`ni][ch9-result]<!-- ignore -->  qaytarish.
 
 <!-- Old headings. Do not remove or links may break. -->
 <a id="returning-a-result-from-new-instead-of-calling-panic"></a>
 
-#### Returning a `Result` Instead of Calling `panic!`
+#### `panic!` o‘rniga `Result`ni qaytarish
 
-We can instead return a `Result` value that will contain a `Config` instance in
-the successful case and will describe the problem in the error case. We’re also
-going to change the function name from `new` to `build` because many
-programmers expect `new` functions to never fail. When `Config::build` is
-communicating to `main`, we can use the `Result` type to signal there was a
-problem. Then we can change `main` to convert an `Err` variant into a more
-practical error for our users without the surrounding text about `thread
-'main'` and `RUST_BACKTRACE` that a call to `panic!` causes.
+Buning o'rniga, muvaffaqiyatli holatda `Config` misolini o'z ichiga olgan va xatolik holatida muammoni tasvirlaydigan `Result` qiymatini qaytarishimiz mumkin. Shuningdek, biz funksiya nomini `new`dan `build`ga o'zgartiramiz, chunki ko'plab dasturchilar `new` funksiyalar hech qachon ishlamay qolmasligini kutishadi. `Config::build` `main` bilan bog'langanda, muammo borligini bildirish uchun `Result` turidan foydalanishimiz mumkin.Keyin biz `main` ni `Err` variantini `panic!` chaqiruvi keltirib chiqaradigan `thread 'main'` va `RUST_BACKTRACE` haqidagi matnsiz foydalanuvchilarimiz uchun amaliyroq xatoga aylantirishimiz mumkin.
 
-Listing 12-9 shows the changes we need to make to the return value of the
-function we’re now calling `Config::build` and the body of the function needed
-to return a `Result`. Note that this won’t compile until we update `main` as
-well, which we’ll do in the next listing.
+12-9 ro'yxatda biz hozir `Config::build` deb nomlanayotgan funksiyaning qaytish(result) qiymatiga va `Result`ni qaytarish uchun zarur bo'lgan funksiyaning tanasiga qilishimiz kerak bo'lgan o'zgarishlar ko'rsatilgan. E'tibor bering, biz `main`ni ham yangilamagunimizcha, bu kompilyatsiya qilinmaydi, biz buni keyingi ro'yxatda qilamiz.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">Fayl nomi: src/main.rs</span>
 
 ```rust,ignore,does_not_compile
 {{#rustdoc_include ../listings/ch12-an-io-project/listing-12-09/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 12-9: Returning a `Result` from
-`Config::build`</span>
+<span class="caption">Ro'yxat 12-9: `Config::build` dan `Result`ni qaytarish</span>
 
-Our `build` function returns a `Result` with a `Config` instance in the success
-case and a `&'static str` in the error case. Our error values will always be
-string literals that have the `'static` lifetime.
+Bizning `build` funksiyamiz muvaffaqiyatli holatda `Config` misoli va xato holatida `&'static str` bilan `Result`ni qaytaradi. Bizning xato qiymatlarimiz har doim `'static` lifetimega ega bo'lgan satr harflari(string literal) bo'ladi. Biz funksiyaning asosiy qismiga ikkita o'zgartirish kiritdik: agar foydalanuvchi yetarli argumentlarni o'tkazmasa, `panic!` deb chaqirish o'rniga, biz endi `Err` qiymatini qaytaramiz va `Config` qaytish(return) qiymatini `OK` bilan o'rab oldik. Ushbu o'zgarishlar funksiyani yangi turdagi signaturega moslashtiradi.
 
-We’ve made two changes in the body of the function: instead of calling `panic!`
-when the user doesn’t pass enough arguments, we now return an `Err` value, and
-we’ve wrapped the `Config` return value in an `Ok`. These changes make the
-function conform to its new type signature.
-
-Returning an `Err` value from `Config::build` allows the `main` function to
-handle the `Result` value returned from the `build` function and exit the
-process more cleanly in the error case.
+`Config::build` dan `Err` qiymatini qaytarish `main` funksiyaga `build` funksiyasidan qaytarilgan `Result` qiymatini boshqarish imkonini beradi va xato holatida jarayondan tozaroq chiqish imkonini beradi.
 
 <!-- Old headings. Do not remove or links may break. -->
 <a id="calling-confignew-and-handling-errors"></a>
 
-#### Calling `Config::build` and Handling Errors
+#### `Config::build` ga murojaat qilish va xatolarni qayta ishlash
 
-To handle the error case and print a user-friendly message, we need to update
-`main` to handle the `Result` being returned by `Config::build`, as shown in
-Listing 12-10. We’ll also take the responsibility of exiting the command line
-tool with a nonzero error code away from `panic!` and instead implement it by
-hand. A nonzero exit status is a convention to signal to the process that
-called our program that the program exited with an error state.
+Xato holatini hal qilish va foydalanuvchi uchun qulay xabarni chop etish uchun biz 12-10 roʻyxatda koʻrsatilganidek, `Config::build` tomonidan qaytariladigan `Result`ni qayta ishlash uchun `main`ni yangilashimiz kerak. Shuningdek, biz `panic!` dan nolga teng bo‘lmagan xato kodi bilan buyruq qatori dasturidan chiqish va uning o‘rniga uni qo‘lda amalga oshirish mas’uliyatini o‘z zimmamizga olamiz. Nolga teng bo'lmagan chiqish holati - bu bizning dasturimizni chaqirgan jarayonga dastur xato holati bilan chiqqanligi haqida signal berish uchun konventsiya.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">Fayl nomi: src/main.rs</span>
 
 ```rust,ignore
 {{#rustdoc_include ../listings/ch12-an-io-project/listing-12-10/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 12-10: Exiting with an error code if building a
-`Config` fails</span>
+<span class="caption">Ro'yxat 12-10: Agar `Config` build bo'lmasa, xato kodi bilan chiqish</span>
 
-In this listing, we’ve used a method we haven’t covered in detail yet:
-`unwrap_or_else`, which is defined on `Result<T, E>` by the standard library.
-Using `unwrap_or_else` allows us to define some custom, non-`panic!` error
-handling. If the `Result` is an `Ok` value, this method’s behavior is similar
-to `unwrap`: it returns the inner value `Ok` is wrapping. However, if the value
-is an `Err` value, this method calls the code in the *closure*, which is an
-anonymous function we define and pass as an argument to `unwrap_or_else`. We’ll
-cover closures in more detail in [Chapter 13][ch13]<!-- ignore -->. For now,
-you just need to know that `unwrap_or_else` will pass the inner value of the
-`Err`, which in this case is the static string `"not enough arguments"` that we
-added in Listing 12-9, to our closure in the argument `err` that appears
-between the vertical pipes. The code in the closure can then use the `err`
-value when it runs.
+Ushbu ro'yxatda biz hali batafsil ko'rib chiqmagan metoddan foydalandik: standart kutubxona tomonidan `Result<T, E>` da aniqlangan `unwrap_or_else`.
+`unwrap_or_else` dan foydalanish bizga `panic!` qo'ymaydigan xatoliklarni aniqlash imkonini beradi. Agar `Result` `Ok` qiymati bo'lsa, bu metodning harakati `unwrap` ga o'xshaydi: u `Ok` o'ralayotgan(wrap) ichki qiymatni qaytaradi. Biroq, agar qiymat `Err` qiymati bo'lsa, bu metod kodni *closure*(yopish) ga chaqiradi, bu biz belgilab beradigan anonim funksiya bo'lib, `unwrap_or_else` ga argument sifatida o'tkazamiz. Biz [13-bobda][ch13]<!-- ignore --> closure(yopilish)larni batafsil ko'rib chiqamiz.  Hozircha siz shuni bilishingiz kerakki, `unwrap_or_else` `Err` ning ichki qiymatidan o‘tadi, bu holda biz 12-9-listga qo‘shgan `"argumentlar yetarli emas"` statik qatori bo‘lib, bizning yopishimiz uchun Vertikal quvurlar(pipe) o'rtasida paydo bo'ladigan `Err` argumenti. Yopishdagi(closure) kod ishlayotganida `err` qiymatidan foydalanishi mumkin.
 
-We’ve added a new `use` line to bring `process` from the standard library into
-scope. The code in the closure that will be run in the error case is only two
-lines: we print the `err` value and then call `process::exit`. The
-`process::exit` function will stop the program immediately and return the
-number that was passed as the exit status code. This is similar to the
-`panic!`-based handling we used in Listing 12-8, but we no longer get all the
-extra output. Let’s try it:
+Biz standart kutubxonadan `process`ni qamrab olish uchun yangi `use` qatorini qo‘shdik. Xato holatida ishga tushiriladigan yopishdagi kod faqat ikkita qatordan iborat: biz `err` qiymatini chop qilamiz va keyin `process::exit`ni chaqiramiz. `process::exit` funksiyasi dasturni darhol to'xtatadi va chiqish holati kodi sifatida berilgan raqamni qaytaradi. Bu biz 12-8 roʻyxatda qoʻllagan `panic!` asosidagi ishlovga oʻxshaydi, ammo biz endi barcha qoʻshimcha natijalarni olmaymiz. Keling, sinab ko'raylik:
 
 ```console
 {{#include ../listings/ch12-an-io-project/listing-12-10/output.txt}}
 ```
 
-Great! This output is much friendlier for our users.
+Ajoyib! Ushbu chiqish bizning foydalanuvchilarimiz uchun juda qulay.
 
-### Extracting Logic from `main`
+### `main` dan mantiqni ajratib olish
 
-Now that we’ve finished refactoring the configuration parsing, let’s turn to
-the program’s logic. As we stated in [“Separation of Concerns for Binary
-Projects”](#separation-of-concerns-for-binary-projects)<!-- ignore -->, we’ll
-extract a function named `run` that will hold all the logic currently in the
-`main` function that isn’t involved with setting up configuration or handling
-errors. When we’re done, `main` will be concise and easy to verify by
-inspection, and we’ll be able to write tests for all the other logic.
+Endi biz konfiguratsiyani tahlil qilishni qayta tiklashni tugatdik, keling, dastur mantig'iga murojaat qilaylik. ["Binary loyihalar uchun vazifalarni ajratish"](#separation-of-concerns-for-binary-projects)<!-- ignore --> da aytib o'tganimizdek, biz konfiguratsiyani o'rnatish yoki xatolarni qayta ishlash bilan bog'liq bo'lmagan `main` funksiyadagi barcha mantiqni ushlab turadigan `run` nomli funksiyani chiqaramiz. Ishimiz tugagach, `main` qisqa va tekshirish orqali tekshirish oson bo'ladi va biz boshqa barcha mantiqlar uchun testlarni yozishimiz mumkin bo'ladi.
 
-Listing 12-11 shows the extracted `run` function. For now, we’re just making
-the small, incremental improvement of extracting the function. We’re still
-defining the function in *src/main.rs*.
+12-11 ro'yxatda ajratilgan `run` funksiyasi ko'rsatilgan. Hozircha biz funksiyani chiqarishni kichik, bosqichma-bosqich yaxshilashni amalga oshirmoqdamiz. Biz hali ham *src/main.rs* da funksiyani aniqlayapmiz.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">Fayl nomi: src/main.rs</span>
 
 ```rust,ignore
 {{#rustdoc_include ../listings/ch12-an-io-project/listing-12-11/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 12-11: Extracting a `run` function containing the
-rest of the program logic</span>
+<span class="caption">Ro'yxat 12-11: Dastur mantig'ining qolgan qismini o'z ichiga olgan `run` funksiyasini chiqarish</span>
 
-The `run` function now contains all the remaining logic from `main`, starting
-from reading the file. The `run` function takes the `Config` instance as an
-argument.
+`run` funksiyasi endi faylni o‘qishdan boshlab `main` dan qolgan barcha mantiqni o‘z ichiga oladi. `run` funksiyasi argument sifatida `Config` misolini oladi.
 
-#### Returning Errors from the `run` Function
+#### `run` funksiyasidan xatolarni qaytarish(return)
 
-With the remaining program logic separated into the `run` function, we can
-improve the error handling, as we did with `Config::build` in Listing 12-9.
-Instead of allowing the program to panic by calling `expect`, the `run`
-function will return a `Result<T, E>` when something goes wrong. This will let
-us further consolidate the logic around handling errors into `main` in a
-user-friendly way. Listing 12-12 shows the changes we need to make to the
-signature and body of `run`.
+Qolgan dastur mantigʻi `run` funksiyasiga ajratilgan boʻlsa, biz 12 9-ro'yxatdagi `Config::build` bilan qilganimiz kabi, xatolarni boshqarishni yaxshilashimiz mumkin. Dasturni `expect` deb chaqirish orqali panic qo‘yish o‘rniga, `run` funksiyasi biror narsa noto‘g‘ri ketganda `Result<T, E>`ni qaytaradi. Bu bizga foydalanuvchilarga qulay tarzda xatolarni `main`ga qayta ishlash mantig'ini yanada mustahkamlash imkonini beradi. 12-12 roʻyxatda `run` signaturesi va asosiy qismiga qilishimiz kerak boʻlgan oʻzgarishlar koʻrsatilgan.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">Fayl nomi: src/main.rs</span>
 
 ```rust,ignore
 {{#rustdoc_include ../listings/ch12-an-io-project/listing-12-12/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 12-12: Changing the `run` function to return
-`Result`</span>
+<span class="caption">Ro'yxat 12-12: `run` funksiyasini `Result`ni qaytarish uchun o'zgartirish</span>
 
-We’ve made three significant changes here. First, we changed the return type of
-the `run` function to `Result<(), Box<dyn Error>>`. This function previously
-returned the unit type, `()`, and we keep that as the value returned in the
-`Ok` case.
+Biz bu yerda uchta muhim o'zgarishlarni amalga oshirdik. Birinchidan, biz `run` funksiyasining qaytish turini `Result<(), Box<dyn Error>>`ga o'zgartirdik. Bu funksiya avval birlik(binary) turini qaytardi, `()` va biz buni `Ok` holatida qaytarilgan qiymat sifatida saqlaymiz.
 
-For the error type, we used the *trait object* `Box<dyn Error>` (and we’ve
-brought `std::error::Error` into scope with a `use` statement at the top).
-We’ll cover trait objects in [Chapter 17][ch17]<!-- ignore -->. For now, just
-know that `Box<dyn Error>` means the function will return a type that
-implements the `Error` trait, but we don’t have to specify what particular type
-the return value will be. This gives us flexibility to return error values that
-may be of different types in different error cases. The `dyn` keyword is short
-for “dynamic.”
+Xato turi uchun biz *trait obyekti* `Box<dyn Error>`dan foydalandik (va biz `std::error::Error` ni yuqori qismida `use` statementi bilan qamrab oldik). Biz [17-bobda][ch17]<!-- ignore --> trait objectlarni ko'rib chiqamiz. Hozircha shuni bilingki, `Box<dyn Error>` funksiya `Error` traitini amalga oshiradigan turni qaytarishini bildiradi, lekin qaytariladigan qiymatning qaysi turini belgilashimiz shart emas. Bu bizga turli xil xato holatlarida har xil turdagi xato qiymatlarini qaytarish uchun moslashuvchanlikni beradi. `dyn` kalit so'zi(keywordi) "dynamic(dinamik)" so'zining qisqartmasi.
 
-Second, we’ve removed the call to `expect` in favor of the `?` operator, as we
-talked about in [Chapter 9][ch9-question-mark]<!-- ignore -->. Rather than
-`panic!` on an error, `?` will return the error value from the current function
-for the caller to handle.
+Ikkinchidan, biz [9-bobda][ch9-question-mark]<!-- ignore --> aytib o'tganimizdek, `?` operatori foydasiga `expect` chaqiruvini olib tashladik. Xatoda `panic!` o‘rniga, `?` murojat qiluvchiga ishlov berish uchun joriy funksiyadan xato qiymatini qaytaradi.
 
-Third, the `run` function now returns an `Ok` value in the success case.
-We’ve declared the `run` function’s success type as `()` in the signature,
-which means we need to wrap the unit type value in the `Ok` value. This
-`Ok(())` syntax might look a bit strange at first, but using `()` like this is
-the idiomatic way to indicate that we’re calling `run` for its side effects
-only; it doesn’t return a value we need.
+Uchinchidan, `run` funksiyasi endi muvaffaqiyatli holatda `Ok` qiymatini qaytaradi.
+Biz signatureda `run` funksiyasining muvaffaqiyat turini `()` deb e’lon qildik, ya’ni birlik turi qiymatini `Ok` qiymatiga o‘rashimiz(wrap) kerak. Bu `Ok(())` sintaksisi dastlab biroz g‘alati ko‘rinishi mumkin, ammo `()` dan foydalanish biz `run`ni faqat uning yon ta’siri uchun chaqirayotganimizni bildirishning idiomatik usulidir; u bizga kerakli qiymatni qaytarmaydi.
 
-When you run this code, it will compile but will display a warning:
+Ushbu kodni ishga tushirganingizda, u kompilyatsiya qilinadi, lekin ogohlantirishni ko'rsatadi:
 
 ```console
 {{#include ../listings/ch12-an-io-project/listing-12-12/output.txt}}
 ```
 
-Rust tells us that our code ignored the `Result` value and the `Result` value
-might indicate that an error occurred. But we’re not checking to see whether or
-not there was an error, and the compiler reminds us that we probably meant to
-have some error-handling code here! Let’s rectify that problem now.
+Rust bizga kodimiz `Result` qiymatini e'tiborsiz qoldirganligini va `Result` qiymati xatolik yuz berganligini ko'rsatishi mumkinligini aytadi. Ammo biz xatolik bor yoki yo'qligini tekshirmayapmiz va kompilyator bu yerda xatoliklarni hal qilish uchun kodga ega bo'lishimiz kerakligini eslatadi! Keling, bu muammoni hozir tuzatamiz.
 
-#### Handling Errors Returned from `run` in `main`
+#### `main`dagi `run` dan qaytarilgan xatolarni qayta ishlash
 
-We’ll check for errors and handle them using a technique similar to one we used
-with `Config::build` in Listing 12-10, but with a slight difference:
+Biz xatolarni tekshirib ko'ramiz va ularni 12-10-sonli ro'yxatdagi `Config::build` bilan ishlatganimizga o'xshash metod yordamida hal qilamiz, lekin bir oz farq bilan:
 
 <span class="filename">Filename: src/main.rs</span>
 
@@ -335,72 +235,48 @@ with `Config::build` in Listing 12-10, but with a slight difference:
 {{#rustdoc_include ../listings/ch12-an-io-project/no-listing-01-handling-errors-in-main/src/main.rs:here}}
 ```
 
-We use `if let` rather than `unwrap_or_else` to check whether `run` returns an
-`Err` value and call `process::exit(1)` if it does. The `run` function doesn’t
-return a value that we want to `unwrap` in the same way that `Config::build`
-returns the `Config` instance. Because `run` returns `()` in the success case,
-we only care about detecting an error, so we don’t need `unwrap_or_else` to
-return the unwrapped value, which would only be `()`.
+`run` `Err` qiymatini qaytaradimi yoki yo‘qligini tekshirish uchun `unwrap_or_else` o‘rniga `if let` dan foydalanamiz va agar qaytarsa `process::exit(1)`ni chaqiramiz. `run` funksiyasi `Config::build` `Config` misolini qaytarganidek, biz `unwrap`ni xohlagan qiymatni qaytarmaydi. Muvaffaqiyatli holatda `run`  `()` ni qaytargani uchun biz faqat xatoni aniqlash haqida qayg'uramiz, shuning uchun o'ralgan(wrap) qiymatni qaytarish uchun `unwrap_or_else` shart emas, bu faqat `()` bo`ladi.
 
-The bodies of the `if let` and the `unwrap_or_else` functions are the same in
-both cases: we print the error and exit.
+`if let` va `unwrap_or_else` funksiyalarining tanasi ikkala holatda ham bir xil: biz xatoni chop qilamiz va chiqamiz.
 
-### Splitting Code into a Library Crate
+### Kodni kutubxona(library) cratesiga bo'lish
 
-Our `minigrep` project is looking good so far! Now we’ll split the
-*src/main.rs* file and put some code into the *src/lib.rs* file. That way we
-can test the code and have a *src/main.rs* file with fewer responsibilities.
+Bizning `minigrep` loyihamiz hozircha yaxshi ko'rinmoqda! Endi biz *src/main.rs* faylini ajratamiz va *src/lib.rs* fayliga bir nechta kodni joylashtiramiz. Shunday qilib, biz kodni sinab ko'rishimiz va kamroq mas'uliyatli *src/main.rs* fayliga ega bo'lishimiz mumkin.
 
-Let’s move all the code that isn’t the `main` function from *src/main.rs* to
-*src/lib.rs*:
+Keling, `main` funksiya bo'lmagan barcha kodlarni *src/main.rs* dan *src/lib.rs* ga o'tkazamiz:
 
-* The `run` function definition
-* The relevant `use` statements
-* The definition of `Config`
-* The `Config::build` function definition
+* `run` funksiyasi definitioni
+* Tegishli `use` statementlari
+* `Config` ning definitioni
+* `Config::build` definitioni
 
-The contents of *src/lib.rs* should have the signatures shown in Listing 12-13
-(we’ve omitted the bodies of the functions for brevity). Note that this won’t
-compile until we modify *src/main.rs* in Listing 12-14.
+*src/lib.rs* ning mazmuni 12-13 roʻyxatda koʻrsatilgan signaturelarga ega boʻlishi kerak (qisqalik uchun funksiyalarning qismlarini olib tashladik). E'tibor bering, biz 12-14 ro'yxatdagi *src/main.rs* ni o'zgartirmagunimizcha, bu kompilyatsiya qilinmaydi.
 
-<span class="filename">Filename: src/lib.rs</span>
+<span class="filename">Fayl nomi: src/lib.rs</span>
 
 ```rust,ignore,does_not_compile
 {{#rustdoc_include ../listings/ch12-an-io-project/listing-12-13/src/lib.rs:here}}
 ```
 
-<span class="caption">Listing 12-13: Moving `Config` and `run` into
-*src/lib.rs*</span>
+<span class="caption">Ro'yxat 12-13: `Config` va `run` ni *src/lib.rs* ichiga ko'chirish</span>
 
-We’ve made liberal use of the `pub` keyword: on `Config`, on its fields and its
-`build` method, and on the `run` function. We now have a library crate that has
-a public API we can test!
+Biz `pub` kalit so‘zidan erkin foydalandik: `Config` da, uning maydonlari va `build` metodida va `run` funksiyasida. Endi bizda testdan o'tkazishimiz mumkin bo'lgan ommaviy(public) API mavjud kutubxona cratesi bor!
 
-Now we need to bring the code we moved to *src/lib.rs* into the scope of the
-binary crate in *src/main.rs*, as shown in Listing 12-14.
+Endi biz *src/lib.rs* ga ko'chirilgan kodni 12-14 ro'yxatda ko'rsatilganidek *src/main.rs* dagi binary crate doirasiga olib kirishimiz kerak.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">Fayl nomi: src/main.rs</span>
 
 ```rust,ignore
 {{#rustdoc_include ../listings/ch12-an-io-project/listing-12-14/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 12-14: Using the `minigrep` library crate in
-*src/main.rs*</span>
+<span class="caption">Ro'yxat 12-14: *src/main.rs* da `minigrep` kutubxona cratesidan foydalanish</span>
 
-We add a `use minigrep::Config` line to bring the `Config` type from the
-library crate into the binary crate’s scope, and we prefix the `run` function
-with our crate name. Now all the functionality should be connected and should
-work. Run the program with `cargo run` and make sure everything works
-correctly.
+Kutubxona cratesidan `Config` turini binary crate ko'lamiga olib kirish uchun `use minigrep::Config` qatorini qo'shamiz va `run` funksiyasiga crate nomimiz bilan prefix qo'shamiz. Endi barcha funksiyalar ulanishi va ishlashi kerak. Dasturni `cargo run` bilan ishga tushiring va hamma narsa to'g'ri ishlashiga ishonch hosil qiling.
 
-Whew! That was a lot of work, but we’ve set ourselves up for success in the
-future. Now it’s much easier to handle errors, and we’ve made the code more
-modular. Almost all of our work will be done in *src/lib.rs* from here on out.
+Vouv! Bu juda ko'p ish edi, lekin biz kelajakda muvaffaqiyatga erishdik. Endi xatolarni hal qilish ancha oson va biz kodni modulliroq qildik. Deyarli barcha ishlarimiz bundan buyon *src/lib.rs* da amalga oshiriladi.
 
-Let’s take advantage of this newfound modularity by doing something that would
-have been difficult with the old code but is easy with the new code: we’ll
-write some tests!
+Keling, eski kod bilan qiyin bo'lgan, ammo yangi kod bilan oson bo'lgan narsani qilish orqali ushbu yangi modullikdan foydalanaylik: biz bir nechta testlarni yozamiz!
 
 [ch13]: ch13-00-functional-features.html
 [ch9-custom-types]: ch09-03-to-panic-or-not-to-panic.html#creating-custom-types-for-validation
