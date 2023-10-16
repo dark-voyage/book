@@ -126,61 +126,32 @@ Ushbu kod kompilyatsiya bo'ladi, ishlaydi va chop etadi:
 {{#include ../listings/ch13-functional-features/listing-13-05/output.txt}}
 ```
 
-Note that there’s no longer a `println!` between the definition and the call of
-the `borrows_mutably` closure: when `borrows_mutably` is defined, it captures a
-mutable reference to `list`. We don’t use the closure again after the closure
-is called, so the mutable borrow ends. Between the closure definition and the
-closure call, an immutable borrow to print isn’t allowed because no other
-borrows are allowed when there’s a mutable borrow. Try adding a `println!`
-there to see what error message you get!
+E'tibor bering, `ozgaruvchan_borrow` closurening ta'rifi(definition) va chaqiruvi o'rtasida endi `println!` belgisi yo'q: `ozgaruvchan_borrow` aniqlanganda, u `list`ga o'zgaruvchan(mutable) referenceni oladi. Closure chaqirilgandan keyin biz closureni qayta ishlatmaymiz, shuning uchun mutable borrow(o'zgaruvchan qarz) tugaydi. Closure definationi va closure chaqiruvi o'rtasida chop etish uchun immutable(o'zgarmas) borrowga ruxsat berilmaydi, chunki mutable borrow mavjud bo'lganda boshqa borrowlarga ruxsat berilmaydi. Qaysi xato xabari borligini bilish uchun u yerga `println!` qo'shib ko'ring!
 
-If you want to force the closure to take ownership of the values it uses in the
-environment even though the body of the closure doesn’t strictly need
-ownership, you can use the `move` keyword before the parameter list.
+Agar closurening asosiy qismi ownershipga(egalik) muhtoj bo'lmasa ham, uni environmentda foydalanadigan qiymatlarga ownershiplik qilishga harakat qilmoqchi bo'lsangiz, parametrlar ro'yxatidan oldin `move` kalit so'zidan foydalanishingiz mumkin.
 
-This technique is mostly useful when passing a closure to a new thread to move
-the data so that it’s owned by the new thread. We’ll discuss threads and why
-you would want to use them in detail in Chapter 16 when we talk about
-concurrency, but for now, let’s briefly explore spawning a new thread using a
-closure that needs the `move` keyword. Listing 13-6 shows Listing 13-4 modified
-to print the vector in a new thread rather than in the main thread:
+Ushbu uslub asosan ma'lumotlarni yangi threadga tegishli bo'lishi uchun ko'chirish uchun yangi threadga closureni o'tkazishda foydalidir. Biz 16-bobda parallellik(concurrency) haqida gapirganda, thereadlarni va nima uchun ulardan foydalanishni xohlashingizni batafsil muhokama qilamiz, ammo hozircha `move` kalit so'ziga muhtoj bo'lgan closure yordamida yangi threadni yaratishni qisqacha ko'rib chiqamiz. 13-6 ro'yxat vektorni asosiy thredda emas, balki yangi threadda chop etish uchun o'zgartirilgan 13-4 ro'yxatini ko'rsatadi:
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">Fayl nomi: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch13-functional-features/listing-13-06/src/main.rs}}
 ```
 
-<span class="caption">Listing 13-6: Using `move` to force the closure for the
-thread to take ownership of `list`</span>
+<span class="caption">Roʻyxat 13-6: `list`ga ownershiplik  qilish uchun threadni yopishni majburlash uchun `move` dan foydalanish</span>
 
-We spawn a new thread, giving the thread a closure to run as an argument. The
-closure body prints out the list. In Listing 13-4, the closure only captured
-`list` using an immutable reference because that's the least amount of access
-to `list` needed to print it. In this example, even though the closure body
-still only needs an immutable reference, we need to specify that `list` should
-be moved into the closure by putting the `move` keyword at the beginning of the
-closure definition. The new thread might finish before the rest of the main
-thread finishes, or the main thread might finish first. If the main thread
-maintained ownership of `list` but ended before the new thread did and dropped
-`list`, the immutable reference in the thread would be invalid. Therefore, the
-compiler requires that `list` be moved into the closure given to the new thread
-so the reference will be valid. Try removing the `move` keyword or using `list`
-in the main thread after the closure is defined to see what compiler errors you
-get!
+Biz argument sifatida ishlash uchun threadni yopish(closure) imkonini berib, yangi threadni yaratamiz. Closure tanasi(body) listni chop etadi. Roʻyxat 13-4, closure faqat oʻzgarmas(immutable) reference yordamida `list`ni yozib oldi, chunki bu uni chop etish uchun zarur boʻlgan `list`ga kirishning eng kam miqdori. Ushbu misolda, closure tanasi(body) hali ham faqat o'zgarmas(immutable) referencega muhtoj bo'lsa ham, biz closure definationing boshiga `move` kalit so'zini qo'yish orqali `list` closurega ko'chirilishi kerakligini ko'rsatishimiz kerak. Yangi thread asosiy threadning qolgan qismi tugashidan oldin tugashi yoki asosiy thread birinchi bo'lib tugashi mumkin. Agar asosiy thread `list`ga ownershiplikni saqlab qolgan boʻlsa-da, lekin yangi thread paydo boʻlishidan oldin tugasa va `list`ni tashlab qoʻysa, threaddagi immutable(oʻzgarmas) reference yaroqsiz boʻladi. Shuning uchun, kompilyator `list`ni yangi threadga berilgan closurega ko'chirishni talab qiladi, shuning uchun reference haqiqiy bo'ladi. Kompilyatorda qanday xatolarga yo'l qo'yganingizni ko'rish uchun closure aniqlangandan so'ng, `move` kalit so'zini olib tashlang yoki asosiy threaddagi `list` dan foydalaning!
 
 <!-- Old headings. Do not remove or links may break. -->
 <a id="storing-closures-using-generic-parameters-and-the-fn-traits"></a>
 <a id="limitations-of-the-cacher-implementation"></a>
 <a id="moving-captured-values-out-of-the-closure-and-the-fn-traits"></a>
 
-### Moving Captured Values Out of Closures and the `Fn` Traits
+### Qabul qilingan qiymatlarni closuredan va `Fn` traitlaridan ko'chirish
 
-Once a closure has captured a reference or captured ownership of a value from
-the environment where the closure is defined (thus affecting what, if anything,
-is moved *into* the closure), the code in the body of the closure defines what
-happens to the references or values when the closure is evaluated later (thus
-affecting what, if anything, is moved *out of* the closure). A closure body can
+Closure ma'lumotnomani qo'lga kiritgandan so'ng(shunday qilib, agar biror narsa bo'lsa, closurega ko'chirilgan narsaga ta'sir qiladi) yoki closure aniqlangan environmentdan qiymatga ownershiplikni qo'lga kiritgandan so'ng,(agar biror narsa bo'lsa, closuredan ko'chirilgan narsaga ta'sir qiladi) closurening asosiy qismidagi kod closure keyinroq baholanganda referencelar yoki qiymatlar bilan nima sodir bo'lishini belgilaydi. 
+
+A closure body can
 do any of the following: move a captured value out of the closure, mutate the
 captured value, neither move nor mutate the value, or capture nothing from the
 environment to begin with.
