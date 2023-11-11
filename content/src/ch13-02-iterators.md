@@ -1,54 +1,32 @@
-## Processing a Series of Items with Iterators
+## Iteratorlar yordamida elementlar ketma-ketligini qayta ishlash
 
-The iterator pattern allows you to perform some task on a sequence of items in
-turn. An iterator is responsible for the logic of iterating over each item and
-determining when the sequence has finished. When you use iterators, you don’t
-have to reimplement that logic yourself.
+Iterator pattern sizga navbat bilan elementlarning ketma-ketligi bo'yicha ba'zi vazifalarni(task) bajarishga imkon beradi. Iterator har bir elementni takrorlash va ketma-ketlik qachon tugashini aniqlash mantiqi uchun javobgardir. Iteratorlardan foydalanganda, bu mantiqni(logic) o'zingiz takrorlashingiz shart emas.
 
-In Rust, iterators are *lazy*, meaning they have no effect until you call
-methods that consume the iterator to use it up. For example, the code in
-Listing 13-10 creates an iterator over the items in the vector `v1` by calling
-the `iter` method defined on `Vec<T>`. This code by itself doesn’t do anything
-useful.
+Rust-da iteratorlar *dangasa*, ya'ni iteratorni ishlatish uchun ishlatadigan metodlarni chaqirmaguningizcha ular hech qanday ta'sir ko'rsatmaydi. Masalan, 13-10-Ro'yxatdagi kod `Vec<T>` da belgilangan `iter` metodini chaqirish orqali `v1` vektoridagi elementlar ustidan iterator yaratadi. Ushbu kod o'z-o'zidan hech qanday foydali ish qilmaydi.
 
 ```rust
 {{#rustdoc_include ../listings/ch13-functional-features/listing-13-10/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 13-10: Creating an iterator</span>
+<span class="caption">Ro'yxat 13-10: iterator yaratish</span>
 
-The iterator is stored in the `v1_iter` variable. Once we’ve created an
-iterator, we can use it in a variety of ways. In Listing 3-5 in Chapter 3, we
-iterated over an array using a `for` loop to execute some code on each of its
-items. Under the hood this implicitly created and then consumed an iterator,
-but we glossed over how exactly that works until now.
+Iterator `v1_iter` o'zgaruvchisida saqlanadi. Biz iteratorni yaratganimizdan so'ng, biz uni turli usullarda ishlatishimiz mumkin. 3-bobdagi 3-5 ro'yxatda biz arrayning har bir elementida ba'zi kodlarni bajarish uchun `for` loop siklidan foydalangan holda uni takrorladik. Korpus ostida bu bilvosita yaratgan va keyin iteratorni ishlatgan, ammo biz hozirgacha uning qanday ishlashini ko'rib chiqdik.
 
-In the example in Listing 13-11, we separate the creation of the iterator from
-the use of the iterator in the `for` loop. When the `for` loop is called using
-the iterator in `v1_iter`, each element in the iterator is used in one
-iteration of the loop, which prints out each value.
+13-11 Ro'yxatdagi misolda biz iteratorni yaratishni `for` loop siklidagi iteratordan foydalanishdan ajratamiz. `for` loop sikli `v1_iter` da iterator yordamida chaqirilganda, iteratordagi har bir element loop siklning bir iteratsiyasida ishlatiladi, bu esa har bir qiymatni chop etadi.
 
 ```rust
 {{#rustdoc_include ../listings/ch13-functional-features/listing-13-11/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 13-11: Using an iterator in a `for` loop</span>
+<span class="caption">Ro'yxat 13-11: `for` loop siklida iteratordan foydalanish</span>
 
-In languages that don’t have iterators provided by their standard libraries,
-you would likely write this same functionality by starting a variable at index
-0, using that variable to index into the vector to get a value, and
-incrementing the variable value in a loop until it reached the total number of
-items in the vector.
+Standart kutubxonalari tomonidan taqdim etilgan iteratorlarga ega bo'lmagan tillarda siz xuddi shu funksiyani o'zgaruvchini 0 indeksidan boshlab yozishingiz mumkin, qiymat olish uchun vektorga indekslash uchun ushbu o'zgaruvchidan foydalanish va vektordagi elementlarning umumiy soniga yetgunga qadar sikldagi o'zgaruvchi qiymatini oshirish.
 
-Iterators handle all that logic for you, cutting down on repetitive code you
-could potentially mess up. Iterators give you more flexibility to use the same
-logic with many different kinds of sequences, not just data structures you can
-index into, like vectors. Let’s examine how iterators do that.
+Iteratorlar siz uchun barcha mantiqni(logic) boshqaradi, siz chalkashtirib yuborishingiz mumkin bo'lgan takroriy kodni qisqartiradi. Iteratorlar vektorlar kabi indekslash mumkin bo'lgan ma'lumotlar tuzilmalari(data structure) emas, balki turli xil ketma-ketliklar(sequence) bilan bir xil mantiqdan foydalanish uchun ko'proq moslashuvchanlikni beradi. Keling, iteratorlar buni qanday qilishini ko'rib chiqaylik.
 
-### The `Iterator` Trait and the `next` Method
+### `Iterator` traiti va `next` metodi
 
-All iterators implement a trait named `Iterator` that is defined in the
-standard library. The definition of the trait looks like this:
+Barcha iteratorlar standart kutubxonada(standard library) aniqlangan `Iterator` nomli traitni implement qiladilar. Traitning definitioni quyidagicha ko'rinadi:
 
 ```rust
 pub trait Iterator {
@@ -56,34 +34,23 @@ pub trait Iterator {
 
     fn next(&mut self) -> Option<Self::Item>;
 
-    // methods with default implementations elided
+    // default implement qilingan  metodlar bekor qilindi
 }
 ```
 
-Notice this definition uses some new syntax: `type Item` and `Self::Item`,
-which are defining an *associated type* with this trait. We’ll talk about
-associated types in depth in Chapter 19. For now, all you need to know is that
-this code says implementing the `Iterator` trait requires that you also define
-an `Item` type, and this `Item` type is used in the return type of the `next`
-method. In other words, the `Item` type will be the type returned from the
-iterator.
+Eʼtibor bering, bu definitionda baʼzi yangi sintaksislar qoʻllangan: `type Item` va `Self::Item` bu trait bilan *bogʻlangan turni(associated type)* belgilaydi. Bog'langan turlar haqida 19-bobda batafsil gaplashamiz. Hozircha siz bilishingiz kerak bo'lgan narsa shuki, ushbu kodda aytilishicha, `Iterator` traitini implement qilish uchun siz `Item` turini ham belgilashingiz kerak bo'ladi va bu `Item` turi `next` metodining qaytarish(return) turida qo'llaniladi. Boshqacha qilib aytganda, `Item` turi iteratordan qaytarilgan tur bo'ladi.
 
-The `Iterator` trait only requires implementors to define one method: the
-`next` method, which returns one item of the iterator at a time wrapped in
-`Some` and, when iteration is over, returns `None`.
+`Iterator` traiti amalga oshiruvchilardan(implementorlar) faqat bitta metodni belgilashni talab qiladi: `next` metod, u bir vaqtning o'zida `Some` ga o'ralgan(wrapped) iteratorning bir elementini qaytaradi va takrorlash(iteratsiya) tugagach, `None`ni qaytaradi.
 
-We can call the `next` method on iterators directly; Listing 13-12 demonstrates
-what values are returned from repeated calls to `next` on the iterator created
-from the vector.
+Biz iteratorlarda `next` metodini to'g'ridan-to'g'ri chaqirishimiz mumkin; Ro'yxat 13-12 vektordan yaratilgan iteratorda `next` ga takroriy chaqiruvlardan qanday qiymatlar qaytarilishini ko'rsatadi.
 
-<span class="filename">Filename: src/lib.rs</span>
+<span class="filename">Fayl nomi: src/lib.rs</span>
 
 ```rust,noplayground
 {{#rustdoc_include ../listings/ch13-functional-features/listing-13-12/src/lib.rs:here}}
 ```
 
-<span class="caption">Listing 13-12: Calling the `next` method on an
-iterator</span>
+<span class="caption">Ro'yxat 13-12: iteratorda `next` metodini chaqirish</span>
 
 Note that we needed to make `v1_iter` mutable: calling the `next` method on an
 iterator changes internal state that the iterator uses to keep track of where
