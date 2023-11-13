@@ -52,144 +52,85 @@ Biz iteratorlarda `next` metodini to'g'ridan-to'g'ri chaqirishimiz mumkin; Ro'yx
 
 <span class="caption">Ro'yxat 13-12: iteratorda `next` metodini chaqirish</span>
 
-Note that we needed to make `v1_iter` mutable: calling the `next` method on an
-iterator changes internal state that the iterator uses to keep track of where
-it is in the sequence. In other words, this code *consumes*, or uses up, the
-iterator. Each call to `next` eats up an item from the iterator. We didn’t need
-to make `v1_iter` mutable when we used a `for` loop because the loop took
-ownership of `v1_iter` and made it mutable behind the scenes.
+Esda tutingki, biz `v1_iter` ni o'zgaruvchan(mutable) qilishimiz kerak edi: iteratorda `next` metodini chaqirish iterator ketma-ketlikda(sequence) qayerdaligini kuzatish uchun foydalanadigan ichki holatni(internal state) o'zgartiradi. Boshqacha qilib aytganda, bu kod iteratorni *iste'mol qiladi(consumes)* yoki ishlatadi. `next` ga har bir chaqiruv(call) iteratordan biror elementni olib tashlaydi. Biz `for` loop siklidan foydalanganda `v1_iter`ni o‘zgaruvchan(mutable) qilishimiz shart emas edi, chunki sikl `v1_iter` ga ownership(egalik) qildi va uni sahna ortida o‘zgaruvchan qildi.
 
-Also note that the values we get from the calls to `next` are immutable
-references to the values in the vector. The `iter` method produces an iterator
-over immutable references. If we want to create an iterator that takes
-ownership of `v1` and returns owned values, we can call `into_iter` instead of
-`iter`. Similarly, if we want to iterate over mutable references, we can call
-`iter_mut` instead of `iter`.
+Shuni ham yodda tutingki, biz `next` ga chaiqruvlardan oladigan qiymatlar vektordagi qiymatlarga o'zgarmas(immutable) referencelardir. `iter` metodi immutable(o'zgarmas) referencelar ustida iterator hosil qiladi. Agar biz `v1` ga ownershiplik(egalik) qiluvchi va tegishli qiymatlarni qaytaruvchi iterator yaratmoqchi bo'lsak, `iter` o‘rniga `into_iter` ni chaqirishimiz mumkin. Xuddi shunday, agar biz mutable(o'zgaruvchan) referencelarni takrorlashni xohlasak, `iter` o'rniga `iter_mut` ni chaqirishimiz mumkin.
 
-### Methods that Consume the Iterator
+### Iteratorni consume qiladigan metodlar
 
-The `Iterator` trait has a number of different methods with default
-implementations provided by the standard library; you can find out about these
-methods by looking in the standard library API documentation for the `Iterator`
-trait. Some of these methods call the `next` method in their definition, which
-is why you’re required to implement the `next` method when implementing the
-`Iterator` trait.
+`Iterator` traiti standart kutubxona(standard library) tomonidan taqdim etilgan default implementationlar bilan bir qator turli metodlarga ega; ushbu metodlar haqida `Iterator` traiti uchun standart kutubxona API texnik hujjatlarini ko'rib chiqish orqali bilib olishingiz mumkin. Ushbu metodlarning ba'zilari o'z definitionlarida `next` metodni chaqiradi, shuning uchun `Iterator` tratini implement qilishda `next` metodni qo'llash talab qilinadi.
 
-Methods that call `next` are called *consuming adaptors*, because calling them
-uses up the iterator. One example is the `sum` method, which takes ownership of
-the iterator and iterates through the items by repeatedly calling `next`, thus
-consuming the iterator. As it iterates through, it adds each item to a running
-total and returns the total when iteration is complete. Listing 13-13 has a
-test illustrating a use of the `sum` method:
+`next` ni chaqiruvchi metoflar *consuming adaptorlar* deb ataladi, chunki ularni chaqirish iteratordan foydalanadi. Bitta misol, iteratorga ownership(egalik) qiladigan va `next` deb qayta-qayta chaqirish orqali elementlarni takrorlaydigan, shu bilan iteratorni consume qiladigan `sum` metodidir. U takrorlanayotganda, u har bir elementni ishlayotgan jamiga qo'shadi va takrorlash tugagach, jamini qaytaradi. 13-13 ro'yxatda `sum` metodidan foydalanishni ko'rsatadigan test mavjud:
 
-<span class="filename">Filename: src/lib.rs</span>
+<span class="filename">Fayl nomi: src/lib.rs</span>
 
 ```rust,noplayground
 {{#rustdoc_include ../listings/ch13-functional-features/listing-13-13/src/lib.rs:here}}
 ```
 
-<span class="caption">Listing 13-13: Calling the `sum` method to get the total
-of all items in the iterator</span>
+<span class="caption">Ro'yxat 13-13: iteratordagi barcha elementlarning umumiy miqdorini olish uchun `sum` metodini chaqirish</span>
 
-We aren’t allowed to use `v1_iter` after the call to `sum` because `sum` takes
-ownership of the iterator we call it on.
+Bizga `sum` chaqiruvidan keyin `v1_iter` dan foydalanishga ruxsat berilmagan, chunki `sum` biz chaqiruvchi iteratorga ownershiplik(egalik) qiladi.
 
-### Methods that Produce Other Iterators
+### Boshqa iteratorlarni yaratuvchi metodlar
 
-*Iterator adaptors* are methods defined on the `Iterator` trait that don’t
-consume the iterator. Instead, they produce different iterators by changing
-some aspect of the original iterator.
+*Iterator adaptorlari* iteratorni consume(iste'mol) qilmaydigan `Iterator` traiti bo'yicha aniqlangan metoddir. Buning o'rniga, ular asl iteratorning ba'zi jihatlarini o'zgartirib, turli iteratorlarni ishlab chiqaradilar.
 
-Listing 13-14 shows an example of calling the iterator adaptor method `map`,
-which takes a closure to call on each item as the items are iterated through.
-The `map` method returns a new iterator that produces the modified items. The
-closure here creates a new iterator in which each item from the vector will be
-incremented by 1:
+13-14 ro'yxatda iterator adapter metodini `map` deb chaqirish misoli ko'rsatilgan, bunda elementlar takrorlanganda(iteratsiya) har bir elementga chaqiruv(call) qilish yopiladi.
+`map` metodi o'zgartirilgan elementlarni ishlab chiqaradigan yangi iteratorni qaytaradi. Bu yerda closure vektorning har bir elementi 1 ga oshiriladigan yangi iteratorni yaratadi:
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">Fayl nomi: src/main.rs</span>
 
 ```rust,not_desired_behavior
 {{#rustdoc_include ../listings/ch13-functional-features/listing-13-14/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 13-14: Calling the iterator adaptor `map` to
-create a new iterator</span>
+<span class="caption">Ro'yxat 13-14: Yangi iterator yaratish uchun iterator adapteriga `map` chaqiruv qilish  qilish</span>
 
-However, this code produces a warning:
+Biroq, bu kod ogohlantirish(warning) ishlab chiqaradi:
 
 ```console
 {{#include ../listings/ch13-functional-features/listing-13-14/output.txt}}
 ```
 
-The code in Listing 13-14 doesn’t do anything; the closure we’ve specified
-never gets called. The warning reminds us why: iterator adaptors are lazy, and
-we need to consume the iterator here.
+13-14 ro'yxatdagi kod hech narsa qilmaydi; biz belgilagan closure hech qachon chaqirilmaydi. Ogohlantirish(warning) bizga nima uchun eslatib turadi: iterator adapterlari dangasa va biz bu yerda iteratorni consume(ishlatish) qilishimiz kerak.
 
-To fix this warning and consume the iterator, we’ll use the `collect` method,
-which we used in Chapter 12 with `env::args` in Listing 12-1. This method
-consumes the iterator and collects the resulting values into a collection data
-type.
+Ushbu ogohlantirishni tuzatish va iteratorni consume qilish uchun biz 12-bobda `env::args` bilan 12-1 ro'yxatda qo'llagan `collect` metodian foydalanamiz. Ushbu metod iteratorni consume qiladi va natijada olingan qiymatlarni ma'lumotlar to'plamiga(data type) to'playdi.
 
-In Listing 13-15, we collect the results of iterating over the iterator that’s
-returned from the call to `map` into a vector. This vector will end up
-containing each item from the original vector incremented by 1.
+13-15 ro'yxatda biz vektorga `map`-ga chaqiruvdan qaytgan iterator bo'yicha takrorlash natijalarini yig'amiz. Ushbu vektor 1 ga oshirilgan asl vektorning har bir elementini o'z ichiga oladi.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">Fayl nomi: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch13-functional-features/listing-13-15/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 13-15: Calling the `map` method to create a new
-iterator and then calling the `collect` method to consume the new iterator and
-create a vector</span>
+<span class="caption">Ro'yxat 13-15: Yangi iterator yaratish uchun `map` metodini chaqirish va keyin yangi iteratorni consume qilish va vektor yaratish uchun `collect` metodini chaqirish</span>
 
-Because `map` takes a closure, we can specify any operation we want to perform
-on each item. This is a great example of how closures let you customize some
-behavior while reusing the iteration behavior that the `Iterator` trait
-provides.
+`map` yopilganligi sababli, biz har bir elementda bajarmoqchi bo'lgan har qanday operatsiyani belgilashimiz mumkin. Bu `Iterator` traiti taʼminlaydigan iteratsiya xatti-harakatlarini(behavior) qayta ishlatishda closurelar sizga qandaydir behaviorlarni sozlash imkonini berishining ajoyib namunasidir.
 
-You can chain multiple calls to iterator adaptors to perform complex actions in
-a readable way. But because all iterators are lazy, you have to call one of the
-consuming adaptor methods to get results from calls to iterator adaptors.
+Murakkab harakatlarni(complex action) o'qilishi mumkin bo'lgan tarzda bajarish uchun iterator adapterlariga bir nechta chaiquvlarni zanjirlashingiz(chain) mumkin. Ammo barcha iteratorlar dangasa bo'lgani uchun, iterator adapterlariga chaqiruvlardan natijalarni olish uchun consuming adapter metodlaridan birini chaqirishingiz kerak.
 
-### Using Closures that Capture Their Environment
+### Environmentni qamrab oladigan(capture) closurelardan foydalanish
 
-Many iterator adapters take closures as arguments, and commonly the closures
-we’ll specify as arguments to iterator adapters will be closures that capture
-their environment.
+Ko'pgina iterator adapterlari closurelarni argument sifatida qabul qiladilar va odatda biz iterator adapterlariga argument sifatida ko'rsatadigan closurelar ularning environmentini oladigan closurelar bo'ladi.
 
-For this example, we’ll use the `filter` method that takes a closure. The
-closure gets an item from the iterator and returns a `bool`. If the closure
-returns `true`, the value will be included in the iteration produced by
-`filter`. If the closure returns `false`, the value won’t be included.
+Ushbu misol uchun biz closureni oladigan `filter` metodidan foydalanamiz. Closure iteratordan element oladi va `bool` ni qaytaradi. Agar closure `true` qiymatini qaytarsa, qiymat `filtr` tomonidan ishlab chiqarilgan iteratsiyaga kiritiladi. Agar closure `false` bo'lsa, qiymat kiritilmaydi.
 
-In Listing 13-16, we use `filter` with a closure that captures the `shoe_size`
-variable from its environment to iterate over a collection of `Shoe` struct
-instances. It will return only shoes that are the specified size.
+13-16 roʻyxatda biz `Poyabzal` structi misollari toʻplamini iteratsiya qilish  uchun uning environmentidan `poyabzal_olchami` oʻzgaruvchisini ushlaydigan(capture) closure bilan `filtr`dan foydalanamiz. U faqat belgilangan o'lchamdagi poyabzallarni qaytaradi.
 
-<span class="filename">Filename: src/lib.rs</span>
+<span class="filename">Fayl nomi: src/lib.rs</span>
 
 ```rust,noplayground
 {{#rustdoc_include ../listings/ch13-functional-features/listing-13-16/src/lib.rs}}
 ```
 
-<span class="caption">Listing 13-16: Using the `filter` method with a closure
-that captures `shoe_size`</span>
+<span class="caption">Roʻyxat 13-16: `poyabzal_olchami`ni ushlaydigan closure bilan`filter` metodidan foydalanish</span>
 
-The `shoes_in_size` function takes ownership of a vector of shoes and a shoe
-size as parameters. It returns a vector containing only shoes of the specified
-size.
+`olcham_boyicha_poyabzal` funksiyasi parametr sifatida poyabzal vektori va poyabzal o'lchamiga egalik qiladi. U faqat belgilangan o'lchamdagi poyabzallarni o'z ichiga olgan vektorni qaytaradi.
 
-In the body of `shoes_in_size`, we call `into_iter` to create an iterator
-that takes ownership of the vector. Then we call `filter` to adapt that
-iterator into a new iterator that only contains elements for which the closure
-returns `true`.
+`olcham_boyicha_poyabzal` bodysida(tanasida) vektorga ownershiplik(egalik) qiluvchi iterator yaratish uchun `into_iter` ni chaqiramiz. Keyin biz ushbu iteratorni faqat closure `true`ni qaytaradigan elementlarni o'z ichiga olgan yangi iteratorga moslashtirish uchun `filter` ni chaqiramiz.
 
-The closure captures the `shoe_size` parameter from the environment and
-compares the value with each shoe’s size, keeping only shoes of the size
-specified. Finally, calling `collect` gathers the values returned by the
-adapted iterator into a vector that’s returned by the function.
+Closure muhitdan `poyabzal_olchami` parametrini oladi va qiymatni har bir poyabzal o'lchami bilan solishtiradi, faqat belgilangan o'lchamdagi poyabzallarni saqlaydi. Nihoyat, `collect` ni chaqirish moslashtirilgan iterator tomonidan qaytarilgan qiymatlarni funksiya tomonidan qaytariladigan vektorga to'playdi.
 
-The test shows that when we call `shoes_in_size`, we get back only shoes
-that have the same size as the value we specified.
+Test shuni ko'rsatadiki, biz `olcham_boyicha_poyabzal` deb ataganimizda, biz faqat biz ko'rsatgan qiymat bilan bir xil o'lchamdagi poyabzallarni qaytarib olamiz.
