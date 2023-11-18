@@ -33,7 +33,7 @@ pub fn run(config: Config) -> Result<(), Box<dyn Error>> {
     let natijalar = if config.ignore_case {
         harflarga_etiborsiz_qidirish(&config.sorov, &tarkib)
     } else {
-        search(&config.sorov, &tarkib)
+        qidiruv(&config.sorov, &tarkib)
     };
 
     for line in natijalar {
@@ -43,7 +43,7 @@ pub fn run(config: Config) -> Result<(), Box<dyn Error>> {
     Ok(())
 }
 
-pub fn search<'a>(sorov: &str, tarkib: &'a str) -> Vec<&'a str> {
+pub fn qidiruv<'a>(sorov: &str, tarkib: &'a str) -> Vec<&'a str> {
     let mut natijalar = Vec::new();
 
     for line in tarkib.lines() {
@@ -84,11 +84,11 @@ xavfsiz, tez, samarali.
 Uchtasini tanlang.
 Duct tape.";
 
-        assert_eq!(vec!["xavfsiz, tez, samarali."], search(sorov, tarkib));
+        assert_eq!(vec!["xavfsiz, tez, samarali."], qidiruv(sorov, tarkib));
     }
 
     #[test]
-    fn case_insensitive() {
+    fn harflarga_etiborsiz() {
         let sorov = "rUsT";
         let tarkib = "\
 Rust:
