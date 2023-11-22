@@ -1,0 +1,440 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>match Control Flow konstruksiyasi - Rust dasturlash tili</title>
+        <!-- Custom HTML head -->
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="ferris.css">
+        <link rel="stylesheet" href="theme/2018-edition.css">
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="title-page.html">Rust dasturlash tili</a></li><li class="chapter-item expanded affix "><a href="foreword.html">Muqaddima</a></li><li class="chapter-item expanded affix "><a href="ch00-00-introduction.html">Kirish</a></li><li class="chapter-item expanded "><a href="ch01-00-getting-started.html"><strong aria-hidden="true">1.</strong> Ishni boshlash</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch01-01-installation.html"><strong aria-hidden="true">1.1.</strong> O'rnatish</a></li><li class="chapter-item expanded "><a href="ch01-02-hello-world.html"><strong aria-hidden="true">1.2.</strong> Hello, World!</a></li><li class="chapter-item expanded "><a href="ch01-03-hello-cargo.html"><strong aria-hidden="true">1.3.</strong> Hello, Cargo!</a></li></ol></li><li class="chapter-item expanded "><a href="ch02-00-guessing-game-tutorial.html"><strong aria-hidden="true">2.</strong> Taxmin qilish o'yinini dasturlash</a></li><li class="chapter-item expanded "><a href="ch03-00-common-programming-concepts.html"><strong aria-hidden="true">3.</strong> Umumiy dasturlash tushunchalari</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch03-01-variables-and-mutability.html"><strong aria-hidden="true">3.1.</strong> O'zgaruvchilar va o'zgaruvchanlik</a></li><li class="chapter-item expanded "><a href="ch03-02-data-types.html"><strong aria-hidden="true">3.2.</strong> Ma'lumotlar turlari</a></li><li class="chapter-item expanded "><a href="ch03-03-how-functions-work.html"><strong aria-hidden="true">3.3.</strong> Funksiyalar</a></li><li class="chapter-item expanded "><a href="ch03-04-comments.html"><strong aria-hidden="true">3.4.</strong> Izohlar</a></li><li class="chapter-item expanded "><a href="ch03-05-control-flow.html"><strong aria-hidden="true">3.5.</strong> Control Flow</a></li></ol></li><li class="chapter-item expanded "><a href="ch04-00-understanding-ownership.html"><strong aria-hidden="true">4.</strong> Ownershipni tushunish</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch04-01-what-is-ownership.html"><strong aria-hidden="true">4.1.</strong> Ownership nima?</a></li><li class="chapter-item expanded "><a href="ch04-02-references-and-borrowing.html"><strong aria-hidden="true">4.2.</strong> Referencelar va  Borrowing</a></li><li class="chapter-item expanded "><a href="ch04-03-slices.html"><strong aria-hidden="true">4.3.</strong> Slice turi</a></li></ol></li><li class="chapter-item expanded "><a href="ch05-00-structs.html"><strong aria-hidden="true">5.</strong> Tegishli ma'lumotlarni tuzish uchun Structdan foydalanish</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch05-01-defining-structs.html"><strong aria-hidden="true">5.1.</strong> Structlarni aniqlash va yaratish</a></li><li class="chapter-item expanded "><a href="ch05-02-example-structs.html"><strong aria-hidden="true">5.2.</strong> Structs yordamida namunaviy dastur</a></li><li class="chapter-item expanded "><a href="ch05-03-method-syntax.html"><strong aria-hidden="true">5.3.</strong> Metod sintaksisi</a></li></ol></li><li class="chapter-item expanded "><a href="ch06-00-enums.html"><strong aria-hidden="true">6.</strong> Enumlar va patternlarni moslashtirish</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch06-01-defining-an-enum.html"><strong aria-hidden="true">6.1.</strong> Enumni aniqlash</a></li><li class="chapter-item expanded "><a href="ch06-02-match.html" class="active"><strong aria-hidden="true">6.2.</strong> match Control Flow konstruksiyasi</a></li><li class="chapter-item expanded "><a href="ch06-03-if-let.html"><strong aria-hidden="true">6.3.</strong> if let bilan qisqacha Control Flow</a></li></ol></li><li class="chapter-item expanded "><a href="ch07-00-managing-growing-projects-with-packages-crates-and-modules.html"><strong aria-hidden="true">7.</strong> O'sib borayotgan loyihalarni Paketlar, Cratelar va Modullar bilan boshqarish</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch07-01-packages-and-crates.html"><strong aria-hidden="true">7.1.</strong> Paketlar va Cratelar</a></li><li class="chapter-item expanded "><a href="ch07-02-defining-modules-to-control-scope-and-privacy.html"><strong aria-hidden="true">7.2.</strong> Qo'llanish doirasi va maxfiylikni nazorat qilish uchun modullarni aniqlash</a></li><li class="chapter-item expanded "><a href="ch07-03-paths-for-referring-to-an-item-in-the-module-tree.html"><strong aria-hidden="true">7.3.</strong> Modul daraxtidagi elementga murojaat qilish yo'llari</a></li><li class="chapter-item expanded "><a href="ch07-04-bringing-paths-into-scope-with-the-use-keyword.html"><strong aria-hidden="true">7.4.</strong> use kalit so'zi bilan yo'llarni qamrab olish</a></li><li class="chapter-item expanded "><a href="ch07-05-separating-modules-into-different-files.html"><strong aria-hidden="true">7.5.</strong> Modullarni turli fayllarga ajratish</a></li></ol></li><li class="chapter-item expanded "><a href="ch08-00-common-collections.html"><strong aria-hidden="true">8.</strong> Umumiy to'plamlar</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch08-01-vectors.html"><strong aria-hidden="true">8.1.</strong> Vectorlar bilan qiymatlar ro'yxatini saqlash</a></li><li class="chapter-item expanded "><a href="ch08-02-strings.html"><strong aria-hidden="true">8.2.</strong> UTF-8 kodlangan matnni Stringlar bilan saqlash</a></li><li class="chapter-item expanded "><a href="ch08-03-hash-maps.html"><strong aria-hidden="true">8.3.</strong> Hash Mapda bog'langan qiymatlarga ega kalitlarni saqlash</a></li></ol></li><li class="chapter-item expanded "><a href="ch09-00-error-handling.html"><strong aria-hidden="true">9.</strong> Xatolar bilan ishlash</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch09-01-unrecoverable-errors-with-panic.html"><strong aria-hidden="true">9.1.</strong> panic! bilan tuzatib bo'lmaydigan xatolar</a></li><li class="chapter-item expanded "><a href="ch09-02-recoverable-errors-with-result.html"><strong aria-hidden="true">9.2.</strong> Result bilan tiklanadigan xatolar</a></li><li class="chapter-item expanded "><a href="ch09-03-to-panic-or-not-to-panic.html"><strong aria-hidden="true">9.3.</strong> panic! yoki panic! emas</a></li></ol></li><li class="chapter-item expanded "><a href="ch10-00-generics.html"><strong aria-hidden="true">10.</strong> Umumiy turlar, traitlar va lifetime</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch10-01-syntax.html"><strong aria-hidden="true">10.1.</strong> Generik ma'lumotlar turlari</a></li><li class="chapter-item expanded "><a href="ch10-02-traits.html"><strong aria-hidden="true">10.2.</strong> Traitlar: umumiy xatti-harakatni aniqlash</a></li><li class="chapter-item expanded "><a href="ch10-03-lifetime-syntax.html"><strong aria-hidden="true">10.3.</strong> Referencelarni lifetime bilan tekshirish</a></li></ol></li><li class="chapter-item expanded "><a href="ch11-00-testing.html"><strong aria-hidden="true">11.</strong> Avtomatlashtirilgan testlarni yozish</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch11-01-writing-tests.html"><strong aria-hidden="true">11.1.</strong> Testlarni qanday yozish kerak</a></li><li class="chapter-item expanded "><a href="ch11-02-running-tests.html"><strong aria-hidden="true">11.2.</strong> Sinovlar qanday o'tkazilishini nazorat qilish</a></li><li class="chapter-item expanded "><a href="ch11-03-test-organization.html"><strong aria-hidden="true">11.3.</strong> Test tashkil etish</a></li></ol></li><li class="chapter-item expanded "><a href="ch12-00-an-io-project.html"><strong aria-hidden="true">12.</strong> I/O loyihasi: Buyruqlar qatori dasturini yaratish</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch12-01-accepting-command-line-arguments.html"><strong aria-hidden="true">12.1.</strong> Buyruqlar qatori argumentini qabul qilishs</a></li><li class="chapter-item expanded "><a href="ch12-02-reading-a-file.html"><strong aria-hidden="true">12.2.</strong> Faylni o'qish</a></li><li class="chapter-item expanded "><a href="ch12-03-improving-error-handling-and-modularity.html"><strong aria-hidden="true">12.3.</strong> Modullikni yaxshilash va xatolarni qayta ishlash uchun refactoring</a></li><li class="chapter-item expanded "><a href="ch12-04-testing-the-librarys-functionality.html"><strong aria-hidden="true">12.4.</strong> Sinovga asoslangan ishlab chiqish bilan kutubxonaning funksionalligini rivojlantirish</a></li><li class="chapter-item expanded "><a href="ch12-05-working-with-environment-variables.html"><strong aria-hidden="true">12.5.</strong> Environment o'zgaruvchilari bilan ishlash</a></li><li class="chapter-item expanded "><a href="ch12-06-writing-to-stderr-instead-of-stdout.html"><strong aria-hidden="true">12.6.</strong> Xato xabarlarini standart chiqish o'rniga standart xatoga yozish</a></li></ol></li><li class="chapter-item expanded "><a href="ch13-00-functional-features.html"><strong aria-hidden="true">13.</strong> Funksional til xususiyatlari: iteratorlar va closurelar</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch13-01-closures.html"><strong aria-hidden="true">13.1.</strong> Closurelar: Environmentni qamrab oladigan anonim funksiyalar</a></li><li class="chapter-item expanded "><a href="ch13-02-iterators.html"><strong aria-hidden="true">13.2.</strong> Iteratorlar bilan bir qator elementlarga ishlov berish</a></li><li class="chapter-item expanded "><a href="ch13-03-improving-our-io-project.html"><strong aria-hidden="true">13.3.</strong> I/O loyihamizni takomillashtirish</a></li><li class="chapter-item expanded "><a href="ch13-04-performance.html"><strong aria-hidden="true">13.4.</strong> Ishlash samaradorligini solishtirish: Looplar va iteratorlar</a></li></ol></li><li class="chapter-item expanded "><a href="ch14-00-more-about-cargo.html"><strong aria-hidden="true">14.</strong> Cargo va Crates.io haqida ko'proq</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch14-01-release-profiles.html"><strong aria-hidden="true">14.1.</strong> Reliz profillari bilan structlarni moslashtirish</a></li><li class="chapter-item expanded "><a href="ch14-02-publishing-to-crates-io.html"><strong aria-hidden="true">14.2.</strong> Crateni Crates.io-ga nashr qilish</a></li><li class="chapter-item expanded "><a href="ch14-03-cargo-workspaces.html"><strong aria-hidden="true">14.3.</strong> Cargo Workspacelar</a></li><li class="chapter-item expanded "><a href="ch14-04-installing-binaries.html"><strong aria-hidden="true">14.4.</strong> Binary fayllarni Crates.io'dan cargo install bilan o'rnatish</a></li><li class="chapter-item expanded "><a href="ch14-05-extending-cargo.html"><strong aria-hidden="true">14.5.</strong> Maxsus buyruqlar bilan Cargoni kengaytirish</a></li></ol></li><li class="chapter-item expanded "><a href="ch15-00-smart-pointers.html"><strong aria-hidden="true">15.</strong> Smart Pointerlar</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch15-01-box.html"><strong aria-hidden="true">15.1.</strong> Heapdagi ma'lumotlarni ko'rsatish uchun Box&lt;T&gt; dan foydalanish</a></li><li class="chapter-item expanded "><a href="ch15-02-deref.html"><strong aria-hidden="true">15.2.</strong> Deref Traitidan foydalangan holda oddiy referencelar kabi Smart Pointerlar bilan ishlash</a></li><li class="chapter-item expanded "><a href="ch15-03-drop.html"><strong aria-hidden="true">15.3.</strong> Drop Traiti bilan tozalashda kodni ishga tushirish</a></li><li class="chapter-item expanded "><a href="ch15-04-rc.html"><strong aria-hidden="true">15.4.</strong> Rc&lt;T&gt;, reference hisoblangan Smart Pointer</a></li><li class="chapter-item expanded "><a href="ch15-05-interior-mutability.html"><strong aria-hidden="true">15.5.</strong> RefCell&lt;T&gt; va ichki o'zgaruvchanlik namunasi</a></li><li class="chapter-item expanded "><a href="ch15-06-reference-cycles.html"><strong aria-hidden="true">15.6.</strong> Reference Cycles Can Leak Memory</a></li></ol></li><li class="chapter-item expanded "><a href="ch16-00-concurrency.html"><strong aria-hidden="true">16.</strong> Qo'rqmas parallellik</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch16-01-threads.html"><strong aria-hidden="true">16.1.</strong> Kodni bir vaqtning o'zida ishga tushirish uchun threadlardan foydalanish</a></li><li class="chapter-item expanded "><a href="ch16-02-message-passing.html"><strong aria-hidden="true">16.2.</strong> Threadlar orasidagi ma'lumotlarni uzatish uchun xabar uzatishdan(Message Passing) foydalanish</a></li><li class="chapter-item expanded "><a href="ch16-03-shared-state.html"><strong aria-hidden="true">16.3.</strong> Shared-State Concurrency</a></li><li class="chapter-item expanded "><a href="ch16-04-extensible-concurrency-sync-and-send.html"><strong aria-hidden="true">16.4.</strong> Sync va Send traitlari bilan kengaytiriladigan parallellik</a></li></ol></li><li class="chapter-item expanded "><a href="ch17-00-oop.html"><strong aria-hidden="true">17.</strong> Rustning ob'ektga yo'naltirilgan dasturlash xususiyatlari- OOP</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch17-01-what-is-oo.html"><strong aria-hidden="true">17.1.</strong> Ob'ektga yo'naltirilgan tillarning xususiyatlari</a></li><li class="chapter-item expanded "><a href="ch17-02-trait-objects.html"><strong aria-hidden="true">17.2.</strong> Har xil turdagi qiymatlarga ruxsat beruvchi trait ob'ektlaridan foydalanish</a></li><li class="chapter-item expanded "><a href="ch17-03-oo-design-patterns.html"><strong aria-hidden="true">17.3.</strong> Ob'ektga yo'naltirilgan dizayn patternini implement qilish</a></li></ol></li><li class="chapter-item expanded "><a href="ch18-00-patterns.html"><strong aria-hidden="true">18.</strong> Patternlar va Matching</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch18-01-all-the-places-for-patterns.html"><strong aria-hidden="true">18.1.</strong> All the Places Patterns Can Be Used</a></li><li class="chapter-item expanded "><a href="ch18-02-refutability.html"><strong aria-hidden="true">18.2.</strong> Refutability: Whether a Pattern Might Fail to Match</a></li><li class="chapter-item expanded "><a href="ch18-03-pattern-syntax.html"><strong aria-hidden="true">18.3.</strong> Pattern Sintaksisi</a></li></ol></li><li class="chapter-item expanded "><a href="ch19-00-advanced-features.html"><strong aria-hidden="true">19.</strong> Kengaytirilgan Xususiyatlar</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch19-01-unsafe-rust.html"><strong aria-hidden="true">19.1.</strong> Xavfsiz Rust</a></li><li class="chapter-item expanded "><a href="ch19-03-advanced-traits.html"><strong aria-hidden="true">19.2.</strong> Murakkab Traitlar</a></li><li class="chapter-item expanded "><a href="ch19-04-advanced-types.html"><strong aria-hidden="true">19.3.</strong> Kengaytirilgan Turlar</a></li><li class="chapter-item expanded "><a href="ch19-05-advanced-functions-and-closures.html"><strong aria-hidden="true">19.4.</strong> Kengaytirilgan funksiyalar va closurelar</a></li><li class="chapter-item expanded "><a href="ch19-06-macros.html"><strong aria-hidden="true">19.5.</strong> Makrolar</a></li></ol></li><li class="chapter-item expanded "><a href="ch20-00-final-project-a-web-server.html"><strong aria-hidden="true">20.</strong> Yakuniy loyiha: Ko'p tarmoqli veb-serverni qurish</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch20-01-single-threaded.html"><strong aria-hidden="true">20.1.</strong> Yagona tarmoqli veb-serverni qurish</a></li><li class="chapter-item expanded "><a href="ch20-02-multithreaded.html"><strong aria-hidden="true">20.2.</strong> Bizning yagona tarmoqli serverimizni ko'p tarmoqli serverga aylantirish</a></li><li class="chapter-item expanded "><a href="ch20-03-graceful-shutdown-and-cleanup.html"><strong aria-hidden="true">20.3.</strong> Ajoyib o'chirish va tozalash</a></li></ol></li><li class="chapter-item expanded "><a href="appendix-00.html"><strong aria-hidden="true">21.</strong> Ilova</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="appendix-01-keywords.html"><strong aria-hidden="true">21.1.</strong> A - Kalit so'zlar</a></li><li class="chapter-item expanded "><a href="appendix-02-operators.html"><strong aria-hidden="true">21.2.</strong> B - Operatorlar va Symbollar</a></li><li class="chapter-item expanded "><a href="appendix-03-derivable-traits.html"><strong aria-hidden="true">21.3.</strong> C - Hosilaviy Traitlar</a></li><li class="chapter-item expanded "><a href="appendix-04-useful-development-tools.html"><strong aria-hidden="true">21.4.</strong> D - Foydali Development Toollar</a></li><li class="chapter-item expanded "><a href="appendix-05-editions.html"><strong aria-hidden="true">21.5.</strong> E - Nashrlar</a></li><li class="chapter-item expanded "><a href="appendix-06-translation.html"><strong aria-hidden="true">21.6.</strong> F - Kitobning tarjimalari</a></li><li class="chapter-item expanded "><a href="appendix-07-nightly-rust.html"><strong aria-hidden="true">21.7.</strong> G - Rust qanday yasaladi va “Nightly Rust”</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Rust dasturlash tili</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/rust-lang/book" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <!-- Old heading. Do not remove or links may break. -->
+<p><a id="the-match-control-flow-operator"></a></p>
+<h2 id="match-control-flow-konstruksiyasi"><a class="header" href="#match-control-flow-konstruksiyasi"><code>match</code> Control Flow konstruksiyasi</a></h2>
+<p>Rust <code>match</code> deb nomlangan juda kuchli control flow konstruksiyasiga ega, bu sizga qiymatni bir qator patternlar bilan solishtirish va keyin qaysi pattern mos kelishiga qarab kodni bajarish imkonini beradi. Patternlar literal qiymatlar, o'zgaruvchilar nomlari, wildcardlar va boshqa ko'plab narsalardan iborat bo'lishi mumkin; <a href="ch18-00-patterns.html">18-bobda</a><!-- ignore --> har xil turdagi patternlar va ular bajaradigan ishlar yoritilgan. <code>match</code>ning kuchi patternlarning ifodaliligidan va kompilyator barcha mumkin bo'lgan holatlar ko'rib chiqilishini tasdiqlashidan kelib chiqadi.</p>
+<p><code>match</code> iborasini tanga saralash mashinasiga o'xshatib tasavvur qiling: tangalar bo'ylab turli o'lchamdagi teshiklari bo'lgan yo'ldan pastga siljiydi va har bir tanga o'zi mos keladigan birinchi teshikdan tushadi. Xuddi shu tarzda, qiymatlar <code>match</code> dagi har bir patterndan o'tadi va birinchi patternda qiymat “fits,”, qiymat bajarish paytida ishlatiladigan tegishli kod blokiga tushadi.</p>
+<p>Tangalar haqida gap ketganda, keling, ularni <code>match</code> yordamida misol qilib olaylik! Biz noma'lum AQSH tangasini oladigan funksiyani yozishimiz mumkin va xuddi sanash mashinasiga o'xshab uning qaysi tanga ekanligini aniqlaydi va 6-3 ro'yxatda ko'rsatilganidek, uning qiymatini sentlarda qaytaradi.</p>
+<pre><pre class="playground"><code class="language-rust">enum Tanga {
+    Penny,
+    Nickel,
+    Dime,
+    Quarter,
+}
+
+fn sentdagi_qiymat(tanga: Tanga) -&gt; u8 {
+    match tanga {
+        Tanga::Penny =&gt; 1,
+        Tanga::Nickel =&gt; 5,
+        Tanga::Dime =&gt; 10,
+        Tanga::Quarter =&gt; 25,
+    }
+}
+<span class="boring">
+</span><span class="boring">fn main() {}
+</span></code></pre></pre>
+<p><span class="caption">Ro'yxat 6-3: Enum va <code>match</code> ifodasi, uning namunalari sifatida enumning variantlari mavjud</span></p>
+<p>Keling, <code>sentdagi_qiymat</code> funksiyasidagi <code>match</code> ni ajratamiz. Avval biz <code>match</code> kalit so'zidan keyin ifodani keltiramiz, bu holda bu qiymat <code>tanga</code> bo'ladi. Bu <code>if</code> bilan ishlatiladigan shartli ifodaga juda o'xshaydi, lekin
+katta farq bor: <code>if</code> bilan shart mantiqiy qiymatga baholanishi kerak, ammo bu yerda u har qanday turdagi bo'lishi mumkin. Ushbu misoldagi <code>tanga</code> turi biz birinchi qatorda belgilagan <code>Tanga</code> enumidir.</p>
+<p>Keyingi <code>match</code> armlari. Arm ikki qismdan iborat: pattern va ba'zi kod. Bu yerdagi birinchi arm <code>Tanga::Penny</code> qiymati boʻlgan patternga ega, soʻngra ishlash uchun pattern va kodni ajratuvchi <code>=&gt;</code> operatori. Bu holatda kod faqat <code>1</code> qiymatidan iborat. Har bir arm keyingisidan vergul bilan ajratiladi.</p>
+<p><code>match</code> ifodasi bajarilganda, natijaviy qiymatni har bir armning patterniga solishtiradi. Agar pattern qiymatga mos kelsa, ushbu pattern bilan bog'langan kod bajariladi. Agar bu pattern qiymatga mos kelmasa, ijro tanga saralash mashinasida bo'lgani kabi keyingi armda davom etadi.
+Bizda qancha arm kerak bo'lsa, shuncha arm bo'lishi mumkin: 6-3 ro'yxatda bizning <code>match</code>imizda to'rtta arm bor.</p>
+<p>Har bir arm bilan bog'langan kod ifodadir va mos keladigan qismdagi ifodaning natijaviy qiymati butun <code>match</code> ifodasi uchun qaytariladigan qiymatdir.</p>
+<p>Agar mos keladigan arm kodi qisqa bo'lsa, biz odatda jingalak qavslardan foydalanmaymiz, chunki bu ro'yxat 6-3da bo'lgani kabi, har bir arm shunchaki qiymat qaytaradi. Agar siz mos keladigan chiziqda bir nechta kod qatorlarini ishlatmoqchi bo'lsangiz, jingalak qavslardan foydalaning va armdan keyingi vergul ixtiyoriy bo'ladi. Masalan, quyidagi kodda <code>Omadli tanga!</code> metod har safar <code>Tanga::Penny</code> bilan chaqirilganda, lekin baribir blokning oxirgi qiymatini qaytaradi, <code>1</code>:</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">enum Tanga {
+</span><span class="boring">    Penny,
+</span><span class="boring">    Nickel,
+</span><span class="boring">    Dime,
+</span><span class="boring">    Quarter,
+</span><span class="boring">}
+</span><span class="boring">
+</span>fn sentdagi_qiymat(tanga: Tanga) -&gt; u8 {
+    match tanga {
+        Tanga::Penny =&gt; {
+            println!(&quot;Omadli tanga!&quot;);
+            1
+        }
+        Tanga::Nickel =&gt; 5,
+        Tanga::Dime =&gt; 10,
+        Tanga::Quarter =&gt; 25,
+    }
+}
+<span class="boring">
+</span><span class="boring">fn main() {}
+</span></code></pre></pre>
+<h3 id="qiymatlarni-boglaydigan-patternlar"><a class="header" href="#qiymatlarni-boglaydigan-patternlar">Qiymatlarni bog'laydigan patternlar</a></h3>
+<p>match armlarining yana bir foydali xususiyati shundaki, ular patternga mos keladigan qiymatlarning qismlarini bog'lashlari mumkin. Enum variantlaridan qiymatlarni shunday chiqarishimiz mumkin.</p>
+<p>Misol tariqasida, uning ichida ma'lumotlarni saqlash uchun enum variantlarimizdan birini o'zgartiraylik.
+1999 yildan 2008 yilgacha Qo'shma Shtatlar bir tomondan 50 shtatning har biri uchun turli dizayndagi tangalarni bosib chiqardi. Boshqa hech qanday tangalar davlat dizayniga ega emas, shuning uchun faqat quarterlarda bunday qo'shimcha qiymat mavjud. Biz ushbu maʼlumotni <code>Quarter</code> variantini uning ichida saqlangan <code>UsState</code> qiymatini kiritish uchun oʻzgartirish orqali <code>enum</code>ga qoʻshishimiz mumkin, biz buni 6-4 roʻyxatda qilganmiz.</p>
+<pre><pre class="playground"><code class="language-rust">#[derive(Debug)] // so we can inspect the state in a minute
+enum UsState {
+    Alabama,
+    Alaska,
+    // --snip--
+}
+
+enum Tanga {
+    Penny,
+    Nickel,
+    Dime,
+    Quarter(UsState),
+}
+<span class="boring">
+</span><span class="boring">fn main() {}
+</span></code></pre></pre>
+<p><span class="caption">Roʻyxat 6-4: <code>Quarter</code> varianti ham <code>UsState</code> qiymatiga ega boʻlgan <code>Tanga</code> enumi</span></p>
+<p>Tasavvur qiling-a, sizning do'stingiz barcha 50 shtatdan quarter yig'ishga harakat qilmoqda. Biz tangalar turi bo'yicha saralashimiz bilan birga, agar do'stimizda yo'q bo'lsa, ular uni o'z kollektsiyasiga qo'shishlari uchun har quarter bilan bog'liq shtat nomini ham chaqiramiz.</p>
+<p>Ushbu kod uchun match ifodasida biz <code>Tanga::Quarter</code> varianti qiymatlariga mos keladigan patternga <code>shtat</code> deb nomlangan o'zgaruvchini qo‘shamiz. <code>Tanga::Quarter</code> mos kelganda, <code>shtat</code> o'zgaruvchisi o'sha quarter holati qiymatiga bog'lanadi. Keyin biz ushbu arm uchun kodda <code>shtat</code> dan foydalanishimiz mumkin, masalan:</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#[derive(Debug)]
+</span><span class="boring">enum UsState {
+</span><span class="boring">    Alabama,
+</span><span class="boring">    Alaska,
+</span><span class="boring">    // --snip--
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">enum Tanga {
+</span><span class="boring">    Penny,
+</span><span class="boring">    Nickel,
+</span><span class="boring">    Dime,
+</span><span class="boring">    Quarter(UsState),
+</span><span class="boring">}
+</span><span class="boring">
+</span>fn sentdagi_qiymat(tanga: Tanga) -&gt; u8 {
+    match tanga {
+        Tanga::Penny =&gt; 1,
+        Tanga::Nickel =&gt; 5,
+        Tanga::Dime =&gt; 10,
+        Tanga::Quarter(shtat) =&gt; {
+            println!(&quot;{:?} dan shtat quarter!&quot;, shtat);
+            25
+        }
+    }
+}
+<span class="boring">
+</span><span class="boring">fn main() {
+</span><span class="boring">    sentdagi_qiymat(Tanga::Quarter(UsState::Alaska));
+</span><span class="boring">}
+</span></code></pre></pre>
+<p>Agar biz <code>sentdagi_qiymat(Tanga::Quarter(UsState::Alaska))</code> deb ataydigan bo'lsak, <code>tanga</code> <code>Tanga::Quarter(UsState::Alaska)</code> bo'ladi. Ushbu qiymatni har bir match armi bilan solishtirganda, biz <code>Tanga::Quarter(shtat)</code> ga yetguncha ularning hech biri mos kelmaydi. O'sha paytda <code>shtat</code> uchun majburiy <code>UsState::Alaska</code> qiymati bo'ladi. Keyin biz bu bog'lanishni <code>println!</code> ifodasida qo'llashimiz mumkin, shu bilan <code>Quarter</code> uchun <code>Tanga</code> enum variantidan ichki holat qiymatini olamiz.</p>
+<h3 id="optiont-uchun-match"><a class="header" href="#optiont-uchun-match"><code>Option&lt;T&gt;</code> uchun Match</a></h3>
+<p>Oldingi bo'limda biz <code>Option&lt;T&gt;</code> dan foydalanilganda <code>Some</code> holatidan ichki <code>T</code> qiymatini olishni xohladik; Biz, shuningdek, <code>Tanga</code> enum bilan qilganimizdek, <code>match</code> yordamida <code>Option&lt;T&gt;</code>ni boshqarishimiz mumkin! Tangalarni solishtirish o'rniga, biz <code>Option&lt;T&gt;</code> variantlarini solishtiramiz, lekin <code>match</code> ifodasining ishlash usuli bir xil bo'lib qoladi.</p>
+<p>Aytaylik, biz <code>Option&lt;i32&gt;</code> ni oladigan funksiya yozmoqchimiz va agar ichida qiymat bo'lsa, bu qiymatga 1 qo'shiladi. Agar ichida qiymat bo'lmasa, funktsiya <code>None</code> qiymatini qaytarishi va hech qanday operatsiyani bajarishga urinmasligi kerak.</p>
+<p>Ushbu funktsiyani yozish juda oson,  <code>match</code> tufayli va 6-5-Ro'yxatga o'xshaydi.</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">fn main() {
+</span>    fn bir_qoshish(x: Option&lt;i32&gt;) -&gt; Option&lt;i32&gt; {
+        match x {
+            None =&gt; None,
+            Some(i) =&gt; Some(i + 1),
+        }
+    }
+
+    let besh = Some(5);
+    let olti = bir_qoshish(besh);
+    let yoq = bir_qoshish(None);
+<span class="boring">}
+</span></code></pre></pre>
+<p><span class="caption">Roʻyxat 6-5: <code>Option</code>da <code>match</code> ifodasidan foydalanadigan funksiya<i32>`</span></p>
+<p>Keling, <code>bir_qoshish</code> ning birinchi bajarilishini batafsilroq ko'rib chiqamiz. Biz <code>bir_qoshish(besh)</code> ni chaqirganimizda, <code>bir_qoshish</code> tanasidagi <code>x</code> o'zgaruvchisi <code>Some(5)</code> qiymatiga ega bo'ladi. Keyin biz buni har bir matchning armi bilan taqqoslaymiz:</p>
+<pre><code class="language-rust ignore"><span class="boring">fn main() {
+</span><span class="boring">    fn bir_qoshish(x: Option&lt;i32&gt;) -&gt; Option&lt;i32&gt; {
+</span><span class="boring">        match x {
+</span>            None =&gt; None,
+<span class="boring">            Some(i) =&gt; Some(i + 1),
+</span><span class="boring">        }
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    let besh = Some(5);
+</span><span class="boring">    let olti = bir_qoshish(besh);
+</span><span class="boring">    let yoq = bir_qoshish(None);
+</span><span class="boring">}
+</span></code></pre>
+<p><code>Some(5)</code> qiymati <code>None</code> patterniga mos kelmaydi, shuning uchun keyingi armga o'tamiz:</p>
+<pre><code class="language-rust ignore"><span class="boring">fn main() {
+</span><span class="boring">    fn bir_qoshish(x: Option&lt;i32&gt;) -&gt; Option&lt;i32&gt; {
+</span><span class="boring">        match x {
+</span><span class="boring">            None =&gt; None,
+</span>            Some(i) =&gt; Some(i + 1),
+<span class="boring">        }
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    let besh = Some(5);
+</span><span class="boring">    let olti = bir_qoshish(besh);
+</span><span class="boring">    let yoq = bir_qoshish(None);
+</span><span class="boring">}
+</span></code></pre>
+<p><code>Some(5)</code> ga <code>Some(i)</code> pattern mos keladimi? Ha bu shunday! Bizda ham xuddi shunday variant bor. Keyin <code>i</code> o'zgaruvchisi <code>Some</code> ichidagi qiymatga bog'lanadi, shuning uchun <code>i</code> <code>5</code> qiymatini oladi. Shundan so'ng match armidagi kod bajariladi, shuning uchun biz <code>i</code> qiymatiga 1 qo'shamiz va ichida jami <code>6</code> bo'lgan yangi <code>Some</code> qiymatini yaratamiz.</p>
+<p>Keling, 6-5-Ro'yxatdagi <code>bir_qoshish</code> ning ikkinchi chaqiruvini ko'rib chiqaylik, bunda <code>x</code> <code>None</code>. Biz <code>match</code> ga kiramiz va birinchi arm bilan taqqoslaymiz:</p>
+<pre><code class="language-rust ignore"><span class="boring">fn main() {
+</span><span class="boring">    fn bir_qoshish(x: Option&lt;i32&gt;) -&gt; Option&lt;i32&gt; {
+</span><span class="boring">        match x {
+</span>            None =&gt; None,
+<span class="boring">            Some(i) =&gt; Some(i + 1),
+</span><span class="boring">        }
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    let besh = Some(5);
+</span><span class="boring">    let olti = bir_qoshish(besh);
+</span><span class="boring">    let yoq = bir_qoshish(None);
+</span><span class="boring">}
+</span></code></pre>
+<p>Bu mos keladi! Qo'shiladigan qiymat yo'q, shuning uchun dastur to'xtaydi va <code>=&gt;</code> o'ng tomonidagi <code>None</code> qiymatini qaytaradi. Birinchi arm mos kelganligi sababli, boshqa armlar taqqoslanmaydi.</p>
+<p><code>match</code> va enumlarni birlashtirish ko'p holatlarda foydalidir. Rust kodida siz ushbu patterni juda ko'p ko'rasiz: enum bilan <code>match</code>, o'zgaruvchini ichidagi ma'lumotlarga bog'lang va keyin unga asoslangan kodni bajaring. Avvaliga bu biroz qiyin, lekin ko'nikkaningizdan so'ng uni barcha tillarda bo'lishini xohlaysiz. Bu har doim foydalanuvchilarning sevimli texnikasi.</p>
+<h3 id="match-barcha-qiymat-variantlarini-qamrab-oladi"><a class="header" href="#match-barcha-qiymat-variantlarini-qamrab-oladi">Match barcha qiymat variantlarini qamrab oladi</a></h3>
+<p>Biz muhokama qilishimiz kerak bo'lgan <code>match</code> ning yana bir jihati bor: arm patterlari barcha imkoniyatlarni qamrab olishi kerak. Xatoga ega va kompilyatsiya qilinmaydigan <code>bir_qoshish</code> funksiyamizning ushbu versiyasini ko'rib chiqing:</p>
+<pre><code class="language-rust ignore does_not_compile"><span class="boring">fn main() {
+</span>    fn bir_qoshish(x: Option&lt;i32&gt;) -&gt; Option&lt;i32&gt; {
+        match x {
+            Some(i) =&gt; Some(i + 1),
+        }
+    }
+<span class="boring">
+</span><span class="boring">    let besh = Some(5);
+</span><span class="boring">    let olti = bir_qoshish(besh);
+</span><span class="boring">    let yoq = bir_qoshish(None);
+</span><span class="boring">}
+</span></code></pre>
+<p>Biz <code>None</code> holatini ko‘rib chiqmadik, shuning uchun bu kod xatolikka olib keladi. Yaxshiyamki, bu xato Rust qanday tutishni biladi. Agar biz ushbu kodni kompilyatsiya qilishga harakat qilsak, biz ushbu xatoni olamiz:</p>
+<pre><code class="language-console">$ cargo run
+   Compiling enums v0.1.0 (file:///projects/enums)
+error[E0004]: non-exhaustive patterns: `None` not covered
+ --&gt; src/main.rs:3:15
+  |
+3 |         match x {
+  |               ^ pattern `None` not covered
+  |
+note: `Option&lt;i32&gt;` defined here
+ --&gt; /rustc/d5a82bbd26e1ad8b7401f6a718a9c57c96905483/library/core/src/option.rs:518:1
+  |
+  = note:
+/rustc/d5a82bbd26e1ad8b7401f6a718a9c57c96905483/library/core/src/option.rs:522:5: not covered
+  = note: the matched value is of type `Option&lt;i32&gt;`
+help: ensure that all possible cases are being handled by adding a match arm with a wildcard pattern or an explicit pattern as shown
+  |
+4 ~             Some(i) =&gt; Some(i + 1),
+5 ~             None =&gt; todo!(),
+  |
+
+For more information about this error, try `rustc --explain E0004`.
+error: could not compile `enums` due to previous error
+</code></pre>
+<p>Rust biz barcha mumkin bo'lgan holatlarni qamrab olmaganimizni biladi va hatto qaysi patterni unutganimizni biladi! Rust-da matchlar to'liq: kod to'g'ri bo'lishi uchun biz barcha mumkin bo'lgan holatlarni qamrab olishimiz kerak. Ayniqsa, <code>Option&lt;T&gt;</code> holatida, Rust bizni <code>None</code> holatini aniq ko'rib chiqishni unutib qo'yishimizga to'sqinlik qilsa, bizni null bo'lishi mumkin bo'lgan qiymatga ega bo`lishimizdan himoya qiladi, shunday qilib, ilgari muhokama qilingan milliard dollarlik xatoni imkonsiz qiladi.</p>
+<h3 id="hammasini-ushlash-patternlari-va-_-placeholder"><a class="header" href="#hammasini-ushlash-patternlari-va-_-placeholder">Hammasini ushlash patternlari va <code>_</code> placeholder</a></h3>
+<p>Enumlardan foydalanib, biz bir nechta ma'lum qiymatlar uchun maxsus harakatlarni amalga oshirishimiz mumkin, ammo boshqa barcha qiymatlar uchun bitta standart amalni bajaramiz. Tasavvur qiling-a, biz o'yinni amalga oshirmoqdamiz, unda 3 ta o'yinda o'yinchi qimirlamaydi, aksincha, chiroyli yangi shlyapa oladi. Agar siz 7 ni aylantirsangiz, o'yinchingiz chiroyli shlyapasini yo'qotadi. Boshqa barcha qiymatlar uchun o'yinchi o'yin taxtasida shuncha bo'sh joyni siljitadi. Mana, bu mantiqni amalga oshiradigan <code>match</code>, bu erda narda toshlarni o'rash natijasi tasodifiy qiymat emas, balki qattiq kodlangan va mantiqning qolgan qismi jismlarsiz funktsiyalar bilan ifodalanadi, chunki ularni amalga oshirish ushbu doiradan tashqarida. misol:</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">fn main() {
+</span>    let narda_toshi = 9;
+    match narda_toshi {
+        3 =&gt; chiroyli_shlyapa_qoshish(),
+        7 =&gt; chiroyli_shlyapani_ochirish(),
+        boshqa =&gt; player_harakati(boshqa),
+    }
+
+    fn chiroyli_shlyapa_qoshish() {}
+    fn chiroyli_shlyapani_ochirish() {}
+    fn player_harakati(bosh_joylar: u8) {}
+<span class="boring">}
+</span></code></pre></pre>
+<p>Dastlabki ikkita arm uchun patternlar <code>3</code> va <code>7</code> harfli qiymatlardir. Boshqa barcha mumkin bo'lgan qiymatlarni qamrab oladigan oxirgi arm uchun pattern biz <code>boshqa</code> deb nomlash uchun tanlagan o'zgaruvchidir. <code>boshqa</code> arm uchun ishlaydigan kod o'zgaruvchini <code>player_harakati</code> funksiyasiga o'tkazish orqali ishlatadi.</p>
+<p>Ushbu kod kompilatsiya qilinadi, garchi biz <code>u8</code> ga ega bo'lishi mumkin bo'lgan barcha qiymatlarni sanab o'tmagan bo'lsak ham, chunki oxirgi pattern maxsus sanab o'tilmagan barcha qiymatlarga mos keladi. Bu <code>match</code> toʻliq boʻlishi kerakligi haqidagi talabga javob beradi. E'tibor bering, biz armni eng oxirgi qo'yishimiz kerak, chunki patternlar tartibda baholanadi. Agar biz ushlovchi armni oldinroq qo'ysak, boshqa armlar hech qachon run bo'lmaydi, shuning uchun biz hammamizni tutgandan keyin arm qo'shsak, Rust bizni ogohlantiradi!</p>
+<p>Rustda umumiy patterda qiymatdan foydalanishni istamaganimizda foydalanish mumkin bo'lgan pattern ham mavjud: <code>_</code> - har qanday qiymatga mos keladigan va bu qiymatga bog'lanmaydigan maxsus pattern. Bu Rustga biz qiymatdan foydalanmasligimizni bildiradi, shuning uchun Rust bizni foydalanilmagan o'zgaruvchi haqida ogohlantirmaydi.</p>
+<p>Keling, o'yin qoidalarini shunday o'zgartiraylik: agar 3 yoki 7 dan boshqa narda toshi paydo bo'lsa, siz yana boshqatdan aylantirib tashlashingiz  kerak. Biz endi catch-all qiymatidan foydalanishimiz shart emas, shuning uchun biz kodimizni <code>boshqa</code> deb nomlangan o‘zgaruvchi o‘rniga <code>_</code> ishlatish uchun o‘zgartirishimiz mumkin:</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">fn main() {
+</span>    let narda_toshi = 9;
+    match narda_toshi {
+        3 =&gt; chiroyli_shlyapa_qoshish(),
+        7 =&gt; chiroyli_shlyapani_ochirish(),
+        _ =&gt; qaytadan(),
+    }
+
+    fn chiroyli_shlyapa_qoshish() {}
+    fn chiroyli_shlyapani_ochirish() {}
+    fn qaytadan() {}
+<span class="boring">}
+</span></code></pre></pre>
+<p>Bu misol, shuningdek, to'liqlik talabiga javob beradi, chunki biz oxirgi qismdagi barcha boshqa qiymatlarni e'tiborsiz qoldiramiz; biz hech narsani unutmadik.</p>
+<p>Nihoyat, biz o'yin qoidalarini yana bir bor o'zgartiramiz, shunda siz 3 yoki 7 ni o'tkazmaguningizcha sizning navbatingizda hech narsa sodir bo'lmaydi. Biz buni birlik qiymatidan (biz <a href="ch03-02-data-types.html#the-tuple-type">&quot;Tuple turi&quot;</a><!-- ignore --> section da aytib o'tgan bo'sh tuple turi) <code>_</code> armi bilan birga keladigan kod sifatida ifodalashimiz mumkin:</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">fn main() {
+</span>    let narda_toshi = 9;
+    match narda_toshi {
+        3 =&gt; chiroyli_shlyapa_qoshish(),
+        7 =&gt; chiroyli_shlyapani_ochirish(),
+        _ =&gt; (),
+    }
+
+    fn chiroyli_shlyapa_qoshish() {}
+    fn chiroyli_shlyapani_ochirish() {}
+<span class="boring">}
+</span></code></pre></pre>
+<p>Bu yerda biz Rustga aniq aytamizki, biz avvalgi armdagi patternga mos kelmaydigan boshqa qiymatdan foydalanmaymiz va bu holda hech qanday kodni ishga tushirishni xohlamaymiz.</p>
+<p><a href="ch18-00-patterns.html">18-bobda</a><!-- ignore --> biz ko'rib chiqadigan patternlar va match haqida ko'proq ma'lumot bor.
+Hozircha biz <code>if let</code> sintaksisiga o‘tamiz, bu <code>match</code> ifodasi juda batafsil bo'lgan holatlarda foydali bo'lishi mumkin.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="ch06-01-defining-an-enum.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a rel="next" href="ch06-03-if-let.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="ch06-01-defining-an-enum.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a rel="next" href="ch06-03-if-let.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        <script type="text/javascript" src="ferris.js"></script>
+    </body>
+</html>

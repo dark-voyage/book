@@ -1,0 +1,417 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Sinovlar qanday o&#x27;tkazilishini nazorat qilish - Rust dasturlash tili</title>
+        <!-- Custom HTML head -->
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="ferris.css">
+        <link rel="stylesheet" href="theme/2018-edition.css">
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="title-page.html">Rust dasturlash tili</a></li><li class="chapter-item expanded affix "><a href="foreword.html">Muqaddima</a></li><li class="chapter-item expanded affix "><a href="ch00-00-introduction.html">Kirish</a></li><li class="chapter-item expanded "><a href="ch01-00-getting-started.html"><strong aria-hidden="true">1.</strong> Ishni boshlash</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch01-01-installation.html"><strong aria-hidden="true">1.1.</strong> O'rnatish</a></li><li class="chapter-item expanded "><a href="ch01-02-hello-world.html"><strong aria-hidden="true">1.2.</strong> Hello, World!</a></li><li class="chapter-item expanded "><a href="ch01-03-hello-cargo.html"><strong aria-hidden="true">1.3.</strong> Hello, Cargo!</a></li></ol></li><li class="chapter-item expanded "><a href="ch02-00-guessing-game-tutorial.html"><strong aria-hidden="true">2.</strong> Taxmin qilish o'yinini dasturlash</a></li><li class="chapter-item expanded "><a href="ch03-00-common-programming-concepts.html"><strong aria-hidden="true">3.</strong> Umumiy dasturlash tushunchalari</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch03-01-variables-and-mutability.html"><strong aria-hidden="true">3.1.</strong> O'zgaruvchilar va o'zgaruvchanlik</a></li><li class="chapter-item expanded "><a href="ch03-02-data-types.html"><strong aria-hidden="true">3.2.</strong> Ma'lumotlar turlari</a></li><li class="chapter-item expanded "><a href="ch03-03-how-functions-work.html"><strong aria-hidden="true">3.3.</strong> Funksiyalar</a></li><li class="chapter-item expanded "><a href="ch03-04-comments.html"><strong aria-hidden="true">3.4.</strong> Izohlar</a></li><li class="chapter-item expanded "><a href="ch03-05-control-flow.html"><strong aria-hidden="true">3.5.</strong> Control Flow</a></li></ol></li><li class="chapter-item expanded "><a href="ch04-00-understanding-ownership.html"><strong aria-hidden="true">4.</strong> Ownershipni tushunish</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch04-01-what-is-ownership.html"><strong aria-hidden="true">4.1.</strong> Ownership nima?</a></li><li class="chapter-item expanded "><a href="ch04-02-references-and-borrowing.html"><strong aria-hidden="true">4.2.</strong> Referencelar va  Borrowing</a></li><li class="chapter-item expanded "><a href="ch04-03-slices.html"><strong aria-hidden="true">4.3.</strong> Slice turi</a></li></ol></li><li class="chapter-item expanded "><a href="ch05-00-structs.html"><strong aria-hidden="true">5.</strong> Tegishli ma'lumotlarni tuzish uchun Structdan foydalanish</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch05-01-defining-structs.html"><strong aria-hidden="true">5.1.</strong> Structlarni aniqlash va yaratish</a></li><li class="chapter-item expanded "><a href="ch05-02-example-structs.html"><strong aria-hidden="true">5.2.</strong> Structs yordamida namunaviy dastur</a></li><li class="chapter-item expanded "><a href="ch05-03-method-syntax.html"><strong aria-hidden="true">5.3.</strong> Metod sintaksisi</a></li></ol></li><li class="chapter-item expanded "><a href="ch06-00-enums.html"><strong aria-hidden="true">6.</strong> Enumlar va patternlarni moslashtirish</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch06-01-defining-an-enum.html"><strong aria-hidden="true">6.1.</strong> Enumni aniqlash</a></li><li class="chapter-item expanded "><a href="ch06-02-match.html"><strong aria-hidden="true">6.2.</strong> match Control Flow konstruksiyasi</a></li><li class="chapter-item expanded "><a href="ch06-03-if-let.html"><strong aria-hidden="true">6.3.</strong> if let bilan qisqacha Control Flow</a></li></ol></li><li class="chapter-item expanded "><a href="ch07-00-managing-growing-projects-with-packages-crates-and-modules.html"><strong aria-hidden="true">7.</strong> O'sib borayotgan loyihalarni Paketlar, Cratelar va Modullar bilan boshqarish</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch07-01-packages-and-crates.html"><strong aria-hidden="true">7.1.</strong> Paketlar va Cratelar</a></li><li class="chapter-item expanded "><a href="ch07-02-defining-modules-to-control-scope-and-privacy.html"><strong aria-hidden="true">7.2.</strong> Qo'llanish doirasi va maxfiylikni nazorat qilish uchun modullarni aniqlash</a></li><li class="chapter-item expanded "><a href="ch07-03-paths-for-referring-to-an-item-in-the-module-tree.html"><strong aria-hidden="true">7.3.</strong> Modul daraxtidagi elementga murojaat qilish yo'llari</a></li><li class="chapter-item expanded "><a href="ch07-04-bringing-paths-into-scope-with-the-use-keyword.html"><strong aria-hidden="true">7.4.</strong> use kalit so'zi bilan yo'llarni qamrab olish</a></li><li class="chapter-item expanded "><a href="ch07-05-separating-modules-into-different-files.html"><strong aria-hidden="true">7.5.</strong> Modullarni turli fayllarga ajratish</a></li></ol></li><li class="chapter-item expanded "><a href="ch08-00-common-collections.html"><strong aria-hidden="true">8.</strong> Umumiy to'plamlar</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch08-01-vectors.html"><strong aria-hidden="true">8.1.</strong> Vectorlar bilan qiymatlar ro'yxatini saqlash</a></li><li class="chapter-item expanded "><a href="ch08-02-strings.html"><strong aria-hidden="true">8.2.</strong> UTF-8 kodlangan matnni Stringlar bilan saqlash</a></li><li class="chapter-item expanded "><a href="ch08-03-hash-maps.html"><strong aria-hidden="true">8.3.</strong> Hash Mapda bog'langan qiymatlarga ega kalitlarni saqlash</a></li></ol></li><li class="chapter-item expanded "><a href="ch09-00-error-handling.html"><strong aria-hidden="true">9.</strong> Xatolar bilan ishlash</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch09-01-unrecoverable-errors-with-panic.html"><strong aria-hidden="true">9.1.</strong> panic! bilan tuzatib bo'lmaydigan xatolar</a></li><li class="chapter-item expanded "><a href="ch09-02-recoverable-errors-with-result.html"><strong aria-hidden="true">9.2.</strong> Result bilan tiklanadigan xatolar</a></li><li class="chapter-item expanded "><a href="ch09-03-to-panic-or-not-to-panic.html"><strong aria-hidden="true">9.3.</strong> panic! yoki panic! emas</a></li></ol></li><li class="chapter-item expanded "><a href="ch10-00-generics.html"><strong aria-hidden="true">10.</strong> Umumiy turlar, traitlar va lifetime</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch10-01-syntax.html"><strong aria-hidden="true">10.1.</strong> Generik ma'lumotlar turlari</a></li><li class="chapter-item expanded "><a href="ch10-02-traits.html"><strong aria-hidden="true">10.2.</strong> Traitlar: umumiy xatti-harakatni aniqlash</a></li><li class="chapter-item expanded "><a href="ch10-03-lifetime-syntax.html"><strong aria-hidden="true">10.3.</strong> Referencelarni lifetime bilan tekshirish</a></li></ol></li><li class="chapter-item expanded "><a href="ch11-00-testing.html"><strong aria-hidden="true">11.</strong> Avtomatlashtirilgan testlarni yozish</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch11-01-writing-tests.html"><strong aria-hidden="true">11.1.</strong> Testlarni qanday yozish kerak</a></li><li class="chapter-item expanded "><a href="ch11-02-running-tests.html" class="active"><strong aria-hidden="true">11.2.</strong> Sinovlar qanday o'tkazilishini nazorat qilish</a></li><li class="chapter-item expanded "><a href="ch11-03-test-organization.html"><strong aria-hidden="true">11.3.</strong> Test tashkil etish</a></li></ol></li><li class="chapter-item expanded "><a href="ch12-00-an-io-project.html"><strong aria-hidden="true">12.</strong> I/O loyihasi: Buyruqlar qatori dasturini yaratish</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch12-01-accepting-command-line-arguments.html"><strong aria-hidden="true">12.1.</strong> Buyruqlar qatori argumentini qabul qilishs</a></li><li class="chapter-item expanded "><a href="ch12-02-reading-a-file.html"><strong aria-hidden="true">12.2.</strong> Faylni o'qish</a></li><li class="chapter-item expanded "><a href="ch12-03-improving-error-handling-and-modularity.html"><strong aria-hidden="true">12.3.</strong> Modullikni yaxshilash va xatolarni qayta ishlash uchun refactoring</a></li><li class="chapter-item expanded "><a href="ch12-04-testing-the-librarys-functionality.html"><strong aria-hidden="true">12.4.</strong> Sinovga asoslangan ishlab chiqish bilan kutubxonaning funksionalligini rivojlantirish</a></li><li class="chapter-item expanded "><a href="ch12-05-working-with-environment-variables.html"><strong aria-hidden="true">12.5.</strong> Environment o'zgaruvchilari bilan ishlash</a></li><li class="chapter-item expanded "><a href="ch12-06-writing-to-stderr-instead-of-stdout.html"><strong aria-hidden="true">12.6.</strong> Xato xabarlarini standart chiqish o'rniga standart xatoga yozish</a></li></ol></li><li class="chapter-item expanded "><a href="ch13-00-functional-features.html"><strong aria-hidden="true">13.</strong> Funksional til xususiyatlari: iteratorlar va closurelar</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch13-01-closures.html"><strong aria-hidden="true">13.1.</strong> Closurelar: Environmentni qamrab oladigan anonim funksiyalar</a></li><li class="chapter-item expanded "><a href="ch13-02-iterators.html"><strong aria-hidden="true">13.2.</strong> Iteratorlar bilan bir qator elementlarga ishlov berish</a></li><li class="chapter-item expanded "><a href="ch13-03-improving-our-io-project.html"><strong aria-hidden="true">13.3.</strong> I/O loyihamizni takomillashtirish</a></li><li class="chapter-item expanded "><a href="ch13-04-performance.html"><strong aria-hidden="true">13.4.</strong> Ishlash samaradorligini solishtirish: Looplar va iteratorlar</a></li></ol></li><li class="chapter-item expanded "><a href="ch14-00-more-about-cargo.html"><strong aria-hidden="true">14.</strong> Cargo va Crates.io haqida ko'proq</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch14-01-release-profiles.html"><strong aria-hidden="true">14.1.</strong> Reliz profillari bilan structlarni moslashtirish</a></li><li class="chapter-item expanded "><a href="ch14-02-publishing-to-crates-io.html"><strong aria-hidden="true">14.2.</strong> Crateni Crates.io-ga nashr qilish</a></li><li class="chapter-item expanded "><a href="ch14-03-cargo-workspaces.html"><strong aria-hidden="true">14.3.</strong> Cargo Workspacelar</a></li><li class="chapter-item expanded "><a href="ch14-04-installing-binaries.html"><strong aria-hidden="true">14.4.</strong> Binary fayllarni Crates.io'dan cargo install bilan o'rnatish</a></li><li class="chapter-item expanded "><a href="ch14-05-extending-cargo.html"><strong aria-hidden="true">14.5.</strong> Maxsus buyruqlar bilan Cargoni kengaytirish</a></li></ol></li><li class="chapter-item expanded "><a href="ch15-00-smart-pointers.html"><strong aria-hidden="true">15.</strong> Smart Pointerlar</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch15-01-box.html"><strong aria-hidden="true">15.1.</strong> Heapdagi ma'lumotlarni ko'rsatish uchun Box&lt;T&gt; dan foydalanish</a></li><li class="chapter-item expanded "><a href="ch15-02-deref.html"><strong aria-hidden="true">15.2.</strong> Deref Traitidan foydalangan holda oddiy referencelar kabi Smart Pointerlar bilan ishlash</a></li><li class="chapter-item expanded "><a href="ch15-03-drop.html"><strong aria-hidden="true">15.3.</strong> Drop Traiti bilan tozalashda kodni ishga tushirish</a></li><li class="chapter-item expanded "><a href="ch15-04-rc.html"><strong aria-hidden="true">15.4.</strong> Rc&lt;T&gt;, reference hisoblangan Smart Pointer</a></li><li class="chapter-item expanded "><a href="ch15-05-interior-mutability.html"><strong aria-hidden="true">15.5.</strong> RefCell&lt;T&gt; va ichki o'zgaruvchanlik namunasi</a></li><li class="chapter-item expanded "><a href="ch15-06-reference-cycles.html"><strong aria-hidden="true">15.6.</strong> Reference Cycles Can Leak Memory</a></li></ol></li><li class="chapter-item expanded "><a href="ch16-00-concurrency.html"><strong aria-hidden="true">16.</strong> Qo'rqmas parallellik</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch16-01-threads.html"><strong aria-hidden="true">16.1.</strong> Kodni bir vaqtning o'zida ishga tushirish uchun threadlardan foydalanish</a></li><li class="chapter-item expanded "><a href="ch16-02-message-passing.html"><strong aria-hidden="true">16.2.</strong> Threadlar orasidagi ma'lumotlarni uzatish uchun xabar uzatishdan(Message Passing) foydalanish</a></li><li class="chapter-item expanded "><a href="ch16-03-shared-state.html"><strong aria-hidden="true">16.3.</strong> Shared-State Concurrency</a></li><li class="chapter-item expanded "><a href="ch16-04-extensible-concurrency-sync-and-send.html"><strong aria-hidden="true">16.4.</strong> Sync va Send traitlari bilan kengaytiriladigan parallellik</a></li></ol></li><li class="chapter-item expanded "><a href="ch17-00-oop.html"><strong aria-hidden="true">17.</strong> Rustning ob'ektga yo'naltirilgan dasturlash xususiyatlari- OOP</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch17-01-what-is-oo.html"><strong aria-hidden="true">17.1.</strong> Ob'ektga yo'naltirilgan tillarning xususiyatlari</a></li><li class="chapter-item expanded "><a href="ch17-02-trait-objects.html"><strong aria-hidden="true">17.2.</strong> Har xil turdagi qiymatlarga ruxsat beruvchi trait ob'ektlaridan foydalanish</a></li><li class="chapter-item expanded "><a href="ch17-03-oo-design-patterns.html"><strong aria-hidden="true">17.3.</strong> Ob'ektga yo'naltirilgan dizayn patternini implement qilish</a></li></ol></li><li class="chapter-item expanded "><a href="ch18-00-patterns.html"><strong aria-hidden="true">18.</strong> Patternlar va Matching</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch18-01-all-the-places-for-patterns.html"><strong aria-hidden="true">18.1.</strong> All the Places Patterns Can Be Used</a></li><li class="chapter-item expanded "><a href="ch18-02-refutability.html"><strong aria-hidden="true">18.2.</strong> Refutability: Whether a Pattern Might Fail to Match</a></li><li class="chapter-item expanded "><a href="ch18-03-pattern-syntax.html"><strong aria-hidden="true">18.3.</strong> Pattern Sintaksisi</a></li></ol></li><li class="chapter-item expanded "><a href="ch19-00-advanced-features.html"><strong aria-hidden="true">19.</strong> Kengaytirilgan Xususiyatlar</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch19-01-unsafe-rust.html"><strong aria-hidden="true">19.1.</strong> Xavfsiz Rust</a></li><li class="chapter-item expanded "><a href="ch19-03-advanced-traits.html"><strong aria-hidden="true">19.2.</strong> Murakkab Traitlar</a></li><li class="chapter-item expanded "><a href="ch19-04-advanced-types.html"><strong aria-hidden="true">19.3.</strong> Kengaytirilgan Turlar</a></li><li class="chapter-item expanded "><a href="ch19-05-advanced-functions-and-closures.html"><strong aria-hidden="true">19.4.</strong> Kengaytirilgan funksiyalar va closurelar</a></li><li class="chapter-item expanded "><a href="ch19-06-macros.html"><strong aria-hidden="true">19.5.</strong> Makrolar</a></li></ol></li><li class="chapter-item expanded "><a href="ch20-00-final-project-a-web-server.html"><strong aria-hidden="true">20.</strong> Yakuniy loyiha: Ko'p tarmoqli veb-serverni qurish</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch20-01-single-threaded.html"><strong aria-hidden="true">20.1.</strong> Yagona tarmoqli veb-serverni qurish</a></li><li class="chapter-item expanded "><a href="ch20-02-multithreaded.html"><strong aria-hidden="true">20.2.</strong> Bizning yagona tarmoqli serverimizni ko'p tarmoqli serverga aylantirish</a></li><li class="chapter-item expanded "><a href="ch20-03-graceful-shutdown-and-cleanup.html"><strong aria-hidden="true">20.3.</strong> Ajoyib o'chirish va tozalash</a></li></ol></li><li class="chapter-item expanded "><a href="appendix-00.html"><strong aria-hidden="true">21.</strong> Ilova</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="appendix-01-keywords.html"><strong aria-hidden="true">21.1.</strong> A - Kalit so'zlar</a></li><li class="chapter-item expanded "><a href="appendix-02-operators.html"><strong aria-hidden="true">21.2.</strong> B - Operatorlar va Symbollar</a></li><li class="chapter-item expanded "><a href="appendix-03-derivable-traits.html"><strong aria-hidden="true">21.3.</strong> C - Hosilaviy Traitlar</a></li><li class="chapter-item expanded "><a href="appendix-04-useful-development-tools.html"><strong aria-hidden="true">21.4.</strong> D - Foydali Development Toollar</a></li><li class="chapter-item expanded "><a href="appendix-05-editions.html"><strong aria-hidden="true">21.5.</strong> E - Nashrlar</a></li><li class="chapter-item expanded "><a href="appendix-06-translation.html"><strong aria-hidden="true">21.6.</strong> F - Kitobning tarjimalari</a></li><li class="chapter-item expanded "><a href="appendix-07-nightly-rust.html"><strong aria-hidden="true">21.7.</strong> G - Rust qanday yasaladi va “Nightly Rust”</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Rust dasturlash tili</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/rust-lang/book" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h2 id="testlar-qanday-otkazilishini-nazorat-qilish"><a class="header" href="#testlar-qanday-otkazilishini-nazorat-qilish">Testlar qanday o'tkazilishini nazorat qilish</a></h2>
+<p>Xuddi <code>cargo run</code> kodingizni kompilyatsiya qilib, natijada olingan binaryni ishga tushirganidek, <code>cargo test</code> kodingizni test rejimida kompilyatsiya qiladi va natijada olingan binary testni ishga tushiradi. <code>cargo test</code> tomonidan ishlab chiqarilgan binary faylning standart xatti-harakati barcha testlarni parallel ravishda bajarish va sinov testlari paytida hosil bo'lgan chiqishni(output) olish, natijaning ko'rsatilishiga yo'l qo'ymaslik va sinov natijalari bilan bog'liq chiqishni o'qishni osonlashtirishdir. Biroq, siz ushbu standart xatti-harakatni o'zgartirish uchun buyruq qatori parametrlarini belgilashingiz mumkin.</p>
+<p>Ba'zi buyruq qatori opsiyalari <code>cargo test</code> ga, ba'zilari esa natijada olingan binary testga o'tadi. Ushbu ikki turdagi argumentlarni ajratish uchun siz <code>cargo test</code> ga, so'ngra ajratuvchi <code>--</code> ga o'tadigan argumentlarni, so'ngra test binarysiga o'tadigan argumentlarni sanab o'tasiz. <code>cargo test --help</code>ni ishga tushirish <code>cargo test</code> bilan foydalanishingiz mumkin bo'lgan variantlarni ko'rsatadi va <code>cargo test -- --help</code>ni ishga tushirish ajratuvchidan(separator) keyin foydalanishingiz mumkin bo'lgan variantlarni ko'rsatadi.</p>
+<h3 id="testlarni-parallel-yoki-ketma-ket-bajarish"><a class="header" href="#testlarni-parallel-yoki-ketma-ket-bajarish">Testlarni parallel yoki ketma-ket bajarish</a></h3>
+<p>Bir nechta testlarni bajarganingizda, standart bo'yicha ular threadlar yordamida parallel ravishda ishlaydi, ya'ni ular tezroq ishlashni tugatadi va siz tezroq fikr-mulohaza olasiz. Testlar bir vaqtning o'zida ishlayotganligi sababli, sizning testlaringiz bir-biriga yoki umumiy holatga, jumladan, joriy ishchi jildi yoki muhit o'zgaruvchilari kabi umumiy muhitga bog'liq emasligiga ishonch hosil qilishingiz kerak.</p>
+<p>Misol uchun, sizning har bir testingiz diskda <em>test-output.txt</em> nomli fayl yaratadigan va ushbu faylga ba'zi ma'lumotlarni yozadigan ba'zi kodlarni ishga tushiradi. Keyin har bir test ushbu fayldagi ma'lumotlarni o'qiydi va faylda har bir testda har xil bo'lgan ma'lum bir qiymat borligini tasdiqlaydi. Testlar bir vaqtning o'zida bajarilganligi sababli, bitta test faylni boshqa test yozish va o'qish oralig'ida faylni qayta yozishi mumkin. Ikkinchi test kod noto'g'ri bo'lgani uchun emas, balki parallel ravishda ishlayotganda testlar bir-biriga xalaqit bergani uchun muvaffaqiyatsiz bo'ladi. Bitta yechim har bir test boshqa faylga yozishiga ishonch hosil qilishdir; yana bir yechim testlarni birma-bir bajarishdir.</p>
+<p>Agar siz testlarni parallel ravishda o'tkazishni xohlamasangiz yoki ishlatilgan threadlar sonini yanada aniqroq nazorat qilishni istasangiz, siz <code>--test threads</code> buyru'gini va foydalanmoqchi bo'lgan threadlar sonini test binaryga yuborishingiz mumkin. Quyidagi misolni ko'rib chiqing:</p>
+<pre><code class="language-console">$ cargo test -- --test-threads=1
+</code></pre>
+<p>Biz dasturga parallelizmdan foydalanmaslikni aytib, test threadlari sonini <code>1</code> ga o'rnatdik. Testlarni bitta thread yordamida o'tkazish ularni parallel ravishda bajarishdan ko'ra ko'proq vaqt talab etadi, ammo agar ular umumiy holatga ega bo'lsa, testlar bir-biriga xalaqit bermaydi.</p>
+<h3 id="funktsiya-natijalarini-korsatish"><a class="header" href="#funktsiya-natijalarini-korsatish">Funktsiya natijalarini ko'rsatish</a></h3>
+<p>Odatiy bo'lib, agar testdan o'tgan bo'lsa, Rustning test kutubxonasi standart chiqishda chop etilgan barcha narsalarni yozib oladi. Misol uchun, agar testda <code>println!</code> ni chaqirsak va testdan o'tgan bo'lsa, terminalda <code>println!</code> chiqishini ko'rmaymiz; biz faqat testdan o'tganligini ko'rsatadigan qatorni ko'ramiz. Agar test muvaffaqiyatsiz tugasa, biz xato xabarining qolgan qismi bilan standart chiqishda chop etilganini ko'ramiz.</p>
+<p>Misol tariqasida, 11-10 ro'yxatida o'z parametrining qiymatini chop etadigan va 10 ni qaytaradigan ahmoqona funksiya, shuningdek, o'tgan test va muvaffaqiyatsizlikka uchragan test mavjud.</p>
+<p><span class="filename">Fayl nomi: src/lib.rs</span></p>
+<pre><code class="language-rust panics noplayground">fn print_qiladi_va_10_qaytaradi(a: i32) -&gt; i32 {
+    println!(&quot;Men {} qiymatini oldim&quot;, a);
+    10
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_muvaffaqiyatli() {
+        let qiymat = print_qiladi_va_10_qaytaradi(4);
+        assert_eq!(10, qiymat);
+    }
+
+    #[test]
+    fn test_muvaffaqiyatsiz() {
+        let qiymat = print_qiladi_va_10_qaytaradi(8);
+        assert_eq!(5, qiymat);
+    }
+}
+</code></pre>
+<p><span class="caption">Ro'yxat 11-10: <code>println!</code>ni chaqiruvchi funksiya uchun testlar</span></p>
+<p>Ushbu testlarni <code>cargo test</code> bilan bajarganimizda, biz quyidagi natijani ko'ramiz:</p>
+<pre><code class="language-console">$ cargo test
+   Compiling silly-function v0.1.0 (file:///projects/silly-function)
+    Finished test [unoptimized + debuginfo] target(s) in 0.58s
+     Running unittests src/lib.rs (target/debug/deps/silly_function-160869f38cff9166)
+
+running 2 tests
+test tests::test_muvaffaqiyatsiz ... FAILED
+test tests::test_muvaffaqiyatli ... ok
+
+failures:
+
+---- tests::test_muvaffaqiyatsiz stdout ----
+I got the value 8
+thread 'tests::test_muvaffaqiyatsiz' panicked at 'assertion failed: `(left == right)`
+  left: `5`,
+ right: `10`', src/lib.rs:19:9
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    tests::test_muvaffaqiyatsiz
+
+test result: FAILED. 1 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+error: test failed, to rerun pass `--lib`
+</code></pre>
+<p>E'tibor bering, bu chiqishning hech bir joyida <code>Men 4 qiymatini oldim</code> ni ko'rmaymiz, ya'ni testdan o'tganda chop etiladi. Bu chiqish qo'lga olindi. Muvaffaqiyatsiz bo'lgan test natijasi, <code>Men 8-qiymatni oldim</code>, test xulosasi chiqishi bo'limida paydo bo'ladi, bu test muvaffaqiyatsizligi sababini ham ko'rsatadi.</p>
+<p>Agar biz testlardan o'tish uchun yozilgan qiymatlarni ham ko'rishni istasak, Rust-ga <code>--show-output</code> bilan muvaffaqiyatli testlar natijasini ham ko'rsatishni aytishimiz mumkin.</p>
+<pre><code class="language-console">$ cargo test -- --show-output
+</code></pre>
+<p>11-10 ro'yxatdagi testlarni yana <code>--show-output</code> buyrug'i bilan o'tkazganimizda, biz quyidagi natijani ko'ramiz:</p>
+<pre><code class="language-console">$ cargo test -- --show-output
+   Compiling silly-function v0.1.0 (file:///projects/silly-function)
+    Finished test [unoptimized + debuginfo] target(s) in 0.60s
+     Running unittests src/lib.rs (target/debug/deps/silly_function-160869f38cff9166)
+
+running 2 tests
+test tests::this_test_will_fail ... FAILED
+test tests::this_test_will_pass ... ok
+
+successes:
+
+---- tests::this_test_will_pass stdout ----
+I got the value 4
+
+
+successes:
+    tests::this_test_will_pass
+
+failures:
+
+---- tests::this_test_will_fail stdout ----
+I got the value 8
+thread 'tests::this_test_will_fail' panicked at 'assertion failed: `(left == right)`
+  left: `5`,
+ right: `10`', src/lib.rs:19:9
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    tests::this_test_will_fail
+
+test result: FAILED. 1 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+error: test failed, to rerun pass `--lib`
+</code></pre>
+<h3 id="testlar-toplamini-nomi-boyicha-bajarishishga-tushirish"><a class="header" href="#testlar-toplamini-nomi-boyicha-bajarishishga-tushirish">Testlar to'plamini nomi bo'yicha bajarish(ishga tushirish)</a></h3>
+<p>Ba'zan to'liq test to'plamini ishga tushirish uzoq vaqt talab qilishi mumkin. Agar siz ma'lum bir sohada kod ustida ishlayotgan bo'lsangiz, faqat ushbu kodga tegishli testlarni o'tkazishni xohlashingiz mumkin. Argument sifatida oʻtkazmoqchi boʻlgan test(lar)ning nomi yoki nomlarini <code>cargo test</code> oʻtish orqali qaysi testlarni oʻtkazishni tanlashingiz mumkin.</p>
+<p>Testlar kichik to‘plamini qanday bajarishni ko‘rsatish uchun avval 11-11 ro‘yxatda ko‘rsatilganidek, <code>ikkita_qoshish</code> funksiyamiz uchun uchta test yaratamiz va qaysi birini bajarishni tanlaymiz.</p>
+<p><span class="filename">Fayl nomi: src/lib.rs</span></p>
+<pre><code class="language-rust noplayground">pub fn ikkita_qoshish(a: i32) -&gt; i32 {
+    a + 2
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn ikkita_qoshish_va_ikki() {
+        assert_eq!(4, ikkita_qoshish(2));
+    }
+
+    #[test]
+    fn uchta_qoshish_va_ikki() {
+        assert_eq!(5, ikkita_qoshish(3));
+    }
+
+    #[test]
+    fn yuz() {
+        assert_eq!(102, ikkita_qoshish(100));
+    }
+}
+</code></pre>
+<p><span class="caption">Ro'yxat 11-11: Uch xil nomga ega uchta test</span></p>
+<p>Agar biz testlarni hech qanday argumentlarsiz o'tkazsak, avval ko'rganimizdek, barcha testlar parallel ravishda ishlaydi:</p>
+<pre><code class="language-console">$ cargo test
+   Compiling adder v0.1.0 (file:///projects/adder)
+    Finished test [unoptimized + debuginfo] target(s) in 0.62s
+     Running unittests src/lib.rs (target/debug/deps/adder-92948b65e88960b4)
+
+running 3 tests
+test tests::uchta_qoshish_va_ikki ... ok
+test tests::ikkita_qoshish_va_ikki ... ok
+test tests::yuz ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests adder
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+</code></pre>
+<h4 id="yagona-testlarni-otkazish"><a class="header" href="#yagona-testlarni-otkazish">Yagona testlarni o'tkazish</a></h4>
+<p>Biz har qanday test funksiyasining nomini faqat shu testni oʻtkazish uchun <code>cargo test</code>ga oʻtkazishimiz mumkin:</p>
+<pre><code class="language-console">$ cargo test yuz
+   Compiling adder v0.1.0 (file:///projects/adder)
+    Finished test [unoptimized + debuginfo] target(s) in 0.69s
+     Running unittests src/lib.rs (target/debug/deps/adder-92948b65e88960b4)
+
+running 1 test
+test tests::yuz ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 2 filtered out; finished in 0.00s
+
+</code></pre>
+<p>Faqat <code>yuz</code> nomli test o'tkazildi; qolgan ikkita test bu nomga mos kelmadi. Sinov natijasi, oxirida <code>2 filtered out</code> belgisini ko‘rsatish orqali bizda boshqa testlar o‘tkazilmaganligini bildiradi.</p>
+<p>Biz bir nechta testlarning nomlarini shu tarzda aniqlay olmaymiz; faqat <code>cargo test</code>ga berilgan birinchi qiymatdan foydalaniladi. Ammo bir nechta testlarni o'tkazishning bir usuli bor.</p>
+<h4 id="bir-nechta-testlarni-otkazish-uchun-filtrlash"><a class="header" href="#bir-nechta-testlarni-otkazish-uchun-filtrlash">Bir nechta testlarni o'tkazish uchun filtrlash</a></h4>
+<p>Biz test nomining bir qismini belgilashimiz mumkin va nomi shu qiymatga mos keladigan har qanday test bajariladi. Masalan, ikkita testimiz nomi <code>qoshish</code> ni o‘z ichiga olganligi sababli, biz <code>cargo test qoshish</code> ni ishga tushirish orqali ikkalasini ham ishga tushirishimiz mumkin:</p>
+<pre><code class="language-console">$ cargo test add
+   Compiling adder v0.1.0 (file:///projects/adder)
+    Finished test [unoptimized + debuginfo] target(s) in 0.61s
+     Running unittests src/lib.rs (target/debug/deps/adder-92948b65e88960b4)
+
+running 2 tests
+test tests::uchta_qoshish_va_ikki ... ok
+test tests::ikkita_qoshish_va_ikki ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 1 filtered out; finished in 0.00s
+
+</code></pre>
+<p>Bu buyruq nomidagi <code>qoshish</code> bilan barcha testlarni o'tkazdi va <code>yuz</code> nomli testni filtrladi. Shuni ham yodda tutingki, test paydo bo'ladigan modul test nomining bir qismiga aylanadi, shuning uchun biz modul nomini filtrlash orqali moduldagi barcha testlarni bajarishimiz mumkin.</p>
+<h3 id="maxsus-talab-qilinmasa-bazi-testlarni-etiborsiz-qoldirish"><a class="header" href="#maxsus-talab-qilinmasa-bazi-testlarni-etiborsiz-qoldirish">Maxsus talab qilinmasa, ba'zi testlarni e'tiborsiz qoldirish</a></h3>
+<p>Ba'zida bir nechta maxsus testlarni bajarish juda ko'p vaqt talab qilishi mumkin, shuning uchun siz <code>cargo test</code> ning ko'p bosqichlarida ularni istisno qilishingiz mumkin. Siz oʻtkazmoqchi boʻlgan barcha testlarni argument sifatida roʻyxatga olish oʻrniga, bu yerda koʻrsatilganidek, ularni istisno qilish uchun <code>ignore</code>(eʼtibor bermaslik) atributidan foydalanib, vaqt talab qiluvchi testlarga izoh qoʻyishingiz mumkin:</p>
+<p><span class="filename">Fayl nomi: src/lib.rs</span></p>
+<pre><code class="language-rust noplayground">#[test]
+fn ishlamoqda() {
+    assert_eq!(2 + 2, 4);
+}
+
+#[test]
+#[ignore]
+fn qiyin_test() {
+    // code that takes an hour to run
+}
+</code></pre>
+<p><code>#[test]</code>dan keyin biz chiqarib tashlamoqchi bo'lgan testga <code>#[ignore]</code> qatorini qo'shamiz. Endi testlarimizni o'tkazganimizda, <code>ishlamoqda</code> ishlaydi, lekin <code>qiyin_test</code> ishlamaydi:</p>
+<pre><code class="language-console">$ cargo test
+   Compiling adder v0.1.0 (file:///projects/adder)
+    Finished test [unoptimized + debuginfo] target(s) in 0.60s
+     Running unittests src/lib.rs (target/debug/deps/adder-92948b65e88960b4)
+
+running 2 tests
+test qiyin_test ... ignored
+test ishlamoqda ... ok
+
+test result: ok. 1 passed; 0 failed; 1 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests adder
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+</code></pre>
+<p><code>qiyin_test</code> funksiyasi <code>ignore</code> ro'yxatiga kiritilgan. Agar biz faqat e'tiborga olinmagan(ignor qilingan) testlarni o'tkazmoqchi bo'lsak, biz <code>cargo test -- --ignored</code> dan foydalanishimiz mumkin:</p>
+<pre><code class="language-console">$ cargo test -- --ignored
+   Compiling adder v0.1.0 (file:///projects/adder)
+    Finished test [unoptimized + debuginfo] target(s) in 0.61s
+     Running unittests src/lib.rs (target/debug/deps/adder-92948b65e88960b4)
+
+running 1 test
+test qiyin_test ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 1 filtered out; finished in 0.00s
+
+   Doc-tests adder
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+</code></pre>
+<p>Qaysi sinovlar o'tkazilishini nazorat qilish orqali siz <code>cargo test</code> natijalari tez bo'lishiga ishonch hosil qilishingiz mumkin. <code>ignored</code> testlar natijalarini tekshirish mantiqiy bo'lgan nuqtada bo'lganingizda va natijalarni kutishga vaqtingiz bo'lsa, uning o'rniga <code>cargo test -- --ignored</code> ni ishga tushirishingiz mumkin. Agar siz barcha testlarni ular e'tiborsiz(ignor) qoldiriladimi yoki yo'qmi, o'tkazmoqchi bo'lsangiz, <code>cargo test -- --include-ignored</code> ni ishga tushirishingiz mumkin.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="ch11-01-writing-tests.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a rel="next" href="ch11-03-test-organization.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="ch11-01-writing-tests.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a rel="next" href="ch11-03-test-organization.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        <script type="text/javascript" src="ferris.js"></script>
+    </body>
+</html>

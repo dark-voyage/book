@@ -1,0 +1,641 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Sinovga asoslangan ishlab chiqish bilan kutubxonaning funksionalligini rivojlantirish - Rust dasturlash tili</title>
+        <!-- Custom HTML head -->
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="ferris.css">
+        <link rel="stylesheet" href="theme/2018-edition.css">
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="title-page.html">Rust dasturlash tili</a></li><li class="chapter-item expanded affix "><a href="foreword.html">Muqaddima</a></li><li class="chapter-item expanded affix "><a href="ch00-00-introduction.html">Kirish</a></li><li class="chapter-item expanded "><a href="ch01-00-getting-started.html"><strong aria-hidden="true">1.</strong> Ishni boshlash</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch01-01-installation.html"><strong aria-hidden="true">1.1.</strong> O'rnatish</a></li><li class="chapter-item expanded "><a href="ch01-02-hello-world.html"><strong aria-hidden="true">1.2.</strong> Hello, World!</a></li><li class="chapter-item expanded "><a href="ch01-03-hello-cargo.html"><strong aria-hidden="true">1.3.</strong> Hello, Cargo!</a></li></ol></li><li class="chapter-item expanded "><a href="ch02-00-guessing-game-tutorial.html"><strong aria-hidden="true">2.</strong> Taxmin qilish o'yinini dasturlash</a></li><li class="chapter-item expanded "><a href="ch03-00-common-programming-concepts.html"><strong aria-hidden="true">3.</strong> Umumiy dasturlash tushunchalari</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch03-01-variables-and-mutability.html"><strong aria-hidden="true">3.1.</strong> O'zgaruvchilar va o'zgaruvchanlik</a></li><li class="chapter-item expanded "><a href="ch03-02-data-types.html"><strong aria-hidden="true">3.2.</strong> Ma'lumotlar turlari</a></li><li class="chapter-item expanded "><a href="ch03-03-how-functions-work.html"><strong aria-hidden="true">3.3.</strong> Funksiyalar</a></li><li class="chapter-item expanded "><a href="ch03-04-comments.html"><strong aria-hidden="true">3.4.</strong> Izohlar</a></li><li class="chapter-item expanded "><a href="ch03-05-control-flow.html"><strong aria-hidden="true">3.5.</strong> Control Flow</a></li></ol></li><li class="chapter-item expanded "><a href="ch04-00-understanding-ownership.html"><strong aria-hidden="true">4.</strong> Ownershipni tushunish</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch04-01-what-is-ownership.html"><strong aria-hidden="true">4.1.</strong> Ownership nima?</a></li><li class="chapter-item expanded "><a href="ch04-02-references-and-borrowing.html"><strong aria-hidden="true">4.2.</strong> Referencelar va  Borrowing</a></li><li class="chapter-item expanded "><a href="ch04-03-slices.html"><strong aria-hidden="true">4.3.</strong> Slice turi</a></li></ol></li><li class="chapter-item expanded "><a href="ch05-00-structs.html"><strong aria-hidden="true">5.</strong> Tegishli ma'lumotlarni tuzish uchun Structdan foydalanish</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch05-01-defining-structs.html"><strong aria-hidden="true">5.1.</strong> Structlarni aniqlash va yaratish</a></li><li class="chapter-item expanded "><a href="ch05-02-example-structs.html"><strong aria-hidden="true">5.2.</strong> Structs yordamida namunaviy dastur</a></li><li class="chapter-item expanded "><a href="ch05-03-method-syntax.html"><strong aria-hidden="true">5.3.</strong> Metod sintaksisi</a></li></ol></li><li class="chapter-item expanded "><a href="ch06-00-enums.html"><strong aria-hidden="true">6.</strong> Enumlar va patternlarni moslashtirish</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch06-01-defining-an-enum.html"><strong aria-hidden="true">6.1.</strong> Enumni aniqlash</a></li><li class="chapter-item expanded "><a href="ch06-02-match.html"><strong aria-hidden="true">6.2.</strong> match Control Flow konstruksiyasi</a></li><li class="chapter-item expanded "><a href="ch06-03-if-let.html"><strong aria-hidden="true">6.3.</strong> if let bilan qisqacha Control Flow</a></li></ol></li><li class="chapter-item expanded "><a href="ch07-00-managing-growing-projects-with-packages-crates-and-modules.html"><strong aria-hidden="true">7.</strong> O'sib borayotgan loyihalarni Paketlar, Cratelar va Modullar bilan boshqarish</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch07-01-packages-and-crates.html"><strong aria-hidden="true">7.1.</strong> Paketlar va Cratelar</a></li><li class="chapter-item expanded "><a href="ch07-02-defining-modules-to-control-scope-and-privacy.html"><strong aria-hidden="true">7.2.</strong> Qo'llanish doirasi va maxfiylikni nazorat qilish uchun modullarni aniqlash</a></li><li class="chapter-item expanded "><a href="ch07-03-paths-for-referring-to-an-item-in-the-module-tree.html"><strong aria-hidden="true">7.3.</strong> Modul daraxtidagi elementga murojaat qilish yo'llari</a></li><li class="chapter-item expanded "><a href="ch07-04-bringing-paths-into-scope-with-the-use-keyword.html"><strong aria-hidden="true">7.4.</strong> use kalit so'zi bilan yo'llarni qamrab olish</a></li><li class="chapter-item expanded "><a href="ch07-05-separating-modules-into-different-files.html"><strong aria-hidden="true">7.5.</strong> Modullarni turli fayllarga ajratish</a></li></ol></li><li class="chapter-item expanded "><a href="ch08-00-common-collections.html"><strong aria-hidden="true">8.</strong> Umumiy to'plamlar</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch08-01-vectors.html"><strong aria-hidden="true">8.1.</strong> Vectorlar bilan qiymatlar ro'yxatini saqlash</a></li><li class="chapter-item expanded "><a href="ch08-02-strings.html"><strong aria-hidden="true">8.2.</strong> UTF-8 kodlangan matnni Stringlar bilan saqlash</a></li><li class="chapter-item expanded "><a href="ch08-03-hash-maps.html"><strong aria-hidden="true">8.3.</strong> Hash Mapda bog'langan qiymatlarga ega kalitlarni saqlash</a></li></ol></li><li class="chapter-item expanded "><a href="ch09-00-error-handling.html"><strong aria-hidden="true">9.</strong> Xatolar bilan ishlash</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch09-01-unrecoverable-errors-with-panic.html"><strong aria-hidden="true">9.1.</strong> panic! bilan tuzatib bo'lmaydigan xatolar</a></li><li class="chapter-item expanded "><a href="ch09-02-recoverable-errors-with-result.html"><strong aria-hidden="true">9.2.</strong> Result bilan tiklanadigan xatolar</a></li><li class="chapter-item expanded "><a href="ch09-03-to-panic-or-not-to-panic.html"><strong aria-hidden="true">9.3.</strong> panic! yoki panic! emas</a></li></ol></li><li class="chapter-item expanded "><a href="ch10-00-generics.html"><strong aria-hidden="true">10.</strong> Umumiy turlar, traitlar va lifetime</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch10-01-syntax.html"><strong aria-hidden="true">10.1.</strong> Generik ma'lumotlar turlari</a></li><li class="chapter-item expanded "><a href="ch10-02-traits.html"><strong aria-hidden="true">10.2.</strong> Traitlar: umumiy xatti-harakatni aniqlash</a></li><li class="chapter-item expanded "><a href="ch10-03-lifetime-syntax.html"><strong aria-hidden="true">10.3.</strong> Referencelarni lifetime bilan tekshirish</a></li></ol></li><li class="chapter-item expanded "><a href="ch11-00-testing.html"><strong aria-hidden="true">11.</strong> Avtomatlashtirilgan testlarni yozish</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch11-01-writing-tests.html"><strong aria-hidden="true">11.1.</strong> Testlarni qanday yozish kerak</a></li><li class="chapter-item expanded "><a href="ch11-02-running-tests.html"><strong aria-hidden="true">11.2.</strong> Sinovlar qanday o'tkazilishini nazorat qilish</a></li><li class="chapter-item expanded "><a href="ch11-03-test-organization.html"><strong aria-hidden="true">11.3.</strong> Test tashkil etish</a></li></ol></li><li class="chapter-item expanded "><a href="ch12-00-an-io-project.html"><strong aria-hidden="true">12.</strong> I/O loyihasi: Buyruqlar qatori dasturini yaratish</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch12-01-accepting-command-line-arguments.html"><strong aria-hidden="true">12.1.</strong> Buyruqlar qatori argumentini qabul qilishs</a></li><li class="chapter-item expanded "><a href="ch12-02-reading-a-file.html"><strong aria-hidden="true">12.2.</strong> Faylni o'qish</a></li><li class="chapter-item expanded "><a href="ch12-03-improving-error-handling-and-modularity.html"><strong aria-hidden="true">12.3.</strong> Modullikni yaxshilash va xatolarni qayta ishlash uchun refactoring</a></li><li class="chapter-item expanded "><a href="ch12-04-testing-the-librarys-functionality.html" class="active"><strong aria-hidden="true">12.4.</strong> Sinovga asoslangan ishlab chiqish bilan kutubxonaning funksionalligini rivojlantirish</a></li><li class="chapter-item expanded "><a href="ch12-05-working-with-environment-variables.html"><strong aria-hidden="true">12.5.</strong> Environment o'zgaruvchilari bilan ishlash</a></li><li class="chapter-item expanded "><a href="ch12-06-writing-to-stderr-instead-of-stdout.html"><strong aria-hidden="true">12.6.</strong> Xato xabarlarini standart chiqish o'rniga standart xatoga yozish</a></li></ol></li><li class="chapter-item expanded "><a href="ch13-00-functional-features.html"><strong aria-hidden="true">13.</strong> Funksional til xususiyatlari: iteratorlar va closurelar</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch13-01-closures.html"><strong aria-hidden="true">13.1.</strong> Closurelar: Environmentni qamrab oladigan anonim funksiyalar</a></li><li class="chapter-item expanded "><a href="ch13-02-iterators.html"><strong aria-hidden="true">13.2.</strong> Iteratorlar bilan bir qator elementlarga ishlov berish</a></li><li class="chapter-item expanded "><a href="ch13-03-improving-our-io-project.html"><strong aria-hidden="true">13.3.</strong> I/O loyihamizni takomillashtirish</a></li><li class="chapter-item expanded "><a href="ch13-04-performance.html"><strong aria-hidden="true">13.4.</strong> Ishlash samaradorligini solishtirish: Looplar va iteratorlar</a></li></ol></li><li class="chapter-item expanded "><a href="ch14-00-more-about-cargo.html"><strong aria-hidden="true">14.</strong> Cargo va Crates.io haqida ko'proq</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch14-01-release-profiles.html"><strong aria-hidden="true">14.1.</strong> Reliz profillari bilan structlarni moslashtirish</a></li><li class="chapter-item expanded "><a href="ch14-02-publishing-to-crates-io.html"><strong aria-hidden="true">14.2.</strong> Crateni Crates.io-ga nashr qilish</a></li><li class="chapter-item expanded "><a href="ch14-03-cargo-workspaces.html"><strong aria-hidden="true">14.3.</strong> Cargo Workspacelar</a></li><li class="chapter-item expanded "><a href="ch14-04-installing-binaries.html"><strong aria-hidden="true">14.4.</strong> Binary fayllarni Crates.io'dan cargo install bilan o'rnatish</a></li><li class="chapter-item expanded "><a href="ch14-05-extending-cargo.html"><strong aria-hidden="true">14.5.</strong> Maxsus buyruqlar bilan Cargoni kengaytirish</a></li></ol></li><li class="chapter-item expanded "><a href="ch15-00-smart-pointers.html"><strong aria-hidden="true">15.</strong> Smart Pointerlar</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch15-01-box.html"><strong aria-hidden="true">15.1.</strong> Heapdagi ma'lumotlarni ko'rsatish uchun Box&lt;T&gt; dan foydalanish</a></li><li class="chapter-item expanded "><a href="ch15-02-deref.html"><strong aria-hidden="true">15.2.</strong> Deref Traitidan foydalangan holda oddiy referencelar kabi Smart Pointerlar bilan ishlash</a></li><li class="chapter-item expanded "><a href="ch15-03-drop.html"><strong aria-hidden="true">15.3.</strong> Drop Traiti bilan tozalashda kodni ishga tushirish</a></li><li class="chapter-item expanded "><a href="ch15-04-rc.html"><strong aria-hidden="true">15.4.</strong> Rc&lt;T&gt;, reference hisoblangan Smart Pointer</a></li><li class="chapter-item expanded "><a href="ch15-05-interior-mutability.html"><strong aria-hidden="true">15.5.</strong> RefCell&lt;T&gt; va ichki o'zgaruvchanlik namunasi</a></li><li class="chapter-item expanded "><a href="ch15-06-reference-cycles.html"><strong aria-hidden="true">15.6.</strong> Reference Cycles Can Leak Memory</a></li></ol></li><li class="chapter-item expanded "><a href="ch16-00-concurrency.html"><strong aria-hidden="true">16.</strong> Qo'rqmas parallellik</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch16-01-threads.html"><strong aria-hidden="true">16.1.</strong> Kodni bir vaqtning o'zida ishga tushirish uchun threadlardan foydalanish</a></li><li class="chapter-item expanded "><a href="ch16-02-message-passing.html"><strong aria-hidden="true">16.2.</strong> Threadlar orasidagi ma'lumotlarni uzatish uchun xabar uzatishdan(Message Passing) foydalanish</a></li><li class="chapter-item expanded "><a href="ch16-03-shared-state.html"><strong aria-hidden="true">16.3.</strong> Shared-State Concurrency</a></li><li class="chapter-item expanded "><a href="ch16-04-extensible-concurrency-sync-and-send.html"><strong aria-hidden="true">16.4.</strong> Sync va Send traitlari bilan kengaytiriladigan parallellik</a></li></ol></li><li class="chapter-item expanded "><a href="ch17-00-oop.html"><strong aria-hidden="true">17.</strong> Rustning ob'ektga yo'naltirilgan dasturlash xususiyatlari- OOP</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch17-01-what-is-oo.html"><strong aria-hidden="true">17.1.</strong> Ob'ektga yo'naltirilgan tillarning xususiyatlari</a></li><li class="chapter-item expanded "><a href="ch17-02-trait-objects.html"><strong aria-hidden="true">17.2.</strong> Har xil turdagi qiymatlarga ruxsat beruvchi trait ob'ektlaridan foydalanish</a></li><li class="chapter-item expanded "><a href="ch17-03-oo-design-patterns.html"><strong aria-hidden="true">17.3.</strong> Ob'ektga yo'naltirilgan dizayn patternini implement qilish</a></li></ol></li><li class="chapter-item expanded "><a href="ch18-00-patterns.html"><strong aria-hidden="true">18.</strong> Patternlar va Matching</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch18-01-all-the-places-for-patterns.html"><strong aria-hidden="true">18.1.</strong> All the Places Patterns Can Be Used</a></li><li class="chapter-item expanded "><a href="ch18-02-refutability.html"><strong aria-hidden="true">18.2.</strong> Refutability: Whether a Pattern Might Fail to Match</a></li><li class="chapter-item expanded "><a href="ch18-03-pattern-syntax.html"><strong aria-hidden="true">18.3.</strong> Pattern Sintaksisi</a></li></ol></li><li class="chapter-item expanded "><a href="ch19-00-advanced-features.html"><strong aria-hidden="true">19.</strong> Kengaytirilgan Xususiyatlar</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch19-01-unsafe-rust.html"><strong aria-hidden="true">19.1.</strong> Xavfsiz Rust</a></li><li class="chapter-item expanded "><a href="ch19-03-advanced-traits.html"><strong aria-hidden="true">19.2.</strong> Murakkab Traitlar</a></li><li class="chapter-item expanded "><a href="ch19-04-advanced-types.html"><strong aria-hidden="true">19.3.</strong> Kengaytirilgan Turlar</a></li><li class="chapter-item expanded "><a href="ch19-05-advanced-functions-and-closures.html"><strong aria-hidden="true">19.4.</strong> Kengaytirilgan funksiyalar va closurelar</a></li><li class="chapter-item expanded "><a href="ch19-06-macros.html"><strong aria-hidden="true">19.5.</strong> Makrolar</a></li></ol></li><li class="chapter-item expanded "><a href="ch20-00-final-project-a-web-server.html"><strong aria-hidden="true">20.</strong> Yakuniy loyiha: Ko'p tarmoqli veb-serverni qurish</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch20-01-single-threaded.html"><strong aria-hidden="true">20.1.</strong> Yagona tarmoqli veb-serverni qurish</a></li><li class="chapter-item expanded "><a href="ch20-02-multithreaded.html"><strong aria-hidden="true">20.2.</strong> Bizning yagona tarmoqli serverimizni ko'p tarmoqli serverga aylantirish</a></li><li class="chapter-item expanded "><a href="ch20-03-graceful-shutdown-and-cleanup.html"><strong aria-hidden="true">20.3.</strong> Ajoyib o'chirish va tozalash</a></li></ol></li><li class="chapter-item expanded "><a href="appendix-00.html"><strong aria-hidden="true">21.</strong> Ilova</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="appendix-01-keywords.html"><strong aria-hidden="true">21.1.</strong> A - Kalit so'zlar</a></li><li class="chapter-item expanded "><a href="appendix-02-operators.html"><strong aria-hidden="true">21.2.</strong> B - Operatorlar va Symbollar</a></li><li class="chapter-item expanded "><a href="appendix-03-derivable-traits.html"><strong aria-hidden="true">21.3.</strong> C - Hosilaviy Traitlar</a></li><li class="chapter-item expanded "><a href="appendix-04-useful-development-tools.html"><strong aria-hidden="true">21.4.</strong> D - Foydali Development Toollar</a></li><li class="chapter-item expanded "><a href="appendix-05-editions.html"><strong aria-hidden="true">21.5.</strong> E - Nashrlar</a></li><li class="chapter-item expanded "><a href="appendix-06-translation.html"><strong aria-hidden="true">21.6.</strong> F - Kitobning tarjimalari</a></li><li class="chapter-item expanded "><a href="appendix-07-nightly-rust.html"><strong aria-hidden="true">21.7.</strong> G - Rust qanday yasaladi va “Nightly Rust”</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Rust dasturlash tili</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/rust-lang/book" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h2 id="testga-asoslangan-ishlab-chiqish-bilan-kutubxonaning-funksionalligini-rivojlantirish"><a class="header" href="#testga-asoslangan-ishlab-chiqish-bilan-kutubxonaning-funksionalligini-rivojlantirish">Testga asoslangan ishlab chiqish bilan kutubxonaning funksionalligini rivojlantirish</a></h2>
+<p>Endi biz mantiqni <em>src/lib.rs</em> ga chiqardik va argumentlarni yig‘ish va xatolarni qayta ishlashni <em>src/main.rs</em> da qoldirdik, kodimizning asosiy funksionalligi uchun testlarni yozish ancha osonlashdi. Biz turli xil argumentlar bilan funksiyalarni to'g'ridan-to'g'ri chaqirishimiz va buyruq satridan binaryga murojaat qilmasdan qaytish(return) qiymatlarini tekshirishimiz mumkin.</p>
+<p>Ushbu bo'limda biz quyidagi bosqichlar bilan test-driven development (TDD) jarayonidan foydalangan holda <code>minigrep</code> dasturiga qidiruv mantig'ini qo'shamiz:</p>
+<ol>
+<li>Muvaffaqiyatsiz bo'lgan testni yozing va siz kutgan sabab tufayli muvaffaqiyatsiz bo'lishiga ishonch hosil qilish uchun uni ishga tushiring.</li>
+<li>Yangi testdan o'tish uchun yetarli kodni yozing yoki o'zgartiring.</li>
+<li>Siz qo'shgan yoki o'zgartirgan kodni qayta tiklang(refaktoring) va testlar o'tishda davom etayotganiga ishonch hosil qiling.</li>
+<li>Repeat from step 1!</li>
+</ol>
+<p>Garchi bu dasturiy ta'minotni yozishning ko'p usullaridan biri bo'lsa-da, TDD kod dizaynini boshqarishga yordam beradi. Testdan o'tishni ta'minlaydigan kodni yozishdan oldin testni yozish jarayon davomida yuqori sinov qamrovini saqlashga yordam beradi.</p>
+<p>Biz fayl tarkibidagi so'rovlar qatorini qidirishni amalga oshiradigan va so'rovga mos keladigan qatorlar ro'yxatini tuzadigan funksiyani amalga oshirishni sinovdan o'tkazamiz. Biz bu funksiyani <code>qidiruv</code> funksiyasiga qo‘shamiz.</p>
+<h3 id="muvaffaqiyatsiz-test-yozish"><a class="header" href="#muvaffaqiyatsiz-test-yozish">Muvaffaqiyatsiz test yozish</a></h3>
+<p>Bizga endi ular kerak emasligi sababli, dasturning harakatini tekshirish uchun foydalanilgan <em>src/lib.rs</em> va <em>src/main.rs</em> dan <code>println!</code> statementlarini olib tashlaymiz. Keyin, <em>src/lib.rs</em> da, <a href="ch11-01-writing-tests.html#the-anatomy-of-a-test-function">11-bobda</a><!-- ignore --> qilganimizdek, test funksiyasiga ega <code>tests</code> modulini qo'shing. Test funksiyasi biz <code>qidirish</code> funksiyasiga ega bo'lishini xohlagan xatti-harakatni belgilaydi: u so'rov va izlash uchun matnni oladi va u so'rovni o'z ichiga olgan matndan faqat satrlarni qaytaradi. 12-15 ro'yxatda ushbu test ko'rsatilgan, u hali kompilyatsiya bo'lmaydi.</p>
+<p><span class="filename">Fayl nomi: src/lib.rs</span></p>
+<pre><code class="language-rust ignore does_not_compile"><span class="boring">use std::error::Error;
+</span><span class="boring">use std::fs;
+</span><span class="boring">
+</span><span class="boring">pub struct Config {
+</span><span class="boring">    pub sorov: String,
+</span><span class="boring">    pub fayl_yoli: String,
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">impl Config {
+</span><span class="boring">    pub fn build(args: &amp;[String]) -&gt; Result&lt;Config, &amp;'static str&gt; {
+</span><span class="boring">        if args.len() &lt; 3 {
+</span><span class="boring">            return Err(&quot;argumentlar yetarli emas&quot;);
+</span><span class="boring">        }
+</span><span class="boring">
+</span><span class="boring">        let sorov = args[1].clone();
+</span><span class="boring">        let fayl_yoli = args[2].clone();
+</span><span class="boring">
+</span><span class="boring">        Ok(Config { sorov, fayl_yoli })
+</span><span class="boring">    }
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">pub fn run(config: Config) -&gt; Result&lt;(), Box&lt;dyn Error&gt;&gt; {
+</span><span class="boring">    let tarkib = fs::read_to_string(config.fayl_yoli)?;
+</span><span class="boring">
+</span><span class="boring">    Ok(())
+</span><span class="boring">}
+</span><span class="boring">
+</span>#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn birinchi_natija() {
+        let sorov = &quot;marali&quot;;
+        let tarkib = &quot;\
+Rust:
+xavfsiz, tez, samarali.
+Uchtasini tanlang.&quot;;
+
+        assert_eq!(vec![&quot;xavfsiz, tez, samarali.&quot;], qidiruv(sorov, tarkib));
+    }
+}
+</code></pre>
+<p><span class="caption">12-15 roʻyxat: <code>qidiruv</code> funksiyasi uchun muvaffaqiyatsiz test yaratish</span></p>
+<p>Bu test <code>marali</code> qatorini qidiradi.Biz izlayotgan matn uchta qatordan iborat bo‘lib, ulardan faqat bittasi <code>marali</code>ni o‘z ichiga oladi (E’tibor bering, qo‘sh qo‘shtirnoqning ochilishidan keyingi teskari chiziq Rustga ushbu satr literalining boshiga yangi qator belgisini qo‘ymaslikni bildiradi). <code>qidiruv</code> funksiyasidan qaytarilgan qiymat faqat biz kutgan qatorni o'z ichiga oladi, deb ta'kidlaymiz.</p>
+<p>Biz hali bu testni bajara olmaymiz va uning muvaffaqiyatsizligini kuzata olmaymiz, chunki test hatto kompilyatsiya ham qilmaydi: <code>qidiruv</code> funksiyasi hali mavjud emas! TDD tamoyillariga muvofiq, biz 12-16 roʻyxatda koʻrsatilganidek, har doim boʻsh vektorni qaytaruvchi <code>qidiruv</code> funksiyasining definitionni qoʻshish orqali testni kompilyatsiya qilish va ishga tushirish uchun yetarli kodni qoʻshamiz. Keyin test kompilyatsiya qilinishi va muvaffaqiyatsiz bo'lishi kerak, chunki bo'sh vektor <code>&quot;xavfsiz, tez, samarali.&quot;</code> qatorini o'z ichiga olgan vektorga mos kelmaydi.</p>
+<p><span class="filename">Fayl nomi: src/lib.rs</span></p>
+<pre><code class="language-rust noplayground"><span class="boring">use std::error::Error;
+</span><span class="boring">use std::fs;
+</span><span class="boring">
+</span><span class="boring">pub struct Config {
+</span><span class="boring">    pub sorov: String,
+</span><span class="boring">    pub fayl_yoli: String,
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">impl Config {
+</span><span class="boring">    pub fn build(args: &amp;[String]) -&gt; Result&lt;Config, &amp;'static str&gt; {
+</span><span class="boring">        if args.len() &lt; 3 {
+</span><span class="boring">            return Err(&quot;argumentlar yetarli emas&quot;);
+</span><span class="boring">        }
+</span><span class="boring">
+</span><span class="boring">        let sorov = args[1].clone();
+</span><span class="boring">        let fayl_yoli = args[2].clone();
+</span><span class="boring">
+</span><span class="boring">        Ok(Config { sorov, fayl_yoli })
+</span><span class="boring">    }
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">pub fn run(config: Config) -&gt; Result&lt;(), Box&lt;dyn Error&gt;&gt; {
+</span><span class="boring">    let tarkib = fs::read_to_string(config.fayl_yoli)?;
+</span><span class="boring">
+</span><span class="boring">    Ok(())
+</span><span class="boring">}
+</span><span class="boring">
+</span>pub fn qidiruv&lt;'a&gt;(sorov: &amp;str, tarkib: &amp;'a str) -&gt; Vec&lt;&amp;'a str&gt; {
+    vec![]
+}
+<span class="boring">
+</span><span class="boring">#[cfg(test)]
+</span><span class="boring">mod tests {
+</span><span class="boring">    use super::*;
+</span><span class="boring">
+</span><span class="boring">    #[test]
+</span><span class="boring">    fn birinchi_natija() {
+</span><span class="boring">        let sorov = &quot;marali&quot;;
+</span><span class="boring">        let tarkib = &quot;\
+</span><span class="boring">Rust:
+</span><span class="boring">xavfsiz, tez, samarali.
+</span><span class="boring">Uchtasini tanlang.&quot;;
+</span><span class="boring">
+</span><span class="boring">        assert_eq!(vec![&quot;xavfsiz, tez, samarali.&quot;], qidiruv(sorov, tarkib));
+</span><span class="boring">    }
+</span><span class="boring">}
+</span></code></pre>
+<p><span class="caption">Ro'yxat 12-16: <code>qidiruv</code> funksiyasini yetarli darajada aniqlash, shuning uchun testimiz kompilyatsiya bo'ladi</span></p>
+<p>E'tibor bering, biz <code>qidiruv</code> signaturesida <code>'a</code> aniq lifetimeni belgilashimiz va bu lifetimeni <code>tarkib</code> argumenti va qaytarish(return) qiymati bilan ishlatishimiz kerak. <a href="ch10-03-lifetime-syntax.html">10-bobda</a><!-- ignore -->  esda tutingki, lifetime parametrlari qaysi argumentning lifetime(ishlash muddati) qaytariladigan qiymatning lifetime bilan bog'liqligini belgilaydi. Bunday holda, qaytarilgan vektorda <code>tarkib</code> argumentining bo'laklariga (<code>sorov</code> argumenti o'rniga) reference qiluvchi string bo'laklari bo'lishi kerakligini ko'rsatamiz.</p>
+<p>Boshqacha qilib aytganda, biz Rustga aytamizki, <code>qidiruv</code> funksiyasi tomonidan qaytarilgan maʼlumotlar <code>tarkib</code> argumentida <code>qidiruv</code> funksiyasiga oʻtgan maʼlumotlar shuncha vaqtgacha yashaydi. Bu muhim! Murojaatlar haqiqiy bo'lishi uchun bo'laklar(slice) bo'yicha reference qilingan ma'lumotlar ham haqiqiy bo'lishi kerak; agar kompilyator biz <code>tarkib</code> emas, balki <code>sorov</code> ning satr bo'laklarini(string slice) yaratmoqda deb hisoblasa, u xavfsizlik tekshiruvini noto'g'ri bajaradi.</p>
+<p>Agar biz lifetime izohlarni(annotation) unutib, ushbu funksiyani kompilyatsiya qilishga harakat qilsak, biz ushbu xatoni olamiz:</p>
+<pre><code class="language-console">$ cargo build
+   Compiling minigrep v0.1.0 (file:///projects/minigrep)
+error[E0106]: missing lifetime specifier
+  --&gt; src/lib.rs:29:50
+   |
+29 | pub fn qidiruv(sorov: &amp;str, tarkib: &amp;str) -&gt; Vec&lt;&amp;str&gt; {
+   |                       ----          ----         ^ expected named lifetime parameter
+   |
+   = help: this function's return type contains a borrowed value, but the signature does not say whether it is borrowed from `sorov` or `tarkib`
+help: consider introducing a named lifetime parameter
+   |
+29 | pub fn qidiruv&lt;'a&gt;(sorov: &amp;'a str, tarkib: &amp;'a str) -&gt; Vec&lt;&amp;'a str&gt; {
+   |               ++++         ++               ++              ++
+
+For more information about this error, try `rustc --explain E0106`.
+error: could not compile `minigrep` (lib) due to previous error
+warning: build failed, waiting for other jobs to finish...
+error: could not compile `minigrep` (lib test) due to previous error
+</code></pre>
+<p>Rust bizga ikkita argumenning qaysi biri kerakligini bila olmaydi, shuning uchun biz buni aniq aytishimiz kerak. <code>tarkib</code> barcha matnimizni o'z ichiga olgan argument bo'lgani uchun va biz ushbu matnning mos keladigan qismlarini qaytarmoqchi bo'lganimiz sababli, biz <code>tarkib</code> lifetime sintaksisi yordamida qaytarish qiymatiga ulanishi kerak bo'lgan argument ekanligini bilamiz.</p>
+<p>Boshqa dasturlash tillari signaturedagi qiymatlarni qaytarish uchun argumentlarni ulashni talab qilmaydi, ammo bu amaliyot vaqt o'tishi bilan osonlashadi. Siz ushbu misolni 10-bobdagi <a href="ch10-03-lifetime-syntax.html#validating-references-with-lifetimes">“Ma’lumotnomalarni lifetime bilan tekshirish”</a><!-- ignore --> bo‘limi bilan solishtirishingiz mumkin.</p>
+<p>Endi testni bajaramiz:</p>
+<pre><code class="language-console">$ cargo test -- --show-output
+   Compiling silly-function v0.1.0 (file:///projects/silly-function)
+    Finished test [unoptimized + debuginfo] target(s) in 0.60s
+     Running unittests src/lib.rs (target/debug/deps/silly_function-160869f38cff9166)
+
+running 1 test
+test tests::birinchi_natija ... FAILED
+
+successes:
+
+successes:
+
+failures:
+
+---- tests::birinchi_natija stdout ----
+thread 'tests::birinchi_natija' panicked at 'assertion failed: `(left == right)`
+  left: `[&quot;xavfsiz, tez, samarali.&quot;]`,
+ right: `[]`', src/lib.rs:46:9
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    tests::birinchi_natija
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+error: test failed, to rerun pass `--lib`
+</code></pre>
+<p>Ajoyib, test biz kutganimizdek muvaffaqiyatsiz tugadi. Keling, testdan o'tamiz!</p>
+<h3 id="testdan-otish-uchun-kod-yozish"><a class="header" href="#testdan-otish-uchun-kod-yozish">Testdan o'tish uchun kod yozish</a></h3>
+<p>Hozirda testimiz muvaffaqiyatsiz tugadi, chunki biz har doim bo'sh vektorni qaytaramiz. Buni tuzatish va <code>qidiruv</code> ni amalga oshirish uchun dasturimiz quyidagi bosqichlarni bajarishi kerak:</p>
+<ul>
+<li><code>tarkib</code> ning har bir satrini takrorlang.</li>
+<li>Berilgan satrda siz izlayotgan qator mavjudligini tekshiring.</li>
+<li>Agar shunday bo'lsa, uni biz qaytaradigan qiymatlar ro'yxatiga qo'shing.</li>
+<li>Agar bunday bo'lmasa, hech narsa qilmang.</li>
+<li>Mos keladigan natijalar ro'yxatini qaytaring.</li>
+</ul>
+<p>Keling, satrlarni takrorlashdan boshlab, har bir bosqichda ishlaylik.</p>
+<h4 id="lines-metodi-bilan-qatorlar-boylab-takrorlash"><a class="header" href="#lines-metodi-bilan-qatorlar-boylab-takrorlash"><code>lines</code> metodi bilan qatorlar bo'ylab takrorlash</a></h4>
+<p>Rust 12-17 ro'yxatda ko'rsatilganidek, qulay tarzda <code>lines</code> deb nomlangan satrlarni qatorma-qator takrorlash uchun foydali metodga ega. E'tibor bering, bu hali kompilyatsiya qilinmaydi.</p>
+<p><span class="filename">Fayl nomi: src/lib.rs</span></p>
+<pre><code class="language-rust ignore does_not_compile"><span class="boring">use std::error::Error;
+</span><span class="boring">use std::fs;
+</span><span class="boring">
+</span><span class="boring">pub struct Config {
+</span><span class="boring">    pub sorov: String,
+</span><span class="boring">    pub fayl_yoli: String,
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">impl Config {
+</span><span class="boring">    pub fn build(args: &amp;[String]) -&gt; Result&lt;Config, &amp;'static str&gt; {
+</span><span class="boring">        if args.len() &lt; 3 {
+</span><span class="boring">            return Err(&quot;argumentlar yetarli emas&quot;);
+</span><span class="boring">        }
+</span><span class="boring">
+</span><span class="boring">        let sorov = args[1].clone();
+</span><span class="boring">        let fayl_yoli = args[2].clone();
+</span><span class="boring">
+</span><span class="boring">        Ok(Config { sorov, fayl_yoli })
+</span><span class="boring">    }
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">pub fn run(config: Config) -&gt; Result&lt;(), Box&lt;dyn Error&gt;&gt; {
+</span><span class="boring">    let tarkib = fs::read_to_string(config.fayl_yoli)?;
+</span><span class="boring">
+</span><span class="boring">    Ok(())
+</span><span class="boring">}
+</span><span class="boring">
+</span>pub fn qidiruv&lt;'a&gt;(sorov: &amp;str, tarkib: &amp;'a str) -&gt; Vec&lt;&amp;'a str&gt; {
+    for line in tarkib.lines() {
+        // do something with line
+    }
+}
+<span class="boring">
+</span><span class="boring">#[cfg(test)]
+</span><span class="boring">mod tests {
+</span><span class="boring">    use super::*;
+</span><span class="boring">
+</span><span class="boring">    #[test]
+</span><span class="boring">    fn birinchi_natija() {
+</span><span class="boring">        let sorov = &quot;marali&quot;;
+</span><span class="boring">        let tarkib = &quot;\
+</span><span class="boring">Rust:
+</span><span class="boring">xavfsiz, tez, samarali.
+</span><span class="boring">Uchtasini tanlang.&quot;;
+</span><span class="boring">
+</span><span class="boring">        assert_eq!(vec![&quot;xavfsiz, tez, samarali.&quot;], qidiruv(sorov, tarkib));
+</span><span class="boring">    }
+</span><span class="boring">}
+</span></code></pre>
+<p><span class="caption">Ro'yxat 12-17: <code>tarkib</code>dagi har bir qatorni takrorlash
+</span></p>
+<p><code>lines</code> metodi iteratorni qaytaradi.Biz iteratorlar haqida <a href="ch13-02-iterators.html">13-bobda</a><!-- ignore --> chuqurroq gaplashamiz, lekin esda tutingki, siz iteratordan foydalanishning bunday usulini <a href="ch03-05-control-flow.html#looping-through-a-collection-with-for">3-5-ro'yxatda</a><!-- ignore --> ko'rgansiz, bu yerda biz to'plamdagi har bir elementda ba'zi kodlarni ishlatish uchun iterator bilan <code>for</code> siklidan foydalanganmiz.</p>
+<h4 id="sorov-uchun-har-bir-qatorni-qidirish"><a class="header" href="#sorov-uchun-har-bir-qatorni-qidirish">So'rov uchun har bir qatorni qidirish</a></h4>
+<p>Keyinchalik, joriy qatorda so'rovlar qatori mavjudligini tekshiramiz. Yaxshiyamki, satrlarda biz uchun buni amalga oshiradigan <code>contains</code> deb nomlangan foydali metod mavjud! 12-18 roʻyxatda koʻrsatilganidek, <code>qidiruv</code> funksiyasidagi <code>contains</code> metodiga murojatni qoʻshing. E'tibor bering, bu hali kompilyatsiya qilinmaydi.</p>
+<p><span class="filename">Fayl nomi: src/lib.rs</span></p>
+<pre><code class="language-rust ignore does_not_compile"><span class="boring">use std::error::Error;
+</span><span class="boring">use std::fs;
+</span><span class="boring">
+</span><span class="boring">pub struct Config {
+</span><span class="boring">    pub sorov: String,
+</span><span class="boring">    pub fayl_yoli: String,
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">impl Config {
+</span><span class="boring">    pub fn build(args: &amp;[String]) -&gt; Result&lt;Config, &amp;'static str&gt; {
+</span><span class="boring">        if args.len() &lt; 3 {
+</span><span class="boring">            return Err(&quot;argumentlar yetarli emas&quot;);
+</span><span class="boring">        }
+</span><span class="boring">
+</span><span class="boring">        let sorov = args[1].clone();
+</span><span class="boring">        let fayl_yoli = args[2].clone();
+</span><span class="boring">
+</span><span class="boring">        Ok(Config { sorov, fayl_yoli })
+</span><span class="boring">    }
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">pub fn run(config: Config) -&gt; Result&lt;(), Box&lt;dyn Error&gt;&gt; {
+</span><span class="boring">    let tarkib = fs::read_to_string(config.fayl_yoli)?;
+</span><span class="boring">
+</span><span class="boring">    Ok(())
+</span><span class="boring">}
+</span><span class="boring">
+</span>pub fn qidiruv&lt;'a&gt;(sorov: &amp;str, tarkib: &amp;'a str) -&gt; Vec&lt;&amp;'a str&gt; {
+    for line in tarkib.lines() {
+        if line.contains(sorov) {
+            // do something with line
+        }
+    }
+}
+<span class="boring">
+</span><span class="boring">#[cfg(test)]
+</span><span class="boring">mod tests {
+</span><span class="boring">    use super::*;
+</span><span class="boring">
+</span><span class="boring">    #[test]
+</span><span class="boring">    fn birinchi_natija() {
+</span><span class="boring">        let sorov = &quot;marali&quot;;
+</span><span class="boring">        let tarkib = &quot;\
+</span><span class="boring">Rust:
+</span><span class="boring">xavfsiz, tez, samarali.
+</span><span class="boring">Uchtasini tanlang.&quot;;
+</span><span class="boring">
+</span><span class="boring">        assert_eq!(vec![&quot;xavfsiz, tez, samarali.&quot;], qidiruv(sorov, tarkib));
+</span><span class="boring">    }
+</span><span class="boring">}
+</span></code></pre>
+<p><span class="caption">Ro'yxat 12-18: satrda <code>sorov</code> dagi satr mavjudligini ko'rish uchun funksiya qo'shiladi</span></p>
+<p>Ayni paytda biz funksionallikni yaratmoqdamiz. Uni kompilyatsiya qilish uchun biz funksiya signaturesida ko'rsatganimizdek, tanadan qiymatni qaytarishimiz kerak.</p>
+<h4 id="mos-keladigan-qatorlarni-saqlash"><a class="header" href="#mos-keladigan-qatorlarni-saqlash">Mos keladigan qatorlarni saqlash</a></h4>
+<p>Ushbu funksiyani tugatish uchun bizga qaytarmoqchi bo'lgan mos keladigan satrlarni saqlash metodi kerak. Buning uchun biz <code>for</code> siklidan oldin o'zgaruvchan vector yasashimiz va vectorda <code>line</code>ni saqlash uchun <code>push</code> metodini chaqirishimiz mumkin. <code>for</code> siklidan so'ng, 12-19 ro'yxatda ko'rsatilganidek, vectorni qaytaramiz.</p>
+<p><span class="filename">Fayl nomi: src/lib.rs</span></p>
+<pre><code class="language-rust ignore"><span class="boring">use std::error::Error;
+</span><span class="boring">use std::fs;
+</span><span class="boring">
+</span><span class="boring">pub struct Config {
+</span><span class="boring">    pub sorov: String,
+</span><span class="boring">    pub fayl_yoli: String,
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">impl Config {
+</span><span class="boring">    pub fn build(args: &amp;[String]) -&gt; Result&lt;Config, &amp;'static str&gt; {
+</span><span class="boring">        if args.len() &lt; 3 {
+</span><span class="boring">            return Err(&quot;argumentlar yetarli emas&quot;);
+</span><span class="boring">        }
+</span><span class="boring">
+</span><span class="boring">        let sorov = args[1].clone();
+</span><span class="boring">        let fayl_yoli = args[2].clone();
+</span><span class="boring">
+</span><span class="boring">        Ok(Config { sorov, fayl_yoli })
+</span><span class="boring">    }
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">pub fn run(config: Config) -&gt; Result&lt;(), Box&lt;dyn Error&gt;&gt; {
+</span><span class="boring">    let tarkib = fs::read_to_string(config.fayl_yoli)?;
+</span><span class="boring">
+</span><span class="boring">    Ok(())
+</span><span class="boring">}
+</span><span class="boring">
+</span>pub fn qidiruv&lt;'a&gt;(sorov: &amp;str, tarkib: &amp;'a str) -&gt; Vec&lt;&amp;'a str&gt; {
+    let mut natijalar = Vec::new();
+
+    for line in tarkib.lines() {
+        if line.contains(sorov) {
+            natijalar.push(line);
+        }
+    }
+
+    natijalar
+}
+<span class="boring">
+</span><span class="boring">#[cfg(test)]
+</span><span class="boring">mod tests {
+</span><span class="boring">    use super::*;
+</span><span class="boring">
+</span><span class="boring">    #[test]
+</span><span class="boring">    fn birinchi_natija() {
+</span><span class="boring">        let sorov = &quot;marali&quot;;
+</span><span class="boring">        let tarkib = &quot;\
+</span><span class="boring">Rust:
+</span><span class="boring">xavfsiz, tez, samarali.
+</span><span class="boring">Uchtasini tanlang.&quot;;
+</span><span class="boring">
+</span><span class="boring">        assert_eq!(vec![&quot;xavfsiz, tez, samarali.&quot;], qidiruv(sorov, tarkib));
+</span><span class="boring">    }
+</span><span class="boring">}
+</span></code></pre>
+<p><span class="caption">Ro'yxat 12-19: Biz ularni qaytarishimiz uchun mos keladigan satrlarni saqlash</span></p>
+<p>Endi <code>qidiruv</code> funksiyasi faqat <code>sorov</code> ni o'z ichiga olgan qatorlarni qaytarishi kerak va bizning testimiz o'tishi kerak. Keling, testni bajaramiz:</p>
+<pre><code class="language-console">$ cargo test
+   Compiling minigrep v0.1.0 (file:///projects/minigrep)
+    Finished test [unoptimized + debuginfo] target(s) in 0.37s
+     Running unittests src/lib.rs (target/debug/deps/minigrep-9cd200e5fac0fc94)
+
+running 1 test
+test tests::birinchi_natija ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/main.rs (target/debug/deps/minigrep-54f36c611e701f9d)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests minigrep
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+</code></pre>
+<p>Testimiz muvaffaqiyatli o'tdi, shuning uchun u ishlayotganini bilamiz!</p>
+<p>Shu nuqtada, biz bir xil funksionallikni saqlab qolish uchun testlarni o'tkazgan holda qidiruv funksiyasini amalga oshirishni qayta tiklash imkoniyatlarini ko'rib chiqishimiz mumkin. Qidiruv funksiyasidagi kod juda yomon emas, lekin u iteratorlarning ba'zi foydali xususiyatlaridan foydalanmaydi. Biz <a href="ch13-02-iterators.html">13-bobda</a><!-- ignore --> ushbu misolga qaytamiz, u yerda iteratorlarni batafsil o'rganamiz va uni qanday yaxshilashni ko'rib chiqamiz.</p>
+<h4 id="run-funksiyasidagi-qidiruv-funksiyasidan-foydalanish"><a class="header" href="#run-funksiyasidagi-qidiruv-funksiyasidan-foydalanish"><code>run</code> funksiyasidagi <code>qidiruv</code> funksiyasidan foydalanish</a></h4>
+<p>Endi <code>qidiruv</code> funksiyasi ishlayotgan va testdan o‘tgan bo‘lsa, <code>run</code> funksiyamizdan <code>qidiruv</code> ni chaqirishimiz kerak. Biz <code>config.sorov</code> qiymatini va fayldan o'qiydigan <code>tarkib</code>-ni  <code>qidiruv</code> funksiyasiga o'tkazishimiz kerak. Keyin <code>run</code> <code>qidiruv</code>dan qaytarilgan har bir qatorni chop etadi:</p>
+<p><span class="filename">Fayl nomi: src/lib.rs</span></p>
+<pre><code class="language-rust ignore"><span class="boring">use std::error::Error;
+</span><span class="boring">use std::fs;
+</span><span class="boring">
+</span><span class="boring">pub struct Config {
+</span><span class="boring">    pub sorov: String,
+</span><span class="boring">    pub fayl_yoli: String,
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">impl Config {
+</span><span class="boring">    pub fn build(args: &amp;[String]) -&gt; Result&lt;Config, &amp;'static str&gt; {
+</span><span class="boring">        if args.len() &lt; 3 {
+</span><span class="boring">            return Err(&quot;argumentlar yetarli emas&quot;);
+</span><span class="boring">        }
+</span><span class="boring">
+</span><span class="boring">        let sorov = args[1].clone();
+</span><span class="boring">        let fayl_yoli = args[2].clone();
+</span><span class="boring">
+</span><span class="boring">        Ok(Config { sorov, fayl_yoli })
+</span><span class="boring">    }
+</span><span class="boring">}
+</span><span class="boring">
+</span>pub fn run(config: Config) -&gt; Result&lt;(), Box&lt;dyn Error&gt;&gt; {
+    let tarkib = fs::read_to_string(config.fayl_yoli)?;
+
+    for line in qidiruv(&amp;config.sorov, &amp;tarkib) {
+        println!(&quot;{line}&quot;);
+    }
+
+    Ok(())
+}
+<span class="boring">
+</span><span class="boring">pub fn qidiruv&lt;'a&gt;(sorov: &amp;str, tarkib: &amp;'a str) -&gt; Vec&lt;&amp;'a str&gt; {
+</span><span class="boring">    let mut natijalar = Vec::new();
+</span><span class="boring">
+</span><span class="boring">    for line in tarkib.lines() {
+</span><span class="boring">        if line.contains(sorov) {
+</span><span class="boring">            natijalar.push(line);
+</span><span class="boring">        }
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    natijalar
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">#[cfg(test)]
+</span><span class="boring">mod tests {
+</span><span class="boring">    use super::*;
+</span><span class="boring">
+</span><span class="boring">    #[test]
+</span><span class="boring">    fn birinchi_natija() {
+</span><span class="boring">        let sorov = &quot;marali&quot;;
+</span><span class="boring">        let tarkib = &quot;\
+</span><span class="boring">Rust:
+</span><span class="boring">xavfsiz, tez, samarali.
+</span><span class="boring">Uchtasini tanlang.&quot;;
+</span><span class="boring">
+</span><span class="boring">        assert_eq!(vec![&quot;xavfsiz, tez, samarali.&quot;], qidiruv(sorov, tarkib));
+</span><span class="boring">    }
+</span><span class="boring">}
+</span></code></pre>
+<p>Biz <code>qidiruv</code> dan har bir qatorni qaytarish va uni chop etish uchun <code>for</code> siklidan foydalanmoqdamiz.</p>
+<p>Endi butun dastur ishlashi kerak! Keling, buni sinab ko'raylik, avval Olma she'ridagi &quot;karnay&quot; ning aynan bir satrini qaytarishi kerak bo'lgan so'z bilan:</p>
+<pre><code class="language-console">$ cargo run -- karnay olma.txt
+   Compiling minigrep v0.1.0 (file:///projects/minigrep)
+    Finished dev [unoptimized + debuginfo] target(s) in 0.01s
+     Running `target/debug/minigrep karnay olma.txt`
+Ishtahang bo'lsin karnay
+</code></pre>
+<p>Ajoyib! Keling, bir nechta qatorga mos keladigan so'zni sinab ko'raylik, masalan, &quot;olma&quot;:</p>
+<pre><code class="language-console">$ cargo run -- olma olma.txt
+   Compiling minigrep v0.1.0 (file:///projects/minigrep)
+    Finished dev [unoptimized + debuginfo] target(s) in 0.38s
+     Running `target/debug/minigrep olma olma.txt`
+Tanishaylik, men - olma,
+Nomimga quloq solma.
+Men sizlarni olmangiz,
+Xomligimda olmangiz!
+Voy qornim deb qolmangiz!
+</code></pre>
+<p>Va nihoyat, she’rning hech bir joyida bo‘lmagan so‘zni izlaganimizda, masalan, “mashina” kabi satrlar chiqmasligiga ishonch hosil qilaylik:</p>
+<pre><code class="language-console">$ cargo run -- mashina olma.txt
+   Compiling minigrep v0.1.0 (file:///projects/minigrep)
+    Finished dev [unoptimized + debuginfo] target(s) in 0.01s
+     Running `target/debug/minigrep mashina olma.txt`
+
+</code></pre>
+<p>Ajoyib! Biz klassik dasturning o'z mini versiyasini yaratdik va ilovalarni qanday tuzish haqida ko'p narsalarni o'rgandik. Shuningdek, biz faylni kiritish(input) va chiqarish(output), lifetime, test va buyruq satrini tahlil qilish haqida bir oz o'rgandik.</p>
+<p>Ushbu loyihani yakunlash uchun biz atrof-muhit(environment) o'zgaruvchilari bilan qanday ishlashni va standart xatoga qanday chop etishni qisqacha ko'rsatamiz, bu ikkalasi ham buyruq qatori dasturlarini yozishda foydalidir..</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="ch12-03-improving-error-handling-and-modularity.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a rel="next" href="ch12-05-working-with-environment-variables.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="ch12-03-improving-error-handling-and-modularity.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a rel="next" href="ch12-05-working-with-environment-variables.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        <script type="text/javascript" src="ferris.js"></script>
+    </body>
+</html>

@@ -1,0 +1,503 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Result bilan tiklanadigan xatolar - Rust dasturlash tili</title>
+        <!-- Custom HTML head -->
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="ferris.css">
+        <link rel="stylesheet" href="theme/2018-edition.css">
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="title-page.html">Rust dasturlash tili</a></li><li class="chapter-item expanded affix "><a href="foreword.html">Muqaddima</a></li><li class="chapter-item expanded affix "><a href="ch00-00-introduction.html">Kirish</a></li><li class="chapter-item expanded "><a href="ch01-00-getting-started.html"><strong aria-hidden="true">1.</strong> Ishni boshlash</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch01-01-installation.html"><strong aria-hidden="true">1.1.</strong> O'rnatish</a></li><li class="chapter-item expanded "><a href="ch01-02-hello-world.html"><strong aria-hidden="true">1.2.</strong> Hello, World!</a></li><li class="chapter-item expanded "><a href="ch01-03-hello-cargo.html"><strong aria-hidden="true">1.3.</strong> Hello, Cargo!</a></li></ol></li><li class="chapter-item expanded "><a href="ch02-00-guessing-game-tutorial.html"><strong aria-hidden="true">2.</strong> Taxmin qilish o'yinini dasturlash</a></li><li class="chapter-item expanded "><a href="ch03-00-common-programming-concepts.html"><strong aria-hidden="true">3.</strong> Umumiy dasturlash tushunchalari</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch03-01-variables-and-mutability.html"><strong aria-hidden="true">3.1.</strong> O'zgaruvchilar va o'zgaruvchanlik</a></li><li class="chapter-item expanded "><a href="ch03-02-data-types.html"><strong aria-hidden="true">3.2.</strong> Ma'lumotlar turlari</a></li><li class="chapter-item expanded "><a href="ch03-03-how-functions-work.html"><strong aria-hidden="true">3.3.</strong> Funksiyalar</a></li><li class="chapter-item expanded "><a href="ch03-04-comments.html"><strong aria-hidden="true">3.4.</strong> Izohlar</a></li><li class="chapter-item expanded "><a href="ch03-05-control-flow.html"><strong aria-hidden="true">3.5.</strong> Control Flow</a></li></ol></li><li class="chapter-item expanded "><a href="ch04-00-understanding-ownership.html"><strong aria-hidden="true">4.</strong> Ownershipni tushunish</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch04-01-what-is-ownership.html"><strong aria-hidden="true">4.1.</strong> Ownership nima?</a></li><li class="chapter-item expanded "><a href="ch04-02-references-and-borrowing.html"><strong aria-hidden="true">4.2.</strong> Referencelar va  Borrowing</a></li><li class="chapter-item expanded "><a href="ch04-03-slices.html"><strong aria-hidden="true">4.3.</strong> Slice turi</a></li></ol></li><li class="chapter-item expanded "><a href="ch05-00-structs.html"><strong aria-hidden="true">5.</strong> Tegishli ma'lumotlarni tuzish uchun Structdan foydalanish</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch05-01-defining-structs.html"><strong aria-hidden="true">5.1.</strong> Structlarni aniqlash va yaratish</a></li><li class="chapter-item expanded "><a href="ch05-02-example-structs.html"><strong aria-hidden="true">5.2.</strong> Structs yordamida namunaviy dastur</a></li><li class="chapter-item expanded "><a href="ch05-03-method-syntax.html"><strong aria-hidden="true">5.3.</strong> Metod sintaksisi</a></li></ol></li><li class="chapter-item expanded "><a href="ch06-00-enums.html"><strong aria-hidden="true">6.</strong> Enumlar va patternlarni moslashtirish</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch06-01-defining-an-enum.html"><strong aria-hidden="true">6.1.</strong> Enumni aniqlash</a></li><li class="chapter-item expanded "><a href="ch06-02-match.html"><strong aria-hidden="true">6.2.</strong> match Control Flow konstruksiyasi</a></li><li class="chapter-item expanded "><a href="ch06-03-if-let.html"><strong aria-hidden="true">6.3.</strong> if let bilan qisqacha Control Flow</a></li></ol></li><li class="chapter-item expanded "><a href="ch07-00-managing-growing-projects-with-packages-crates-and-modules.html"><strong aria-hidden="true">7.</strong> O'sib borayotgan loyihalarni Paketlar, Cratelar va Modullar bilan boshqarish</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch07-01-packages-and-crates.html"><strong aria-hidden="true">7.1.</strong> Paketlar va Cratelar</a></li><li class="chapter-item expanded "><a href="ch07-02-defining-modules-to-control-scope-and-privacy.html"><strong aria-hidden="true">7.2.</strong> Qo'llanish doirasi va maxfiylikni nazorat qilish uchun modullarni aniqlash</a></li><li class="chapter-item expanded "><a href="ch07-03-paths-for-referring-to-an-item-in-the-module-tree.html"><strong aria-hidden="true">7.3.</strong> Modul daraxtidagi elementga murojaat qilish yo'llari</a></li><li class="chapter-item expanded "><a href="ch07-04-bringing-paths-into-scope-with-the-use-keyword.html"><strong aria-hidden="true">7.4.</strong> use kalit so'zi bilan yo'llarni qamrab olish</a></li><li class="chapter-item expanded "><a href="ch07-05-separating-modules-into-different-files.html"><strong aria-hidden="true">7.5.</strong> Modullarni turli fayllarga ajratish</a></li></ol></li><li class="chapter-item expanded "><a href="ch08-00-common-collections.html"><strong aria-hidden="true">8.</strong> Umumiy to'plamlar</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch08-01-vectors.html"><strong aria-hidden="true">8.1.</strong> Vectorlar bilan qiymatlar ro'yxatini saqlash</a></li><li class="chapter-item expanded "><a href="ch08-02-strings.html"><strong aria-hidden="true">8.2.</strong> UTF-8 kodlangan matnni Stringlar bilan saqlash</a></li><li class="chapter-item expanded "><a href="ch08-03-hash-maps.html"><strong aria-hidden="true">8.3.</strong> Hash Mapda bog'langan qiymatlarga ega kalitlarni saqlash</a></li></ol></li><li class="chapter-item expanded "><a href="ch09-00-error-handling.html"><strong aria-hidden="true">9.</strong> Xatolar bilan ishlash</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch09-01-unrecoverable-errors-with-panic.html"><strong aria-hidden="true">9.1.</strong> panic! bilan tuzatib bo'lmaydigan xatolar</a></li><li class="chapter-item expanded "><a href="ch09-02-recoverable-errors-with-result.html" class="active"><strong aria-hidden="true">9.2.</strong> Result bilan tiklanadigan xatolar</a></li><li class="chapter-item expanded "><a href="ch09-03-to-panic-or-not-to-panic.html"><strong aria-hidden="true">9.3.</strong> panic! yoki panic! emas</a></li></ol></li><li class="chapter-item expanded "><a href="ch10-00-generics.html"><strong aria-hidden="true">10.</strong> Umumiy turlar, traitlar va lifetime</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch10-01-syntax.html"><strong aria-hidden="true">10.1.</strong> Generik ma'lumotlar turlari</a></li><li class="chapter-item expanded "><a href="ch10-02-traits.html"><strong aria-hidden="true">10.2.</strong> Traitlar: umumiy xatti-harakatni aniqlash</a></li><li class="chapter-item expanded "><a href="ch10-03-lifetime-syntax.html"><strong aria-hidden="true">10.3.</strong> Referencelarni lifetime bilan tekshirish</a></li></ol></li><li class="chapter-item expanded "><a href="ch11-00-testing.html"><strong aria-hidden="true">11.</strong> Avtomatlashtirilgan testlarni yozish</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch11-01-writing-tests.html"><strong aria-hidden="true">11.1.</strong> Testlarni qanday yozish kerak</a></li><li class="chapter-item expanded "><a href="ch11-02-running-tests.html"><strong aria-hidden="true">11.2.</strong> Sinovlar qanday o'tkazilishini nazorat qilish</a></li><li class="chapter-item expanded "><a href="ch11-03-test-organization.html"><strong aria-hidden="true">11.3.</strong> Test tashkil etish</a></li></ol></li><li class="chapter-item expanded "><a href="ch12-00-an-io-project.html"><strong aria-hidden="true">12.</strong> I/O loyihasi: Buyruqlar qatori dasturini yaratish</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch12-01-accepting-command-line-arguments.html"><strong aria-hidden="true">12.1.</strong> Buyruqlar qatori argumentini qabul qilishs</a></li><li class="chapter-item expanded "><a href="ch12-02-reading-a-file.html"><strong aria-hidden="true">12.2.</strong> Faylni o'qish</a></li><li class="chapter-item expanded "><a href="ch12-03-improving-error-handling-and-modularity.html"><strong aria-hidden="true">12.3.</strong> Modullikni yaxshilash va xatolarni qayta ishlash uchun refactoring</a></li><li class="chapter-item expanded "><a href="ch12-04-testing-the-librarys-functionality.html"><strong aria-hidden="true">12.4.</strong> Sinovga asoslangan ishlab chiqish bilan kutubxonaning funksionalligini rivojlantirish</a></li><li class="chapter-item expanded "><a href="ch12-05-working-with-environment-variables.html"><strong aria-hidden="true">12.5.</strong> Environment o'zgaruvchilari bilan ishlash</a></li><li class="chapter-item expanded "><a href="ch12-06-writing-to-stderr-instead-of-stdout.html"><strong aria-hidden="true">12.6.</strong> Xato xabarlarini standart chiqish o'rniga standart xatoga yozish</a></li></ol></li><li class="chapter-item expanded "><a href="ch13-00-functional-features.html"><strong aria-hidden="true">13.</strong> Funksional til xususiyatlari: iteratorlar va closurelar</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch13-01-closures.html"><strong aria-hidden="true">13.1.</strong> Closurelar: Environmentni qamrab oladigan anonim funksiyalar</a></li><li class="chapter-item expanded "><a href="ch13-02-iterators.html"><strong aria-hidden="true">13.2.</strong> Iteratorlar bilan bir qator elementlarga ishlov berish</a></li><li class="chapter-item expanded "><a href="ch13-03-improving-our-io-project.html"><strong aria-hidden="true">13.3.</strong> I/O loyihamizni takomillashtirish</a></li><li class="chapter-item expanded "><a href="ch13-04-performance.html"><strong aria-hidden="true">13.4.</strong> Ishlash samaradorligini solishtirish: Looplar va iteratorlar</a></li></ol></li><li class="chapter-item expanded "><a href="ch14-00-more-about-cargo.html"><strong aria-hidden="true">14.</strong> Cargo va Crates.io haqida ko'proq</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch14-01-release-profiles.html"><strong aria-hidden="true">14.1.</strong> Reliz profillari bilan structlarni moslashtirish</a></li><li class="chapter-item expanded "><a href="ch14-02-publishing-to-crates-io.html"><strong aria-hidden="true">14.2.</strong> Crateni Crates.io-ga nashr qilish</a></li><li class="chapter-item expanded "><a href="ch14-03-cargo-workspaces.html"><strong aria-hidden="true">14.3.</strong> Cargo Workspacelar</a></li><li class="chapter-item expanded "><a href="ch14-04-installing-binaries.html"><strong aria-hidden="true">14.4.</strong> Binary fayllarni Crates.io'dan cargo install bilan o'rnatish</a></li><li class="chapter-item expanded "><a href="ch14-05-extending-cargo.html"><strong aria-hidden="true">14.5.</strong> Maxsus buyruqlar bilan Cargoni kengaytirish</a></li></ol></li><li class="chapter-item expanded "><a href="ch15-00-smart-pointers.html"><strong aria-hidden="true">15.</strong> Smart Pointerlar</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch15-01-box.html"><strong aria-hidden="true">15.1.</strong> Heapdagi ma'lumotlarni ko'rsatish uchun Box&lt;T&gt; dan foydalanish</a></li><li class="chapter-item expanded "><a href="ch15-02-deref.html"><strong aria-hidden="true">15.2.</strong> Deref Traitidan foydalangan holda oddiy referencelar kabi Smart Pointerlar bilan ishlash</a></li><li class="chapter-item expanded "><a href="ch15-03-drop.html"><strong aria-hidden="true">15.3.</strong> Drop Traiti bilan tozalashda kodni ishga tushirish</a></li><li class="chapter-item expanded "><a href="ch15-04-rc.html"><strong aria-hidden="true">15.4.</strong> Rc&lt;T&gt;, reference hisoblangan Smart Pointer</a></li><li class="chapter-item expanded "><a href="ch15-05-interior-mutability.html"><strong aria-hidden="true">15.5.</strong> RefCell&lt;T&gt; va ichki o'zgaruvchanlik namunasi</a></li><li class="chapter-item expanded "><a href="ch15-06-reference-cycles.html"><strong aria-hidden="true">15.6.</strong> Reference Cycles Can Leak Memory</a></li></ol></li><li class="chapter-item expanded "><a href="ch16-00-concurrency.html"><strong aria-hidden="true">16.</strong> Qo'rqmas parallellik</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch16-01-threads.html"><strong aria-hidden="true">16.1.</strong> Kodni bir vaqtning o'zida ishga tushirish uchun threadlardan foydalanish</a></li><li class="chapter-item expanded "><a href="ch16-02-message-passing.html"><strong aria-hidden="true">16.2.</strong> Threadlar orasidagi ma'lumotlarni uzatish uchun xabar uzatishdan(Message Passing) foydalanish</a></li><li class="chapter-item expanded "><a href="ch16-03-shared-state.html"><strong aria-hidden="true">16.3.</strong> Shared-State Concurrency</a></li><li class="chapter-item expanded "><a href="ch16-04-extensible-concurrency-sync-and-send.html"><strong aria-hidden="true">16.4.</strong> Sync va Send traitlari bilan kengaytiriladigan parallellik</a></li></ol></li><li class="chapter-item expanded "><a href="ch17-00-oop.html"><strong aria-hidden="true">17.</strong> Rustning ob'ektga yo'naltirilgan dasturlash xususiyatlari- OOP</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch17-01-what-is-oo.html"><strong aria-hidden="true">17.1.</strong> Ob'ektga yo'naltirilgan tillarning xususiyatlari</a></li><li class="chapter-item expanded "><a href="ch17-02-trait-objects.html"><strong aria-hidden="true">17.2.</strong> Har xil turdagi qiymatlarga ruxsat beruvchi trait ob'ektlaridan foydalanish</a></li><li class="chapter-item expanded "><a href="ch17-03-oo-design-patterns.html"><strong aria-hidden="true">17.3.</strong> Ob'ektga yo'naltirilgan dizayn patternini implement qilish</a></li></ol></li><li class="chapter-item expanded "><a href="ch18-00-patterns.html"><strong aria-hidden="true">18.</strong> Patternlar va Matching</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch18-01-all-the-places-for-patterns.html"><strong aria-hidden="true">18.1.</strong> All the Places Patterns Can Be Used</a></li><li class="chapter-item expanded "><a href="ch18-02-refutability.html"><strong aria-hidden="true">18.2.</strong> Refutability: Whether a Pattern Might Fail to Match</a></li><li class="chapter-item expanded "><a href="ch18-03-pattern-syntax.html"><strong aria-hidden="true">18.3.</strong> Pattern Sintaksisi</a></li></ol></li><li class="chapter-item expanded "><a href="ch19-00-advanced-features.html"><strong aria-hidden="true">19.</strong> Kengaytirilgan Xususiyatlar</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch19-01-unsafe-rust.html"><strong aria-hidden="true">19.1.</strong> Xavfsiz Rust</a></li><li class="chapter-item expanded "><a href="ch19-03-advanced-traits.html"><strong aria-hidden="true">19.2.</strong> Murakkab Traitlar</a></li><li class="chapter-item expanded "><a href="ch19-04-advanced-types.html"><strong aria-hidden="true">19.3.</strong> Kengaytirilgan Turlar</a></li><li class="chapter-item expanded "><a href="ch19-05-advanced-functions-and-closures.html"><strong aria-hidden="true">19.4.</strong> Kengaytirilgan funksiyalar va closurelar</a></li><li class="chapter-item expanded "><a href="ch19-06-macros.html"><strong aria-hidden="true">19.5.</strong> Makrolar</a></li></ol></li><li class="chapter-item expanded "><a href="ch20-00-final-project-a-web-server.html"><strong aria-hidden="true">20.</strong> Yakuniy loyiha: Ko'p tarmoqli veb-serverni qurish</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch20-01-single-threaded.html"><strong aria-hidden="true">20.1.</strong> Yagona tarmoqli veb-serverni qurish</a></li><li class="chapter-item expanded "><a href="ch20-02-multithreaded.html"><strong aria-hidden="true">20.2.</strong> Bizning yagona tarmoqli serverimizni ko'p tarmoqli serverga aylantirish</a></li><li class="chapter-item expanded "><a href="ch20-03-graceful-shutdown-and-cleanup.html"><strong aria-hidden="true">20.3.</strong> Ajoyib o'chirish va tozalash</a></li></ol></li><li class="chapter-item expanded "><a href="appendix-00.html"><strong aria-hidden="true">21.</strong> Ilova</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="appendix-01-keywords.html"><strong aria-hidden="true">21.1.</strong> A - Kalit so'zlar</a></li><li class="chapter-item expanded "><a href="appendix-02-operators.html"><strong aria-hidden="true">21.2.</strong> B - Operatorlar va Symbollar</a></li><li class="chapter-item expanded "><a href="appendix-03-derivable-traits.html"><strong aria-hidden="true">21.3.</strong> C - Hosilaviy Traitlar</a></li><li class="chapter-item expanded "><a href="appendix-04-useful-development-tools.html"><strong aria-hidden="true">21.4.</strong> D - Foydali Development Toollar</a></li><li class="chapter-item expanded "><a href="appendix-05-editions.html"><strong aria-hidden="true">21.5.</strong> E - Nashrlar</a></li><li class="chapter-item expanded "><a href="appendix-06-translation.html"><strong aria-hidden="true">21.6.</strong> F - Kitobning tarjimalari</a></li><li class="chapter-item expanded "><a href="appendix-07-nightly-rust.html"><strong aria-hidden="true">21.7.</strong> G - Rust qanday yasaladi va “Nightly Rust”</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Rust dasturlash tili</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/rust-lang/book" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h2 id="result-bilan-tiklanadigan-xatolar"><a class="header" href="#result-bilan-tiklanadigan-xatolar"><code>Result</code> bilan tiklanadigan xatolar</a></h2>
+<p>Ko'pgina xatolar dasturni butunlay to'xtatishni talab qiladigan darajada jiddiy emas.
+Ba'zan, funksiya bajarilmasa, bu siz osongina talqin qilishingiz va javob berishingiz mumkin bo'lgan sababdir. Misol uchun, agar siz faylni ochishga urinib ko'rsangiz va fayl mavjud bo'lmagani uchun bu operatsiya bajarilmasa, jarayonni tugatish o'rniga faylni yaratishni xohlashingiz mumkin.</p>
+<p>2-bobdagi <a href="ch02-00-guessing-game-tutorial.html#handling-potential-failure-with-result">“Potentsial muvaffaqiyatsizlikni <code>Result</code> bilan hal qilish”</a><!-- ignore --> bo'limini eslang: biz u yerda muvaffaqiyatsizliklarni hal qilish uchun ikkita variantga ega bo'lgan <code>Ok</code> va <code>Err</code> varianti bo'lgan <code>Result</code> enumidan foydalanganmiz. Enumning o'zi quyidagicha aniqlanadi:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>enum Result&lt;T, E&gt; {
+    Ok(T),
+    Err(E),
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p><code>T</code> va <code>E</code> umumiy turdagi parametrlardir: biz generiklarni 10-bobda batafsilroq muhokama qilamiz. Siz hozir bilishingiz kerak bo'lgan narsa shundaki, <code>T</code> <code>Ok</code> variantida muvaffaqiyatli holatda qaytariladigan qiymat turini bildiradi, va <code>E</code> <code>Err</code>(Xato) variantida xatolik holatida qaytariladigan xato turini ifodalaydi. <code>Result</code>da ushbu umumiy turdagi parametrlar mavjud bo'lganligi sababli, biz qaytarmoqchi bo'lgan muvaffaqiyatli qiymat va xato qiymati har xil bo'lishi mumkin bo'lgan turli vaziyatlarda <code>Result</code> turidan va unda belgilangan funksiyalardan foydalanishimiz mumkin.</p>
+<p>Keling, <code>Result</code> qiymatini qaytaruvchi funksiyani chaqiraylik, chunki funksiya bajarilmasligi mumkin. 9-3 ro'yxatda biz faylni ochishga harakat qilamiz.</p>
+<p><span class="filename">Fayl nomi: src/main.rs</span></p>
+<pre><pre class="playground"><code class="language-rust">use std::fs::File;
+
+fn main() {
+    let fayl_ochish = File::open(&quot;olma.txt&quot;);
+}
+</code></pre></pre>
+<p><span class="caption">Ro'yxat 9-3: Faylni ochish</span></p>
+<p><code>File::open</code> return(qaytish) turi <code>Result&lt;T, E&gt;</code>dir. <code>File::open</code>ni amalga oshirishdagi umumiy <code>T</code> turi muvaffaqiyatli qabul qilingan qiymat turiga, <code>std::fs::File</code>ga, ya'ni fayl deskriptoriga mos keladi. Xato qiymatida ishlatiladigan <code>E</code> turi <code>std::io::Error</code>. Qaytish(return) turi <code>File::open</code> ga chaqiruv muvaffaqiyatli bo'lishi va biz o'qishimiz yoki yozishimiz mumkin bo'lgan fayl handleni qaytarishi mumkinligini anglatadi. Funksiya chaqiruvi ham muvaffaqiyatsiz bo'lishi mumkin: masalan, fayl mavjud bo'lmasligi yoki faylga kirish uchun ruxsatimiz bo'lmasligi mumkin. <code>File::open</code> funksiyasi muvaffaqiyatli yoki muvaffaqiyatsiz bo'lganligini va bir vaqtning o'zida bizga fayl identifikatori yoki xato haqida ma'lumot beradigan metodga ega bo'lishi kerak. Ushbu ma'lumot aynan <code>Result</code> enumini bildiradi.</p>
+<p>Agar <code>File::open</code> muvaffaqiyatli bo'lsa, <code>fayl_ochish</code> qiymati fayl identifikatorini o'z ichiga olgan <code>Ok</code> misoli bo'ladi.
+Muvaffaqiyatsiz bo'lgan taqdirda, <code>fayl_ochish</code> dagi qiymat <code>Err</code> misoli bo'lib, sodir bo'lgan xato turi haqida qo'shimcha ma'lumotni o'z ichiga oladi.</p>
+<p><code>File::open</code> qiymatiga qarab turli amallarni bajarish uchun 9-3-Ro'yxatdagi kodga o'zgartirishimiz kerak. 9-4 ro'yxatda biz 6-bobda muhokama qilgan asosiy tool - <code>match</code> ifodasi yordamida <code>Result</code> ni boshqarishning bir usuli ko'rsatilgan.</p>
+<p><span class="filename">Fayl nomi: src/main.rs</span></p>
+<pre><pre class="playground"><code class="language-rust should_panic">use std::fs::File;
+
+fn main() {
+    let fayl_ochish = File::open(&quot;olma.txt&quot;);
+
+    let fayl = match fayl_ochish {
+        Ok(file) =&gt; file,
+        Err(error) =&gt; panic!(&quot;Faylni ochishda muammo: {:?}&quot;, error),
+    };
+}
+</code></pre></pre>
+<p><span class="caption">Roʻyxat 9-4: Qaytarilishi mumkin boʻlgan <code>Result</code> variantlarini boshqarish uchun <code>match</code> ifodasidan foydalanish</span></p>
+<p>E'tibor bering, <code>Option</code> enumi kabi, <code>Result</code> enumi va uning variantlari avtomatik import (prelude) orqali kiritilgan, shuning uchun biz <code>match</code>  qatoridagi <code>Ok</code> va <code>Err</code>  variantlaridan oldin <code>Result::</code> ni belgilashimiz shart emas.</p>
+<p>Natija <code>Ok</code> bo'lsa, bu kod <code>Ok</code> variantidan ichki <code>file</code> qiymatini qaytaradi va biz ushbu faylni ishlov berish qiymatini <code>fayl_ochish</code> o'zgaruvchisiga tayinlaymiz. <code>match</code>dan so'ng biz o'qish yoki yozish uchun fayl boshqaruvidan foydalanishimiz mumkin.</p>
+<p><code>match</code>ning boshqa qismi <code>File::open</code> dan <code>Err</code> qiymatini oladigan holatni boshqaradi. Ushbu misolda biz <code>panic!</code>  makrosini tanladik. Agar joriy jildimizda <em>olma.txt</em> nomli fayl bo‘lmasa va biz ushbu kodni ishga tushirsak, biz <code>panic!</code> makrosidan quyidagi natijani ko‘ramiz:</p>
+<pre><code class="language-console">$ cargo run
+   Compiling error-handling v0.1.0 (file:///projects/error-handling)
+    Finished dev [unoptimized + debuginfo] target(s) in 0.73s
+     Running `target/debug/error-handling`
+thread 'main' panicked at 'Problem opening the file: Os { code: 2, kind: NotFound, message: &quot;No such file or directory&quot; }', src/main.rs:8:23
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+</code></pre>
+<p>Odatdagidek, bu chiqish bizga nima noto'g'ri ketganligini aniq aytadi.</p>
+<h3 id="turli-xil-xatolarga-moslashish"><a class="header" href="#turli-xil-xatolarga-moslashish">Turli xil xatolarga moslashish</a></h3>
+<p>9-4 roʻyxatdagi kod nima uchun <code>File::open</code> muvaffaqiyatsiz boʻlishidan qatʼiy nazar <code>panic!</code> qoʻyadi.
+Biroq, biz turli sabablarga ko'ra turli xil harakatlarni amalga oshirishni xohlaymiz: agar fayl mavjud bo'lmagani uchun <code>File::open</code> muvaffaqiyatsiz bo'lsa, biz faylni yaratmoqchimiz va fayl boshqaruvini yangi faylga qaytaramiz. Agar <code>File::open</code> boshqa sabablarga ko'ra, masalan, faylni ochishga ruxsatimiz yo'qligi sababli muvaffaqiyatsiz bo'lsa, biz hali ham kodga 9-4 ro'yxatdagi kabi <code>panic!</code> qo'yishini xohlaymiz. Buning uchun biz 9-5 ro'yxatda ko'rsatilgan ichki <code>match</code> ifodasini qo'shamiz.</p>
+<p><span class="filename">Fayl nomi: src/main.rs</span></p>
+<!-- ignore this test because otherwise it creates hello.txt which causes other
+tests to fail lol -->
+<pre><code class="language-rust ignore">use std::fs::File;
+use std::io::ErrorKind;
+
+fn main() {
+    let fayl_ochish = File::open(&quot;olma.txt&quot;);
+
+    let fayl = match fayl_ochish {
+        Ok(file) =&gt; file,
+        Err(error) =&gt; match error.kind() {
+            ErrorKind::NotFound =&gt; match File::create(&quot;olma.txt&quot;) {
+                Ok(fc) =&gt; fc,
+                Err(e) =&gt; panic!(&quot;Fayl yaratishda muammo: {:?}&quot;, e),
+            },
+            boshqa_xato =&gt; {
+                panic!(&quot;Faylni ochishda muammo: {:?}&quot;, boshqa_xato);
+            }
+        },
+    };
+}
+</code></pre>
+<p><span class="caption">Ro'yxat 9-5: Har xil turdagi xatolarni turli yo'llar bilan hal qilish</span></p>
+<p><code>File::open</code> <code>Err</code> variantida qaytaradigan qiymat turi <code>io::Error</code> bo'lib, bu standart kutubxona tomonidan taqdim etilgan strukturadir. Ushbu strukturada <code>io::ErrorKind</code> qiymatini olish uchun chaqirishimiz mumkin bo'lgan <code>kind</code> metodi mavjud. <code>io::ErrorKind</code> enumi standart kutubxona tomonidan taqdim etilgan va <code>io</code> operatsiyasi natijasida yuzaga kelishi mumkin bo'lgan turli xil xatolarni ifodalovchi variantlarga ega. Biz foydalanmoqchi boʻlgan variant <code>ErrorKind::NotFound</code> boʻlib, biz ochmoqchi boʻlgan fayl hali mavjud emasligini bildiradi. Shunday qilib, biz <code>fayl_ochish</code> bo'yicha mos kelamiz, lekin bizda <code>error.kind()</code> da ichki match ham bor.</p>
+<p>Biz ichki matchni tekshirmoqchi bo'lgan shart - <code>error.kind()</code> tomonidan qaytarilgan qiymat <code>ErrorKind</code> enumining <code>NotFound</code> variantidir. Agar shunday bo'lsa, biz faylni <code>File::create</code> yordamida yaratishga harakat qilamiz. Biroq, <code>File::create</code> ham muvaffaqiyatsiz bo'lishi mumkinligi sababli, bizga ichki <code>match</code> ifodasida ikkinchi arm kerak. Faylni yaratib bo'lmaganda, boshqa xato xabari chop etiladi. Tashqi <code>match</code> ning ikkinchi armi bir xil bo'lib qoladi, shuning uchun dastur yetishmayotgan fayl xatosidan tashqari har qanday xato haqida panic qo'yadi.</p>
+<blockquote>
+<h3 id="resultt-e-bilan-match-dan-foydalanishning-muqobillari"><a class="header" href="#resultt-e-bilan-match-dan-foydalanishning-muqobillari"><code>Result&lt;T, E&gt;</code> bilan <code>match</code> dan foydalanishning muqobillari</a></h3>
+<p>Bu juda ko'p <code>match</code>! <code>match</code> ifodasi juda foydali, lekin ayni paytda
+juda primitivdir. 13-bobda siz <code>Result&lt;T, E&gt;</code> da belgilangan koʻplab
+metodlarda qoʻllaniladigan yopilishlar(closures) haqida bilib olasiz. Ushbu
+metodlar kodingizdagi <code>Result&lt;T, E&gt;</code> qiymatlari bilan ishlashda <code>match</code> 
+dan foydalanishdan ko'ra qisqaroq bo'lishi mumkin.</p>
+<p>Misol uchun, 9-5 ro'yxatda ko'rsatilgan mantiqni yozishning yana bir
+usuli, bu safar closures va <code>unwrap_or_else</code> metodi yordamida:</p>
+<!-- CAN'T EXTRACT SEE https://github.com/rust-lang/mdBook/issues/1127 -->
+<pre><code class="language-rust ignore">use std::fs::File;
+use std::io::ErrorKind;
+
+fn main() {
+    let fayl_ochish = File::open(&quot;olma.txt&quot;).unwrap_or_else(|error| {
+        if error.kind() == ErrorKind::NotFound {
+            File::create(&quot;olma.txt&quot;).unwrap_or_else(|error| {
+                panic!(&quot;Fayl yaratishda muammo: {:?}&quot;, error);
+            })
+        } else {
+            panic!(&quot;Faylni ochishda muammo: {:?}&quot;, error);
+        }
+    });
+}
+</code></pre>
+<p>Garchi bu kod 9-5 roʻyxatdagi kabi harakatga ega boʻlsa-da, unda
+<code>match</code> iboralari mavjud emas va oʻqish uchun qulayroq. 13-bobni o‘qib bo‘lgach,
+ushbu misolga qayting va standart kutubxona hujjatlarida <code>unwrap_or_else</code>
+metodini qidiring. Ushbu metodlarning ko'pchiligi xatolar bilan
+shug'ullanayotganda katta o'rinli <code>match</code>  iboralarni tozalashi mumkin.</p>
+</blockquote>
+<h3 id="xatoda-panic-uchun-yorliqlar-unwrap-va-expect"><a class="header" href="#xatoda-panic-uchun-yorliqlar-unwrap-va-expect">Xatoda panic uchun yorliqlar: <code>unwrap</code> va <code>expect</code></a></h3>
+<p><code>match</code> dan foydalanish yetarlicha yaxshi ishlaydi, lekin u biroz batafsil bo'lishi mumkin va har doim ham maqsadni yaxshi bildirmaydi. <code>Result&lt;T, E&gt;</code> turida turli, aniqroq vazifalarni bajarish uchun belgilangan koʻplab yordamchi metodlar mavjud. <code>unwrap</code> metodi biz 9-4 ro'yxatda yozgan <code>match</code> iborasi kabi implemen qilinadigan yorliq metodidir. Agar <code>Result</code> qiymati <code>Ok</code> varianti bo'lsa, <code>unwrap</code> qiymati <code>Ok</code> ichidagi qiymatni qaytaradi. Agar <code>Result</code> <code>Err</code> varianti bo‘lsa, <code>unwrap</code> biz uchun <code>panic!</code> makrosini chaqiradi. Mana amaldagi <code>unwrap</code> misoli:</p>
+<p><span class="filename">Fayl nomi: src/main.rs</span></p>
+<pre><pre class="playground"><code class="language-rust should_panic">use std::fs::File;
+
+fn main() {
+    let fayl_ochish = File::open(&quot;olma.txt&quot;).unwrap();
+}
+</code></pre></pre>
+<p>Agar biz ushbu kodni <em>olma.txt</em> faylisiz ishga tushiradigan bo‘lsak, biz <code>panic!</code> chaqiruvidan xato xabarini ko‘ramiz.</p>
+<!-- manual-regeneration
+cd listings/ch09-error-handling/no-listing-04-unwrap
+cargo run
+copy and paste relevant text
+-->
+<pre><code class="language-text">thread 'main' panicked at 'called `Result::unwrap()` on an `Err` value: Os {
+code: 2, kind: NotFound, message: &quot;No such file or directory&quot; }',
+src/main.rs:4:49
+</code></pre>
+<p>Xuddi shunday, <code>expect</code> metodi bizga <code>panic!</code> xato xabarini tanlash imkonini beradi.
+<code>unwrap</code> o'rniga <code>expect</code> dan foydalanish va yaxshi xato xabarlarini taqdim etish niyatingizni bildirishi va panic manbasini kuzatishni osonlashtirishi mumkin. <code>expect</code> sintaksisi quyidagicha ko'rinadi:</p>
+<p><span class="filename">Fayl nomi: src/main.rs</span></p>
+<pre><pre class="playground"><code class="language-rust should_panic">use std::fs::File;
+
+fn main() {
+    let fayl_ochish = File::open(&quot;olma.txt&quot;)
+        .expect(&quot;olma.txt ushbu loyihaga kiritilishi kerak&quot;);
+}
+</code></pre></pre>
+<p>Biz <code>expect</code> dan xuddi <code>unwrap</code> kabi foydalanamiz: fayl boshqaruvini qaytarish yoki <code>panic!</code> makrosini chaqirish uchun.<code>panic!</code> chaqiruvida <code>expect</code> tomonidan foydalanilgan xato xabari <code>unwrap</code> ishlatadigan standart <code>panic!</code> xabari emas, balki <code>expect</code> parametriga o‘tadigan parametr bo‘ladi. Bu qanday ko'rinishga ega:</p>
+<!-- manual-regeneration
+cd listings/ch09-error-handling/no-listing-05-expect
+cargo run
+copy and paste relevant text
+-->
+<pre><code class="language-text">thread 'main' panicked at 'olma.txt should be included in this project: Os {
+code: 2, kind: NotFound, message: &quot;No such file or directory&quot; }',
+src/main.rs:5:10
+</code></pre>
+<p>Ishlab chiqarish sifati kodida ko'pchilik Rustaceanlar <code>unwrap</code> o'rniga  <code>expect</code> ni tanlaydilar va nima uchun operatsiya har doim muvaffaqiyatli bo'lishi kutilayotgani haqida ko'proq kontekst beradi. Shunday qilib, agar sizning taxminlaringiz noto'g'ri ekanligi isbotlangan bo'lsa, debuggingda foydalanish uchun ko'proq ma'lumotga ega bo'lasiz.</p>
+<h3 id="xatoni-yonaltirish---propagating"><a class="header" href="#xatoni-yonaltirish---propagating">Xatoni yo'naltirish - Propagating</a></h3>
+<p>Funksiyani amalga oshirish muvaffaqiyatsiz bo'lishi mumkin bo'lgan narsani chaqirganda, xatoni funksiyaning o'zida hal qilish o'rniga, nima qilish kerakligini hal qilish uchun xatoni chaqiruvchi kodga qaytarishingiz mumkin. Bu xatoni <em>propagating</em> deb nomlanadi va chaqiruv kodini ko'proq nazorat qiladi, bu yerda kodingiz kontekstida mavjud bo'lgan narsadan ko'ra xatoni qanday hal qilish kerakligini ko'rsatadigan ko'proq ma'lumot yoki mantiq bo'lishi mumkin.</p>
+<p>Misol uchun, 9-6 ro'yxati fayldan foydalanuvchi nomini o'qiydigan funksiyani ko'rsatadi. Agar fayl mavjud bo'lmasa yoki o'qib bo'lmasa, bu funksiya ushbu xatolarni funksiya chaqirgan kodga qaytaradi.</p>
+<p><span class="filename">Fayl nomi: src/main.rs</span></p>
+<!-- Deliberately not using rustdoc_include here; the `main` function in the
+file panics. We do want to include it for reader experimentation purposes, but
+don't want to include it for rustdoc testing purposes. -->
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use std::fs::File;
+use std::io::{self, Read};
+
+fn fayldan_foydalanuvchi_nomini_olish() -&gt; Result&lt;String, io::Error&gt; {
+    let foydalanuvchi_fayli_natijasi = File::open(&quot;olma.txt&quot;);
+
+    let mut foydalanuvchi_fayli = match foydalanuvchi_fayli_natijasi {
+        Ok(file) =&gt; file,
+        Err(e) =&gt; return Err(e),
+    };
+
+    let mut foydalanuvchi = String::new();
+
+    match foydalanuvchi_fayli.read_to_string(&amp;mut foydalanuvchi) {
+        Ok(_) =&gt; Ok(foydalanuvchi),
+        Err(e) =&gt; Err(e),
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p><span class="caption">Ro'yxat 9-6: <code>match</code> yordamida chaqiruv kodiga xatoliklarni qaytaruvchi funksiya</span></p>
+<p>Bu funksiyani ancha qisqaroq tarzda yozish mumkin, lekin biz xatolarni qayta ishlashni o'rganish uchun uning ko'p qismini qo'lda qilishdan boshlaymiz; oxirida biz qisqaroq yo'lni ko'rsatamiz. Avval funksiyaning qaytish turini ko'rib chiqamiz: <code>Result&lt;String, io::Error&gt;</code>. Bu funksiya <code>Result&lt;T, E&gt;</code> turidagi qiymatni qaytarayotganini bildiradi, bunda parametr <code>T</code> aniq turdagi <code>String</code> bilan to'ldirilgan, va <code>E</code> umumiy turi aniq turdagi <code>io::Error</code> bilan to`ldirilgan.</p>
+<p>Agar bu funksiya hech qanday muammosiz muvaffaqiyatli bajarilsa, ushbu funksiyani chaqiruvchi kod <code>String</code> ga ega boʻlgan <code>Ok</code> qiymatini oladi – bu funksiya fayldan o'qigan foydalanuvchi nomi. Agar bu funksiya biron bir muammoga duch kelsa, murojaat qiluvchi kod <code>io::Error</code> misolini o'z ichiga olgan <code>Err</code> qiymatini oladi, unda muammolar nima bo'lganligi haqida qo'shimcha ma'lumot mavjud. Biz ushbu funktsiyaning qaytish turi sifatida <code>io::Error</code> ni tanladik, chunki bu funksiyaning tanasida bajarilmay qolishi mumkin bo‘lgan ikkala operatsiyadan qaytarilgan xato qiymatining turi: <code>File::open</code> funksiyasi va <code>read_to_string</code> metodi.</p>
+<p>Funksiyaning asosiy qismi <code>File::open</code> funksiyasini chaqirish orqali boshlanadi. Keyin biz <code>Result</code> qiymatini 9-4 ro'yxatdagi <code>match</code>ga o'xshash <code>match</code> bilan ishlaymiz.
+Agar <code>File::open</code> muvaffaqiyatli bajarilsa, <code>file</code> pattern o'zgaruvchisidagi fayl ishlovi <code>foydalanuvchi_fayli</code> o'zgaruvchan o'zgaruvchisidagi qiymatga aylanadi va funksiya davom etadi. <code>Err</code> holatida, <code>panic!</code> deb chaqirish o‘rniga, biz <code>return</code>  kalit so‘zidan funksiyadan to‘liq chiqib ketish uchun foydalanamiz va xato qiymatini <code>File::open</code> dan, endi <code>e</code> pattern o‘zgaruvchisiga o‘tkazamiz, bu funksiya xato qiymati sifatida chaqiruvchi kodga qaytaradi.</p>
+<p>Shunday qilib, agar bizda <code>foydalanuvchi_fayli</code> da fayl boshqaruvi mavjud bo'lsa, keyin funksiya <code>foydalanuvchi</code> o'zgaruvchisida yangi <code>String</code> yaratadi va fayl mazmunini <code>foydalanuvchi</code> ni o'qish uchun <code>foydalanuvchi_fayli</code> da fayl boshqaruvidagi <code>read_to_string</code> metodini chaqiradi. <code>read_to_string</code> metodi ham <code>Result</code>ni qaytaradi, chunki u <code>File::open</code> muvaffaqiyatli bo'lishi ham mumkin, muvaffaqiyatsiz bo'lishi ham mumkin. Demak, ushbu <code>Result</code> bilan ishlash uchun bizga yana bir <code>match</code> kerak bo'ladi: agar <code>read_to_string</code> muvaffaqiyatli bo'lsa, demak, bizning funksiyamiz muvaffaqiyatli bo'ldi va biz foydalanuvchi nomini hozirda <code>Ok</code> bilan o'ralgan <code>foydalanuvchi</code> faylidan qaytaramiz. Agar <code>read_to_string</code> bajarilmasa, biz xato qiymatini xuddi <code>File::open</code> qiymatini qayta ishlagan <code>match</code> da xato qiymatini qaytarganimizdek qaytaramiz. Biroq, biz <code>return</code> ni aniq aytishimiz shart emas, chunki bu funksiyadagi oxirgi ifoda.</p>
+<p>Ushbu kodni chaqiruvchi kod foydalanuvchi nomini o'z ichiga olgan <code>Ok</code>  qiymatini yoki <code>io::Error</code> ni o'z ichiga olgan <code>Err</code> qiymatini olishni boshqaradi. Ushbu qiymatlar bilan nima qilishni hal qilish chaqiruv kodiga bog'liq. Agar chaqiruv kodi <code>Err</code> qiymatini olsa, u <code>panic!</code> deb chaqirishi va dasturni buzishi mumkin, standart foydalanuvchi nomidan foydalaning yoki foydalanuvchi nomini fayldan boshqa joydan qidiring, masalan. Bizda chaqiruv kodi aslida nima qilmoqchi ekanligi haqida yetarli ma'lumot yo'q, shuning uchun biz barcha muvaffaqiyat yoki xato ma'lumotlarini to'g'ri ishlashi uchun xatolarni propagate qilamiz.</p>
+<p>Xatolarni propagating qilish namunasi Rustda shu qadar keng tarqalganki, Rust buni osonlashtirish uchun savol belgisi operatori <code>?</code> beradi.</p>
+<h4 id="propagating-xatolar-uchun-qisqa-kod--operatori"><a class="header" href="#propagating-xatolar-uchun-qisqa-kod--operatori">Propagating xatolar uchun qisqa kod: <code>?</code> operatori</a></h4>
+<p>9-7 ro'yxatda 9-6 ro'yxatdagi kabi funksiyaga ega bo'lgan <code>foydalanuvchi_fayli</code> ilovasi ko'rsatilgan, ammo bu dastur <code>?</code> operatoridan foydalanadi.</p>
+<p><span class="filename">Fayl nomi: src/main.rs</span></p>
+<!-- Deliberately not using rustdoc_include here; the `main` function in the
+file panics. We do want to include it for reader experimentation purposes, but
+don't want to include it for rustdoc testing purposes. -->
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use std::fs::File;
+use std::io::{self, Read};
+
+fn fayldan_foydalanuvchi_nomini_olish() -&gt; Result&lt;String, io::Error&gt; {
+    let mut foydalanuvchi_fayli = File::open(&quot;olma.txt&quot;)?;
+    let mut foydalanuvchi = String::new();
+    foydalanuvchi_fayli.read_to_string(&amp;mut foydalanuvchi)?;
+    Ok(foydalanuvchi)
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p><span class="caption">Ro'yxat 9-7: <code>?</code> operatori yordamida chaqiruvchi kodga xatoliklarni qaytaruvchi funksiya</span></p>
+<p><code>Result</code> qiymatidan keyin qoʻyilgan <code>?</code> 9-6 roʻyxatdagi <code>Result</code> qiymatlarini boshqarish uchun biz belgilagan <code>match</code> iboralari bilan deyarli bir xil ishlaydi. Agar <code>Result</code> qiymati <code>Ok</code> bo'lsa, <code>Ok</code> ichidagi qiymat ushbu ifodadan qaytariladi va dastur davom etadi. Agar qiymat <code>Err</code> bo'lsa, <code>Err</code> butun funktsiyadan qaytariladi, xuddi biz <code>return</code> kalit so'zidan foydalanganimizdek, xato qiymati chaqiruvchi kodga propagate qiladi.</p>
+<p>9-6 roʻyxatdagi <code>match</code> ifodasi va <code>?</code> operatori nima qilishi oʻrtasida farq bor: <code>?</code> operatori chaqirilgan xato qiymatlari <code>from</code> funksiyasidan oʻtadi, qiymatlarni bir turdan ikkinchi turga aylantirish uchun foydalaniladigan standart kutubxonadagi <code>From</code> traitida aniqlanadi.
+<code>?</code> operatori <code>from</code> funksiyasini chaqirganda, qabul qilingan xato turi joriy funksiyaning qaytish turida aniqlangan xato turiga aylanadi. Bu funksiya muvaffaqiyatsiz bo'lishi mumkin bo'lgan barcha usullarni ifodalash uchun bitta xato turini qaytarganda foydalidir, agar qismlar turli sabablarga ko'ra ishlamay qolsa ham.</p>
+<p>Misol uchun, biz 9-7 ro'yxatdagi <code>fayldan_foydalanuvchi_nomini_olish</code> funksiyasini o'zgartirishimiz mumkin, bu biz aniqlagan <code>OurError</code>  nomli maxsus xato turini qaytarishimiz mumkin. Agar <code>io::Error</code> dan <code>OurError</code> misolini yaratish uchun <code>OurError</code> uchun <code>impl From&lt;io::Error&gt; for OurError</code> ni ham aniqlasak, keyin <code>fayldan_foydalanuvchi_nomini_olish</code> asosiy qismidagi <code>?</code> operatori chaqiruvlari <code>from</code>ga murojaat qiladi va funksiyaga boshqa kod qo'shmasdan xato turlarini o'zgartiradi.
+<code>foydalanuvchi_fayli</code> o'zgaruvchisiga qaytaradi.Agar xatolik yuzaga kelsa, <code>?</code> operatori butun funksiyadan erta qaytadi va chaqiruvchi kodga istalgan <code>Err</code> qiymatini beradi. Xuddi shu narsa <code>read_to_string</code> chaqiruvi oxiridagi <code>?</code> uchun ham amal qiladi.</p>
+<p><code>?</code> operatori ko'plab nosozliklarni bartaraf qiladi va bu funksiyani amalga oshirishni soddalashtiradi. 9-8 ro'yxatda ko'rsatilganidek, biz ushbu kodni <code>?</code> dan keyin metod chaqiruvlar zanjiridan foydalansak, bu kodni yanada qisqartirishimiz mumkin.</p>
+<p><span class="filename">Fayl nomi: src/main.rs</span></p>
+<!-- Deliberately not using rustdoc_include here; the `main` function in the
+file panics. We do want to include it for reader experimentation purposes, but
+don't want to include it for rustdoc testing purposes. -->
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use std::fs::File;
+use std::io::{self, Read};
+
+fn fayldan_foydalanuvchi_nomini_olish() -&gt; Result&lt;String, io::Error&gt; {
+    let mut foydalanuvchi = String::new();
+
+    File::open(&quot;olma.txt&quot;)?.read_to_string(&amp;mut foydalanuvchi)?;
+
+    Ok(foydalanuvchi)
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p><span class="caption">Ro'yxat 9-8: <code>?</code> operatoridan keyin zanjirlash(chaining) metodi chaqiruvlari</span></p>
+<p>Biz <code>foydalanuvchi</code> da yangi <code>String</code> yaratishni funksiya boshiga o‘tkazdik; bu qism o'zgarmagan. <code>foydalanuvchi_fayli</code> oʻzgaruvchisini yaratish oʻrniga, <code>File::open(&quot;olma.txt&quot;)?</code> natijasiga toʻgʻridan-toʻgʻri <code>read_to_string</code> chaqiruvlarini bogʻladik. Bizda <code>read_to_string</code>  chaqiruvi oxirida hali ham <code>?</code> bor va biz xatoliklarni qaytarish oʻrniga <code>File::open</code> va <code>read_to_string</code> muvaffaqiyatli boʻlganda ham <code>foydalanuvchi</code>ni oʻz ichiga olgan <code>OK</code> qiymatini qaytaramiz. Funksionallik yana 9-6 va 9-7 ro'yxatdagi kabi; Bu uni yozishning boshqacha, ergonomik usuli.</p>
+<p>9-9 ro'yxati <code>fs::read_to_string</code> yordamida buni yanada qisqartirish yo'lini ko'rsatadi.</p>
+<p><span class="filename">Fayl nomi: src/main.rs</span></p>
+<!-- Deliberately not using rustdoc_include here; the `main` function in the
+file panics. We do want to include it for reader experimentation purposes, but
+don't want to include it for rustdoc testing purposes. -->
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use std::fs;
+use std::io;
+
+fn read_username_from_file() -&gt; Result&lt;String, io::Error&gt; {
+    fs::read_to_string(&quot;hello.txt&quot;)
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p><span class="caption">Roʻyxat 9-9: faylni ochish va keyin oʻqish oʻrniga <code>fs::read_to_string</code> dan foydalanish</span></p>
+<p>Faylni stringda o'qish juda keng tarqalgan operatsiya, shuning uchun standart kutubxona faylni ochadigan, yangi <code>String</code> yaratadigan qulay <code>fs::read_to_string</code> funksiyasini ta'minlaydi fayl mazmunini o'qiydi, mazmunini o'sha <code>String</code> ga qo'yadi va uni qaytaradi. Albatta, <code>fs::read_to_string</code> dan foydalanish bizga xatolarni qanday hal qilishni tushuntirishga imkon bermaydi, shuning uchun biz birinchi navbatda uzoq yo'lni o'rgandik.</p>
+<h4 id="-operatoridan-qayerda-foydalanish-mumkin"><a class="header" href="#-operatoridan-qayerda-foydalanish-mumkin"><code>?</code> Operatoridan qayerda foydalanish mumkin</a></h4>
+<p><code>?</code> operatori faqat qaytarish turi <code>?</code> ishlatiladigan qiymatga mos keladigan funksiyalarda ishlatilishi mumkin. Buning sababi, <code>?</code> operatori biz 9-6 ro'yxatda belgilagan <code>match</code> ifodasi kabi funksiyadan tashqari qiymatni erta qaytarish uchun belgilangan. 9-6 roʻyxatda <code>match</code> <code>Result</code> qiymatidan foydalanilgan va erta qaytish armi <code>Err(e)</code> qiymatini qaytargan. Funksiyaning qaytish turi <code>Result</code> bo'lishi kerak, shunda u ushbu <code>return</code> bilan mos keladi.</p>
+<p>9-10 ro'yxatda, agar biz <code>?</code> dan foydalanadigan qiymat turiga mos kelmaydigan qaytish turi bilan <code>main</code> funksiyada <code>?</code> operatoridan foydalansak, qanday xatoga duch kelamiz:</p>
+<p><span class="filename">Fayl nomi: src/main.rs</span></p>
+<pre><code class="language-rust ignore does_not_compile">use std::fs::File;
+
+fn main() {
+    let fayl_ochish = File::open(&quot;olma.txt&quot;)?;
+}
+</code></pre>
+<p><span class="caption">Roʻyxat 9-10: <code>()</code> qaytaradigan <code>main</code>  funksiyadagi <code>?</code> dan foydalanishga urinish kompilyatsiya qilinmaydi.</span></p>
+<p>Ushbu kod faylni ochadi, bu muvaffaqiyatsiz bo'lishi mumkin. <code>?</code> operatori <code>File::open</code> tomonidan qaytarilgan <code>Result</code> qiymatiga amal qiladi, lekin bu <code>main</code> funksiya <code>Result</code> emas, <code>()</code> qaytish turiga ega. Ushbu kodni kompilyatsiya qilganimizda, biz quyidagi xato xabarini olamiz:</p>
+<pre><code class="language-console">$ cargo run
+   Compiling error-handling v0.1.0 (file:///projects/error-handling)
+error[E0277]: the `?` operator can only be used in a function that returns `Result` or `Option` (or another type that implements `FromResidual`)
+ --&gt; src/main.rs:4:48
+  |
+3 | fn main() {
+  | --------- this function should return `Result` or `Option` to accept `?`
+4 |     let fayl_ochish = File::open(&quot;olma.txt&quot;)?;
+  |                                                ^ cannot use the `?` operator in a function that returns `()`
+  |
+  = help: the trait `FromResidual&lt;Result&lt;Infallible, std::io::Error&gt;&gt;` is not implemented for `()`
+
+For more information about this error, try `rustc --explain E0277`.
+error: could not compile `error-handling` due to previous error
+</code></pre>
+<p>Bu xato bizga <code>?</code> operatoridan faqat <code>Result</code>, <code>Option</code> yoki <code>FromResidual</code>ni qo'llaydigan boshqa turdagi qaytaruvchi funksiyada foydalanishga ruxsat berilganligini ko`rsatadi.</p>
+<p>Xatoni tuzatish uchun sizda ikkita variant bor. Tanlovlardan biri, funksiyangizning qaytish turini <code>?</code> operatoridan foydalanayotgan qiymatga mos keladigan qilib o'zgartirish, agar bunga hech qanday cheklovlar bo'lmasa. Boshqa usul esa, <code>Result&lt;T, E&gt;</code> ni mos keladigan usulda boshqarish uchun <code>match</code> yoki <code>Result&lt;T, E&gt;</code> metodlaridan birini qo`llashdir.</p>
+<p>Xato xabarida, shuningdek, <code>?</code> ni <code>Option&lt;T&gt;</code> qiymatlari bilan ham foydalanish mumkinligi aytilgan. <code>Result</code>da <code>?</code> dan foydalanish kabi, siz <code>?</code> dan faqat <code>Option</code> ni qaytaradigan funksiyada foydalanishingiz mumkin. <code>?</code> operatorining <code>Option&lt;T&gt;</code> bo'yicha chaqirilgandagi xatti-harakati <code>Result&lt;T, E&gt;</code> da chaqirilgandagi xatti-harakatiga o'xshaydi: agar qiymat <code>None</code> bo'lsa <code>None</code> bo'ladi o'sha paytda  funksiyadan erta qaytariladi. Agar qiymat <code>Some</code> bo'lsa, <code>Some</code> ichidagi qiymat ifodaning natijaviy qiymati bo`lib, funksiya davom etadi. 9-11 ro'yxatda berilgan matndagi birinchi qatorning oxirgi belgisini topadigan funksiya misoli mavjud:</p>
+<pre><pre class="playground"><code class="language-rust">fn birinchi_satrning_oxirgi_belgisi(matn: &amp;str) -&gt; Option&lt;char&gt; {
+    matn.lines().next()?.chars().last()
+}
+<span class="boring">
+</span><span class="boring">fn main() {
+</span><span class="boring">    assert_eq!(
+</span><span class="boring">        birinchi_satrning_oxirgi_belgisi(&quot;Salom Do'stim\n Ahvollaring qanday?&quot;),
+</span><span class="boring">        Some('m')
+</span><span class="boring">    );
+</span><span class="boring">
+</span><span class="boring">    assert_eq!(birinchi_satrning_oxirgi_belgisi(&quot;&quot;), None);
+</span><span class="boring">    assert_eq!(birinchi_satrning_oxirgi_belgisi(&quot;\nhi&quot;), None);
+</span><span class="boring">}
+</span></code></pre></pre>
+<p><span class="caption">Roʻyxat 9-11: <code>Option</code>da <code>?</code> operatoridan foydalanish<T>`
+value</span></p>
+<p>Bu funksiya <code>Option&lt;char&gt;</code>ni qaytaradi, chunki u yerda belgi(character) boʻlishi mumkin, lekin yoʻq boʻlishi ham mumkin. Bu kod <code>matn</code> string argumentini oladi va undagi <code>lines</code> metodini chaqiradi, bu esa satrdagi satrlar ustidan iteratorni qaytaradi. Ushbu funksiya birinchi qatorni tekshirmoqchi bo'lganligi sababli, iteratordan birinchi qiymatni olish uchun iteratorda <code>next</code> ni chaqiradi. Agar <code>matn</code> boʻsh qator boʻlsa, <code>next</code> ga murojat qilish <code>None</code>ni qaytaradi, bu holda biz <code>birinchi_satrning_oxirgi_belgisi</code>dan <code>None</code>ni toʻxtatish va qaytarish uchun <code>?</code> operatoridan foydalanamiz. Agar <code>matn</code> bo'sh qator bo'lmasa, <code>next</code> <code>matn</code>dagi birinchi qatorning string sliceni o'z ichiga olgan <code>Some</code> qiymatini qaytaradi.</p>
+<p><code>?</code> operatori satr bo'lagini chiqaradi va biz uning belgilarining iteratorini olish uchun ushbu qator bo'limidagi <code>chars</code>larni chaqirishimiz mumkin. Bizni ushbu birinchi qatordagi oxirgi belgi qiziqtiradi, shuning uchun biz iteratordagi oxirgi elementni qaytarish uchun <code>last</code> deb chaqiramiz.
+Bu <code>Option</code>dir, chunki birinchi qator boʻsh satr boʻlishi mumkin, masalan, <code>matn</code> boʻsh satr bilan boshlansa, lekin <code>&quot;\nhi&quot;</code>dagi kabi boshqa qatorlarda belgilar boʻlsa. Biroq, agar birinchi qatorda oxirgi belgi bo'lsa, u <code>Some</code> variantida qaytariladi. O'rtadagi <code>?</code> operatori bu mantiqni ifodalashning ixcham usulini beradi, bu funksiyani bir qatorda amalga oshirish imkonini beradi. Agar biz <code>Option</code> da<code>?</code> operatoridan foydalana olmasak, biz bu mantiqni ko'proq metod chaqiruvlari yoki <code>match</code> ifodasi yordamida amalga oshirishimiz kerak edi.</p>
+<p>Esda tutingki, <code>?</code> operatoridan <code>Result</code> qaytaruvchi funksiyada <code>Result</code>da foydalanishingiz mumkin, va <code>?</code> operatoridan <code>Option</code> qaytaradigan funksiyada <code>Option</code>da foydalanishingiz mumkin, lekin siz aralashtirib, moslashtira olmaysiz. <code>?</code> operatori <code>Result</code>ni avtomatik ravishda <code>Option</code>ga yoki aksincha o'zgartirmaydi; Bunday hollarda konvertatsiyani aniq amalga oshirish uchun <code>Result</code>dagi <code>ok</code> metodi yoki <code>Option</code>dagi <code>ok_or</code> kabi metodlardan foydalanishingiz mumkin.</p>
+<p>Hozirgacha biz ishlatgan barcha <code>main</code> funksiyalar <code>()</code> ni qaytaradi. <code>main</code> funksiya maxsus, chunki u bajariladigan dasturlarning kirish va chiqish nuqtasi bo'lib, dasturlar kutilgandek harakat qilishi uchun uning qaytish(return) turi qanday bo'lishi mumkinligiga cheklovlar mavjud.</p>
+<p>Yaxshiyamki, <code>main</code> <code>Result&lt;(), E&gt;</code>ni ham qaytarishi mumkin. 9-12 ro'yxatda 9-10 ro'yxatdagi kod mavjud, biroq biz <code>main</code> ning qaytish turini <code>Result&lt;(),  Box&lt;dyn Error&gt;&gt;</code> qilib o'zgartirdik va oxiriga <code>Ok(())</code>  qaytish qiymatini qo'shdik. Ushbu kod endi kompilyatsiya qilinadi:</p>
+<pre><code class="language-rust ignore">use std::error::Error;
+use std::fs::File;
+
+fn main() -&gt; Result&lt;(), Box&lt;dyn Error&gt;&gt; {
+    let fayl_ochish = File::open(&quot;olma.txt&quot;)?;
+
+    Ok(())
+}
+</code></pre>
+<p><span class="caption">Roʻyxat 9-12: <code>main</code>ni <code>Result&lt;(), E&gt;</code> qaytarishga oʻzgartirish <code>Result</code> qiymatlarida <code>?</code> operatoridan foydalanish imkonini beradi.</span></p>
+<p><code>Box&lt;dyn Error&gt;</code> turi bu <em>trait ob'ekti</em> bo'lib, biz 17-bobning <a href="ch17-02-trait-objects.html#using-trait-objects-that-allow-for-values-of-different-types">&quot;Turli turdagi qiymatlarga ruxsat beruvchi trait ob'ektlaridan foydalanish&quot;</a><!-- ignore -->  bo'limida gaplashamiz. Hozircha siz <code>Box&lt;dyn Error&gt;</code>ni “har qanday xato” degan ma'noni anglatadi deb o'ylashingiz mumkin. <code>Box&lt;dyn Error&gt;</code> xato turi bilan <code>main</code> funksiyadagi <code>Result</code> qiymatida <code>?</code> dan foydalanishga ruxsat beriladi, chunki bu har qanday <code>Err</code> qiymatini erta qaytarish imkonini beradi. Garchi bu <code>main</code> funksiyaning tanasi faqat <code>std::io::Error</code> turidagi xatolarni qaytarsa ham, <code>Box&lt;dyn Error&gt;</code> ni belgilab, <code>main</code> funksiyaga boshqa xatolarni qaytaruvchi ko'proq kod qo'shilsa ham, bu kod to'g'ri bo'lib qoladi.</p>
+<p><code>main</code>  funksiya <code>Result&lt;(), E&gt;</code>ni qaytarsa, bajariladigan fayl(executable file) <code>0</code> qiymati bilan chiqadi, agar <code>main</code> <code>Ok(())</code> qaytarsa va <code>main</code> <code>Err</code> qiymatini qaytarsa nolga teng bo'lmagan qiymat bilan chiqadi. C tilida yozilgan bajariladigan fayllar(executable file) chiqqanda butun sonlarni qaytaradi: muvaffaqiyatli chiqqan dasturlar <code>0</code> butun sonini qaytaradi, xatoga yo'l qo'ygan dasturlar esa <code>0</code> dan boshqa butun sonni qaytaradi. Rust shuningdek, ushbu konventsiyaga mos kelishi uchun bajariladigan fayllardan butun(integer) sonlarni qaytaradi.</p>
+<p><code>main</code> funksiya <a href="../std/process/trait.Termination.html"><code>std::process::Termination</code> traitini</a><!-- ignore --> amalga oshiradigan har qanday turlarni qaytarishi mumkin, bunda <code>ExitCode</code> qaytaruvchi <code>report</code> funksiyasi mavjud. O'zingizning turlaringiz uchun <code>Termination</code> traitini qo'llash bo'yicha qo'shimcha ma'lumot olish uchun standart kutubxona texnik hujjatlariga murojaat qiling.</p>
+<p>Endi biz <code>panic!</code> chaqirish yoki <code>Result</code>ni qaytarish tafsilotlarini muhokama qilganimizdan so‘ng, keling, qaysi hollarda qaysi biri to‘g‘ri kelishini hal qilish mavzusiga qaytaylik.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="ch09-01-unrecoverable-errors-with-panic.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a rel="next" href="ch09-03-to-panic-or-not-to-panic.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="ch09-01-unrecoverable-errors-with-panic.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a rel="next" href="ch09-03-to-panic-or-not-to-panic.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        <script type="text/javascript" src="ferris.js"></script>
+    </body>
+</html>

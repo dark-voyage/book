@@ -1,0 +1,932 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Testlarni qanday yozish kerak - Rust dasturlash tili</title>
+        <!-- Custom HTML head -->
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="ferris.css">
+        <link rel="stylesheet" href="theme/2018-edition.css">
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="title-page.html">Rust dasturlash tili</a></li><li class="chapter-item expanded affix "><a href="foreword.html">Muqaddima</a></li><li class="chapter-item expanded affix "><a href="ch00-00-introduction.html">Kirish</a></li><li class="chapter-item expanded "><a href="ch01-00-getting-started.html"><strong aria-hidden="true">1.</strong> Ishni boshlash</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch01-01-installation.html"><strong aria-hidden="true">1.1.</strong> O'rnatish</a></li><li class="chapter-item expanded "><a href="ch01-02-hello-world.html"><strong aria-hidden="true">1.2.</strong> Hello, World!</a></li><li class="chapter-item expanded "><a href="ch01-03-hello-cargo.html"><strong aria-hidden="true">1.3.</strong> Hello, Cargo!</a></li></ol></li><li class="chapter-item expanded "><a href="ch02-00-guessing-game-tutorial.html"><strong aria-hidden="true">2.</strong> Taxmin qilish o'yinini dasturlash</a></li><li class="chapter-item expanded "><a href="ch03-00-common-programming-concepts.html"><strong aria-hidden="true">3.</strong> Umumiy dasturlash tushunchalari</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch03-01-variables-and-mutability.html"><strong aria-hidden="true">3.1.</strong> O'zgaruvchilar va o'zgaruvchanlik</a></li><li class="chapter-item expanded "><a href="ch03-02-data-types.html"><strong aria-hidden="true">3.2.</strong> Ma'lumotlar turlari</a></li><li class="chapter-item expanded "><a href="ch03-03-how-functions-work.html"><strong aria-hidden="true">3.3.</strong> Funksiyalar</a></li><li class="chapter-item expanded "><a href="ch03-04-comments.html"><strong aria-hidden="true">3.4.</strong> Izohlar</a></li><li class="chapter-item expanded "><a href="ch03-05-control-flow.html"><strong aria-hidden="true">3.5.</strong> Control Flow</a></li></ol></li><li class="chapter-item expanded "><a href="ch04-00-understanding-ownership.html"><strong aria-hidden="true">4.</strong> Ownershipni tushunish</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch04-01-what-is-ownership.html"><strong aria-hidden="true">4.1.</strong> Ownership nima?</a></li><li class="chapter-item expanded "><a href="ch04-02-references-and-borrowing.html"><strong aria-hidden="true">4.2.</strong> Referencelar va  Borrowing</a></li><li class="chapter-item expanded "><a href="ch04-03-slices.html"><strong aria-hidden="true">4.3.</strong> Slice turi</a></li></ol></li><li class="chapter-item expanded "><a href="ch05-00-structs.html"><strong aria-hidden="true">5.</strong> Tegishli ma'lumotlarni tuzish uchun Structdan foydalanish</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch05-01-defining-structs.html"><strong aria-hidden="true">5.1.</strong> Structlarni aniqlash va yaratish</a></li><li class="chapter-item expanded "><a href="ch05-02-example-structs.html"><strong aria-hidden="true">5.2.</strong> Structs yordamida namunaviy dastur</a></li><li class="chapter-item expanded "><a href="ch05-03-method-syntax.html"><strong aria-hidden="true">5.3.</strong> Metod sintaksisi</a></li></ol></li><li class="chapter-item expanded "><a href="ch06-00-enums.html"><strong aria-hidden="true">6.</strong> Enumlar va patternlarni moslashtirish</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch06-01-defining-an-enum.html"><strong aria-hidden="true">6.1.</strong> Enumni aniqlash</a></li><li class="chapter-item expanded "><a href="ch06-02-match.html"><strong aria-hidden="true">6.2.</strong> match Control Flow konstruksiyasi</a></li><li class="chapter-item expanded "><a href="ch06-03-if-let.html"><strong aria-hidden="true">6.3.</strong> if let bilan qisqacha Control Flow</a></li></ol></li><li class="chapter-item expanded "><a href="ch07-00-managing-growing-projects-with-packages-crates-and-modules.html"><strong aria-hidden="true">7.</strong> O'sib borayotgan loyihalarni Paketlar, Cratelar va Modullar bilan boshqarish</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch07-01-packages-and-crates.html"><strong aria-hidden="true">7.1.</strong> Paketlar va Cratelar</a></li><li class="chapter-item expanded "><a href="ch07-02-defining-modules-to-control-scope-and-privacy.html"><strong aria-hidden="true">7.2.</strong> Qo'llanish doirasi va maxfiylikni nazorat qilish uchun modullarni aniqlash</a></li><li class="chapter-item expanded "><a href="ch07-03-paths-for-referring-to-an-item-in-the-module-tree.html"><strong aria-hidden="true">7.3.</strong> Modul daraxtidagi elementga murojaat qilish yo'llari</a></li><li class="chapter-item expanded "><a href="ch07-04-bringing-paths-into-scope-with-the-use-keyword.html"><strong aria-hidden="true">7.4.</strong> use kalit so'zi bilan yo'llarni qamrab olish</a></li><li class="chapter-item expanded "><a href="ch07-05-separating-modules-into-different-files.html"><strong aria-hidden="true">7.5.</strong> Modullarni turli fayllarga ajratish</a></li></ol></li><li class="chapter-item expanded "><a href="ch08-00-common-collections.html"><strong aria-hidden="true">8.</strong> Umumiy to'plamlar</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch08-01-vectors.html"><strong aria-hidden="true">8.1.</strong> Vectorlar bilan qiymatlar ro'yxatini saqlash</a></li><li class="chapter-item expanded "><a href="ch08-02-strings.html"><strong aria-hidden="true">8.2.</strong> UTF-8 kodlangan matnni Stringlar bilan saqlash</a></li><li class="chapter-item expanded "><a href="ch08-03-hash-maps.html"><strong aria-hidden="true">8.3.</strong> Hash Mapda bog'langan qiymatlarga ega kalitlarni saqlash</a></li></ol></li><li class="chapter-item expanded "><a href="ch09-00-error-handling.html"><strong aria-hidden="true">9.</strong> Xatolar bilan ishlash</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch09-01-unrecoverable-errors-with-panic.html"><strong aria-hidden="true">9.1.</strong> panic! bilan tuzatib bo'lmaydigan xatolar</a></li><li class="chapter-item expanded "><a href="ch09-02-recoverable-errors-with-result.html"><strong aria-hidden="true">9.2.</strong> Result bilan tiklanadigan xatolar</a></li><li class="chapter-item expanded "><a href="ch09-03-to-panic-or-not-to-panic.html"><strong aria-hidden="true">9.3.</strong> panic! yoki panic! emas</a></li></ol></li><li class="chapter-item expanded "><a href="ch10-00-generics.html"><strong aria-hidden="true">10.</strong> Umumiy turlar, traitlar va lifetime</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch10-01-syntax.html"><strong aria-hidden="true">10.1.</strong> Generik ma'lumotlar turlari</a></li><li class="chapter-item expanded "><a href="ch10-02-traits.html"><strong aria-hidden="true">10.2.</strong> Traitlar: umumiy xatti-harakatni aniqlash</a></li><li class="chapter-item expanded "><a href="ch10-03-lifetime-syntax.html"><strong aria-hidden="true">10.3.</strong> Referencelarni lifetime bilan tekshirish</a></li></ol></li><li class="chapter-item expanded "><a href="ch11-00-testing.html"><strong aria-hidden="true">11.</strong> Avtomatlashtirilgan testlarni yozish</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch11-01-writing-tests.html" class="active"><strong aria-hidden="true">11.1.</strong> Testlarni qanday yozish kerak</a></li><li class="chapter-item expanded "><a href="ch11-02-running-tests.html"><strong aria-hidden="true">11.2.</strong> Sinovlar qanday o'tkazilishini nazorat qilish</a></li><li class="chapter-item expanded "><a href="ch11-03-test-organization.html"><strong aria-hidden="true">11.3.</strong> Test tashkil etish</a></li></ol></li><li class="chapter-item expanded "><a href="ch12-00-an-io-project.html"><strong aria-hidden="true">12.</strong> I/O loyihasi: Buyruqlar qatori dasturini yaratish</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch12-01-accepting-command-line-arguments.html"><strong aria-hidden="true">12.1.</strong> Buyruqlar qatori argumentini qabul qilishs</a></li><li class="chapter-item expanded "><a href="ch12-02-reading-a-file.html"><strong aria-hidden="true">12.2.</strong> Faylni o'qish</a></li><li class="chapter-item expanded "><a href="ch12-03-improving-error-handling-and-modularity.html"><strong aria-hidden="true">12.3.</strong> Modullikni yaxshilash va xatolarni qayta ishlash uchun refactoring</a></li><li class="chapter-item expanded "><a href="ch12-04-testing-the-librarys-functionality.html"><strong aria-hidden="true">12.4.</strong> Sinovga asoslangan ishlab chiqish bilan kutubxonaning funksionalligini rivojlantirish</a></li><li class="chapter-item expanded "><a href="ch12-05-working-with-environment-variables.html"><strong aria-hidden="true">12.5.</strong> Environment o'zgaruvchilari bilan ishlash</a></li><li class="chapter-item expanded "><a href="ch12-06-writing-to-stderr-instead-of-stdout.html"><strong aria-hidden="true">12.6.</strong> Xato xabarlarini standart chiqish o'rniga standart xatoga yozish</a></li></ol></li><li class="chapter-item expanded "><a href="ch13-00-functional-features.html"><strong aria-hidden="true">13.</strong> Funksional til xususiyatlari: iteratorlar va closurelar</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch13-01-closures.html"><strong aria-hidden="true">13.1.</strong> Closurelar: Environmentni qamrab oladigan anonim funksiyalar</a></li><li class="chapter-item expanded "><a href="ch13-02-iterators.html"><strong aria-hidden="true">13.2.</strong> Iteratorlar bilan bir qator elementlarga ishlov berish</a></li><li class="chapter-item expanded "><a href="ch13-03-improving-our-io-project.html"><strong aria-hidden="true">13.3.</strong> I/O loyihamizni takomillashtirish</a></li><li class="chapter-item expanded "><a href="ch13-04-performance.html"><strong aria-hidden="true">13.4.</strong> Ishlash samaradorligini solishtirish: Looplar va iteratorlar</a></li></ol></li><li class="chapter-item expanded "><a href="ch14-00-more-about-cargo.html"><strong aria-hidden="true">14.</strong> Cargo va Crates.io haqida ko'proq</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch14-01-release-profiles.html"><strong aria-hidden="true">14.1.</strong> Reliz profillari bilan structlarni moslashtirish</a></li><li class="chapter-item expanded "><a href="ch14-02-publishing-to-crates-io.html"><strong aria-hidden="true">14.2.</strong> Crateni Crates.io-ga nashr qilish</a></li><li class="chapter-item expanded "><a href="ch14-03-cargo-workspaces.html"><strong aria-hidden="true">14.3.</strong> Cargo Workspacelar</a></li><li class="chapter-item expanded "><a href="ch14-04-installing-binaries.html"><strong aria-hidden="true">14.4.</strong> Binary fayllarni Crates.io'dan cargo install bilan o'rnatish</a></li><li class="chapter-item expanded "><a href="ch14-05-extending-cargo.html"><strong aria-hidden="true">14.5.</strong> Maxsus buyruqlar bilan Cargoni kengaytirish</a></li></ol></li><li class="chapter-item expanded "><a href="ch15-00-smart-pointers.html"><strong aria-hidden="true">15.</strong> Smart Pointerlar</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch15-01-box.html"><strong aria-hidden="true">15.1.</strong> Heapdagi ma'lumotlarni ko'rsatish uchun Box&lt;T&gt; dan foydalanish</a></li><li class="chapter-item expanded "><a href="ch15-02-deref.html"><strong aria-hidden="true">15.2.</strong> Deref Traitidan foydalangan holda oddiy referencelar kabi Smart Pointerlar bilan ishlash</a></li><li class="chapter-item expanded "><a href="ch15-03-drop.html"><strong aria-hidden="true">15.3.</strong> Drop Traiti bilan tozalashda kodni ishga tushirish</a></li><li class="chapter-item expanded "><a href="ch15-04-rc.html"><strong aria-hidden="true">15.4.</strong> Rc&lt;T&gt;, reference hisoblangan Smart Pointer</a></li><li class="chapter-item expanded "><a href="ch15-05-interior-mutability.html"><strong aria-hidden="true">15.5.</strong> RefCell&lt;T&gt; va ichki o'zgaruvchanlik namunasi</a></li><li class="chapter-item expanded "><a href="ch15-06-reference-cycles.html"><strong aria-hidden="true">15.6.</strong> Reference Cycles Can Leak Memory</a></li></ol></li><li class="chapter-item expanded "><a href="ch16-00-concurrency.html"><strong aria-hidden="true">16.</strong> Qo'rqmas parallellik</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch16-01-threads.html"><strong aria-hidden="true">16.1.</strong> Kodni bir vaqtning o'zida ishga tushirish uchun threadlardan foydalanish</a></li><li class="chapter-item expanded "><a href="ch16-02-message-passing.html"><strong aria-hidden="true">16.2.</strong> Threadlar orasidagi ma'lumotlarni uzatish uchun xabar uzatishdan(Message Passing) foydalanish</a></li><li class="chapter-item expanded "><a href="ch16-03-shared-state.html"><strong aria-hidden="true">16.3.</strong> Shared-State Concurrency</a></li><li class="chapter-item expanded "><a href="ch16-04-extensible-concurrency-sync-and-send.html"><strong aria-hidden="true">16.4.</strong> Sync va Send traitlari bilan kengaytiriladigan parallellik</a></li></ol></li><li class="chapter-item expanded "><a href="ch17-00-oop.html"><strong aria-hidden="true">17.</strong> Rustning ob'ektga yo'naltirilgan dasturlash xususiyatlari- OOP</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch17-01-what-is-oo.html"><strong aria-hidden="true">17.1.</strong> Ob'ektga yo'naltirilgan tillarning xususiyatlari</a></li><li class="chapter-item expanded "><a href="ch17-02-trait-objects.html"><strong aria-hidden="true">17.2.</strong> Har xil turdagi qiymatlarga ruxsat beruvchi trait ob'ektlaridan foydalanish</a></li><li class="chapter-item expanded "><a href="ch17-03-oo-design-patterns.html"><strong aria-hidden="true">17.3.</strong> Ob'ektga yo'naltirilgan dizayn patternini implement qilish</a></li></ol></li><li class="chapter-item expanded "><a href="ch18-00-patterns.html"><strong aria-hidden="true">18.</strong> Patternlar va Matching</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch18-01-all-the-places-for-patterns.html"><strong aria-hidden="true">18.1.</strong> All the Places Patterns Can Be Used</a></li><li class="chapter-item expanded "><a href="ch18-02-refutability.html"><strong aria-hidden="true">18.2.</strong> Refutability: Whether a Pattern Might Fail to Match</a></li><li class="chapter-item expanded "><a href="ch18-03-pattern-syntax.html"><strong aria-hidden="true">18.3.</strong> Pattern Sintaksisi</a></li></ol></li><li class="chapter-item expanded "><a href="ch19-00-advanced-features.html"><strong aria-hidden="true">19.</strong> Kengaytirilgan Xususiyatlar</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch19-01-unsafe-rust.html"><strong aria-hidden="true">19.1.</strong> Xavfsiz Rust</a></li><li class="chapter-item expanded "><a href="ch19-03-advanced-traits.html"><strong aria-hidden="true">19.2.</strong> Murakkab Traitlar</a></li><li class="chapter-item expanded "><a href="ch19-04-advanced-types.html"><strong aria-hidden="true">19.3.</strong> Kengaytirilgan Turlar</a></li><li class="chapter-item expanded "><a href="ch19-05-advanced-functions-and-closures.html"><strong aria-hidden="true">19.4.</strong> Kengaytirilgan funksiyalar va closurelar</a></li><li class="chapter-item expanded "><a href="ch19-06-macros.html"><strong aria-hidden="true">19.5.</strong> Makrolar</a></li></ol></li><li class="chapter-item expanded "><a href="ch20-00-final-project-a-web-server.html"><strong aria-hidden="true">20.</strong> Yakuniy loyiha: Ko'p tarmoqli veb-serverni qurish</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch20-01-single-threaded.html"><strong aria-hidden="true">20.1.</strong> Yagona tarmoqli veb-serverni qurish</a></li><li class="chapter-item expanded "><a href="ch20-02-multithreaded.html"><strong aria-hidden="true">20.2.</strong> Bizning yagona tarmoqli serverimizni ko'p tarmoqli serverga aylantirish</a></li><li class="chapter-item expanded "><a href="ch20-03-graceful-shutdown-and-cleanup.html"><strong aria-hidden="true">20.3.</strong> Ajoyib o'chirish va tozalash</a></li></ol></li><li class="chapter-item expanded "><a href="appendix-00.html"><strong aria-hidden="true">21.</strong> Ilova</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="appendix-01-keywords.html"><strong aria-hidden="true">21.1.</strong> A - Kalit so'zlar</a></li><li class="chapter-item expanded "><a href="appendix-02-operators.html"><strong aria-hidden="true">21.2.</strong> B - Operatorlar va Symbollar</a></li><li class="chapter-item expanded "><a href="appendix-03-derivable-traits.html"><strong aria-hidden="true">21.3.</strong> C - Hosilaviy Traitlar</a></li><li class="chapter-item expanded "><a href="appendix-04-useful-development-tools.html"><strong aria-hidden="true">21.4.</strong> D - Foydali Development Toollar</a></li><li class="chapter-item expanded "><a href="appendix-05-editions.html"><strong aria-hidden="true">21.5.</strong> E - Nashrlar</a></li><li class="chapter-item expanded "><a href="appendix-06-translation.html"><strong aria-hidden="true">21.6.</strong> F - Kitobning tarjimalari</a></li><li class="chapter-item expanded "><a href="appendix-07-nightly-rust.html"><strong aria-hidden="true">21.7.</strong> G - Rust qanday yasaladi va “Nightly Rust”</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Rust dasturlash tili</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/rust-lang/book" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h2 id="testlarni-qanday-yozish-kerak"><a class="header" href="#testlarni-qanday-yozish-kerak">Testlarni qanday yozish kerak</a></h2>
+<p>Testlar - bu sinovdan tashqari kod kutilgan tarzda ishlayotganligini tasdiqlovchi Rust funksiyalari. Test funksiyalari organlari odatda ushbu uchta harakatni bajaradi:</p>
+<ol>
+<li>Har qanday kerakli ma'lumotlarni yoki holatni o'rnating.</li>
+<li>Test qilmoqchi bo'lgan kodni ishga tushiring.</li>
+<li>Natijalar siz kutgan narsa ekanligini tasdiqlang.</li>
+</ol>
+<p>Keling, Rust ushbu amallarni bajaradigan testlarni yozish uchun taqdim etgan xususiyatlarni ko'rib chiqaylik, ular orasida <code>test</code> atributi, bir nechta makroslar va <code>should_panic</code> atributi mavjud.</p>
+<h3 id="test-funksiyasining-anatomiyasi"><a class="header" href="#test-funksiyasining-anatomiyasi">Test funksiyasining anatomiyasi</a></h3>
+<p>Eng sodda qilib aytganda, Rust-dagi test <code>test</code> atributi bilan izohlangan funksiyadir. Atributlar Rust kodining bo'laklari haqidagi metama'lumotlardir; bir misol, biz 5-bobda structlar bilan ishlatgan <code>derive</code> atributidir. Funksiyani test funksiyasiga oʻzgartirish uchun <code>fn</code> oldidan qatorga <code>#[test]</code> qoʻshing. <code>cargo test</code> buyrug'i bilan testlarni o'tkazganingizda, Rust izohli funksiyalarni ishga tushiradigan test dasturining binaryrini yaratadi va har bir test funksiyasidan o'tgan yoki muvaffaqiyatsizligi haqida hisobot beradi.</p>
+<p>Har safar biz Cargo bilan yangi kutubxona loyihasini yaratganimizda, biz uchun test funksiyasi bo'lgan test moduli avtomatik ravishda yaratiladi. Ushbu modul sizga testlarni yozish uchun shablonni taqdim etadi, shuning uchun har safar yangi loyihani boshlaganingizda aniq struktura va sintaksisni izlashga hojat qolmaydi. Siz xohlagancha qo'shimcha test funksiyalari va test modullarini qo'shishingiz mumkin!</p>
+<p>Har qanday kodni sinab ko'rishdan oldin shablon testi bilan tajriba o'tkazish orqali testlar qanday ishlashining ba'zi jihatlarini o'rganamiz. Keyin biz yozgan ba'zi kodlarni chaqiradigan va uning xatti-harakati to'g'riligini tasdiqlaydigan haqiqiy dunyo testlarini yozamiz.</p>
+<p>Keling, ikkita raqamni qo'shadigan <code>qoshuvchi</code> nomli yangi kutubxona loyihasini yarataylik:</p>
+<pre><code class="language-console">$ cargo new qoshuvchi --lib
+     Created library `qoshuvchi` project
+$ cd qoshuvchi
+</code></pre>
+<p><code>qoshuvchi</code> kutubxonangizdagi <em>src/lib.rs</em> faylining mazmuni 11-1 roʻyxatdagi kabi koʻrinishi kerak.</p>
+<p><span class="filename">Fayl nomi: src/lib.rs</span></p>
+<!-- manual-regeneration
+cd listings/ch11-writing-automated-tests
+rm -rf listing-11-01
+cargo new listing-11-01 --lib --name adder
+cd listing-11-01
+cargo test
+git co output.txt
+cd ../../..
+-->
+<pre><code class="language-rust noplayground">#[cfg(test)]
+mod tests {
+    #[test]
+    fn ishlaydi() {
+        let natija = 2 + 2;
+        assert_eq!(natija, 4);
+    }
+}
+</code></pre>
+<p><span class="caption">Ro'yxat 11-1: Test moduli va funksiyasi avtomatik ravishda <code>cargo new</code> tomonidan yaratilgan</span></p>
+<p>Hozircha, keling, yuqoridagi ikkita qatorga e'tibor bermaylik va funksiyaga e'tibor qarataylik. <code>#[test]</code> izohiga e'tibor bering: bu atribut bu test funksiyasi ekanligini bildiradi, shuning uchun test ishtirokchisi bu funksiyani test sifatida ko'rishni biladi. Umumiy stsenariylarni oʻrnatish yoki umumiy operatsiyalarni bajarishda yordam beradigan <code>tests</code> modulida testdan tashqari funksiyalar ham boʻlishi mumkin, shuning uchun biz har doim qaysi funksiyalar test ekanligini koʻrsatishimiz kerak.</p>
+<p>Misol funksiya tanasi 2 va 2 qo‘shilishi natijasini o‘z ichiga olgan <code>natija</code> 4 ga teng ekanligini tasdiqlash uchun <code>assert_eq!</code> makrosidan foydalanadi. Ushbu tasdiq odatiy test formatiga misol bo'lib xizmat qiladi. Ushbu sinovdan o'tishini ko'rish uchun uni ishga tushiramiz.</p>
+<p><code>cargo test</code> buyrug'i 11-2 ro'yxatda ko'rsatilganidek, loyihamizdagi barcha testlarni amalga oshiradi.</p>
+<pre><code class="language-console">$ cargo test
+   Compiling qoshuvchi v0.1.0 (file:///projects/qoshuvchi)
+    Finished test [unoptimized + debuginfo] target(s) in 0.57s
+     Running unittests src/lib.rs (target/debug/deps/qoshuvchi-92948b65e88960b4)
+
+running 1 test
+test tests::ishlaydi ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests qoshuvchi
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+</code></pre>
+<p><span class="caption">Ro'yxat 11-2: Avtomatik ishlab chiqarilgan testni bajarishdan olingan natija</span></p>
+<p>Cargo kompilyatsiya qilindi va sinovdan o'tdi. Biz <code>running 1 test</code> qatorini ko'ramiz. Keyingi qatorda <code>ishlaydi</code> deb nomlangan yaratilgan test funksiyasining nomi va bu testni bajarish natijasi <code>ok</code> ekanligini ko'rsatadi. Umumiy xulosa test natijasi <code>test result: ok.</code> barcha testlardan muvaffaqiyatli oʻtganligini va <code>1 passed;</code> deb yozilgan qismi muvaffaqiyatli oʻtganligini bildiradi; <code>0 failed</code> muvaffaqiyatsiz boʻlgan testlar sonini ifodalaydi.</p>
+<p>Muayyan misolda ishlamasligi uchun testni e'tiborsiz(ignor) deb belgilash mumkin; Biz buni ushbu bobning keyingi qismida <a href="ch11-02-running-tests.html#ignoring-some-tests-unless-specifically-requested">&quot;Agar aniq talab qilinmasa, ba'zi testlarni e'tiborsiz qoldirish&quot;</a><!-- ignore --> bo'limida ko'rib chiqamiz. Bu yerda biz buni qilmaganimiz sababli, xulosada  <code>0 ignored</code> 0-ta eʼtibor berilmagan koʻrsatiladi. Shuningdek, biz argumentni faqat nomi satrga mos keladigan testlarni o'tkazish uchun <code>cargo test</code> buyrug'iga o'tkazishimiz mumkin; bu <em>filtrlash</em> deb ataladi va biz buni <a href="ch11-02-running-tests.html#running-a-subset-of-tests-by-name">&quot;Testlar to'plamini nomi bo'yicha ishga tushirish&quot;</a><!-- ignore --> bo'limida ko'rib chiqamiz. Shuningdek, biz bajarilayotgan testlarni filtrlamadik, shuning uchun xulosa oxirida <code>0 filtered out</code> 0-ta filtrlangan deb ko‘rsatiladi.</p>
+<p><code>0 measured</code> statistikasi samaradorlikni o'lchaydigan benchmark testlari uchundir.
+Benchmark testlari, ushbu yozuvdan boshlab, faqat nightly Rust-da mavjud. Batafsil ma'lumot olish uchun <a href="../unstable-book/library-features/test.html">benchmark testlari haqidagi hujjatlarga</a> qarang.</p>
+<p><code>Doc-tests adder</code>(Hujjat testlari qoʻshuvchisi) dan boshlanadigan test natijasining keyingi qismi har qanday hujjat sinovlari natijalariga moʻljallangan. Bizda hali hech qanday hujjat sinovlari yo'q, lekin Rust API hujjatlarida ko'rinadigan har qanday kod misollarini to'plashi mumkin.
+Bu xususiyat hujjatlaringiz va kodingizni sinxronlashtirishga yordam beradi! Hujjat testlarini qanday yozishni 14-bobning <a href="ch14-02-publishing-to-crates-io.html#documentation-comments-as-tests">“Hujjatlarga sharhlar test sifatida”</a><!-- ignore --> bo‘limida muhokama qilamiz. Hozircha biz <code>Doc-tests</code> chiqishini e'tiborsiz qoldiramiz.</p>
+<p>Keling, testni o'z ehtiyojlarimizga moslashtirishni boshlaylik. Avval <code>ishlaydi</code> funksiyasining nomini <code>tadqiqot</code> kabi boshqa nomga o'zgartiring, masalan:</p>
+<p><span class="filename">Fayl nomi: src/lib.rs</span></p>
+<pre><code class="language-rust noplayground">#[cfg(test)]
+mod tests {
+    #[test]
+    fn tadqiqot() {
+        assert_eq!(2 + 2, 4);
+    }
+}
+</code></pre>
+<p>Keyin yana <code>cargo test</code> bajaring. Chiqish(output) endi <code>ishlaydi</code> o‘rniga <code>tadqiqot</code>ni ko‘rsatadi:</p>
+<pre><code class="language-console">$ cargo test
+   Compiling adder v0.1.0 (file:///projects/adder)
+    Finished test [unoptimized + debuginfo] target(s) in 0.59s
+     Running unittests src/lib.rs (target/debug/deps/adder-92948b65e88960b4)
+
+running 1 test
+test tests::tadqiqot ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests adder
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+</code></pre>
+<p>Endi biz yana bir test qo'shamiz, lekin bu safar muvaffaqiyatsiz bo'lgan testni qilamiz! Test funktsiyasidagi biror narsa panic qo'zg'atganda, testlar muvaffaqiyatsiz tugaydi. Har bir test yangi threadda o'tkaziladi va asosiy(main) thread sinov chizig'i o'lganini ko'rsa, test muvaffaqiyatsiz deb belgilanadi. 9-bobda biz panic qo'zg'ashning eng oddiy yo'li <code>panic!</code> makrosini chaqirish haqida gapirdik. Yangi testni <code>boshqa</code> funksiya sifatida kiriting, shunda <em>src/lib.rs</em> faylingiz 11-3 roʻyxatiga oʻxshaydi.</p>
+<p><span class="filename">Fayl nomi: src/lib.rs</span></p>
+<pre><code class="language-rust panics noplayground">#[cfg(test)]
+mod tests {
+    #[test]
+    fn tadqiqot() {
+        assert_eq!(2 + 2, 4);
+    }
+
+    #[test]
+    fn boshqa() {
+        panic!(&quot;Ushbu test muvaffaqiyatsizlikka uchradil&quot;);
+    }
+}
+</code></pre>
+<p><span class="caption">Ro'yxat 11-3: Muvaffaqiyatsiz bo'ladigan ikkinchi testni qo'shish, chunki biz <code>panic!</code> makrosini chaqiramiz.</span></p>
+<p><code>cargo test</code> yordamida testlarni qaytadan test qiling. Chiqish 11-4 ro'yxatga o'xshash bo'lishi kerak, bu bizning <code>tadqiqot</code> sinovimizdan o'tganligini va <code>boshqa</code> muvaffaqiyatsiz ekanligini ko'rsatadi.</p>
+<pre><code class="language-console">$ cargo test
+   Compiling adder v0.1.0 (file:///projects/adder)
+    Finished test [unoptimized + debuginfo] target(s) in 0.72s
+     Running unittests src/lib.rs (target/debug/deps/adder-92948b65e88960b4)
+
+running 2 tests
+test tests::boshqa ... FAILED
+test tests::tadqiqot ... ok
+
+failures:
+
+---- tests::boshqa stdout ----
+thread 'tests::boshqa' panicked at 'Make this test fail', src/lib.rs:10:9
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    tests::boshqa
+
+test result: FAILED. 1 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+error: test failed, to rerun pass `--lib`
+</code></pre>
+<p><span class="caption">Ro'yxat 11-4: Bitta test sinovdan o'tgan va bitta test muvaffaqiyatsizlikka uchragan sinov natijalari</span></p>
+<p><code>OK</code> o'rniga <code>test tests::boshqa</code> qatori <code>FAILED</code>ni koʻrsatadi. Shaxsiy natijalar va xulosa o'rtasida ikkita yangi bo'lim paydo bo'ladi: birinchisida har bir sinov muvaffaqiyatsizligining batafsil sababi ko'rsatiladi. Bunday holda, biz <em>src/lib.rs</em> faylidagi 10-qatordagi <code>panicked at 'Make this test fail'</code> da panic qo'ygani uchun <code>boshqa</code> muvaffaqiyatsizlikka uchraganligi haqidagi tafsilotlarni olamiz. Keyingi bo'limda barcha muvaffaqiyatsiz testlarning nomlari keltirilgan, bu juda ko'p sinovlar va ko'plab batafsil muvaffaqiyatsiz sinov natijalari mavjud bo'lganda foydalidir. Muvaffaqiyatsiz test nomidan uni osonroq debug qilish uchun ishlatishimiz mumkin; testlarni o'tkazish usullari haqida ko'proq <a href="ch11-02-running-tests.html#controlling-how-tests-are-run">&quot;Testlar qanday o'tkazilishini nazorat qilish&quot;</a><!-- ignore
+--> section bo'limida gaplashamiz.</p>
+<p>Xulosa qatori oxirida ko'rsatiladi: umuman olganda, bizning test natijasimiz <code>FAILED</code> muvaffaqiyatsiz. Bizda bitta test sinovi bor edi va bitta sinov muvaffaqiyatsiz tugadi.</p>
+<p>Sinov natijalari turli stsenariylarda qanday ko‘rinishini ko‘rganingizdan so‘ng, keling, testlarda foydali bo‘lgan  <code>panic!</code>dan tashqari ba’zi makrolarni ko‘rib chiqaylik.</p>
+<h3 id="natijalarni-assert-makrosi-bilan-tekshirish"><a class="header" href="#natijalarni-assert-makrosi-bilan-tekshirish">Natijalarni <code>assert!</code> makrosi bilan tekshirish!</a></h3>
+<p>Standart kutubxona tomonidan taqdim etilgan <code>assert!</code> makrosi testdagi baʼzi shartlar <code>true</code>(toʻgʻri) boʻlishini taʼminlashni istasangiz foydali boʻladi. Biz <code>assert!</code> makrosiga mantiqiy(boolean) qiymatga baholovchi argument beramiz. Qiymat <code>true</code> bo'lsa, hech narsa sodir bo'lmaydi va sinovdan o'tadi. Agar qiymat <code>false</code> bo‘lsa, <code>assert!</code> makros testning muvaffaqiyatsiz bo‘lishiga olib kelishi uchun <code>panic!</code> chaqiradi. <code>assert!</code> makrosidan foydalanish bizning kodimiz biz rejalashtirgan tarzda ishlayotganligini tekshirishga yordam beradi.</p>
+<p>5-bob, 5-15-ro'yxarda biz 11-5-ro'yxardada takrorlangan <code>Kvadrat</code> strukturasi va <code>ushlab_tur</code> metodidan foydalandik. Keling, ushbu kodni <em>src/lib.rs</em> fayliga joylashtiramiz, so'ngra <code>assert!</code> makrosidan foydalanib, u uchun testlarni yozamiz.</p>
+<p><span class="filename">Fayl nomi: src/lib.rs</span></p>
+<pre><code class="language-rust noplayground">#[derive(Debug)]
+struct Kvadrat {
+    kenglik: u32,
+    balandlik: u32,
+}
+
+impl Kvadrat {
+    fn ushlab_tur(&amp;self, boshqa: &amp;Kvadrat) -&gt; bool {
+        self.kenglik &gt; other.kenglik &amp;&amp; self.balandlik &gt; boshqa.balandlik
+    }
+}
+</code></pre>
+<p><span class="caption">Ro'yxat 11-5: 5-bobdagi <code>Kvadrat</code> strukturasi va uning <code>ushlab_tur</code> metodidan foydalanish</span></p>
+<p><code>ushlab_tur</code> metodi mantiqiy(boolean) qiymatini qaytaradi, ya'ni bu <code>assert!</code> makrosi uchun mukammal foydalanish holati. 11-6 ro'yxatda biz kengligi 8 va balandligi 7 bo'lgan <code>Kvadrat</code> misolini yaratish va uning kengligi 5 va balandligi 1 bo'lgan boshqa <code>Kvadrat</code> misolini ushlab turishi mumkinligini tekshirish orqali <code>ushlab_tur</code> metodini bajaradigan testni yozamiz.</p>
+<p><span class="filename">Fayl nomi: src/lib.rs</span></p>
+<pre><code class="language-rust noplayground"><span class="boring">#[derive(Debug)]
+</span><span class="boring">struct Kvadrat {
+</span><span class="boring">    kenglik: u32,
+</span><span class="boring">    balandlik: u32,
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">impl Kvadrat {
+</span><span class="boring">    fn ushlab_tur(&amp;self, boshqa: &amp;Kvadrat) -&gt; bool {
+</span><span class="boring">        self.kenglik &gt; boshqa.kenglik &amp;&amp; self.balandlik &gt; boshqa.balandlik
+</span><span class="boring">    }
+</span><span class="boring">}
+</span><span class="boring">
+</span>#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn katta_kichikni_ushlab_turadi() {
+        let kattaroq = Kvadrat {
+            kenglik: 8,
+            balandlik: 7,
+        };
+        let kichikroq = Kvadrat {
+            kenglik: 5,
+            balandlik: 1,
+        };
+
+        assert!(kattaroq.ushlab_tur(&amp;kichikroq));
+    }
+}
+</code></pre>
+<p><span class="caption">Ro'yxat 11-6: Kattaroq kvadrat haqiqatan ham kichikroq kvadratni sig'dira oladimi yoki yo'qligini tekshiradigan <code>ushlab_tur</code> testi</span></p>
+<p>E'tibor bering, biz <code>tests</code> moduliga yangi qator qo'shdik: <code>use super::*;</code>. <code>tests</code> moduli odatiy modul bo'lib, biz 7-bobda <a href="ch07-03-paths-for-referring-to-an-item-in-the-module-tree.html">&quot;Modul daraxtidagi elementga murojaat qilish yo'llari&quot;</a><!-- ignore --> bo'limida ko'rib chiqqan odatiy ko'rinish qoidalariga amal qiladi. <code>tests</code> moduli ichki modul bo'lgani uchun biz tashqi moduldagi sinovdan o'tayotgan kodni ichki modul doirasiga kiritishimiz kerak. Biz bu yerda globdan foydalanamiz, shuning uchun tashqi modulda biz aniqlagan har qanday narsa ushbu <code>tests</code> modulida mavjud bo'ladi.</p>
+<p>Biz sinovimizga <code>katta_kichikni_ushlab_turadi</code> deb nom berdik va o‘zimizga kerak bo‘lgan ikkita <code>Kvadrat</code> misolini yaratdik.
+Keyin biz <code>assert!</code> makrosini chaqirdik va uni <code>kattaroq.ushlab_tur(&amp;kichikroq)</code> deb chaqirish natijasini berdik. Bu ifoda <code>true</code> ni qaytarishi kerak, shuning uchun testimiz muvaffaqiyatli o'tishi kerak. Keling, bilib olaylik!</p>
+<pre><code class="language-console">$ cargo test
+   Compiling rectangle v0.1.0 (file:///projects/rectangle)
+    Finished test [unoptimized + debuginfo] target(s) in 0.66s
+     Running unittests src/lib.rs (target/debug/deps/rectangle-6584c4561e48942e)
+
+running 1 test
+test tests::larger_can_hold_smaller ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests rectangle
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+</code></pre>
+<p>Test muvaffaqiyatli o'tadi! Keling, yana bir sinovni qo'shamiz, bu safar kichikroq kvadrat kattaroq kvadratni ushlab turolmaydi:</p>
+<p><span class="filename">Fayl nomi: src/lib.rs</span></p>
+<pre><code class="language-rust noplayground"><span class="boring">#[derive(Debug)]
+</span><span class="boring">struct Kvadrat {
+</span><span class="boring">    kenglik: u32,
+</span><span class="boring">    balandlik: u32,
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">impl Kvadrat {
+</span><span class="boring">    fn ushlab_tur(&amp;self, boshqa: &amp;Kvadrat) -&gt; bool {
+</span><span class="boring">        self.kenglik &gt; boshqa.kenglik &amp;&amp; self.balandlik &gt; boshqa.balandlik
+</span><span class="boring">    }
+</span><span class="boring">}
+</span><span class="boring">
+</span>#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn katta_kichikni_ushlab_turadi() {
+        // --snip--
+<span class="boring">        let kattaroq = Kvadrat {
+</span><span class="boring">            kenglik: 8,
+</span><span class="boring">            balandlik: 7,
+</span><span class="boring">        };
+</span><span class="boring">        let kichikroq = Kvadrat {
+</span><span class="boring">            kenglik: 5,
+</span><span class="boring">            balandlik: 1,
+</span><span class="boring">        };
+</span><span class="boring">
+</span><span class="boring">        assert!(kattaroq.ushlab_tur(&amp;kichikroq));
+</span>    }
+
+    #[test]
+    fn kichik_kattani_ushlolmaydi() {
+        let kattaroq = Kvadrat {
+            kenglik: 8,
+            balandlik: 7,
+        };
+        let kichikroq = Kvadrat {
+            kenglik: 5,
+            balandlik: 1,
+        };
+
+        assert!(!kichikroq.ushlab_tur(&amp;kattaroq));
+    }
+}
+</code></pre>
+<p>Chunki bu holda <code>ushlab_tur</code> funksiyasining to'g'ri natijasi <code>false</code> bo'lsa, biz uni <code>assert!</code> makrosiga o'tkazishdan oldin bu natijani inkor etishimiz kerak. Natijada, agar <code>ushlab_tur</code> <code>false</code> qiymatini qaytarsa, testimiz o'tadi:</p>
+<pre><code class="language-console">$ cargo test
+   Compiling kvadrat v0.1.0 (file:///projects/kvadrat)
+    Finished test [unoptimized + debuginfo] target(s) in 0.66s
+     Running unittests src/lib.rs (target/debug/deps/kvadrat-6584c4561e48942e)
+
+running 2 tests
+test tests::katta_kichikni_ushlab_turadi ... ok
+test tests::kichik_kattani_ushlolmaydi ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests kvadrat
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+</code></pre>
+<p>Ikkita sinovdan o'tadi! Keling, kodimizga xatolik kiritganimizda test natijalarimiz bilan nima sodir bo'lishini ko'rib chiqaylik. Kengliklarni solishtirganda katta belgisini kichikroq belgisi bilan almashtirish orqali <code>ushlab_tur</code> metodini amalga oshirishni o‘zgartiramiz:</p>
+<pre><code class="language-rust not_desired_behavior noplayground"><span class="boring">#[derive(Debug)]
+</span><span class="boring">struct Kvadrat {
+</span><span class="boring">    kenglik: u32,
+</span><span class="boring">    balandlik: u32,
+</span><span class="boring">}
+</span><span class="boring">
+</span>// --snip--
+impl Kvadrat {
+    fn ushlab_tur(&amp;self, boshqa: &amp;Kvadrat) -&gt; bool {
+        self.kenglik &lt; boshqa.kenglik &amp;&amp; self.balandlik &gt; boshqa.balandlik
+    }
+}
+<span class="boring">
+</span><span class="boring">#[cfg(test)]
+</span><span class="boring">mod tests {
+</span><span class="boring">    use super::*;
+</span><span class="boring">
+</span><span class="boring">    #[test]
+</span><span class="boring">    fn katta_kichikni_ushlab_turadi() {
+</span><span class="boring">        let kattaroq = Kvadrat {
+</span><span class="boring">            kenglik: 8,
+</span><span class="boring">            balandlik: 7,
+</span><span class="boring">        };
+</span><span class="boring">        let kichikroq = Kvadrat {
+</span><span class="boring">            kenglik: 5,
+</span><span class="boring">            balandlik: 1,
+</span><span class="boring">        };
+</span><span class="boring">
+</span><span class="boring">        assert!(kattaroq.ushlab_tur(&amp;kichikroq));
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    #[test]
+</span><span class="boring">    fn kichik_kattani_ushlolmaydi() {
+</span><span class="boring">        let kattaroq = Kvadrat {
+</span><span class="boring">            kenglik: 8,
+</span><span class="boring">            balandlik: 7,
+</span><span class="boring">        };
+</span><span class="boring">        let kichikroq = Kvadrat {
+</span><span class="boring">            kenglik: 5,
+</span><span class="boring">            balandlik: 1,
+</span><span class="boring">        };
+</span><span class="boring">
+</span><span class="boring">        assert!(!kichikroq.ushlab_tur(&amp;kattaroq));
+</span><span class="boring">    }
+</span><span class="boring">}
+</span></code></pre>
+<p>Sinovlarni o'tkazish endi quyidagilarga olib keladi:</p>
+<pre><code class="language-console">$ cargo test
+   Compiling rectangle v0.1.0 (file:///projects/rectangle)
+    Finished test [unoptimized + debuginfo] target(s) in 0.66s
+     Running unittests src/lib.rs (target/debug/deps/rectangle-6584c4561e48942e)
+
+running 2 tests
+test tests::larger_can_hold_smaller ... FAILED
+test tests::smaller_cannot_hold_larger ... ok
+
+failures:
+
+---- tests::larger_can_hold_smaller stdout ----
+thread 'tests::larger_can_hold_smaller' panicked at 'assertion failed: larger.can_hold(&amp;smaller)', src/lib.rs:28:9
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    tests::larger_can_hold_smaller
+
+test result: FAILED. 1 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+error: test failed, to rerun pass `--lib`
+</code></pre>
+<p>Sinovlarimiz xatoni aniqladi! <code>kattaroq.kenglik</code> 8 va <code>kichikroq.kenglik</code> 5 bo'lganligi sababli, <code>ushlab_tur</code>da kengliklarni taqqoslash endi <code>false</code>ni qaytaradi: 8 5-dan kichik emas.</p>
+<h3 id="tenglikni-assert_eq-va-assert_ne-makroslari-bilan-tekshirish"><a class="header" href="#tenglikni-assert_eq-va-assert_ne-makroslari-bilan-tekshirish">Tenglikni <code>assert_eq!</code> va <code>assert_ne!</code> makroslari bilan tekshirish</a></h3>
+<p>Funksionallikni tekshirishning keng tarqalgan usuli - bu testdan o'tayotgan kod natijasi va kod qaytarilishini kutayotgan qiymat o'rtasidagi tenglikni tekshirish. Buni <code>assert!</code> makrosidan foydalanib, unga <code>==</code> operatori yordamida ifoda o'tkazishingiz mumkin. Biroq, bu shunday keng tarqalgan testki, standart kutubxona ushbu testni yanada qulayroq bajarish uchun bir juft makros-<code>assert_eq!</code> va <code>assert_ne!</code>-ni taqdim etadi. Ushbu makrolar mos ravishda tenglik yoki tengsizlik uchun ikkita argumentni solishtiradi. Agar tasdiqlash muvaffaqiyatsiz bo'lsa, ular ikkita qiymatni chop etadilar, bu esa <em>nima uchun</em> sinov muvaffaqiyatsiz tugaganini ko'rishni osonlashtiradi; aksincha, <code>assert!</code> makros <code>false</code> qiymatiga olib kelgan qiymatlarni chop etmasdan, <code>==</code> ifodasi uchun <code>false</code> qiymatini olganligini bildiradi.
+11-7 ro'yxatda biz o'z parametriga <code>2</code> qo'shadigan <code>ikkita_qoshish</code> nomli funksiyani yozamiz, so'ngra bu funksiyani <code>assert_eq!</code> makrosidan foydalanib tekshiramiz.</p>
+<p><span class="filename">Fayl nomi: src/lib.rs</span></p>
+<pre><code class="language-rust noplayground">pub fn ikkita_qoshish(a: i32) -&gt; i32 {
+    a + 2
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn ikkita_qosh() {
+        assert_eq!(4, ikkita_qoshish(2));
+    }
+}
+</code></pre>
+<p><span class="caption">Roʻyxat 11-7: <code>assert_eq!</code> makrosidan foydalanib <code>ikkita_qoshish</code> funksiyasini sinab koʻrish</span></p>
+<p>Keling test o'tganligini tekshirib ko'raylik!</p>
+<pre><code class="language-console">$ cargo test
+   Compiling qoshuvchi v0.1.0 (file:///projects/qoshuvchi)
+    Finished test [unoptimized + debuginfo] target(s) in 0.58s
+     Running unittests src/lib.rs (target/debug/deps/qoshuvchi-92948b65e88960b4)
+
+running 1 test
+test tests::ikkita_qosh ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests qoshuvchi
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+</code></pre>
+<p>Argument sifatida <code>4</code> ni <code>assert_eq!</code>ga o'tkazamiz, bu esa <code>ikkita_qoshish(2)</code> ni chaqirish natijasiga teng. Ushbu test qatori  <code>test tests::it_adds_two ... ok</code> va <code>ok</code> matni testimiz muvaffaqiyatli o'tganligini bildiradi!</p>
+<p><code>assert_eq!</code> muvaffaqiyatsiz bo'lganda qanday ko'rinishini ko'rish uchun kodimizga xato kiritamiz. <code>ikkita_qoshish</code> funksiyasining bajarilishini o'rniga <code>3</code> qo'shish uchun o`zgartiramiz:</p>
+<pre><code class="language-rust not_desired_behavior noplayground">pub fn ikkita_qoshish(a: i32) -&gt; i32 {
+    a + 3
+}
+<span class="boring">
+</span><span class="boring">#[cfg(test)]
+</span><span class="boring">mod tests {
+</span><span class="boring">    use super::*;
+</span><span class="boring">
+</span><span class="boring">    #[test]
+</span><span class="boring">    fn ikkita_qosh() {
+</span><span class="boring">        assert_eq!(4, ikkita_qoshish(2));
+</span><span class="boring">    }
+</span><span class="boring">}
+</span></code></pre>
+<p>Testlarni qayta ishga tushiring:</p>
+<pre><code class="language-console">$ cargo test
+   Compiling qoshuvchi v0.1.0 (file:///projects/qoshuvchi)
+    Finished test [unoptimized + debuginfo] target(s) in 0.61s
+     Running unittests src/lib.rs (target/debug/deps/qoshuvchi-92948b65e88960b4)
+
+running 1 test
+test tests::ikkita_qosh ... FAILED
+
+failures:
+
+---- tests::ikkita_qosh stdout ----
+thread 'tests::ikkita_qosh' panicked at 'assertion failed: `(left == right)`
+  left: `4`,
+ right: `5`', src/lib.rs:11:9
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    tests::ikkita_qosh
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+error: test failed, to rerun pass `--lib`
+</code></pre>
+<p>Bizning sinovimiz xatoni aniqladi! <code>ikkita_qosh</code> testi muvaffaqiyatsiz tugadi va xabarda muvaffaqiyatsizlikka uchragan tasdiqlash <code>assertion failed: `(left == right)`</code> va <code>left</code> va <code>right</code> qiymatlari nima. Bu xabar nosozliklarni(debugging) tuzatishni boshlashimizga yordam beradi: <code>left</code>(chap) argumenti <code>4</code> edi, lekin <code>ikkita_qoshish(2)</code> bo'lgan <code>right</code>(o'ng) argumenti <code>5</code> edi. Tasavvur qilishingiz mumkinki, bu bizda juda ko'p sinovlar o'tkazilayotganda ayniqsa foydali bo'ladi.</p>
+<p>E'tibor bering, ba'zi dasturlash tillarda va test tizimlarida(framework) tenglikni tasdiqlash funksiyalari parametrlari <code>expected</code> va <code>actual</code> deb nomlanadi va biz argumentlarni ko'rsatish tartibi muhim ahamiyatga ega. Biroq, Rustda ular <code>left</code> va <code>right</code> deb nomlanadi va biz kutgan qiymat va kod ishlab chiqaradigan qiymatni belgilash tartibi muhim emas. Biz ushbu testdagi tasdiqni <code>assert_eq!(ikkita_qoshish(2), 4)</code> deb yozishimiz mumkin, natijada <code>assertion failed: `(left == right)`</code> ko'rsatiladigan bir xil xato xabari paydo bo'ladi.</p>
+<p><code>assert_ne!</code> makros biz bergan ikkita qiymat teng bo'lmasa o'tadi va teng bo'lsa muvaffaqiyatsiz bo'ladi. Ushbu makro biz qiymat nima bo'lishini amin bo'lmagan holatlar uchun juda foydali bo'ladi, lekin biz qiymat nima bo'lmasligi kerakligini bilamiz.
+Misol uchun, agar biz biron-bir tarzda uning kiritilishini o'zgartirishi kafolatlangan funksiyani sinab ko'rayotgan bo'lsak, lekin kirishni o'zgartirish metodi testlarimizni o'tkazadigan hafta kuniga bog'liq bo'lsa, tasdiqlash uchun eng yaxshi narsa, funksiyaning chiqishi kirishga teng emasligi bo'lishi mumkin.</p>
+<p>Sirt ostida <code>assert_eq!</code> va <code>assert_ne!</code> makroslari mos ravishda <code>==</code> va <code>!=</code> operatorlaridan foydalanadi. Tasdiqlar bajarilmasa, bu makroslar debug formati yordamida o‘z argumentlarini chop etadi, ya’ni solishtirilayotgan qiymatlar <code>PartialEq</code> va <code>Debug</code> traitlarini bajarishi kerak. Barcha primitiv turlar va standart kutubxona turlarining aksariyati bu traittlarni amalga oshiradi. O'zingiz belgilagan structlar va enumlar uchun ushbu turlarning tengligini tasdiqlash uchun <code>PartialEq</code> ni qo'llashingiz kerak bo'ladi. Tasdiqlash muvaffaqiyatsizlikka uchraganida qiymatlarni chop etish uchun <code>Debug</code> ni ham qo'llashingiz kerak bo'ladi. 5-bobdagi 5-12 roʻyxatda aytib oʻtilganidek, ikkala trait ham derivable traitli boʻlganligi sababli, bu odatda struct yoki enum taʼrifiga <code>#[derive(PartialEq, Debug)]</code> izohini qoʻshishdek oddiy. Ushbu va boshqa <a href="appendix-03-derivable-traits.html">&quot;Derivable Trait&quot;</a><!-- ignore -->lari haqida batafsil ma'lumot olish uchun C ilovasiga qarang.</p>
+<h3 id="maxsus-nosozlik-xabarlarini-qoshish"><a class="header" href="#maxsus-nosozlik-xabarlarini-qoshish">Maxsus nosozlik xabarlarini qo'shish</a></h3>
+<p>Shuningdek, <code>assert!</code>, <code>assert_eq!</code> va <code>assert_ne!</code> makroslariga ixtiyoriy argumentlar sifatida xato xabari bilan chop etiladigan maxsus xabarni qo'shishingiz mumkin. Kerakli argumentlardan so‘ng ko‘rsatilgan har qanday argumentlar <code>format!</code> makrosiga uzatiladi (8-bobda <a href="ch08-02-strings.html#concatenation-with-the--operator-or-the-format-macro">&quot;<code>+</code> operatori yoki <code>format!</code> makrosi bilan birlashtirish&quot;</a><!-- ignore --> bo‘limida muhokama qilingan), shuning uchun siz <code>{}</code> to'ldirgichlar va qiymatlarni o'z ichiga olgan format qatorini o'tkazishingiz mumkin. Maxsus xabarlar tasdiqlash nimani anglatishini hujjatlashtirish uchun foydalidir; test muvaffaqiyatsiz tugagach, kod bilan bog'liq muammo nimada ekanligini yaxshiroq tushunasiz.</p>
+<p>Masalan, bizda odamlarni ism bilan kutib oladigan funksiya bor va biz funksiyaga kiritgan ism chiqishda(output) paydo bo‘lishini sinab ko‘rmoqchimiz:</p>
+<p><span class="filename">Fayl nomi: src/lib.rs</span></p>
+<pre><code class="language-rust noplayground">pub fn salomlashish(name: &amp;str) -&gt; String {
+    format!(&quot;Salom {}!&quot;, name)
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn salomlash() {
+        let natija = salomlashish(&quot;Azizbek&quot;);
+        assert!(natija.contains(&quot;Azizbek&quot;));
+    }
+}
+</code></pre>
+<p>Ushbu dasturga qoʻyiladigan talablar hali kelishib olinmagan va salomlashish boshidagi <code>Salom</code> matni oʻzgarishiga ishonchimiz komil. Talablar o'zgarganda testni yangilashni xohlamasligimizga qaror qildik, shuning uchun <code>salomlashish</code> funksiyasidan qaytarilgan qiymatga aniq tenglikni tekshirish o‘rniga, biz faqat chiqishda kirish parametrining matni borligini tasdiqlaymiz.</p>
+<p>Endi standart sinov xatosi qanday koʻrinishini koʻrish uchun <code>name</code>ni chiqarib tashlash uchun <code>salomlashish</code> ni oʻzgartirish orqali ushbu kodga xatolik kiritamiz:</p>
+<pre><code class="language-rust not_desired_behavior noplayground">pub fn salomlashish(name: &amp;str) -&gt; String {
+    String::from(&quot;Salom!&quot;)
+}
+<span class="boring">
+</span><span class="boring">#[cfg(test)]
+</span><span class="boring">mod tests {
+</span><span class="boring">    use super::*;
+</span><span class="boring">
+</span><span class="boring">    #[test]
+</span><span class="boring">    fn salomlash() {
+</span><span class="boring">        let natija = salomlashish(&quot;Azizbek&quot;);
+</span><span class="boring">        assert!(natija.contains(&quot;Azizbek&quot;));
+</span><span class="boring">    }
+</span><span class="boring">}
+</span></code></pre>
+<p>Ushbu testni bajarish quyidagi natijalarni beradi:</p>
+<pre><code class="language-console">$ cargo test
+   Compiling greeter v0.1.0 (file:///projects/greeter)
+    Finished test [unoptimized + debuginfo] target(s) in 0.91s
+     Running unittests src/lib.rs (target/debug/deps/greeter-170b942eb5bf5e3a)
+
+running 1 test
+test tests::salomlash ... FAILED
+
+failures:
+
+---- tests::salomlash stdout ----
+thread 'tests::salomlash' panicked at 'assertion failed: result.contains(\&quot;Azizbek\&quot;)', src/lib.rs:12:9
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    tests::salomlash
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+error: test failed, to rerun pass `--lib`
+</code></pre>
+<p>Bu natija faqat tasdiqlash(assertion) muvaffaqiyatsizligini va tasdiqlash qaysi qatorda ekanligini ko'rsatadi. Foydaliroq xato xabari <code>salomlashish</code> funksiyasidan qiymatni chop etadi. Keling, <code>salomlashish</code> funksiyasidan olingan haqiqiy qiymat bilan toʻldirilgan maxsus xabar to'ldiruvchisi(plaseholder) bilan format qatoridan iborat maxsus xato xabarini qoʻshamiz:</p>
+<pre><code class="language-rust ignore"><span class="boring">pub fn salomlashish(name: &amp;str) -&gt; String {
+</span><span class="boring">    String::from(&quot;Salom!&quot;)
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">#[cfg(test)]
+</span><span class="boring">mod tests {
+</span><span class="boring">    use super::*;
+</span><span class="boring">
+</span>    #[test]
+    fn salomlash() {
+        let natija = salomlashish(&quot;Azizbek&quot;);
+        assert!(
+            natija.contains(&quot;Azizbek&quot;),
+            &quot;Salomlashishda ism yo'q, qiymat `{}` edi&quot;,
+            natija
+        );
+    }
+<span class="boring">}
+</span></code></pre>
+<p>Endi sinovni o'tkazganimizda, biz ko'proq ma'lumot beruvchi xato xabarini olamiz:</p>
+<pre><code class="language-console">$ cargo test
+   Compiling greeter v0.1.0 (file:///projects/greeter)
+    Finished test [unoptimized + debuginfo] target(s) in 0.93s
+     Running unittests src/lib.rs (target/debug/deps/greeter-170b942eb5bf5e3a)
+
+running 1 test
+test tests::salomlash ... FAILED
+
+failures:
+
+---- tests::salomlash stdout ----
+thread 'tests::salomlash' panicked at 'Greeting did not contain name, value was `Salom!`', src/lib.rs:12:9
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    tests::salomlash
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+error: test failed, to rerun pass `--lib`
+</code></pre>
+<p>Sinov natijasida biz haqiqatda olgan qiymatni ko'rishimiz mumkin, bu biz kutgan narsaning o'rniga nima sodir bo'lganligini aniqlashga yordam beradi.</p>
+<h3 id="should_panic-yordamida-panic-tekshirish"><a class="header" href="#should_panic-yordamida-panic-tekshirish"><code>should_panic</code> yordamida panic tekshirish</a></h3>
+<p>Qaytish(return) qiymatlarini tekshirishdan tashqari, bizning kodimiz xato holatlarini biz kutganidek hal qilishini tekshirish muhimdir. Misol uchun, biz 9-bob, 9-13 ro'yxatda yaratgan <code>Taxmin</code> turini ko'rib chiqaylik. <code>Taxmin</code> dan foydalanadigan boshqa kod <code>Taxmin</code> misollarida faqat 1 dan 100 gacha bo'lgan qiymatlarni o'z ichiga olishi kafolatiga bog'liq. Ushbu diapazondan(chegaradan) tashqaridagi qiymatga ega <code>Taxmin</code> misolini yaratishga urinish panic qo'yishini ta'minlaydigan test yozishimiz mumkin.</p>
+<p>Buni test funksiyamizga <code>should_panic</code> atributini qo‘shish orqali qilamiz. Funktsiya ichidagi kod panic qo'zg'atsa, test o'tadi;funksiya ichidagi kod panic qo'ymasa, test muvaffaqiyatsiz tugaydi.</p>
+<p>11-8 ro'yxatda <code>Taxmin::new</code> xatolik holatlari biz kutgan vaqtda sodir bo'lishini tekshiradigan test ko'rsatilgan.</p>
+<p><span class="filename">Fayl nomi: src/lib.rs</span></p>
+<pre><code class="language-rust noplayground">pub struct Guess {
+    value: i32,
+}
+
+impl Guess {
+    pub fn new(value: i32) -&gt; Guess {
+        if value &lt; 1 || value &gt; 100 {
+            panic!(&quot;Guess value must be between 1 and 100, got {}.&quot;, value);
+        }
+
+        Guess { value }
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    #[should_panic]
+    fn greater_than_100() {
+        Guess::new(200);
+    }
+}
+</code></pre>
+<p><span class="caption">Ro'yxat 11-8: Test <code>panic!</code> keltirib chiqarishini tekshirish</span></p>
+<p>Biz <code>#[should_panic]</code> atributini <code>#[test]</code> atributidan keyin va u amal qiladigan test funksiyasidan oldin joylashtiramiz. Keling, ushbu testdan o'tgan natijani ko'rib chiqaylik:</p>
+<pre><code class="language-console">$ cargo test
+   Compiling guessing_game v0.1.0 (file:///projects/guessing_game)
+    Finished test [unoptimized + debuginfo] target(s) in 0.58s
+     Running unittests src/lib.rs (target/debug/deps/guessing_game-57d70c3acb738f4d)
+
+running 1 test
+test tests::greater_than_100 - should panic ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests guessing_game
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+</code></pre>
+<p>Yaxshi ko'rinadi! Endi shartni olib tashlash orqali kodimizga xatolik kiritamiz,
+agar qiymat 100 dan katta bo'lsa, <code>new</code> funksiya panic qo'zg'atadi:</p>
+<pre><code class="language-rust not_desired_behavior noplayground"><span class="boring">pub struct Taxmin {
+</span><span class="boring">    qiymat: i32,
+</span><span class="boring">}
+</span><span class="boring">
+</span>// --snip--
+impl Taxmin {
+    pub fn new(qiymat: i32) -&gt; Taxmin {
+        if qiymat &lt; 1 {
+            panic!(&quot;Taxmin qilingan qiymat 1 dan 100 gacha bo'lishi kerak, {} qabul qilinmaydi.&quot;, qiymat);
+        }
+
+        Taxmin { qiymat }
+    }
+}
+<span class="boring">
+</span><span class="boring">#[cfg(test)]
+</span><span class="boring">mod tests {
+</span><span class="boring">    use super::*;
+</span><span class="boring">
+</span><span class="boring">    #[test]
+</span><span class="boring">    #[should_panic]
+</span><span class="boring">    fn _100_dan_ortiq() {
+</span><span class="boring">        Taxmin::new(200);
+</span><span class="boring">    }
+</span><span class="boring">}
+</span></code></pre>
+<p>Sinovni 11-8 ro'yxatda o'tkazganimizda, u muvaffaqiyatsiz bo'ladi:</p>
+<pre><code class="language-console">$ cargo test
+   Compiling guessing_game v0.1.0 (file:///projects/guessing_game)
+    Finished test [unoptimized + debuginfo] target(s) in 0.62s
+     Running unittests src/lib.rs (target/debug/deps/guessing_game-57d70c3acb738f4d)
+
+running 1 test
+test tests::_100_dan_ortiq - should panic ... FAILED
+
+failures:
+
+---- tests::_100_dan_ortiq stdout ----
+note: test did not panic as expected
+
+failures:
+    tests::_100_dan_ortiq
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+error: test failed, to rerun pass `--lib`
+</code></pre>
+<p>Biz bu holatda unchalik foydali xabar olmaymiz, lekin test funksiyasini ko‘rib chiqsak, u <code>#[should_panic]</code> bilan izohlanganini ko‘ramiz. Biz erishgan muvaffaqiyatsizlik test funksiyasidagi kod panic qo'zg'atmaganligini anglatadi.</p>
+<p><code>should_panic</code> ishlatadigan testlar noaniq bo'lishi mumkin. Agar test biz kutgandan boshqa sababga ko'ra panic qo'zg'atsa ham, <code>should_panic</code> testi o'tadi. <code>should_panic</code> testlarini aniqroq qilish uchun biz <code>should_panic</code> atributiga ixtiyoriy <code>expected</code>  parametrini qo'shishimiz mumkin. Test dasturi xato xabarida taqdim etilgan matn mavjudligiga ishonch hosil qiladi. Masalan, 11-9 ro'yxatdagi <code>Taxmin</code> uchun o'zgartirilgan kodni ko'rib chiqing, bu erda <code>new</code> funksiya qiymat juda kichik yoki juda kattaligiga qarab turli xabarlar bilan panicga tushadi.</p>
+<p><span class="filename">Fayl nomi: src/lib.rs</span></p>
+<pre><code class="language-rust noplayground"><span class="boring">pub struct Guess {
+</span><span class="boring">    value: i32,
+</span><span class="boring">}
+</span><span class="boring">
+</span>// --snip--
+
+impl Guess {
+    pub fn new(value: i32) -&gt; Guess {
+        if value &lt; 1 {
+            panic!(
+                &quot;Guess value must be greater than or equal to 1, got {}.&quot;,
+                value
+            );
+        } else if value &gt; 100 {
+            panic!(
+                &quot;Guess value must be less than or equal to 100, got {}.&quot;,
+                value
+            );
+        }
+
+        Guess { value }
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    #[should_panic(expected = &quot;less than or equal to 100&quot;)]
+    fn greater_than_100() {
+        Guess::new(200);
+    }
+}
+</code></pre>
+<p><span class="caption">Ro'yxat 11-9: Belgilangan substringni oʻz ichiga olgan panic xabari bilan <code>panic!</code> sinovi</span></p>
+<p>Bu testdan o‘tadi, chunki biz <code>should_panic</code> atributining <code>expected</code> parametriga qo‘ygan qiymat <code>Taxmin::new</code> funksiyasi panicga tushadigan xabarning substringi hisoblanadi. Biz kutgan vahima haqidagi xabarni toʻliq koʻrsatishimiz mumkin edi, bu holda <code>Taxmin qilingan qiymat 1 dan 100 gacha bo'lishi kerak, 200 qabul qilinmaydi.</code>. Siz belgilashni tanlagan narsa panic xabarining qanchalik noyob yoki dinamik ekanligiga va testingiz qanchalik aniq bo'lishini xohlayotganingizga bog'liq. Bunday holda, test funksiyasidagi kod <code>else if qiymat &gt; 100</code> holatini bajarishini ta`minlash uchun panic xabarining substringi kifoya qiladi.</p>
+<p><code>expected</code>  xabari bilan <code>should_panic</code> testi muvaffaqiyatsiz tugashi bilan nima sodir bo'lishini ko'rish uchun <code>if qiymat &lt; 1</code> va <code>else if qiymat &gt; 100</code> bloklarini almashtirish orqali kodimizga yana xato kiritamiz:</p>
+<pre><code class="language-rust ignore not_desired_behavior"><span class="boring">pub struct Taxmin {
+</span><span class="boring">    qiymat: i32,
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">impl Taxmin  {
+</span><span class="boring">    pub fn new(qiymat: i32) -&gt; Taxmin  {
+</span>        if qiymat &lt; 1 {
+            panic!(
+                &quot;Taxmin qilingan qiymat 1 dan 100 gacha bo'lishi kerak, {} qabul qilinmaydi.&quot;,
+                qiymat
+            );
+        } else if qiymat &gt; 100 {
+            panic!(
+                &quot;Taxmin qilingan qiymat 1 dan katta yoki teng bo'lishi kerak, {} qabul qilinmaydi.&quot;,
+                qiymat
+            );
+        }
+<span class="boring">
+</span><span class="boring">        Taxmin  { qiymat }
+</span><span class="boring">    }
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">#[cfg(test)]
+</span><span class="boring">mod tests {
+</span><span class="boring">    use super::*;
+</span><span class="boring">
+</span><span class="boring">    #[test]
+</span><span class="boring">    #[should_panic(expected = &quot;100 dan kichik yoki teng&quot;)]
+</span><span class="boring">    fn _100_dan_ortiq() {
+</span><span class="boring">        Taxmin ::new(200);
+</span><span class="boring">    }
+</span><span class="boring">}
+</span></code></pre>
+<p>Bu safar biz <code>should_panic</code> testini o'tkazsak, u muvaffaqiyatsiz bo'ladi:</p>
+<pre><code class="language-console">$ cargo test
+   Compiling guessing_game v0.1.0 (file:///projects/guessing_game)
+    Finished test [unoptimized + debuginfo] target(s) in 0.66s
+     Running unittests src/lib.rs (target/debug/deps/guessing_game-57d70c3acb738f4d)
+
+running 1 test
+test tests::_100_dan_ortiq - should panic ... FAILED
+
+failures:
+
+---- tests::_100_dan_ortiq stdout ----
+thread 'tests::_100_dan_ortiq' panicked at 'Taxmin qilingan qiymat 1 dan katta yoki teng bo'lishi kerak, 200 qabul qilinmaydi.', src/lib.rs:13:13
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+note: panic did not contain expected string
+      panic message: `&quot;Taxmin qilingan qiymat 1 dan katta yoki teng bo'lishi kerak, 200 qabul qilinmaydi.&quot;`,
+ expected substring: `&quot;100 dan kichik yoki teng&quot;`
+
+failures:
+    tests::_100_dan_ortiq
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+error: test failed, to rerun pass `--lib`
+</code></pre>
+<p>Muvaffaqiyatsizlik xabari shuni ko'rsatadiki, bu test biz kutgandek panic qo'zg'atdi, lekin panic xabarida kutilgan <code>Taxmin qilingan qiymat 100 dan kichik yoki unga teng bo'lishi kerak</code> qatori yo'q edi. Bu holatda biz olgan vahima xabari: <code>Taxmin qilingan qiymat 1 dan katta yoki teng bo'lishi kerak, 200 qabul qilinmaydi.</code>. Endi biz xatomiz qayerda ekanligini aniqlashni boshlashimiz mumkin!</p>
+<h3 id="testlarda-resultt-e-dan-foydalanish"><a class="header" href="#testlarda-resultt-e-dan-foydalanish">Testlarda <code>Result&lt;T, E&gt;</code> dan foydalanish</a></h3>
+<p>Bizning testlarimiz muvaffaqiyatsiz bo'lganda panic qo'zg'atadi. Biz <code>Result&lt;T, E&gt;</code> dan foydalanadigan testlarni ham yozishimiz mumkin! 11-1 roʻyxatidagi test <code>Result&lt;T, E&gt;</code> dan foydalanish va panic oʻrniga <code>Err</code>ni qaytarish uchun qayta yozilgan:</p>
+<pre><code class="language-rust noplayground">#[cfg(test)]
+mod tests {
+    #[test]
+    fn ishlaydi() -&gt; Result&lt;(), String&gt; {
+        if 2 + 2 == 4 {
+            Ok(())
+        } else {
+            Err(String::from(&quot;ikki qo'shish ikki to'rtga teng emas&quot;))
+        }
+    }
+}
+</code></pre>
+<p><code>ishlaydi</code> funksiyasi endi <code>Result&lt;(), String&gt;</code> qaytish(return) turiga ega. Funksiya tanasida <code>assert_eq!</code> makrosini chaqirishdan ko'ra, testdan o'tganda <code>Ok(())</code> va test muvaffaqiyatsiz bo'lganda ichida <code>String</code> bilan <code>Err</code>ni qaytaramiz.</p>
+<p>Testlarni <code>Result&lt;T, E&gt;</code> qaytaradigan qilib yozish testlar matnida savol belgisi operatoridan foydalanish imkonini beradi, bu testlarni yozishning qulay usuli bo'lishi mumkin, agar ulardagi har qanday operatsiya <code>Err</code> variantini qaytarsa, muvaffaqiyatsiz bo'lishi mumkin.</p>
+<p><code>Result&lt;T, E&gt;</code> ishlatadigan testlarda <code>#[should_panic]</code> izohidan(annotation) foydalana olmaysiz. Amaliyot <code>Err</code> variantini qaytarishini tasdiqlash uchun <code>Result&lt;T, E&gt;</code> qiymatida savol belgisi operatoridan foydalanmang. Buning oʻrniga <code>assert!(value.is_err())</code> dan foydalaning.</p>
+<p>Endi siz testlarni yozishning bir necha usullarini bilganingizdan so'ng, keling, testlarimizni o'tkazganimizda nima sodir bo'layotganini ko'rib chiqamiz va <code>cargo test</code> bilan foydalanishimiz mumkin bo'lgan turli xil variantlarni ko'rib chiqamiz.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="ch11-00-testing.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a rel="next" href="ch11-02-running-tests.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="ch11-00-testing.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a rel="next" href="ch11-02-running-tests.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        <script type="text/javascript" src="ferris.js"></script>
+    </body>
+</html>

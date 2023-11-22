@@ -1,0 +1,83 @@
+name: Update
+
+on:
+  push:
+    branches:
+      - main
+  schedule:
+    - cron: "0 0 * * *"
+  workflow_dispatch:
+
+permissions: write-all
+
+jobs:
+  update:
+    name: Update the book
+    runs-on: ubuntu-latest
+    outputs:
+      repo-updated: ${{ steps.git-step.outputs.updated }}
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Cleaning up the repository
+        run: |
+          [ -d "./content" ] && rm -rf ./content
+
+      - name: Clone the current state repo
+        uses: actions/checkout@v3
+        with:
+          repository: rust-lang-uz/i10n
+          path: i10n
+
+      - name: Update the content
+        run: |
+          # Move ordinary files first
+          mv ./i10n/rustbook-uz ./content
+          # Delete the cloned data
+          sudo rm -rf ./i10n
+
+      - name: Setup git credentials
+        run: |
+          # Use github actions default username and email
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Push the content
+        run: |
+          git add .
+          [[ -z $(git status -uno --porcelain) ]] && echo "this branch is clean, no need to push..." && exit 0;
+          git commit -m "[BOT] Updating $GITHUB_SHA content"
+          git push origin main --force
+
+  deploy:
+    name: Deploy the book
+    runs-on: ubuntu-latest
+    needs: update
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Install mdbook
+        run: |
+          mkdir mdbook
+          curl -sSL https://github.com/rust-lang/mdBook/releases/download/v0.4.14/mdbook-v0.4.14-x86_64-unknown-linux-gnu.tar.gz | tar -xz --directory=./mdbook
+          echo `pwd`/mdbook >> $GITHUB_PATH
+
+      - name: Deploy GitHub Pages
+        run: |
+          cd content
+          mdbook build
+          git worktree add gh-pages
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          cd gh-pages
+          git update-ref -d refs/heads/gh-pages
+          rm -rf *
+          mv ../book/* .
+          echo "book.rust-lang.uz" >> CNAME
+          git add .
+          git commit -m "Deploy $GITHUB_SHA to gh-pages"
+          git push --force --set-upstream origin gh-pages

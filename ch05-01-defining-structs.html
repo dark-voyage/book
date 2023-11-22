@@ -1,0 +1,451 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Structlarni aniqlash va yaratish - Rust dasturlash tili</title>
+        <!-- Custom HTML head -->
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="ferris.css">
+        <link rel="stylesheet" href="theme/2018-edition.css">
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="title-page.html">Rust dasturlash tili</a></li><li class="chapter-item expanded affix "><a href="foreword.html">Muqaddima</a></li><li class="chapter-item expanded affix "><a href="ch00-00-introduction.html">Kirish</a></li><li class="chapter-item expanded "><a href="ch01-00-getting-started.html"><strong aria-hidden="true">1.</strong> Ishni boshlash</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch01-01-installation.html"><strong aria-hidden="true">1.1.</strong> O'rnatish</a></li><li class="chapter-item expanded "><a href="ch01-02-hello-world.html"><strong aria-hidden="true">1.2.</strong> Hello, World!</a></li><li class="chapter-item expanded "><a href="ch01-03-hello-cargo.html"><strong aria-hidden="true">1.3.</strong> Hello, Cargo!</a></li></ol></li><li class="chapter-item expanded "><a href="ch02-00-guessing-game-tutorial.html"><strong aria-hidden="true">2.</strong> Taxmin qilish o'yinini dasturlash</a></li><li class="chapter-item expanded "><a href="ch03-00-common-programming-concepts.html"><strong aria-hidden="true">3.</strong> Umumiy dasturlash tushunchalari</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch03-01-variables-and-mutability.html"><strong aria-hidden="true">3.1.</strong> O'zgaruvchilar va o'zgaruvchanlik</a></li><li class="chapter-item expanded "><a href="ch03-02-data-types.html"><strong aria-hidden="true">3.2.</strong> Ma'lumotlar turlari</a></li><li class="chapter-item expanded "><a href="ch03-03-how-functions-work.html"><strong aria-hidden="true">3.3.</strong> Funksiyalar</a></li><li class="chapter-item expanded "><a href="ch03-04-comments.html"><strong aria-hidden="true">3.4.</strong> Izohlar</a></li><li class="chapter-item expanded "><a href="ch03-05-control-flow.html"><strong aria-hidden="true">3.5.</strong> Control Flow</a></li></ol></li><li class="chapter-item expanded "><a href="ch04-00-understanding-ownership.html"><strong aria-hidden="true">4.</strong> Ownershipni tushunish</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch04-01-what-is-ownership.html"><strong aria-hidden="true">4.1.</strong> Ownership nima?</a></li><li class="chapter-item expanded "><a href="ch04-02-references-and-borrowing.html"><strong aria-hidden="true">4.2.</strong> Referencelar va  Borrowing</a></li><li class="chapter-item expanded "><a href="ch04-03-slices.html"><strong aria-hidden="true">4.3.</strong> Slice turi</a></li></ol></li><li class="chapter-item expanded "><a href="ch05-00-structs.html"><strong aria-hidden="true">5.</strong> Tegishli ma'lumotlarni tuzish uchun Structdan foydalanish</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch05-01-defining-structs.html" class="active"><strong aria-hidden="true">5.1.</strong> Structlarni aniqlash va yaratish</a></li><li class="chapter-item expanded "><a href="ch05-02-example-structs.html"><strong aria-hidden="true">5.2.</strong> Structs yordamida namunaviy dastur</a></li><li class="chapter-item expanded "><a href="ch05-03-method-syntax.html"><strong aria-hidden="true">5.3.</strong> Metod sintaksisi</a></li></ol></li><li class="chapter-item expanded "><a href="ch06-00-enums.html"><strong aria-hidden="true">6.</strong> Enumlar va patternlarni moslashtirish</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch06-01-defining-an-enum.html"><strong aria-hidden="true">6.1.</strong> Enumni aniqlash</a></li><li class="chapter-item expanded "><a href="ch06-02-match.html"><strong aria-hidden="true">6.2.</strong> match Control Flow konstruksiyasi</a></li><li class="chapter-item expanded "><a href="ch06-03-if-let.html"><strong aria-hidden="true">6.3.</strong> if let bilan qisqacha Control Flow</a></li></ol></li><li class="chapter-item expanded "><a href="ch07-00-managing-growing-projects-with-packages-crates-and-modules.html"><strong aria-hidden="true">7.</strong> O'sib borayotgan loyihalarni Paketlar, Cratelar va Modullar bilan boshqarish</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch07-01-packages-and-crates.html"><strong aria-hidden="true">7.1.</strong> Paketlar va Cratelar</a></li><li class="chapter-item expanded "><a href="ch07-02-defining-modules-to-control-scope-and-privacy.html"><strong aria-hidden="true">7.2.</strong> Qo'llanish doirasi va maxfiylikni nazorat qilish uchun modullarni aniqlash</a></li><li class="chapter-item expanded "><a href="ch07-03-paths-for-referring-to-an-item-in-the-module-tree.html"><strong aria-hidden="true">7.3.</strong> Modul daraxtidagi elementga murojaat qilish yo'llari</a></li><li class="chapter-item expanded "><a href="ch07-04-bringing-paths-into-scope-with-the-use-keyword.html"><strong aria-hidden="true">7.4.</strong> use kalit so'zi bilan yo'llarni qamrab olish</a></li><li class="chapter-item expanded "><a href="ch07-05-separating-modules-into-different-files.html"><strong aria-hidden="true">7.5.</strong> Modullarni turli fayllarga ajratish</a></li></ol></li><li class="chapter-item expanded "><a href="ch08-00-common-collections.html"><strong aria-hidden="true">8.</strong> Umumiy to'plamlar</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch08-01-vectors.html"><strong aria-hidden="true">8.1.</strong> Vectorlar bilan qiymatlar ro'yxatini saqlash</a></li><li class="chapter-item expanded "><a href="ch08-02-strings.html"><strong aria-hidden="true">8.2.</strong> UTF-8 kodlangan matnni Stringlar bilan saqlash</a></li><li class="chapter-item expanded "><a href="ch08-03-hash-maps.html"><strong aria-hidden="true">8.3.</strong> Hash Mapda bog'langan qiymatlarga ega kalitlarni saqlash</a></li></ol></li><li class="chapter-item expanded "><a href="ch09-00-error-handling.html"><strong aria-hidden="true">9.</strong> Xatolar bilan ishlash</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch09-01-unrecoverable-errors-with-panic.html"><strong aria-hidden="true">9.1.</strong> panic! bilan tuzatib bo'lmaydigan xatolar</a></li><li class="chapter-item expanded "><a href="ch09-02-recoverable-errors-with-result.html"><strong aria-hidden="true">9.2.</strong> Result bilan tiklanadigan xatolar</a></li><li class="chapter-item expanded "><a href="ch09-03-to-panic-or-not-to-panic.html"><strong aria-hidden="true">9.3.</strong> panic! yoki panic! emas</a></li></ol></li><li class="chapter-item expanded "><a href="ch10-00-generics.html"><strong aria-hidden="true">10.</strong> Umumiy turlar, traitlar va lifetime</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch10-01-syntax.html"><strong aria-hidden="true">10.1.</strong> Generik ma'lumotlar turlari</a></li><li class="chapter-item expanded "><a href="ch10-02-traits.html"><strong aria-hidden="true">10.2.</strong> Traitlar: umumiy xatti-harakatni aniqlash</a></li><li class="chapter-item expanded "><a href="ch10-03-lifetime-syntax.html"><strong aria-hidden="true">10.3.</strong> Referencelarni lifetime bilan tekshirish</a></li></ol></li><li class="chapter-item expanded "><a href="ch11-00-testing.html"><strong aria-hidden="true">11.</strong> Avtomatlashtirilgan testlarni yozish</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch11-01-writing-tests.html"><strong aria-hidden="true">11.1.</strong> Testlarni qanday yozish kerak</a></li><li class="chapter-item expanded "><a href="ch11-02-running-tests.html"><strong aria-hidden="true">11.2.</strong> Sinovlar qanday o'tkazilishini nazorat qilish</a></li><li class="chapter-item expanded "><a href="ch11-03-test-organization.html"><strong aria-hidden="true">11.3.</strong> Test tashkil etish</a></li></ol></li><li class="chapter-item expanded "><a href="ch12-00-an-io-project.html"><strong aria-hidden="true">12.</strong> I/O loyihasi: Buyruqlar qatori dasturini yaratish</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch12-01-accepting-command-line-arguments.html"><strong aria-hidden="true">12.1.</strong> Buyruqlar qatori argumentini qabul qilishs</a></li><li class="chapter-item expanded "><a href="ch12-02-reading-a-file.html"><strong aria-hidden="true">12.2.</strong> Faylni o'qish</a></li><li class="chapter-item expanded "><a href="ch12-03-improving-error-handling-and-modularity.html"><strong aria-hidden="true">12.3.</strong> Modullikni yaxshilash va xatolarni qayta ishlash uchun refactoring</a></li><li class="chapter-item expanded "><a href="ch12-04-testing-the-librarys-functionality.html"><strong aria-hidden="true">12.4.</strong> Sinovga asoslangan ishlab chiqish bilan kutubxonaning funksionalligini rivojlantirish</a></li><li class="chapter-item expanded "><a href="ch12-05-working-with-environment-variables.html"><strong aria-hidden="true">12.5.</strong> Environment o'zgaruvchilari bilan ishlash</a></li><li class="chapter-item expanded "><a href="ch12-06-writing-to-stderr-instead-of-stdout.html"><strong aria-hidden="true">12.6.</strong> Xato xabarlarini standart chiqish o'rniga standart xatoga yozish</a></li></ol></li><li class="chapter-item expanded "><a href="ch13-00-functional-features.html"><strong aria-hidden="true">13.</strong> Funksional til xususiyatlari: iteratorlar va closurelar</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch13-01-closures.html"><strong aria-hidden="true">13.1.</strong> Closurelar: Environmentni qamrab oladigan anonim funksiyalar</a></li><li class="chapter-item expanded "><a href="ch13-02-iterators.html"><strong aria-hidden="true">13.2.</strong> Iteratorlar bilan bir qator elementlarga ishlov berish</a></li><li class="chapter-item expanded "><a href="ch13-03-improving-our-io-project.html"><strong aria-hidden="true">13.3.</strong> I/O loyihamizni takomillashtirish</a></li><li class="chapter-item expanded "><a href="ch13-04-performance.html"><strong aria-hidden="true">13.4.</strong> Ishlash samaradorligini solishtirish: Looplar va iteratorlar</a></li></ol></li><li class="chapter-item expanded "><a href="ch14-00-more-about-cargo.html"><strong aria-hidden="true">14.</strong> Cargo va Crates.io haqida ko'proq</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch14-01-release-profiles.html"><strong aria-hidden="true">14.1.</strong> Reliz profillari bilan structlarni moslashtirish</a></li><li class="chapter-item expanded "><a href="ch14-02-publishing-to-crates-io.html"><strong aria-hidden="true">14.2.</strong> Crateni Crates.io-ga nashr qilish</a></li><li class="chapter-item expanded "><a href="ch14-03-cargo-workspaces.html"><strong aria-hidden="true">14.3.</strong> Cargo Workspacelar</a></li><li class="chapter-item expanded "><a href="ch14-04-installing-binaries.html"><strong aria-hidden="true">14.4.</strong> Binary fayllarni Crates.io'dan cargo install bilan o'rnatish</a></li><li class="chapter-item expanded "><a href="ch14-05-extending-cargo.html"><strong aria-hidden="true">14.5.</strong> Maxsus buyruqlar bilan Cargoni kengaytirish</a></li></ol></li><li class="chapter-item expanded "><a href="ch15-00-smart-pointers.html"><strong aria-hidden="true">15.</strong> Smart Pointerlar</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch15-01-box.html"><strong aria-hidden="true">15.1.</strong> Heapdagi ma'lumotlarni ko'rsatish uchun Box&lt;T&gt; dan foydalanish</a></li><li class="chapter-item expanded "><a href="ch15-02-deref.html"><strong aria-hidden="true">15.2.</strong> Deref Traitidan foydalangan holda oddiy referencelar kabi Smart Pointerlar bilan ishlash</a></li><li class="chapter-item expanded "><a href="ch15-03-drop.html"><strong aria-hidden="true">15.3.</strong> Drop Traiti bilan tozalashda kodni ishga tushirish</a></li><li class="chapter-item expanded "><a href="ch15-04-rc.html"><strong aria-hidden="true">15.4.</strong> Rc&lt;T&gt;, reference hisoblangan Smart Pointer</a></li><li class="chapter-item expanded "><a href="ch15-05-interior-mutability.html"><strong aria-hidden="true">15.5.</strong> RefCell&lt;T&gt; va ichki o'zgaruvchanlik namunasi</a></li><li class="chapter-item expanded "><a href="ch15-06-reference-cycles.html"><strong aria-hidden="true">15.6.</strong> Reference Cycles Can Leak Memory</a></li></ol></li><li class="chapter-item expanded "><a href="ch16-00-concurrency.html"><strong aria-hidden="true">16.</strong> Qo'rqmas parallellik</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch16-01-threads.html"><strong aria-hidden="true">16.1.</strong> Kodni bir vaqtning o'zida ishga tushirish uchun threadlardan foydalanish</a></li><li class="chapter-item expanded "><a href="ch16-02-message-passing.html"><strong aria-hidden="true">16.2.</strong> Threadlar orasidagi ma'lumotlarni uzatish uchun xabar uzatishdan(Message Passing) foydalanish</a></li><li class="chapter-item expanded "><a href="ch16-03-shared-state.html"><strong aria-hidden="true">16.3.</strong> Shared-State Concurrency</a></li><li class="chapter-item expanded "><a href="ch16-04-extensible-concurrency-sync-and-send.html"><strong aria-hidden="true">16.4.</strong> Sync va Send traitlari bilan kengaytiriladigan parallellik</a></li></ol></li><li class="chapter-item expanded "><a href="ch17-00-oop.html"><strong aria-hidden="true">17.</strong> Rustning ob'ektga yo'naltirilgan dasturlash xususiyatlari- OOP</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch17-01-what-is-oo.html"><strong aria-hidden="true">17.1.</strong> Ob'ektga yo'naltirilgan tillarning xususiyatlari</a></li><li class="chapter-item expanded "><a href="ch17-02-trait-objects.html"><strong aria-hidden="true">17.2.</strong> Har xil turdagi qiymatlarga ruxsat beruvchi trait ob'ektlaridan foydalanish</a></li><li class="chapter-item expanded "><a href="ch17-03-oo-design-patterns.html"><strong aria-hidden="true">17.3.</strong> Ob'ektga yo'naltirilgan dizayn patternini implement qilish</a></li></ol></li><li class="chapter-item expanded "><a href="ch18-00-patterns.html"><strong aria-hidden="true">18.</strong> Patternlar va Matching</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch18-01-all-the-places-for-patterns.html"><strong aria-hidden="true">18.1.</strong> All the Places Patterns Can Be Used</a></li><li class="chapter-item expanded "><a href="ch18-02-refutability.html"><strong aria-hidden="true">18.2.</strong> Refutability: Whether a Pattern Might Fail to Match</a></li><li class="chapter-item expanded "><a href="ch18-03-pattern-syntax.html"><strong aria-hidden="true">18.3.</strong> Pattern Sintaksisi</a></li></ol></li><li class="chapter-item expanded "><a href="ch19-00-advanced-features.html"><strong aria-hidden="true">19.</strong> Kengaytirilgan Xususiyatlar</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch19-01-unsafe-rust.html"><strong aria-hidden="true">19.1.</strong> Xavfsiz Rust</a></li><li class="chapter-item expanded "><a href="ch19-03-advanced-traits.html"><strong aria-hidden="true">19.2.</strong> Murakkab Traitlar</a></li><li class="chapter-item expanded "><a href="ch19-04-advanced-types.html"><strong aria-hidden="true">19.3.</strong> Kengaytirilgan Turlar</a></li><li class="chapter-item expanded "><a href="ch19-05-advanced-functions-and-closures.html"><strong aria-hidden="true">19.4.</strong> Kengaytirilgan funksiyalar va closurelar</a></li><li class="chapter-item expanded "><a href="ch19-06-macros.html"><strong aria-hidden="true">19.5.</strong> Makrolar</a></li></ol></li><li class="chapter-item expanded "><a href="ch20-00-final-project-a-web-server.html"><strong aria-hidden="true">20.</strong> Yakuniy loyiha: Ko'p tarmoqli veb-serverni qurish</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch20-01-single-threaded.html"><strong aria-hidden="true">20.1.</strong> Yagona tarmoqli veb-serverni qurish</a></li><li class="chapter-item expanded "><a href="ch20-02-multithreaded.html"><strong aria-hidden="true">20.2.</strong> Bizning yagona tarmoqli serverimizni ko'p tarmoqli serverga aylantirish</a></li><li class="chapter-item expanded "><a href="ch20-03-graceful-shutdown-and-cleanup.html"><strong aria-hidden="true">20.3.</strong> Ajoyib o'chirish va tozalash</a></li></ol></li><li class="chapter-item expanded "><a href="appendix-00.html"><strong aria-hidden="true">21.</strong> Ilova</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="appendix-01-keywords.html"><strong aria-hidden="true">21.1.</strong> A - Kalit so'zlar</a></li><li class="chapter-item expanded "><a href="appendix-02-operators.html"><strong aria-hidden="true">21.2.</strong> B - Operatorlar va Symbollar</a></li><li class="chapter-item expanded "><a href="appendix-03-derivable-traits.html"><strong aria-hidden="true">21.3.</strong> C - Hosilaviy Traitlar</a></li><li class="chapter-item expanded "><a href="appendix-04-useful-development-tools.html"><strong aria-hidden="true">21.4.</strong> D - Foydali Development Toollar</a></li><li class="chapter-item expanded "><a href="appendix-05-editions.html"><strong aria-hidden="true">21.5.</strong> E - Nashrlar</a></li><li class="chapter-item expanded "><a href="appendix-06-translation.html"><strong aria-hidden="true">21.6.</strong> F - Kitobning tarjimalari</a></li><li class="chapter-item expanded "><a href="appendix-07-nightly-rust.html"><strong aria-hidden="true">21.7.</strong> G - Rust qanday yasaladi va “Nightly Rust”</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Rust dasturlash tili</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/rust-lang/book" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h2 id="structlarni-aniqlash-va-yaratish"><a class="header" href="#structlarni-aniqlash-va-yaratish">Structlarni aniqlash va yaratish</a></h2>
+<p>Structlar <a href="ch03-02-data-types.html#the-tuple-type">“Tuple turi“</a><!-- ignore --> bo'limida muhokama qilingan tuplelarga o'xshaydi, chunki ikkalasi ham bir-biriga bog'liq bo'lgan bir nechta qiymatlarga ega.
+Tuplelar singari, structning qismlari ham har xil turdagi bo'lishi mumkin. Tuplelardan farqli o'laroq, structda siz har bir ma'lumot qismini nomlaysiz, shunda qiymatlar nimani anglatishini tushunasiz. Ushbu nomlarni qo'shish structlar tuplelardan ko'ra moslashuvchanroq ekanligini anglatadi: misol qiymatlarini belgilash yoki ularga kirish uchun ma'lumotlar tartibiga ishonishingiz shart emas.</p>
+<p>Structni aniqlash uchun biz <code>struct</code> kalit so`zini kiritamiz va butun tuzilishga nom beramiz. Struct nomi birgalikda guruhlangan ma'lumotlar bo'laklarining ahamiyatini tavsiflashi kerak. Keyin, jingalak qavslar ichida biz <em>maydonlar</em> deb ataydigan ma'lumotlar qismlarining nomlari va turlarini aniqlaymiz. Masalan, 5-1 ro'yxati foydalanuvchi hisobi haqidagi ma'lumotlarni saqlaydigan structni ko'rsatadi.</p>
+<p><span class="filename">Fayl nomi: src/main.rs</span></p>
+<pre><pre class="playground"><code class="language-rust">struct Foydalanuvchi {
+    faollik: bool,
+    foydalanuvchi: String,
+    email: String,
+    kirish_hisobi: u64,
+}
+<span class="boring">
+</span><span class="boring">fn main() {}
+</span></code></pre></pre>
+<p><span class="caption">Ro'yxat 5-1: <code>Foydalanuvchi</code> structi ta'rifi</span></p>
+<p>Struct aniqlangandan so'ng, tegishli ma'lumotlar turiga ega bo'lgan har bir maydonga ma'lum bir qiymat berish orqali uni yaratish mumkin. Biz structning nomini ko'rsatish orqali misol yaratamiz va keyin <em>kalit: qiymat</em>(key: value) juftlarini o'z ichiga olgan jingalak qavslarni qo'shamiz, bu erda kalitlar maydonlarning nomlari va qiymatlar biz o'sha maydonlarda saqlamoqchi bo'lgan ma'lumotlardir.Biz maydonlarni structda e'lon qilgan tartibda ko'rsatishimiz shart emas. Boshqacha qilib aytganda, structning ta'rifi tur uchun umumiy shablonga o'xshaydi va misollar tur qiymatlarini yaratish uchun ushbu shablonni ma'lum ma'lumotlar bilan to'ldiradi. Misol uchun, biz 5-2 ro'yxatda ko'rsatilganidek, ma'lum bir foydalanuvchini e'lon qilishimiz mumkin.</p>
+<p><span class="filename">Fayl nomi: src/main.rs</span></p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">struct Foydalanuvchi {
+</span><span class="boring">    faollik: bool,
+</span><span class="boring">    foydalanuvchi: String,
+</span><span class="boring">    email: String,
+</span><span class="boring">    kirish_hisobi: u64,
+</span><span class="boring">}
+</span><span class="boring">
+</span>fn main() {
+    let foydalanuvchi1 = Foydalanuvchi {
+        faollik: true,
+        foydalanuvchi: String::from(&quot;ismoilovdev&quot;),
+        email: String::from(&quot;ismoilovdev@example.com&quot;),
+        kirish_hisobi: 1,
+    };
+}
+</code></pre></pre>
+<p><span class="caption">Ro'yxat 5-2: <code>Foydalanuvchi</code> nusxasini yaratish
+structi</span></p>
+<p>Structdan ma'lum bir qiymat olish uchun biz nuqta belgilaridan foydalanamiz. Masalan, ushbu foydalanuvchining elektron pochta manziliga kirish uchun biz <code>foydalanuvchi1.email</code> dan foydalanamiz. Agar misol o'zgaruvchan bo'lsa, biz nuqta belgisi yordamida qiymatni o'zgartirishimiz va ma'lum bir maydonga belgilashimiz mumkin. 5-3 ro'yxatda o'zgaruvchan <code>Foydalanuvchi</code> misolining <code>email</code> maydonidagi qiymatni qanday o'zgartirish mumkinligi ko'rsatilgan.</p>
+<p><span class="filename">Fayl nomi: src/main.rs</span></p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">struct Foydalanuvchi {
+</span><span class="boring">    faollik: bool,
+</span><span class="boring">    foydalanuvchi: String,
+</span><span class="boring">    email: String,
+</span><span class="boring">    kirish_hisobi: u64,
+</span><span class="boring">}
+</span><span class="boring">
+</span>fn main() {
+    let foydalanuvchi1 = Foydalanuvchi {
+        faollik: true,
+        foydalanuvchi: String::from(&quot;ismoilovdev&quot;),
+        email: String::from(&quot;ismoilovdev@example.com&quot;),
+        kirish_hisobi: 1,
+    };
+
+    foydalanuvchi1.email = String::from(&quot;asilbek@example.com&quot;);
+}
+</code></pre></pre>
+<p><span class="caption">Ro'yxat 5-3: <code>Foydalanuvchi</code> misolining <code>email</code> maydonidagi qiymatni o'zgartirish</span></p>
+<p>E'tibor bering, butun misol o'zgaruvchan bo'lishi kerak; Rust bizga faqat ma'lum maydonlarni o'zgaruvchan deb belgilashga ruxsat bermaydi. Har qanday ifodada bo'lgani kabi, biz ushbu yangi misolni bilvosita qaytarish uchun funksiya tanasidagi oxirgi ifoda sifatida structning yangi nusxasini qurishimiz mumkin.</p>
+<p>5-4 roʻyxatda berilgan email va foydalanuvchi nomi bilan <code>Foydalanuvchi</code> misolini qaytaruvchi <code>foydalanuvchi_yaratish</code> funksiyasi koʻrsatilgan. <code>faollik</code> maydoni <code>true</code> qiymatini, <code>kirish_hisobi</code> esa <code>1</code> qiymatini oladi.</p>
+<p><span class="filename">Fayl nomi: src/main.rs</span></p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">struct Foydalanuvchi {
+</span><span class="boring">    faollik: bool,
+</span><span class="boring">    foydalanuvchi: String,
+</span><span class="boring">    email: String,
+</span><span class="boring">    kirish_hisobi: u64,
+</span><span class="boring">}
+</span><span class="boring">
+</span>fn foydalanuvchi_yaratish(email: String, foydalanuvchi: String) -&gt; Foydalanuvchi {
+    Foydalanuvchi {
+        faollik: true,
+        foydalanuvchi: foydalanuvchi,
+        email: email,
+        kirish_hisobi: 1,
+    }
+}
+<span class="boring">
+</span><span class="boring">fn main() {
+</span><span class="boring">    let foydalanuvchi1 = foydalanuvchi_yaratish(
+</span><span class="boring">        String::from(&quot;ismoilovdev@example.com&quot;),
+</span><span class="boring">        String::from(&quot;ismoilovdev&quot;),
+</span><span class="boring">    );
+</span><span class="boring">}
+</span></code></pre></pre>
+<p><span class="caption">Roʻyxat 5-4: <code>foydalanuvchi_yaratish</code> funksiyasi email va foydalanuvchi nomini oladi va <code>Foydalanuvchi</code> misolini qaytaradi</span></p>
+<p>Funksiya parametrlarini struct maydonlari bilan bir xil nom bilan nomlash mantiqan to‘g‘ri keladi, lekin <code>email</code> va <code>foydalanuvchi</code> maydon nomlari va o‘zgaruvchilarini takrorlash biroz zerikarli. Agar structda ko'proq maydonlar bo'lsa, har bir nomni takrorlash yanada zerikarli bo'ladi. Yaxshiyamki, qulay Shorthand bor!</p>
+<!-- Old heading. Do not remove or links may break. -->
+<p><a id="using-the-field-init-shorthand-when-variables-and-fields-have-the-same-name"></a></p>
+<h3 id="field-init-shorthandan-foydalanish"><a class="header" href="#field-init-shorthandan-foydalanish">Field Init Shorthandan foydalanish</a></h3>
+<p>Parametr nomlari va struct maydonlarining nomlari 5-4 ro'yxatda aynan bir xil bo'lgani uchun, <code>foydalanuvchi_yaratish</code>ni qayta yozish uchun <em>init shorthand</em> sintaksisidan foydalanishimiz mumkin, shuning uchun u xuddi shunday ishlaydi, lekin <code>foydalanuvchi</code> va <code>email</code>ni takrorlamaydi, 5-5 ro'yxatda ko'rsatilganidek.</p>
+<p><span class="filename">Fayl nomi: src/main.rs</span></p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">struct Foydalanuvchi {
+</span><span class="boring">    faollik: bool,
+</span><span class="boring">    foydalanuvchi: String,
+</span><span class="boring">    email: String,
+</span><span class="boring">    kirish_hisobi: u64,
+</span><span class="boring">}
+</span><span class="boring">
+</span>fn foydalanuvchi_yaratish(email: String, foydalanuvchi: String) -&gt; Foydalanuvchi {
+    Foydalanuvchi {
+        faollik: true,
+        foydalanuvchi,
+        email,
+        kirish_hisobi: 1,
+    }
+}
+<span class="boring">
+</span><span class="boring">fn main() {
+</span><span class="boring">    let foydalanuvchi1 = foydalanuvchi_yaratish(
+</span><span class="boring">        String::from(&quot;ismoilovdev@example.com&quot;),
+</span><span class="boring">        String::from(&quot;ismoilovdev&quot;),
+</span><span class="boring">    );
+</span><span class="boring">}
+</span></code></pre></pre>
+<p><span class="caption">Roʻyxat 5-5: <code>foydalanuvchi</code> va <code>email</code> parametrlari struct maydonlari bilan bir xil nomga ega boʻlgani uchun init shorthanddan foydalanadigan <code>foydalanuvchi_yaratish</code> funksiyasi</span></p>
+<p>Bu yerda biz <code>Foydalanuvchi</code> structining yangi nusxasini yaratmoqdamiz, unda <code>email</code> deb nomlangan maydon mavjud. Biz <code>email</code> maydonining qiymatini <code>foydalanuvchi_yaratish</code> funksiyasining <code>email</code> parametridagi qiymatga o‘rnatmoqchimiz. <code>email</code> maydoni va <code>email</code> parametri bir xil nomga ega bo'lgani uchun biz <code>email: email</code> emas, balki <code>email</code> yozishimiz kerak.</p>
+<h3 id="structni-update-sintaksisidan-foydalanib-boshqa-tuzilma-nusxasidan-tuzilma-namunasini-yaratish"><a class="header" href="#structni-update-sintaksisidan-foydalanib-boshqa-tuzilma-nusxasidan-tuzilma-namunasini-yaratish">Structni update sintaksisidan foydalanib, boshqa tuzilma nusxasidan tuzilma namunasini yaratish</a></h3>
+<p>Ko'pincha boshqa namunadagi qiymatlarning ko'pini o'z ichiga olgan, lekin ularning ba'zilarini o'zgartiradigan structning yangi nusxasini yaratish foydali bo'ladi. Buni <em>struct update sintaksisi</em> yordamida amalga oshirishingiz mumkin.</p>
+<p>Birinchidan, 5-6 ro'yxatda biz yangilanish sintaksisisiz muntazam ravishda <code>foydalanuvchi2</code> da yangi <code>Foydalanuvchi</code> misolini qanday yaratishni ko'rsatamiz. Biz <code>email</code> uchun yangi qiymat o‘rnatdik, lekin aks holda 5-2 ro‘yxatda yaratgan <code>foydalanuvchi1</code> qiymatidan foydalanamiz.</p>
+<p><span class="filename">Fayl nomi: src/main.rs</span></p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">struct Foydalanuvchi {
+</span><span class="boring">    faollik: bool,
+</span><span class="boring">    foydalanuvchi: String,
+</span><span class="boring">    email: String,
+</span><span class="boring">    kirish_hisobi: u64,
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">
+</span>fn main() {
+    // --snip--
+<span class="boring">
+</span><span class="boring">    let foydalanuvchi1 = Foydalanuvchi {
+</span><span class="boring">        email: String::from(&quot;ismoilovdev@example.com&quot;),
+</span><span class="boring">        foydalanuvchi: String::from(&quot;ismoilovdev&quot;),
+</span><span class="boring">        faollik: true,
+</span><span class="boring">        kirish_hisobi: 1,
+</span><span class="boring">    };
+</span>
+    let foydalanuvchi2 = Foydalanuvchi {
+        faollik: foydalanuvchi1.faollik,
+        foydalanuvchi: foydalanuvchi1.foydalanuvchi,
+        email: String::from(&quot;asilbek@example.com&quot;),
+        kirish_hisobi: foydalanuvchi1.kirish_hisobi,
+    };
+}
+</code></pre></pre>
+<p><span class="caption">Roʻyxat 5-6: foydalanuvchi1 qiymatlaridan biri yordamida yangi <code>Foydalanuvchi</code> namunasini yaratish</span></p>
+<p>Strukturani yangilash sintaksisidan foydalanib, biz 5-7 ro'yxatda ko'rsatilganidek, kamroq kod bilan bir xil effektga erishishimiz mumkin. <code>..</code> sintaksisi qolgan maydonlar aniq o'rnatilganligini va belgilangan namunadagi qiymatlarga ega bo'lishi kerakligini ko'rsatadi.</p>
+<p><span class="filename">Fayl nomi: src/main.rs</span></p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">struct Foydalanuvchi {
+</span><span class="boring">    faollik: bool,
+</span><span class="boring">    foydalanuvchi: String,
+</span><span class="boring">    email: String,
+</span><span class="boring">    kirish_hisobi: u64,
+</span><span class="boring">}
+</span><span class="boring">
+</span>fn main() {
+    // --snip--
+<span class="boring">
+</span><span class="boring">    let foydalanuvchi1 = Foydalanuvchi {
+</span><span class="boring">        email: String::from(&quot;ismoilovdev@example.com&quot;),
+</span><span class="boring">        foydalanuvchi: String::from(&quot;ismoilovdev&quot;),
+</span><span class="boring">        faollik: true,
+</span><span class="boring">        kirish_hisobi: 1,
+</span><span class="boring">    };
+</span>
+    let foydalanuvchi2 = Foydalanuvchi {
+        email: String::from(&quot;asilbek@example.com&quot;),
+        ..foydalanuvchi1
+    };
+}
+</code></pre></pre>
+<p><span class="caption">Ro'yxat 5-7: <code>Foydalanuvchi</code> misoli uchun yangi <code>email</code> qiymatini o'rnatish, lekin <code>foydalanuvchi1</code> dagi qolgan qiymatlardan foydalanish uchun structni yangilash sintaksisidan foydalanish</span></p>
+<p>5-7 roʻyxatdagi kod <code>foydalanuvchi2</code> da <code>email</code> uchun boshqa qiymatga ega, lekin <code>foydalanuvchi1</code> dan <code>foydalanuvchi</code>, <code>faollik</code> va <code>kirish_hisobi</code> maydonlari uchun bir xil qiymatlarga ega boʻlgan misol yaratadi. <code>..foydalanuvchi1</code> qolgan maydonlar o‘z qiymatlarini <code>foydalanuvchi1</code> dagi tegishli maydonlardan olishi kerakligini ko‘rsatish uchun oxirgi o‘rinda turishi kerak, lekin biz istalgan tartibda xohlagancha ko'p maydonlar uchun qiymatlarni belgilashni tanlashimiz mumkin, strukturaning ta'rifidagi maydonlar tartibidan qat'i nazar.</p>
+<p>E'tibor bering, strukturani yangilash sintaksisi topshiriq kabi <code>=</code> dan foydalanadi; Buning sababi, biz <a href="ch04-01-what-is-ownership.html#variables-and-data-interacting-with-move">”O'zgaruvchilar va ma'lumotlarni ko'chirish bilan o'zaro ta'sir qilish”</a><!-- ignore --> bo'limida ko'rganimizdek, u ma'lumotlarni harakatlantiradi. Ushbu misolda biz <code>foydalanuvchi2</code> ni yaratganimizdan keyin <code>foydalanuvchi1</code> dan bir butun sifatida foydalana olmaymiz, chunki <code>foydalanuvchi1</code>ning <code>foydalanuvchi</code> maydonidagi <code>String</code> <code>foydalanuvchi2</code> ga koʻchirilgan. Agar biz <code>foydalanuvchi2</code> ga <code>email</code> va <code>foydalanuvchi</code> uchun yangi <code>String</code> qiymatlarini bergan bo‘lsak va shuning uchun <code>foydalanuvchi1</code>dan faqat <code>faollik</code> va <code>kirish_hisobi</code> qiymatlarini ishlatgan bo‘lsak, keyin <code>foydalanuvchi1</code> <code>foydalanuvchi2</code> yaratilgandan keyin ham amal qiladi. <code>faollik</code> va <code>kirish_hisobi</code> turlari nusxa ko'chirish xususiyatini amalga oshiradigan turlardir, shuning uchun biz <a href="ch04-01-what-is-ownership.html#stack-only-data-copy">”Stek ma'lumotlari: Nusxalash”</a><!-- ignore --> bo'limida muhokama qilgan xatti-harakatlar qo'llaniladi.</p>
+<h3 id="har-xil-turlarni-yaratish-uchun-nomli-maydonlarsiz-tuplelardan-foydalanish"><a class="header" href="#har-xil-turlarni-yaratish-uchun-nomli-maydonlarsiz-tuplelardan-foydalanish">Har xil turlarni yaratish uchun nomli maydonlarsiz tuplelardan foydalanish</a></h3>
+<p>Rust shuningdek, <em>tuple struct</em>lar deb ataladigan tuplelarga o'xshash structlarni qo'llab-quvvatlaydi.
+Tuple structlari struct nomi taqdim etadigan qo'shimcha ma'noga ega, ammo ularning maydonlari bilan bog'langan nomlari yo'q; aksincha, ular faqat maydonlarning turlariga ega. Tuple structlari butun tuplega nom berish va tupleni boshqa tuplelardan farqli turga aylantirish zarur bo‘lganda foydali bo‘ladi va har bir maydonni oddiy structdagi kabi nomlashda batafsil yoki ortiqcha bo‘ladi.</p>
+<p>Tuple structini aniqlash uchun <code>struct</code> kalit so‘zi va struct nomidan keyin tupledagi turlardan boshlang. Masalan, bu yerda biz <code>Rang</code> va <code>Nuqta</code> nomli ikkita tuple structini aniqlaymiz va foydalanamiz:</p>
+<p><span class="filename">Fayl nomi: src/main.rs</span></p>
+<pre><pre class="playground"><code class="language-rust">struct Rang(i32, i32, i32);
+struct Nuqta(i32, i32, i32);
+
+fn main() {
+    let qora = Rang(0, 0, 0);
+    let kelib_chiqishi = Nuqta(0, 0, 0);
+}
+</code></pre></pre>
+<p>Esda tutingki, <code>qora</code> va <code>kelib_chiqishi</code> qiymatlari har xil turdagi, chunki ular turli xil tuple structlarining namunalaridir. Structdagi maydonlar bir xil turlarga ega bo'lishi mumkin bo'lsa ham, siz belgilagan har bir struct o'z turiga ega. Masalan, <code>Rang</code> turidagi parametrni qabul qiladigan funksiya, har ikkala tur ham uchta <code>i32</code> qiymatidan iborat bo‘lsa ham, <code>Nuqta</code>ni argument sifatida qabul qila olmaydi. Aks holda, tuple structi namunalari tupelarga o'xshaydi, chunki siz ularni alohida qismlarga ajratishingiz mumkin va individual qiymatga kirish uchun <code>.</code> va keyin indeksdan foydalanishingiz mumkin.</p>
+<h3 id="hech-qanday-maydonsiz-unit-kabi-structlar"><a class="header" href="#hech-qanday-maydonsiz-unit-kabi-structlar">Hech qanday maydonsiz unit kabi structlar</a></h3>
+<p>Shuningdek, siz hech qanday maydonga ega bo'lmagan structlarni belgilashingiz mumkin! Ular <em>unita o'xshash structlar</em> deb ataladi, chunki ular biz <a href="ch03-02-data-types.html#the-tuple-type">”Tuple turi”</a><!-- ignore --> bo'limida aytib o'tgan unit turiga <code>()</code> o'xshash harakat qiladilar. Unitga o'xshash structlar qaysidir turdagi traitni qo'llash kerak bo'lganda foydali bo'lishi mumkin, ammo sizda turning o'zida saqlash uchun ma'lumotlaringiz yo'q. Traitlarni 10-bobda muhokama qilamiz. Mana <code>AlwaysEqual</code> nomli unit structini e’lon qilish va instantsiyalash misoli:</p>
+<p><span class="filename">Fayl nomi: src/main.rs</span></p>
+<pre><pre class="playground"><code class="language-rust">struct AlwaysEqual;
+
+fn main() {
+    let subject = AlwaysEqual;
+}
+</code></pre></pre>
+<p><code>AlwaysEqual</code> ni aniqlash uchun biz <code>struct</code> kalit so'zidan, kerakli nomdan va keyin nuqta-verguldan foydalanamiz. Jingalak qavslar yoki qavslar kerak emas! Shunda biz <code>subject</code> o'zgaruvchisida <code>AlwaysEqual</code> misolini xuddi shunday tarzda olishimiz mumkin: biz belgilagan nomdan foydalanib, hech qanday jingalak qavs yoki qavslarsiz. Tasavvur qiling-a, keyinchalik biz ushbu turdagi xatti-harakatlarni shunday amalga oshiramizki, <code>AlwaysEqual</code> ning har bir nusxasi har doim boshqa turdagi har bir misolga teng bo'ladi, ehtimol sinov uchun ma'lum natijaga ega bo'lishi mumkin. Ushbu xatti-harakatni amalga oshirish uchun bizga hech qanday ma'lumot kerak emas! Traitlarni qanday aniqlash va ularni har qanday turdagi, shu jumladan unitga o'xshash structlarda amalga oshirishni 10-bobda ko'rasiz.</p>
+<blockquote>
+<h3 id="strukturaviy-malumotlarga-ownershiplik-qilish"><a class="header" href="#strukturaviy-malumotlarga-ownershiplik-qilish">Strukturaviy ma'lumotlarga ownershiplik qilish</a></h3>
+<p>5-1 roʻyxatdagi <code>Foydalanuvchi</code> structi taʼrifida biz <code>&amp;str</code> string slice turidan
+koʻra tegishli <code>String</code> turidan foydalandik. Bu ataylab qilingan tanlov, chunki
+biz ushbu structning har bir nusxasi uning barcha maʼlumotlariga ega boʻlishini
+va bu maʼlumotlar butun struct amalda boʻlgunga qadar amal qilishini istaymiz.</p>
+<p>Structlar boshqa narsaga tegishli maʼlumotlarga referencelarni saqlashi ham mumkin,
+ammo buning uchun biz 10-bobda muhokama qiladigan Rust xususiyatidan  <em>lifetimelar</em>
+foydalanishni talab qiladi. Lifetime struct tomonidan reference qilingan ma'lumotlar
+struct mavjud bo'lgunga qadar amal qilishini ta'minlaydi. Aytaylik, siz ma'lumotnomani
+lifetimeni ko'rsatmasdan structda saqlashga harakat qildingiz, quyidagi kabi; bu ishlamaydi:</p>
+<p><span class="filename">Fayl nomi: src/main.rs</span></p>
+<!-- CAN'T EXTRACT SEE https://github.com/rust-lang/mdBook/issues/1127 -->
+<pre><code class="language-rust ignore does_not_compile">struct Foydalanuvchi {
+    faollik: bool,
+    foydalanuvchi: &amp;str,
+    email: &amp;str,
+    kirish_hisobi: u64,
+}
+
+fn main() {
+    let foydalanuvchi1 = Foydalanuvchi {
+        faollik: true,
+        foydalanuvchi: &quot;ismoilovdev&quot;,
+        email: &quot;ismoilovdev@example.com&quot;,
+        kirish_hisobi: 1,
+    };
+}
+</code></pre>
+<p>Kompilyator referencelarning lifetimeni aniqlash zarurati haqida shikoyat qiladi:</p>
+<pre><code class="language-console">$ cargo run
+   Compiling structs v0.1.0 (file:///projects/structs)
+error[E0106]: missing lifetime specifier
+ --&gt; src/main.rs:3:15
+  |
+3 |     foydalanuvchi: &amp;str,
+  |               ^ expected named lifetime parameter
+  |
+help: consider introducing a named lifetime parameter
+  |
+1 ~ struct Foydalanuvchi&lt;'a&gt; {
+2 |     faollik: bool,
+3 ~     foydalanuvchi: &amp;'a str,
+  |
+
+error[E0106]: missing lifetime specifier
+ --&gt; src/main.rs:4:12
+  |
+4 |     email: &amp;str,
+  |            ^ expected named lifetime parameter
+  |
+help: consider introducing a named lifetime parameter
+  |
+1 ~ struct Foydalanuvchi&lt;'a&gt; {
+2 |     faollik: bool,
+3 |     foydalanuvchi: &amp;str,
+4 ~     email: &amp;'a str,
+  |
+
+For more information about this error, try `rustc --explain E0106`.
+error: could not compile `structs` due to 2 previous errors
+</code></pre>
+<p>10-bobda biz ushbu xatolarni qanday tuzatishni muhokama qilamiz, shunda siz
+referencelarni structlarda saqlashingiz mumkin, ammo hozircha biz bu kabi
+xatolarni <code>&amp;str</code> kabi referencelar oʻrniga <code>String</code> kabi tegishli turlardan foydalanib tuzatamiz.</p>
+</blockquote>
+<!-- manual-regeneration
+for the error above
+after running update-rustc.sh:
+pbcopy < listings/ch05-using-structs-to-structure-related-data/no-listing-02-reference-in-struct/output.txt
+paste above
+add `> ` before every line -->
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="ch05-00-structs.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a rel="next" href="ch05-02-example-structs.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="ch05-00-structs.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a rel="next" href="ch05-02-example-structs.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        <script type="text/javascript" src="ferris.js"></script>
+    </body>
+</html>

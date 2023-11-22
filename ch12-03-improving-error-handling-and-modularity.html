@@ -1,0 +1,779 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Modullikni yaxshilash va xatolarni qayta ishlash uchun refactoring - Rust dasturlash tili</title>
+        <!-- Custom HTML head -->
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="ferris.css">
+        <link rel="stylesheet" href="theme/2018-edition.css">
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="title-page.html">Rust dasturlash tili</a></li><li class="chapter-item expanded affix "><a href="foreword.html">Muqaddima</a></li><li class="chapter-item expanded affix "><a href="ch00-00-introduction.html">Kirish</a></li><li class="chapter-item expanded "><a href="ch01-00-getting-started.html"><strong aria-hidden="true">1.</strong> Ishni boshlash</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch01-01-installation.html"><strong aria-hidden="true">1.1.</strong> O'rnatish</a></li><li class="chapter-item expanded "><a href="ch01-02-hello-world.html"><strong aria-hidden="true">1.2.</strong> Hello, World!</a></li><li class="chapter-item expanded "><a href="ch01-03-hello-cargo.html"><strong aria-hidden="true">1.3.</strong> Hello, Cargo!</a></li></ol></li><li class="chapter-item expanded "><a href="ch02-00-guessing-game-tutorial.html"><strong aria-hidden="true">2.</strong> Taxmin qilish o'yinini dasturlash</a></li><li class="chapter-item expanded "><a href="ch03-00-common-programming-concepts.html"><strong aria-hidden="true">3.</strong> Umumiy dasturlash tushunchalari</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch03-01-variables-and-mutability.html"><strong aria-hidden="true">3.1.</strong> O'zgaruvchilar va o'zgaruvchanlik</a></li><li class="chapter-item expanded "><a href="ch03-02-data-types.html"><strong aria-hidden="true">3.2.</strong> Ma'lumotlar turlari</a></li><li class="chapter-item expanded "><a href="ch03-03-how-functions-work.html"><strong aria-hidden="true">3.3.</strong> Funksiyalar</a></li><li class="chapter-item expanded "><a href="ch03-04-comments.html"><strong aria-hidden="true">3.4.</strong> Izohlar</a></li><li class="chapter-item expanded "><a href="ch03-05-control-flow.html"><strong aria-hidden="true">3.5.</strong> Control Flow</a></li></ol></li><li class="chapter-item expanded "><a href="ch04-00-understanding-ownership.html"><strong aria-hidden="true">4.</strong> Ownershipni tushunish</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch04-01-what-is-ownership.html"><strong aria-hidden="true">4.1.</strong> Ownership nima?</a></li><li class="chapter-item expanded "><a href="ch04-02-references-and-borrowing.html"><strong aria-hidden="true">4.2.</strong> Referencelar va  Borrowing</a></li><li class="chapter-item expanded "><a href="ch04-03-slices.html"><strong aria-hidden="true">4.3.</strong> Slice turi</a></li></ol></li><li class="chapter-item expanded "><a href="ch05-00-structs.html"><strong aria-hidden="true">5.</strong> Tegishli ma'lumotlarni tuzish uchun Structdan foydalanish</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch05-01-defining-structs.html"><strong aria-hidden="true">5.1.</strong> Structlarni aniqlash va yaratish</a></li><li class="chapter-item expanded "><a href="ch05-02-example-structs.html"><strong aria-hidden="true">5.2.</strong> Structs yordamida namunaviy dastur</a></li><li class="chapter-item expanded "><a href="ch05-03-method-syntax.html"><strong aria-hidden="true">5.3.</strong> Metod sintaksisi</a></li></ol></li><li class="chapter-item expanded "><a href="ch06-00-enums.html"><strong aria-hidden="true">6.</strong> Enumlar va patternlarni moslashtirish</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch06-01-defining-an-enum.html"><strong aria-hidden="true">6.1.</strong> Enumni aniqlash</a></li><li class="chapter-item expanded "><a href="ch06-02-match.html"><strong aria-hidden="true">6.2.</strong> match Control Flow konstruksiyasi</a></li><li class="chapter-item expanded "><a href="ch06-03-if-let.html"><strong aria-hidden="true">6.3.</strong> if let bilan qisqacha Control Flow</a></li></ol></li><li class="chapter-item expanded "><a href="ch07-00-managing-growing-projects-with-packages-crates-and-modules.html"><strong aria-hidden="true">7.</strong> O'sib borayotgan loyihalarni Paketlar, Cratelar va Modullar bilan boshqarish</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch07-01-packages-and-crates.html"><strong aria-hidden="true">7.1.</strong> Paketlar va Cratelar</a></li><li class="chapter-item expanded "><a href="ch07-02-defining-modules-to-control-scope-and-privacy.html"><strong aria-hidden="true">7.2.</strong> Qo'llanish doirasi va maxfiylikni nazorat qilish uchun modullarni aniqlash</a></li><li class="chapter-item expanded "><a href="ch07-03-paths-for-referring-to-an-item-in-the-module-tree.html"><strong aria-hidden="true">7.3.</strong> Modul daraxtidagi elementga murojaat qilish yo'llari</a></li><li class="chapter-item expanded "><a href="ch07-04-bringing-paths-into-scope-with-the-use-keyword.html"><strong aria-hidden="true">7.4.</strong> use kalit so'zi bilan yo'llarni qamrab olish</a></li><li class="chapter-item expanded "><a href="ch07-05-separating-modules-into-different-files.html"><strong aria-hidden="true">7.5.</strong> Modullarni turli fayllarga ajratish</a></li></ol></li><li class="chapter-item expanded "><a href="ch08-00-common-collections.html"><strong aria-hidden="true">8.</strong> Umumiy to'plamlar</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch08-01-vectors.html"><strong aria-hidden="true">8.1.</strong> Vectorlar bilan qiymatlar ro'yxatini saqlash</a></li><li class="chapter-item expanded "><a href="ch08-02-strings.html"><strong aria-hidden="true">8.2.</strong> UTF-8 kodlangan matnni Stringlar bilan saqlash</a></li><li class="chapter-item expanded "><a href="ch08-03-hash-maps.html"><strong aria-hidden="true">8.3.</strong> Hash Mapda bog'langan qiymatlarga ega kalitlarni saqlash</a></li></ol></li><li class="chapter-item expanded "><a href="ch09-00-error-handling.html"><strong aria-hidden="true">9.</strong> Xatolar bilan ishlash</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch09-01-unrecoverable-errors-with-panic.html"><strong aria-hidden="true">9.1.</strong> panic! bilan tuzatib bo'lmaydigan xatolar</a></li><li class="chapter-item expanded "><a href="ch09-02-recoverable-errors-with-result.html"><strong aria-hidden="true">9.2.</strong> Result bilan tiklanadigan xatolar</a></li><li class="chapter-item expanded "><a href="ch09-03-to-panic-or-not-to-panic.html"><strong aria-hidden="true">9.3.</strong> panic! yoki panic! emas</a></li></ol></li><li class="chapter-item expanded "><a href="ch10-00-generics.html"><strong aria-hidden="true">10.</strong> Umumiy turlar, traitlar va lifetime</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch10-01-syntax.html"><strong aria-hidden="true">10.1.</strong> Generik ma'lumotlar turlari</a></li><li class="chapter-item expanded "><a href="ch10-02-traits.html"><strong aria-hidden="true">10.2.</strong> Traitlar: umumiy xatti-harakatni aniqlash</a></li><li class="chapter-item expanded "><a href="ch10-03-lifetime-syntax.html"><strong aria-hidden="true">10.3.</strong> Referencelarni lifetime bilan tekshirish</a></li></ol></li><li class="chapter-item expanded "><a href="ch11-00-testing.html"><strong aria-hidden="true">11.</strong> Avtomatlashtirilgan testlarni yozish</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch11-01-writing-tests.html"><strong aria-hidden="true">11.1.</strong> Testlarni qanday yozish kerak</a></li><li class="chapter-item expanded "><a href="ch11-02-running-tests.html"><strong aria-hidden="true">11.2.</strong> Sinovlar qanday o'tkazilishini nazorat qilish</a></li><li class="chapter-item expanded "><a href="ch11-03-test-organization.html"><strong aria-hidden="true">11.3.</strong> Test tashkil etish</a></li></ol></li><li class="chapter-item expanded "><a href="ch12-00-an-io-project.html"><strong aria-hidden="true">12.</strong> I/O loyihasi: Buyruqlar qatori dasturini yaratish</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch12-01-accepting-command-line-arguments.html"><strong aria-hidden="true">12.1.</strong> Buyruqlar qatori argumentini qabul qilishs</a></li><li class="chapter-item expanded "><a href="ch12-02-reading-a-file.html"><strong aria-hidden="true">12.2.</strong> Faylni o'qish</a></li><li class="chapter-item expanded "><a href="ch12-03-improving-error-handling-and-modularity.html" class="active"><strong aria-hidden="true">12.3.</strong> Modullikni yaxshilash va xatolarni qayta ishlash uchun refactoring</a></li><li class="chapter-item expanded "><a href="ch12-04-testing-the-librarys-functionality.html"><strong aria-hidden="true">12.4.</strong> Sinovga asoslangan ishlab chiqish bilan kutubxonaning funksionalligini rivojlantirish</a></li><li class="chapter-item expanded "><a href="ch12-05-working-with-environment-variables.html"><strong aria-hidden="true">12.5.</strong> Environment o'zgaruvchilari bilan ishlash</a></li><li class="chapter-item expanded "><a href="ch12-06-writing-to-stderr-instead-of-stdout.html"><strong aria-hidden="true">12.6.</strong> Xato xabarlarini standart chiqish o'rniga standart xatoga yozish</a></li></ol></li><li class="chapter-item expanded "><a href="ch13-00-functional-features.html"><strong aria-hidden="true">13.</strong> Funksional til xususiyatlari: iteratorlar va closurelar</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch13-01-closures.html"><strong aria-hidden="true">13.1.</strong> Closurelar: Environmentni qamrab oladigan anonim funksiyalar</a></li><li class="chapter-item expanded "><a href="ch13-02-iterators.html"><strong aria-hidden="true">13.2.</strong> Iteratorlar bilan bir qator elementlarga ishlov berish</a></li><li class="chapter-item expanded "><a href="ch13-03-improving-our-io-project.html"><strong aria-hidden="true">13.3.</strong> I/O loyihamizni takomillashtirish</a></li><li class="chapter-item expanded "><a href="ch13-04-performance.html"><strong aria-hidden="true">13.4.</strong> Ishlash samaradorligini solishtirish: Looplar va iteratorlar</a></li></ol></li><li class="chapter-item expanded "><a href="ch14-00-more-about-cargo.html"><strong aria-hidden="true">14.</strong> Cargo va Crates.io haqida ko'proq</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch14-01-release-profiles.html"><strong aria-hidden="true">14.1.</strong> Reliz profillari bilan structlarni moslashtirish</a></li><li class="chapter-item expanded "><a href="ch14-02-publishing-to-crates-io.html"><strong aria-hidden="true">14.2.</strong> Crateni Crates.io-ga nashr qilish</a></li><li class="chapter-item expanded "><a href="ch14-03-cargo-workspaces.html"><strong aria-hidden="true">14.3.</strong> Cargo Workspacelar</a></li><li class="chapter-item expanded "><a href="ch14-04-installing-binaries.html"><strong aria-hidden="true">14.4.</strong> Binary fayllarni Crates.io'dan cargo install bilan o'rnatish</a></li><li class="chapter-item expanded "><a href="ch14-05-extending-cargo.html"><strong aria-hidden="true">14.5.</strong> Maxsus buyruqlar bilan Cargoni kengaytirish</a></li></ol></li><li class="chapter-item expanded "><a href="ch15-00-smart-pointers.html"><strong aria-hidden="true">15.</strong> Smart Pointerlar</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch15-01-box.html"><strong aria-hidden="true">15.1.</strong> Heapdagi ma'lumotlarni ko'rsatish uchun Box&lt;T&gt; dan foydalanish</a></li><li class="chapter-item expanded "><a href="ch15-02-deref.html"><strong aria-hidden="true">15.2.</strong> Deref Traitidan foydalangan holda oddiy referencelar kabi Smart Pointerlar bilan ishlash</a></li><li class="chapter-item expanded "><a href="ch15-03-drop.html"><strong aria-hidden="true">15.3.</strong> Drop Traiti bilan tozalashda kodni ishga tushirish</a></li><li class="chapter-item expanded "><a href="ch15-04-rc.html"><strong aria-hidden="true">15.4.</strong> Rc&lt;T&gt;, reference hisoblangan Smart Pointer</a></li><li class="chapter-item expanded "><a href="ch15-05-interior-mutability.html"><strong aria-hidden="true">15.5.</strong> RefCell&lt;T&gt; va ichki o'zgaruvchanlik namunasi</a></li><li class="chapter-item expanded "><a href="ch15-06-reference-cycles.html"><strong aria-hidden="true">15.6.</strong> Reference Cycles Can Leak Memory</a></li></ol></li><li class="chapter-item expanded "><a href="ch16-00-concurrency.html"><strong aria-hidden="true">16.</strong> Qo'rqmas parallellik</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch16-01-threads.html"><strong aria-hidden="true">16.1.</strong> Kodni bir vaqtning o'zida ishga tushirish uchun threadlardan foydalanish</a></li><li class="chapter-item expanded "><a href="ch16-02-message-passing.html"><strong aria-hidden="true">16.2.</strong> Threadlar orasidagi ma'lumotlarni uzatish uchun xabar uzatishdan(Message Passing) foydalanish</a></li><li class="chapter-item expanded "><a href="ch16-03-shared-state.html"><strong aria-hidden="true">16.3.</strong> Shared-State Concurrency</a></li><li class="chapter-item expanded "><a href="ch16-04-extensible-concurrency-sync-and-send.html"><strong aria-hidden="true">16.4.</strong> Sync va Send traitlari bilan kengaytiriladigan parallellik</a></li></ol></li><li class="chapter-item expanded "><a href="ch17-00-oop.html"><strong aria-hidden="true">17.</strong> Rustning ob'ektga yo'naltirilgan dasturlash xususiyatlari- OOP</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch17-01-what-is-oo.html"><strong aria-hidden="true">17.1.</strong> Ob'ektga yo'naltirilgan tillarning xususiyatlari</a></li><li class="chapter-item expanded "><a href="ch17-02-trait-objects.html"><strong aria-hidden="true">17.2.</strong> Har xil turdagi qiymatlarga ruxsat beruvchi trait ob'ektlaridan foydalanish</a></li><li class="chapter-item expanded "><a href="ch17-03-oo-design-patterns.html"><strong aria-hidden="true">17.3.</strong> Ob'ektga yo'naltirilgan dizayn patternini implement qilish</a></li></ol></li><li class="chapter-item expanded "><a href="ch18-00-patterns.html"><strong aria-hidden="true">18.</strong> Patternlar va Matching</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch18-01-all-the-places-for-patterns.html"><strong aria-hidden="true">18.1.</strong> All the Places Patterns Can Be Used</a></li><li class="chapter-item expanded "><a href="ch18-02-refutability.html"><strong aria-hidden="true">18.2.</strong> Refutability: Whether a Pattern Might Fail to Match</a></li><li class="chapter-item expanded "><a href="ch18-03-pattern-syntax.html"><strong aria-hidden="true">18.3.</strong> Pattern Sintaksisi</a></li></ol></li><li class="chapter-item expanded "><a href="ch19-00-advanced-features.html"><strong aria-hidden="true">19.</strong> Kengaytirilgan Xususiyatlar</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch19-01-unsafe-rust.html"><strong aria-hidden="true">19.1.</strong> Xavfsiz Rust</a></li><li class="chapter-item expanded "><a href="ch19-03-advanced-traits.html"><strong aria-hidden="true">19.2.</strong> Murakkab Traitlar</a></li><li class="chapter-item expanded "><a href="ch19-04-advanced-types.html"><strong aria-hidden="true">19.3.</strong> Kengaytirilgan Turlar</a></li><li class="chapter-item expanded "><a href="ch19-05-advanced-functions-and-closures.html"><strong aria-hidden="true">19.4.</strong> Kengaytirilgan funksiyalar va closurelar</a></li><li class="chapter-item expanded "><a href="ch19-06-macros.html"><strong aria-hidden="true">19.5.</strong> Makrolar</a></li></ol></li><li class="chapter-item expanded "><a href="ch20-00-final-project-a-web-server.html"><strong aria-hidden="true">20.</strong> Yakuniy loyiha: Ko'p tarmoqli veb-serverni qurish</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch20-01-single-threaded.html"><strong aria-hidden="true">20.1.</strong> Yagona tarmoqli veb-serverni qurish</a></li><li class="chapter-item expanded "><a href="ch20-02-multithreaded.html"><strong aria-hidden="true">20.2.</strong> Bizning yagona tarmoqli serverimizni ko'p tarmoqli serverga aylantirish</a></li><li class="chapter-item expanded "><a href="ch20-03-graceful-shutdown-and-cleanup.html"><strong aria-hidden="true">20.3.</strong> Ajoyib o'chirish va tozalash</a></li></ol></li><li class="chapter-item expanded "><a href="appendix-00.html"><strong aria-hidden="true">21.</strong> Ilova</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="appendix-01-keywords.html"><strong aria-hidden="true">21.1.</strong> A - Kalit so'zlar</a></li><li class="chapter-item expanded "><a href="appendix-02-operators.html"><strong aria-hidden="true">21.2.</strong> B - Operatorlar va Symbollar</a></li><li class="chapter-item expanded "><a href="appendix-03-derivable-traits.html"><strong aria-hidden="true">21.3.</strong> C - Hosilaviy Traitlar</a></li><li class="chapter-item expanded "><a href="appendix-04-useful-development-tools.html"><strong aria-hidden="true">21.4.</strong> D - Foydali Development Toollar</a></li><li class="chapter-item expanded "><a href="appendix-05-editions.html"><strong aria-hidden="true">21.5.</strong> E - Nashrlar</a></li><li class="chapter-item expanded "><a href="appendix-06-translation.html"><strong aria-hidden="true">21.6.</strong> F - Kitobning tarjimalari</a></li><li class="chapter-item expanded "><a href="appendix-07-nightly-rust.html"><strong aria-hidden="true">21.7.</strong> G - Rust qanday yasaladi va “Nightly Rust”</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Rust dasturlash tili</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/rust-lang/book" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h2 id="modullilikni-va-xatolarni-boshqarishni-yaxshilash-uchun-refaktoring"><a class="header" href="#modullilikni-va-xatolarni-boshqarishni-yaxshilash-uchun-refaktoring">Modullilikni va xatolarni boshqarishni yaxshilash uchun refaktoring</a></h2>
+<p>Dasturimizni yaxshilash uchun dastur tuzilishi va uning yuzaga kelishi mumkin bo'lgan xatolarni qanday hal qilishi bilan bog'liq bo'lgan to'rtta muammoni tuzatamiz. Birinchidan, bizning <code>main</code> funksiyamiz endi ikkita vazifani bajaradi: u argumentlarni tahlil qiladi va fayllarni o'qiydi. Dasturimiz o'sib borishi bilan <code>main</code> funksiya boshqaradigan alohida vazifalar soni ortadi. Funksiyaga mas'uliyat yuklagan sari, uning qismlaridan birini buzmasdan fikr yuritish, sinab ko'rish va o'zgartirish qiyinroq bo'ladi. Har bir funksiya bitta vazifa uchun javobgar bo'lishi uchun funksionallikni ajratish yaxshiroqdir.</p>
+<p>Bu muammo ikkinchi muammo bilan ham bog'liq: <code>sorov</code> va <code>fayl_yoli</code> bizning dasturimiz uchun konfiguratsiya o'zgaruvchilari bo'lsa-da, dastur mantig'ini bajarish uchun <code>tarkib</code> kabi o'zgaruvchilardan foydalaniladi. <code>main</code> qancha uzun bo'lsa, biz ko'proq o'zgaruvchilarni qamrab olishimiz kerak bo'ladi; bizda qancha ko'p o'zgaruvchilar mavjud bo'lsa, ularning har birining maqsadini kuzatib borish shunchalik qiyin bo'ladi. Maqsadlari aniq bo'lishi uchun konfiguratsiya o'zgaruvchilarini bitta tuzilishga guruhlash yaxshidir.</p>
+<p>Uchinchi muammo shundaki, biz faylni o‘qib chiqmaganda xato xabarini chop etish uchun <code>expect</code> tugmasidan foydalanganmiz, biroq xato xabari “Faylni o‘qishi kerak edi” degan yozuvni chiqaradi. Faylni o'qish bir necha usul bilan muvaffaqiyatsiz bo'lishi mumkin: masalan, fayl yetishmayotgan bo'lishi mumkin yoki bizda uni ochishga ruxsat yo'q.
+Hozirda, vaziyatdan qat'i nazar, biz hamma narsa uchun bir xil xato xabarini chop qilamiz, bu esa foydalanuvchiga hech qanday ma'lumot bermaydi!</p>
+<p>To‘rtinchidan, biz turli xil xatolarni qayta ishlash uchun <code>expect</code> dan qayta-qayta foydalanamiz va agar foydalanuvchi dasturimizni yetarlicha argumentlarni ko'rsatmasdan ishga tushirsa, Rustdan <code>index out of bounds</code>(&quot;chegaradan tashqari indeks&quot;) xatosini oladi va bu muammoni aniq tushuntirmaydi. Xatolarni qayta ishlash mantig'ini o'zgartirish kerak bo'lsa, kelajakdagi saqlovchilar(maintainerlar) kod bilan maslahatlashish uchun faqat bitta joyga ega bo'lishlari uchun barcha xatolarni qayta ishlash kodi bir joyda bo'lsa yaxshi bo'lar edi. Xatolarni qayta ishlash uchun barcha kodlar bir joyda bo'lsa, biz oxirgi foydalanuvchilarimiz uchun mazmunli bo'lgan xabarlarni chop etishimizni ta'minlaydi.</p>
+<p>Keling, loyihamizni qayta tiklash orqali ushbu to'rtta muammoni hal qilaylik.</p>
+<h3 id="binary-loyihalar-uchun-vazifalarni-ajratish"><a class="header" href="#binary-loyihalar-uchun-vazifalarni-ajratish">Binary loyihalar uchun vazifalarni ajratish</a></h3>
+<p>Bir nechta vazifalar uchun javobgarlikni <code>main</code> funksiyaga taqsimlashning tashkiliy muammosi ko'plab ikkilik(binary) loyihalar uchun umumiydir. Natijada, Rust hamjamiyati <code>main</code> kattalasha boshlaganda ikkilik dasturning alohida muammolarini ajratish bo'yicha ko'rsatmalar ishlab chiqdi. Bu jarayon quyidagi bosqichlardan iborat:</p>
+<ul>
+<li>
+<p>Dasturingizni <em>main.rs</em> va <em>lib.rs</em> ga bo'ling va dasturingiz mantig'ini <em>lib.rs</em> ga o'tkazing.</p>
+</li>
+<li>
+<p>Agar buyruq satrini tahlil qilish mantig'i kichik bo'lsa, u <em>main.rs</em> da qolishi mumkin.</p>
+</li>
+<li>
+<p>Buyruqlar qatorini tahlil qilish mantig'i murakkablasha boshlagach, uni <em>main.rs</em> dan chiqarib, <em>lib.rs</em> ga o'tkazing.</p>
+</li>
+</ul>
+<p>Ushbu jarayondan keyin <code>main</code> funksiyada qoladigan mas'uliyatlar quyidagilar bilan cheklanishi kerak:</p>
+<ul>
+<li>Argument qiymatlari bilan buyruq satrini tahlil qilish mantig'ini chaqirish</li>
+<li>Boshqa har qanday konfiguratsiyani sozlash</li>
+<li><em>lib.rs</em> da <code>run</code> funksiyasini chaqirish</li>
+<li><code>run</code> xatoni qaytarsa, xatoni hal qilish</li>
+</ul>
+<p>Ushbu pattern vazifalarni ajratish bilan bog'liq: <em>main.rs</em> dasturni ishga tushirishni boshqaradi va <em>lib.rs</em> topshirilgan vazifaning barcha mantig'ini boshqaradi. <code>main</code> funksiyani toʻgʻridan-toʻgʻri test qilib koʻra olmasligingiz sababli, ushbu structura dasturingizning barcha mantig'ini <em>lib.rs</em> funksiyalariga koʻchirish orqali test qilib koʻrish imkonini beradi. <em>main.rs</em> da qolgan kod uni o'qish orqali uning to'g'riligini tekshirish uchun yetarlicha kichik bo'ladi. Keling, ushbu jarayonni kuzatib, dasturimizni qayta ishlaymiz.</p>
+<h4 id="argument-tahlilchisiniparser-chiqarish"><a class="header" href="#argument-tahlilchisiniparser-chiqarish">Argument tahlilchisini(parser) chiqarish</a></h4>
+<p>Argumentlarni tahlil qilish(parsing qilish) funksiyasini <code>main</code> buyruq satrini tahlil qilish mantig'ini <em>src/lib.rs</em> ga ko'chirishga tayyorlash uchun chaqiradigan funksiyaga ajratamiz. Ro'yxat 12-5 <code>main</code> ning yangi boshlanishini ko'rsatadi, u <code>parse_config</code> yangi funksiyasini chaqiradi, biz buni hozircha <em>src/main.rs</em> da aniqlaymiz.</p>
+<p><span class="filename">Fayl nomi: src/main.rs</span></p>
+<pre><code class="language-rust ignore"><span class="boring">use std::env;
+</span><span class="boring">use std::fs;
+</span><span class="boring">
+</span>fn main() {
+    let args: Vec&lt;String&gt; = env::args().collect();
+
+    let (sorov, fayl_yoli) = parse_config(&amp;args);
+
+    // --snip--
+<span class="boring">
+</span><span class="boring">    println!(&quot;{} qidirilmoqda&quot;, sorov);
+</span><span class="boring">    println!(&quot;{} faylida&quot;, fayl_yoli);
+</span><span class="boring">
+</span><span class="boring">    let tarkib = fs::read_to_string(fayl_yoli)
+</span><span class="boring">        .expect(&quot;Faylni o'qiy olishi kerak edi&quot;);
+</span><span class="boring">
+</span><span class="boring">    println!(&quot;Fayl tarkibi:\n{tarkib}&quot;);
+</span>}
+
+fn parse_config(args: &amp;[String]) -&gt; (&amp;str, &amp;str) {
+    let sorov = &amp;args[1];
+    let fayl_yoli = &amp;args[2];
+
+    (sorov, fayl_yoli)
+}
+</code></pre>
+<p><span class="caption">Ro'yxat 12-5: <code>main</code> dan <code>parse_config</code> funksiyasini chiqarish</span></p>
+<p>Biz hali ham buyruq qatori argumentlarini vectorga yig‘moqdamiz, lekin 1-indeksdagi argument qiymatini <code>sorov</code> o‘zgaruvchisiga va 2 indeksidagi argument qiymatini <code>main</code> funksiyasi ichidagi <code>fayl_yoli</code> o‘zgaruvchisiga belgilash o‘rniga, butun vectorni <code>parse_config</code> funksiyasiga o‘tkazamiz. Keyin <code>parse_config</code> funksiyasi qaysi argument qaysi o'zgaruvchiga kirishini aniqlaydigan mantiqni ushlab turadi va qiymatlarni <code>main</code>ga qaytaradi. Biz hali ham <code>sorov</code> va <code>fayl_yoli</code> o'zgaruvchilarini <code>main</code>da yaratamiz, lekin <code>main</code> endi buyruq qatori argumentlari va o'zgaruvchilari qanday mos kelishini aniqlash vazifasiga ega emas.</p>
+<p>Ushbu qayta ishlash bizning kichik dasturimiz uchun ortiqcha bo'lib tuyulishi mumkin, ammo biz kichik, bosqichma-bosqich refactoring qilmoqdamiz. Ushbu o'zgartirishni amalga oshirgandan so'ng, argumentni tahlil qilish hali ham ishlayotganligini tekshirish uchun dasturni qayta ishga tushiring. Muammolar yuzaga kelganda sabablarini aniqlashga yordam berish uchun taraqqiyotingizni tez-tez tekshirib turish yaxshidir.</p>
+<h4 id="konfiguratsiya-qiymatlarini-guruhlash"><a class="header" href="#konfiguratsiya-qiymatlarini-guruhlash">Konfiguratsiya qiymatlarini guruhlash</a></h4>
+<p><code>parse_config</code> funksiyasini yanada yaxshilash uchun yana bir kichik qadam tashlashimiz mumkin.
+Ayni paytda biz tupleni qaytarmoqdamiz, lekin keyin darhol bu tupleni yana alohida qismlarga ajratamiz. Bu, ehtimol, bizda hali to'g'ri mavhumlik yo'qligining belgisidir.</p>
+<p>Yaxshilash uchun joy borligini ko'rsatadigan yana bir ko'rsatkich <code>parse_config</code> ning <code>config</code> qismidir, bu biz qaytaradigan ikkita qiymat bir-biriga bog'liqligini va ikkalasi ham bitta konfiguratsiya qiymatining bir qismi ekanligini anglatadi. Biz hozirda bu mantiqni ma'lumotlar strukturasida yetkazmayapmiz, bundan tashqari ikkita qiymatni tuplega guruhlash; Buning o'rniga biz ikkita qiymatni bitta strukturaga joylashtiramiz va har bir struktura maydoniga mazmunli nom beramiz. Buni qilish ushbu kodning kelajakdagi saqlovchilariga(maintainerlarga) turli qadriyatlar bir-biriga qanday bog'liqligini va ularning maqsadi nima ekanligini tushunishni osonlashtiradi.</p>
+<p>12-6 ro'yxatda <code>parse_config</code> funksiyasining yaxshilanishi ko'rsatilgan.</p>
+<p><span class="filename">Fayl nomi: src/main.rs</span></p>
+<pre><code class="language-rust should_panic noplayground"><span class="boring">use std::env;
+</span><span class="boring">use std::fs;
+</span><span class="boring">
+</span>fn main() {
+    let args: Vec&lt;String&gt; = env::args().collect();
+
+    let config = parse_config(&amp;args);
+
+    println!(&quot;{} qidirilmoqda&quot;, config.sorov);
+    println!(&quot;{} faylida&quot;, config.fayl_yoli);
+
+    let tarkib = fs::read_to_string(config.fayl_yoli)
+        .expect(&quot;Faylni o'qiy olishi kerak edi&quot;);
+
+    // --snip--
+<span class="boring">
+</span><span class="boring">    println!(&quot;Fayl tarkibi:\n{tarkib}&quot;);
+</span>}
+
+struct Config {
+    sorov: String,
+    fayl_yoli: String,
+}
+
+fn parse_config(args: &amp;[String]) -&gt; Config {
+    let sorov = args[1].clone();
+    let fayl_yoli = args[2].clone();
+
+    Config { sorov, fayl_yoli }
+}
+</code></pre>
+<p><span class="caption">Ro'yxat 12-6: <code>Config</code> strukturasining namunasini qaytarish uchun <code>parse_config</code> ni qayta tahrirlash</span></p>
+<p>Biz <code>sorov</code> va <code>fayl_yoli</code> nomli maydonlarga ega bo'lishi uchun aniqlangan <code>Config</code> nomli structi qo'shdik. Endi <code>parse_config</code> signaturesi <code>Config</code> qiymatini qaytarishini bildiradi. Biz <code>args</code>dagi <code>String</code> qiymatlariga reference qilingan satr bo‘laklarini qaytargan <code>parse_config</code> korpusida endi <code>Config</code> ga tegishli <code>String</code> qiymatlarini o‘z ichiga olgan holda belgilaymiz. <code>main</code>dagi <code>args</code> oʻzgaruvchisi argument qiymatlarining owneri(ega) boʻlib, faqat <code>parse_config</code> funksiyasiga ularni borrowga(qarz olish) ruxsat beradi, yaʼni <code>Config</code> <code>args</code> qiymatlariga ownership(egalik) qilmoqchi boʻlsa, Rustning borrowing(qarz olish) qoidalarini buzgan boʻlamiz.</p>
+<p><code>String</code> ma'lumotlarini boshqarishning bir qancha usullari mavjud; Eng oson, garchi unchalik samarasiz bo'lsa ham, route qiymatlar bo'yicha <code>clone</code> metodini chaqirishdir.
+Bu <code>Config</code> nusxasi uchun ma'lumotlarning to'liq nusxasini oladi, bu esa satr(string) ma'lumotlariga referenceni saqlashdan ko'ra ko'proq vaqt va xotirani oladi. Biroq, ma'lumotlarni klonlash bizning kodimizni juda sodda qiladi, chunki biz referencelarning lifetimeni(ishlash muddati) boshqarishimiz shart emas; bu holatda, soddalikka erishish uchun ozgina ishlashdan voz kechish foydali savdodir.</p>
+<blockquote>
+<h3 id="clone-dan-foydalanishning-ozaro-kelishuvlari"><a class="header" href="#clone-dan-foydalanishning-ozaro-kelishuvlari"><code>clone</code> dan foydalanishning o'zaro kelishuvlari</a></h3>
+<p>Ko'pgina Rustaceanlar orasida <code>clone</code> dan foydalanish vaqti xarajati tufayli ownership
+muammolarini hal qilish uchun foydalanmaslik tendentsiyasi mavjud.
+<a href="ch13-00-functional-features.html">13-bobda</a><!-- ignore --> siz ushbu turdagi vaziyatda samaraliroq
+usullardan qanday foydalanishni o'rganasiz. Ammo hozircha rivojlanishni
+davom ettirish uchun bir nechta satrlarni nusxalash ma'qul, chunki siz bu nusxalarni
+faqat bir marta qilasiz va fayl yo'li va so'rovlar qatori juda kichik. Birinchi o'tishda
+kodni giperoptimallashtirishga urinishdan ko'ra, biroz samarasiz ishlaydigan dasturga
+ega bo'lish yaxshiroqdir. Rust bilan tajribangiz ortgan sayin, eng samarali
+yechimdan boshlash osonroq bo'ladi, ammo hozircha <code>clone</code> deb
+nomlash juda maqbuldir.</p>
+</blockquote>
+<p>Biz <code>main</code>ni yangiladik, shuning uchun u <code>parse_config</code> tomonidan qaytarilgan <code>Config</code> namunasini <code>config</code> nomli o‘zgaruvchiga joylashtiradi va biz avval alohida <code>sorov</code> va <code>fayl_yoli</code> o‘zgaruvchilaridan foydalangan kodni yangiladik, shuning uchun u endi <code>Config</code> strukturasidagi maydonlardan foydalanadi.</p>
+<p>Endi bizning kodimiz <code>sorov</code> va <code>fayl_yoli</code> bir-biriga bog'liqligini va ularning maqsadi dastur qanday ishlashini sozlash ekanligini aniqroq bildiradi. Ushbu qiymatlardan foydalanadigan har qanday kod ularni maqsadlari uchun nomlangan maydonlardagi <code>config</code> misolida topishni biladi.</p>
+<h4 id="config-uchun-konstruktor-yaratish"><a class="header" href="#config-uchun-konstruktor-yaratish"><code>Config</code> uchun konstruktor yaratish</a></h4>
+<p>Hozircha biz <code>main</code> dan buyruq qatori argumentlarini tahlil qilish uchun javob beradigan mantiqni chiqarib oldik va uni <code>parse_config</code> funksiyasiga joylashtirdik. Bu bizga <code>sorov</code> va <code>fayl_yoli</code> qiymatlari o'zaro bog'liqligini va bu munosabatlar bizning kodimizda ko'rsatilishi kerakligini ko'rishga yordam berdi. Keyin biz <code>sorov</code> va <code>fayl_yoli</code> ning tegishli maqsadini nomlash va <code>parse_config</code> funksiyasidan qiymatlar nomlarini stuct maydoni nomi sifatida qaytarish uchun <code>Config</code> structini qo'shdik.</p>
+<p>Endi <code>parse_config</code> funksiyasining maqsadi <code>Config</code> misolini yaratish bo‘lganligi sababli, biz <code>parse_config</code> ni oddiy funksiyadan <code>Config</code> structi bilan bog'langan <code>new</code> funksiyaga o‘zgartirishimiz mumkin. Ushbu o'zgarish kodni yanada idiomatik qiladi. Biz standart kutubxonada <code>String</code> kabi turlarning namunalarini <code>String::new</code> ni chaqirish orqali yaratishimiz mumkin. Xuddi shunday, <code>parse_config</code>ni <code>Config</code> bilan bog‘langan <code>new</code> funksiyaga o‘zgartirib, <code>Config::new</code> ni chaqirish orqali <code>Config</code> misollarini yaratishimiz mumkin bo‘ladi. 12-7 ro'yxat biz qilishimiz kerak bo'lgan o'zgarishlarni ko'rsatadi.</p>
+<p><span class="filename">Fayl nomi: src/main.rs</span></p>
+<pre><code class="language-rust should_panic noplayground"><span class="boring">use std::env;
+</span><span class="boring">use std::fs;
+</span><span class="boring">
+</span>fn main() {
+    let args: Vec&lt;String&gt; = env::args().collect();
+
+    let config = Config::new(&amp;args);
+<span class="boring">
+</span><span class="boring">    println!(&quot;{} qidirilmoqda&quot;, config.sorov);
+</span><span class="boring">    println!(&quot;{} faylida&quot;, config.fayl_yoli);
+</span><span class="boring">
+</span><span class="boring">    let tarkib = fs::read_to_string(config.fayl_yoli)
+</span><span class="boring">        .expect(&quot;Faylni o'qiy olishi kerak edi&quot;);
+</span><span class="boring">
+</span><span class="boring">    println!(&quot;Fayl tarkibi:\n{tarkib}&quot;);
+</span>
+    // --snip--
+}
+
+// --snip--
+
+<span class="boring">struct Config {
+</span><span class="boring">    sorov: String,
+</span><span class="boring">    fayl_yoli: String,
+</span><span class="boring">}
+</span><span class="boring">
+</span>impl Config {
+    fn new(args: &amp;[String]) -&gt; Config {
+        let sorov = args[1].clone();
+        let fayl_yoli = args[2].clone();
+
+        Config { sorov, fayl_yoli }
+    }
+}
+</code></pre>
+<p><span class="caption">Ro'yxat 12-7: <code>parse_config</code> ni <code>Config::new</code> ga o'zgartirish</span></p>
+<p>Biz <code>parse_config</code> deb chaqirgan <code>main</code>ni yangilab, <code>Config::new</code> deb chaqirdik. Biz <code>parse_config</code> nomini <code>new</code> ga o‘zgartirdik va uni <code>new</code> funksiyani <code>Config</code> bilan bog‘laydigan <code>impl</code> blokiga o‘tkazdik. Ishlayotganiga ishonch hosil qilish uchun ushbu kodni qayta kompilyatsiya qilib ko'ring.</p>
+<h3 id="qayta-ishlash-xatolarini-tuzatish"><a class="header" href="#qayta-ishlash-xatolarini-tuzatish">Qayta ishlash xatolarini tuzatish</a></h3>
+<p>Endi biz xatolarimizni tuzatish ustida ishlaymiz. Eslatib o'tamiz, <code>args</code> vectoridagi qiymatlarga 1 yoki indeks 2 da kirishga urinish vector uchtadan kam elementni o'z ichiga olgan bo'lsa, dastur panic paydo bo'ladi. Dasturni hech qanday argumentlarsiz ishga tushirishga harakat qiling; u shunday ko'rinadi:</p>
+<pre><code class="language-console">$ cargo run
+   Compiling minigrep v0.1.0 (file:///projects/minigrep)
+    Finished dev [unoptimized + debuginfo] target(s) in 0.0s
+     Running `target/debug/minigrep`
+thread 'main' panicked at 'index out of bounds: the len is 1 but the index is 1', src/main.rs:27:21
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+</code></pre>
+<p><code>index out of bounds: the len is 1 but the index is 1</code>(indeks chegaradan tashqarida: len 1, lekin indeks 1) qatori dasturchilar uchun moʻljallangan xato xabaridir. Bu bizning oxirgi foydalanuvchilarga nima qilish kerakligini tushunishga yordam bermaydi. Keling, buni hozir tuzatamiz.</p>
+<h4 id="xato-xabarini-yaxshilash"><a class="header" href="#xato-xabarini-yaxshilash">Xato xabarini yaxshilash</a></h4>
+<p>Ro'yxat 12-8da biz <code>new</code> funksiyasiga chek qo'shamiz, bu 1 va 2 indekslarga kirishdan oldin bo'lakning yetarlicha uzunligini tasdiqlaydi. Agar bo'lak yetarlicha uzun bo'lmasa, dastur panic chiqaradi va yaxshiroq xato xabarini ko'rsatadi.</p>
+<p><span class="filename">Fayl nomi: src/main.rs</span></p>
+<pre><code class="language-rust ignore"><span class="boring">use std::env;
+</span><span class="boring">use std::fs;
+</span><span class="boring">
+</span><span class="boring">fn main() {
+</span><span class="boring">    let args: Vec&lt;String&gt; = env::args().collect();
+</span><span class="boring">
+</span><span class="boring">    let config = Config::new(&amp;args);
+</span><span class="boring">
+</span><span class="boring">    println!(&quot;{} qidirilmoqda&quot;, config.sorov);
+</span><span class="boring">    println!(&quot;{} faylida&quot;, config.fayl_yoli);
+</span><span class="boring">
+</span><span class="boring">    let tarkib = fs::read_to_string(config.fayl_yoli)
+</span><span class="boring">        .expect(&quot;Faylni o'qiy olishi kerak edi&quot;);
+</span><span class="boring">
+</span><span class="boring">    println!(&quot;Fayl tarkibi:\n{tarkib}&quot;);
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">struct Config {
+</span><span class="boring">    sorov: String,
+</span><span class="boring">    fayl_yoli: String,
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">impl Config {
+</span>    // --snip--
+    fn new(args: &amp;[String]) -&gt; Config {
+        if args.len() &lt; 3 {
+            panic!(&quot;argumentlar yetarli emas&quot;);
+        }
+        // --snip--
+<span class="boring">
+</span><span class="boring">        let sorov= args[1].clone();
+</span><span class="boring">        let fayl_yoli = args[2].clone();
+</span><span class="boring">
+</span><span class="boring">        Config { sorov, fayl_yoli }
+</span><span class="boring">    }
+</span><span class="boring">}
+</span></code></pre>
+<p><span class="caption">Ro'yxat 12-8: Argumentlar soni uchun chek qo'shish</span></p>
+<p>Bu kod biz 9-13 roʻyxatda yozgan <a href="ch09-03-to-panic-or-not-to-panic.html#creating-custom-types-for-validation"><code>Taxmin::new</code> funksiyasiga oʻxshaydi,</a><!-- ignore --> bu yerda <code>qiymat</code> argumenti amaldagi qiymatlar oraligʻidan tashqarida boʻlganida <code>panic!</code> deb chaqirdik. Bu yerda bir qator qiymatlar mavjudligini tekshirish o‘rniga, biz <code>args</code> uzunligi kamida 3 ekanligini va funksiyaning qolgan qismi ushbu shart bajarilgan deb taxmin qilingan holda ishlashini tekshiramiz. Agar <code>args</code> uchta elementdan kam boʻlsa, bu shart toʻgʻri boʻladi va dasturni darhol tugatish uchun <code>panic!</code> makrosini chaqiramiz.</p>
+<p><code>new</code> da qoʻshimcha bir necha qator kodlar mavjud boʻlsa, keling, xatolik qanday koʻrinishini koʻrish uchun dasturni argumentlarsiz yana ishga tushiramiz:</p>
+<pre><code class="language-console">$ cargo run
+   Compiling minigrep v0.1.0 (file:///projects/minigrep)
+    Finished dev [unoptimized + debuginfo] target(s) in 0.0s
+     Running `target/debug/minigrep`
+thread 'main' panicked at 'argumentlar yetarli emas', src/main.rs:26:13
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+</code></pre>
+<p>Bu chiqish yaxshiroq: endi bizda oqilona xato xabari bor. Biroq, bizda foydalanuvchilarga berishni istamaydigan begona ma'lumotlar ham bor. Ehtimol, biz 9-13 roʻyxatda qoʻllagan texnikamizdan foydalanish bu yerda eng yaxshisi emas: <code>panic!</code> chaqiruvi <a href="ch09-03-to-panic-or-not-to-panic.html#guidelines-for-error-handling">9-bobda muhokama qilinganidek</a><!-- ignore -->, foydalanish muammosidan koʻra dasturlash muammosiga koʻproq mos keladi. Buning o'rniga biz 9-bobda o'rgangan boshqa texnikadan foydalanamiz - muvaffaqiyat yoki xatoni ko'rsatadigan <a href="ch09-02-recoverable-errors-with-result.html"><code>Result</code>ni</a><!-- ignore -->  qaytarish.</p>
+<!-- Old headings. Do not remove or links may break. -->
+<p><a id="returning-a-result-from-new-instead-of-calling-panic"></a></p>
+<h4 id="panic-orniga-resultni-qaytarish"><a class="header" href="#panic-orniga-resultni-qaytarish"><code>panic!</code> o‘rniga <code>Result</code>ni qaytarish</a></h4>
+<p>Buning o'rniga, muvaffaqiyatli holatda <code>Config</code> misolini o'z ichiga olgan va xatolik holatida muammoni tasvirlaydigan <code>Result</code> qiymatini qaytarishimiz mumkin. Shuningdek, biz funksiya nomini <code>new</code>dan <code>build</code>ga o'zgartiramiz, chunki ko'plab dasturchilar <code>new</code> funksiyalar hech qachon ishlamay qolmasligini kutishadi. <code>Config::build</code> <code>main</code> bilan bog'langanda, muammo borligini bildirish uchun <code>Result</code> turidan foydalanishimiz mumkin.Keyin biz <code>main</code> ni <code>Err</code> variantini <code>panic!</code> chaqiruvi keltirib chiqaradigan <code>thread 'main'</code> va <code>RUST_BACKTRACE</code> haqidagi matnsiz foydalanuvchilarimiz uchun amaliyroq xatoga aylantirishimiz mumkin.</p>
+<p>12-9 ro'yxatda biz hozir <code>Config::build</code> deb nomlanayotgan funksiyaning qaytish(result) qiymatiga va <code>Result</code>ni qaytarish uchun zarur bo'lgan funksiyaning tanasiga qilishimiz kerak bo'lgan o'zgarishlar ko'rsatilgan. E'tibor bering, biz <code>main</code>ni ham yangilamagunimizcha, bu kompilyatsiya qilinmaydi, biz buni keyingi ro'yxatda qilamiz.</p>
+<p><span class="filename">Fayl nomi: src/main.rs</span></p>
+<pre><code class="language-rust ignore does_not_compile"><span class="boring">use std::env;
+</span><span class="boring">use std::fs;
+</span><span class="boring">
+</span><span class="boring">fn main() {
+</span><span class="boring">    let args: Vec&lt;String&gt; = env::args().collect();
+</span><span class="boring">
+</span><span class="boring">    let config = Config::new(&amp;args);
+</span><span class="boring">
+</span><span class="boring">    println!(&quot;{} qidirilmoqda&quot;, config.sorov);
+</span><span class="boring">    println!(&quot;{} faylida&quot;, config.fayl_yoli);
+</span><span class="boring">
+</span><span class="boring">    let tarkib = fs::read_to_string(config.fayl_yoli)
+</span><span class="boring">        .expect(&quot;Faylni o'qiy olishi kerak edi&quot;);
+</span><span class="boring">
+</span><span class="boring">    println!(&quot;Fayl tarkibi:\n{tarkib}&quot;);
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">struct Config {
+</span><span class="boring">    sorov: String,
+</span><span class="boring">    fayl_yoli: String,
+</span><span class="boring">}
+</span><span class="boring">
+</span>impl Config {
+    fn build(args: &amp;[String]) -&gt; Result&lt;Config, &amp;'static str&gt; {
+        if args.len() &lt; 3 {
+            return Err(&quot;argumentlar yetarli emas&quot;);
+        }
+
+        let sorov = args[1].clone();
+        let fayl_yoli = args[2].clone();
+
+        Ok(Config { sorov, fayl_yoli })
+    }
+}
+</code></pre>
+<p><span class="caption">Ro'yxat 12-9: <code>Config::build</code> dan <code>Result</code>ni qaytarish</span></p>
+<p>Bizning <code>build</code> funksiyamiz muvaffaqiyatli holatda <code>Config</code> misoli va xato holatida <code>&amp;'static str</code> bilan <code>Result</code>ni qaytaradi. Bizning xato qiymatlarimiz har doim <code>'static</code> lifetimega ega bo'lgan satr harflari(string literal) bo'ladi. Biz funksiyaning asosiy qismiga ikkita o'zgartirish kiritdik: agar foydalanuvchi yetarli argumentlarni o'tkazmasa, <code>panic!</code> deb chaqirish o'rniga, biz endi <code>Err</code> qiymatini qaytaramiz va <code>Config</code> qaytish(return) qiymatini <code>OK</code> bilan o'rab oldik. Ushbu o'zgarishlar funksiyani yangi turdagi signaturega moslashtiradi.</p>
+<p><code>Config::build</code> dan <code>Err</code> qiymatini qaytarish <code>main</code> funksiyaga <code>build</code> funksiyasidan qaytarilgan <code>Result</code> qiymatini boshqarish imkonini beradi va xato holatida jarayondan tozaroq chiqish imkonini beradi.</p>
+<!-- Old headings. Do not remove or links may break. -->
+<p><a id="calling-confignew-and-handling-errors"></a></p>
+<h4 id="configbuild-ga-murojaat-qilish-va-xatolarni-qayta-ishlash"><a class="header" href="#configbuild-ga-murojaat-qilish-va-xatolarni-qayta-ishlash"><code>Config::build</code> ga murojaat qilish va xatolarni qayta ishlash</a></h4>
+<p>Xato holatini hal qilish va foydalanuvchi uchun qulay xabarni chop etish uchun biz 12-10 roʻyxatda koʻrsatilganidek, <code>Config::build</code> tomonidan qaytariladigan <code>Result</code>ni qayta ishlash uchun <code>main</code>ni yangilashimiz kerak. Shuningdek, biz <code>panic!</code> dan nolga teng bo‘lmagan xato kodi bilan buyruq qatori dasturidan chiqish va uning o‘rniga uni qo‘lda amalga oshirish mas’uliyatini o‘z zimmamizga olamiz. Nolga teng bo'lmagan chiqish holati - bu bizning dasturimizni chaqirgan jarayonga dastur xato holati bilan chiqqanligi haqida signal berish uchun konventsiya.</p>
+<p><span class="filename">Fayl nomi: src/main.rs</span></p>
+<pre><code class="language-rust ignore"><span class="boring">use std::env;
+</span><span class="boring">use std::fs;
+</span>use std::process;
+
+fn main() {
+    let args: Vec&lt;String&gt; = env::args().collect();
+
+    let config = Config::build(&amp;args).unwrap_or_else(|err| {
+        println!(&quot;Argumentlarni tahlil qilish muammosi: {err}&quot;);
+        process::exit(1);
+    });
+
+    // --snip--
+<span class="boring">
+</span><span class="boring">    println!(&quot;{} qidirilmoqda&quot;, config.sorov);
+</span><span class="boring">    println!(&quot;{} faylida&quot;, config.fayl_yoli);
+</span><span class="boring">
+</span><span class="boring">    let tarkib = fs::read_to_string(config.fayl_yoli)
+</span><span class="boring">        .expect(&quot;Faylni o'qiy olishi kerak edi&quot;);
+</span><span class="boring">
+</span><span class="boring">    println!(&quot;Fayl tarkibi:\n{tarkib}&quot;);
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">struct Config {
+</span><span class="boring">    sorov: String,
+</span><span class="boring">    fayl_yoli: String,
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">impl Config {
+</span><span class="boring">    fn build(args: &amp;[String]) -&gt; Result&lt;Config, &amp;'static str&gt; {
+</span><span class="boring">        if args.len() &lt; 3 {
+</span><span class="boring">            return Err(&quot;argumentlar yetarli emas&quot;);
+</span><span class="boring">        }
+</span><span class="boring">
+</span><span class="boring">        let sorov = args[1].clone();
+</span><span class="boring">        let fayl_yoli = args[2].clone();
+</span><span class="boring">
+</span><span class="boring">        Ok(Config { sorov, fayl_yoli })
+</span><span class="boring">    }
+</span><span class="boring">}
+</span></code></pre>
+<p><span class="caption">Ro'yxat 12-10: Agar <code>Config</code> build bo'lmasa, xato kodi bilan chiqish</span></p>
+<p>Ushbu ro'yxatda biz hali batafsil ko'rib chiqmagan metoddan foydalandik: standart kutubxona tomonidan <code>Result&lt;T, E&gt;</code> da aniqlangan <code>unwrap_or_else</code>.
+<code>unwrap_or_else</code> dan foydalanish bizga <code>panic!</code> qo'ymaydigan xatoliklarni aniqlash imkonini beradi. Agar <code>Result</code> <code>Ok</code> qiymati bo'lsa, bu metodning harakati <code>unwrap</code> ga o'xshaydi: u <code>Ok</code> o'ralayotgan(wrap) ichki qiymatni qaytaradi. Biroq, agar qiymat <code>Err</code> qiymati bo'lsa, bu metod kodni <em>closure</em>(yopish) ga chaqiradi, bu biz belgilab beradigan anonim funksiya bo'lib, <code>unwrap_or_else</code> ga argument sifatida o'tkazamiz. Biz <a href="ch13-00-functional-features.html">13-bobda</a><!-- ignore --> closure(yopilish)larni batafsil ko'rib chiqamiz.  Hozircha siz shuni bilishingiz kerakki, <code>unwrap_or_else</code> <code>Err</code> ning ichki qiymatidan o‘tadi, bu holda biz 12-9-listga qo‘shgan <code>&quot;argumentlar yetarli emas&quot;</code> statik qatori bo‘lib, bizning yopishimiz uchun Vertikal quvurlar(pipe) o'rtasida paydo bo'ladigan <code>Err</code> argumenti. Yopishdagi(closure) kod ishlayotganida <code>err</code> qiymatidan foydalanishi mumkin.</p>
+<p>Biz standart kutubxonadan <code>process</code>ni qamrab olish uchun yangi <code>use</code> qatorini qo‘shdik. Xato holatida ishga tushiriladigan yopishdagi kod faqat ikkita qatordan iborat: biz <code>err</code> qiymatini chop qilamiz va keyin <code>process::exit</code>ni chaqiramiz. <code>process::exit</code> funksiyasi dasturni darhol to'xtatadi va chiqish holati kodi sifatida berilgan raqamni qaytaradi. Bu biz 12-8 roʻyxatda qoʻllagan <code>panic!</code> asosidagi ishlovga oʻxshaydi, ammo biz endi barcha qoʻshimcha natijalarni olmaymiz. Keling, sinab ko'raylik:</p>
+<pre><code class="language-console">$ cargo run
+   Compiling minigrep v0.1.0 (file:///projects/minigrep)
+    Finished dev [unoptimized + debuginfo] target(s) in 0.48s
+     Running `target/debug/minigrep`
+Argumentlarni tahlil qilish muammosi: argumentlar yetarli emas
+</code></pre>
+<p>Ajoyib! Ushbu chiqish bizning foydalanuvchilarimiz uchun juda qulay.</p>
+<h3 id="main-dan-mantiqni-ajratib-olish"><a class="header" href="#main-dan-mantiqni-ajratib-olish"><code>main</code> dan mantiqni ajratib olish</a></h3>
+<p>Endi biz konfiguratsiyani tahlil qilishni qayta tiklashni tugatdik, keling, dastur mantig'iga murojaat qilaylik. <a href="#separation-of-concerns-for-binary-projects">&quot;Binary loyihalar uchun vazifalarni ajratish&quot;</a><!-- ignore --> da aytib o'tganimizdek, biz konfiguratsiyani o'rnatish yoki xatolarni qayta ishlash bilan bog'liq bo'lmagan <code>main</code> funksiyadagi barcha mantiqni ushlab turadigan <code>run</code> nomli funksiyani chiqaramiz. Ishimiz tugagach, <code>main</code> qisqa va tekshirish orqali tekshirish oson bo'ladi va biz boshqa barcha mantiqlar uchun testlarni yozishimiz mumkin bo'ladi.</p>
+<p>12-11 ro'yxatda ajratilgan <code>run</code> funksiyasi ko'rsatilgan. Hozircha biz funksiyani chiqarishni kichik, bosqichma-bosqich yaxshilashni amalga oshirmoqdamiz. Biz hali ham <em>src/main.rs</em> da funksiyani aniqlayapmiz.</p>
+<p><span class="filename">Fayl nomi: src/main.rs</span></p>
+<pre><code class="language-rust ignore"><span class="boring">use std::env;
+</span><span class="boring">use std::fs;
+</span><span class="boring">use std::process;
+</span><span class="boring">
+</span>fn main() {
+    // --snip--
+
+<span class="boring">    let args: Vec&lt;String&gt; = env::args().collect();
+</span><span class="boring">
+</span><span class="boring">    let config = Config::build(&amp;args).unwrap_or_else(|err| {
+</span><span class="boring">        println!(&quot;Argumentlarni tahlil qilish muammosi: {err}&quot;);
+</span><span class="boring">        process::exit(1);
+</span><span class="boring">    });
+</span><span class="boring">
+</span>    println!(&quot;{} qidirilmoqda&quot;, config.sorov);
+    println!(&quot;{} faylida&quot;, config.fayl_yoli);
+
+    run(config);
+}
+
+fn run(config: Config) {
+    let tarkib = fs::read_to_string(config.fayl_yoli)
+        .expect(&quot;Faylni o'qiy olishi kerak edi&quot;);
+
+    println!(&quot;Fayl tarkibi:\n{tarkib}&quot;);
+}
+
+// --snip--
+<span class="boring">
+</span><span class="boring">struct Config {
+</span><span class="boring">    sorov: String,
+</span><span class="boring">    fayl_yoli: String,
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">impl Config {
+</span><span class="boring">    fn build(args: &amp;[String]) -&gt; Result&lt;Config, &amp;'static str&gt; {
+</span><span class="boring">        if args.len() &lt; 3 {
+</span><span class="boring">            return Err(&quot;argumentlar yetarli emas&quot;);
+</span><span class="boring">        }
+</span><span class="boring">
+</span><span class="boring">        let sorov = args[1].clone();
+</span><span class="boring">        let fayl_yoli = args[2].clone();
+</span><span class="boring">
+</span><span class="boring">        Ok(Config { sorov, fayl_yoli })
+</span><span class="boring">    }
+</span><span class="boring">}
+</span></code></pre>
+<p><span class="caption">Ro'yxat 12-11: Dastur mantig'ining qolgan qismini o'z ichiga olgan <code>run</code> funksiyasini chiqarish</span></p>
+<p><code>run</code> funksiyasi endi faylni o‘qishdan boshlab <code>main</code> dan qolgan barcha mantiqni o‘z ichiga oladi. <code>run</code> funksiyasi argument sifatida <code>Config</code> misolini oladi.</p>
+<h4 id="run-funksiyasidan-xatolarni-qaytarishreturn"><a class="header" href="#run-funksiyasidan-xatolarni-qaytarishreturn"><code>run</code> funksiyasidan xatolarni qaytarish(return)</a></h4>
+<p>Qolgan dastur mantigʻi <code>run</code> funksiyasiga ajratilgan boʻlsa, biz 12 9-ro'yxatdagi <code>Config::build</code> bilan qilganimiz kabi, xatolarni boshqarishni yaxshilashimiz mumkin. Dasturni <code>expect</code> deb chaqirish orqali panic qo‘yish o‘rniga, <code>run</code> funksiyasi biror narsa noto‘g‘ri ketganda <code>Result&lt;T, E&gt;</code>ni qaytaradi. Bu bizga foydalanuvchilarga qulay tarzda xatolarni <code>main</code>ga qayta ishlash mantig'ini yanada mustahkamlash imkonini beradi. 12-12 roʻyxatda <code>run</code> signaturesi va asosiy qismiga qilishimiz kerak boʻlgan oʻzgarishlar koʻrsatilgan.</p>
+<p><span class="filename">Fayl nomi: src/main.rs</span></p>
+<pre><code class="language-rust ignore"><span class="boring">use std::env;
+</span><span class="boring">use std::fs;
+</span><span class="boring">use std::process;
+</span>use std::error::Error;
+
+// --snip--
+
+<span class="boring">
+</span><span class="boring">fn main() {
+</span><span class="boring">    let args: Vec&lt;String&gt; = env::args().collect();
+</span><span class="boring">
+</span><span class="boring">    let config = Config::build(&amp;args).unwrap_or_else(|err| {
+</span><span class="boring">        println!(&quot;Argumentlarni tahlil qilish muammosi: {err}&quot;);
+</span><span class="boring">        process::exit(1);
+</span><span class="boring">    });
+</span><span class="boring">
+</span><span class="boring">    println!(&quot;{} qidirilmoqda&quot;, config.sorov);
+</span><span class="boring">    println!(&quot;{} faylida&quot;, config.fayl_yoli);
+</span><span class="boring">
+</span><span class="boring">    run(config);
+</span><span class="boring">}
+</span><span class="boring">
+</span>fn run(config: Config) -&gt; Result&lt;(), Box&lt;dyn Error&gt;&gt; {
+    let tarkib = fs::read_to_string(config.fayl_yoli)?;
+
+    println!(&quot;Fayl tarkibi:\n{tarkib}&quot;);
+
+    Ok(())
+}
+<span class="boring">
+</span><span class="boring">struct Config {
+</span><span class="boring">    sorov: String,
+</span><span class="boring">    fayl_yoli: String,
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">impl Config {
+</span><span class="boring">    fn build(args: &amp;[String]) -&gt; Result&lt;Config, &amp;'static str&gt; {
+</span><span class="boring">        if args.len() &lt; 3 {
+</span><span class="boring">            return Err(&quot;argumentlar yetarli emas&quot;);
+</span><span class="boring">        }
+</span><span class="boring">
+</span><span class="boring">        let sorov = args[1].clone();
+</span><span class="boring">        let fayl_yoli = args[2].clone();
+</span><span class="boring">
+</span><span class="boring">        Ok(Config { sorov, fayl_yoli })
+</span><span class="boring">    }
+</span><span class="boring">}
+</span></code></pre>
+<p><span class="caption">Ro'yxat 12-12: <code>run</code> funksiyasini <code>Result</code>ni qaytarish uchun o'zgartirish</span></p>
+<p>Biz bu yerda uchta muhim o'zgarishlarni amalga oshirdik. Birinchidan, biz <code>run</code> funksiyasining qaytish turini <code>Result&lt;(), Box&lt;dyn Error&gt;&gt;</code>ga o'zgartirdik. Bu funksiya avval birlik(binary) turini qaytardi, <code>()</code> va biz buni <code>Ok</code> holatida qaytarilgan qiymat sifatida saqlaymiz.</p>
+<p>Xato turi uchun biz <em>trait obyekti</em> <code>Box&lt;dyn Error&gt;</code>dan foydalandik (va biz <code>std::error::Error</code> ni yuqori qismida <code>use</code> statementi bilan qamrab oldik). Biz <a href="ch17-00-oop.html">17-bobda</a><!-- ignore --> trait objectlarni ko'rib chiqamiz. Hozircha shuni bilingki, <code>Box&lt;dyn Error&gt;</code> funksiya <code>Error</code> traitini amalga oshiradigan turni qaytarishini bildiradi, lekin qaytariladigan qiymatning qaysi turini belgilashimiz shart emas. Bu bizga turli xil xato holatlarida har xil turdagi xato qiymatlarini qaytarish uchun moslashuvchanlikni beradi. <code>dyn</code> kalit so'zi(keywordi) &quot;dynamic(dinamik)&quot; so'zining qisqartmasi.</p>
+<p>Ikkinchidan, biz <a href="ch09-02-recoverable-errors-with-result.html#a-shortcut-for-propagating-errors-the--operator">9-bobda</a><!-- ignore --> aytib o'tganimizdek, <code>?</code> operatori foydasiga <code>expect</code> chaqiruvini olib tashladik. Xatoda <code>panic!</code> o‘rniga, <code>?</code> murojat qiluvchiga ishlov berish uchun joriy funksiyadan xato qiymatini qaytaradi.</p>
+<p>Uchinchidan, <code>run</code> funksiyasi endi muvaffaqiyatli holatda <code>Ok</code> qiymatini qaytaradi.
+Biz signatureda <code>run</code> funksiyasining muvaffaqiyat turini <code>()</code> deb e’lon qildik, ya’ni birlik turi qiymatini <code>Ok</code> qiymatiga o‘rashimiz(wrap) kerak. Bu <code>Ok(())</code> sintaksisi dastlab biroz g‘alati ko‘rinishi mumkin, ammo <code>()</code> dan foydalanish biz <code>run</code>ni faqat uning yon ta’siri uchun chaqirayotganimizni bildirishning idiomatik usulidir; u bizga kerakli qiymatni qaytarmaydi.</p>
+<p>Ushbu kodni ishga tushirganingizda, u kompilyatsiya qilinadi, lekin ogohlantirishni ko'rsatadi:</p>
+<pre><code class="language-console">$ cargo run men olma.txt
+   Compiling minigrep v0.1.0 (file:///projects/minigrep)
+warning: unused `Result` that must be used
+  --&gt; src/main.rs:19:5
+   |
+19 |     run(config);
+   |     ^^^^^^^^^^
+   |
+   = note: this `Result` may be an `Err` variant, which should be handled
+   = note: `#[warn(unused_must_use)]` on by default
+
+warning: `minigrep` (bin &quot;minigrep&quot;) generated 1 warning
+    Finished dev [unoptimized + debuginfo] target(s) in 0.71s
+     Running `target/debug/minigrep the poem.txt`
+men qidirilmoqda
+olma.txt faylida
+Fayl tarkibi:
+Tanishaylik, men - olma,
+Nomimga quloq solma.
+Olaver, ikiklanmay,
+Ishtahang bo'lsin karnay
+
+Reklamaga hojat yo'q
+Ta'mim rosa yoqimli.
+Ortganini quritsang,
+Qishda yeysan qoqimni
+
+Men sizlarni olmangiz,
+Xomligimda olmangiz!
+Asilbekga o'xshab so'ng,
+Voy qornim deb qolmangiz!
+
+Bog'larda chiroymanda, 
+Vitaminga boymanda!
+Pishganimda yemasangiz,
+Qolasizda armonda!
+</code></pre>
+<p>Rust bizga kodimiz <code>Result</code> qiymatini e'tiborsiz qoldirganligini va <code>Result</code> qiymati xatolik yuz berganligini ko'rsatishi mumkinligini aytadi. Ammo biz xatolik bor yoki yo'qligini tekshirmayapmiz va kompilyator bu yerda xatoliklarni hal qilish uchun kodga ega bo'lishimiz kerakligini eslatadi! Keling, bu muammoni hozir tuzatamiz.</p>
+<h4 id="maindagi-run-dan-qaytarilgan-xatolarni-qayta-ishlash"><a class="header" href="#maindagi-run-dan-qaytarilgan-xatolarni-qayta-ishlash"><code>main</code>dagi <code>run</code> dan qaytarilgan xatolarni qayta ishlash</a></h4>
+<p>Biz xatolarni tekshirib ko'ramiz va ularni 12-10-sonli ro'yxatdagi <code>Config::build</code> bilan ishlatganimizga o'xshash metod yordamida hal qilamiz, lekin bir oz farq bilan:</p>
+<p><span class="filename">Filename: src/main.rs</span></p>
+<pre><code class="language-rust ignore"><span class="boring">use std::env;
+</span><span class="boring">use std::error::Error;
+</span><span class="boring">use std::fs;
+</span><span class="boring">use std::process;
+</span><span class="boring">
+</span>fn main() {
+    // --snip--
+
+<span class="boring">    let args: Vec&lt;String&gt; = env::args().collect();
+</span><span class="boring">
+</span><span class="boring">    let config = Config::build(&amp;args).unwrap_or_else(|err| {
+</span><span class="boring">        println!(&quot;Argumentlarni tahlil qilish muammosi: {err}&quot;);
+</span><span class="boring">        process::exit(1);
+</span><span class="boring">    });
+</span><span class="boring">
+</span>    println!(&quot;{} qidirilmoqda&quot;, config.sorov);
+    println!(&quot;{} faylida&quot;, config.fayl_yoli);
+
+    if let Err(e) = run(config) {
+        println!(&quot;Dastur xatosi: {e}&quot;);
+        process::exit(1);
+    }
+}
+<span class="boring">
+</span><span class="boring">fn run(config: Config) -&gt; Result&lt;(), Box&lt;dyn Error&gt;&gt; {
+</span><span class="boring">    let tarkib = fs::read_to_string(config.fayl_yoli)?;
+</span><span class="boring">
+</span><span class="boring">    println!(&quot;Fayl tarkibi:\n{tarkib}&quot;);
+</span><span class="boring">
+</span><span class="boring">    Ok(())
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">struct Config {
+</span><span class="boring">    sorov: String,
+</span><span class="boring">    fayl_yoli: String,
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">impl Config {
+</span><span class="boring">    fn build(args: &amp;[String]) -&gt; Result&lt;Config, &amp;'static str&gt; {
+</span><span class="boring">        if args.len() &lt; 3 {
+</span><span class="boring">            return Err(&quot;argumentlar yetarli emas&quot;);
+</span><span class="boring">        }
+</span><span class="boring">
+</span><span class="boring">        let sorov = args[1].clone();
+</span><span class="boring">        let fayl_yoli = args[2].clone();
+</span><span class="boring">
+</span><span class="boring">        Ok(Config { sorov, fayl_yoli })
+</span><span class="boring">    }
+</span><span class="boring">}
+</span></code></pre>
+<p><code>run</code> <code>Err</code> qiymatini qaytaradimi yoki yo‘qligini tekshirish uchun <code>unwrap_or_else</code> o‘rniga <code>if let</code> dan foydalanamiz va agar qaytarsa <code>process::exit(1)</code>ni chaqiramiz. <code>run</code> funksiyasi <code>Config::build</code> <code>Config</code> misolini qaytarganidek, biz <code>unwrap</code>ni xohlagan qiymatni qaytarmaydi. Muvaffaqiyatli holatda <code>run</code>  <code>()</code> ni qaytargani uchun biz faqat xatoni aniqlash haqida qayg'uramiz, shuning uchun o'ralgan(wrap) qiymatni qaytarish uchun <code>unwrap_or_else</code> shart emas, bu faqat <code>()</code> bo`ladi.</p>
+<p><code>if let</code> va <code>unwrap_or_else</code> funksiyalarining tanasi ikkala holatda ham bir xil: biz xatoni chop qilamiz va chiqamiz.</p>
+<h3 id="kodni-kutubxonalibrary-cratesiga-bolish"><a class="header" href="#kodni-kutubxonalibrary-cratesiga-bolish">Kodni kutubxona(library) cratesiga bo'lish</a></h3>
+<p>Bizning <code>minigrep</code> loyihamiz hozircha yaxshi ko'rinmoqda! Endi biz <em>src/main.rs</em> faylini ajratamiz va <em>src/lib.rs</em> fayliga bir nechta kodni joylashtiramiz. Shunday qilib, biz kodni sinab ko'rishimiz va kamroq mas'uliyatli <em>src/main.rs</em> fayliga ega bo'lishimiz mumkin.</p>
+<p>Keling, <code>main</code> funksiya bo'lmagan barcha kodlarni <em>src/main.rs</em> dan <em>src/lib.rs</em> ga o'tkazamiz:</p>
+<ul>
+<li><code>run</code> funksiyasi definitioni</li>
+<li>Tegishli <code>use</code> statementlari</li>
+<li><code>Config</code> ning definitioni</li>
+<li><code>Config::build</code> definitioni</li>
+</ul>
+<p><em>src/lib.rs</em> ning mazmuni 12-13 roʻyxatda koʻrsatilgan signaturelarga ega boʻlishi kerak (qisqalik uchun funksiyalarning qismlarini olib tashladik). E'tibor bering, biz 12-14 ro'yxatdagi <em>src/main.rs</em> ni o'zgartirmagunimizcha, bu kompilyatsiya qilinmaydi.</p>
+<p><span class="filename">Fayl nomi: src/lib.rs</span></p>
+<pre><code class="language-rust ignore does_not_compile">use std::error::Error;
+use std::fs;
+
+pub struct Config {
+    pub sorov: String,
+    pub fayl_yoli: String,
+}
+
+impl Config {
+    pub fn build(args: &amp;[String]) -&gt; Result&lt;Config, &amp;'static str&gt; {
+        // --snip--
+<span class="boring">        if args.len() &lt; 3 {
+</span><span class="boring">            return Err(&quot;argumentlar yetarli emas&quot;);
+</span><span class="boring">        }
+</span><span class="boring">
+</span><span class="boring">        let sorov = args[1].clone();
+</span><span class="boring">        let fayl_yoli = args[2].clone();
+</span><span class="boring">
+</span><span class="boring">        Ok(Config { sorov, fayl_yoli })
+</span>    }
+}
+
+pub fn run(config: Config) -&gt; Result&lt;(), Box&lt;dyn Error&gt;&gt; {
+    // --snip--
+<span class="boring">    let tarkib = fs::read_to_string(config.fayl_yoli)?;
+</span><span class="boring">
+</span><span class="boring">    println!(&quot;Fayl tarkibi:\n{tarkib}&quot;);
+</span><span class="boring">
+</span><span class="boring">    Ok(())
+</span>}
+</code></pre>
+<p><span class="caption">Ro'yxat 12-13: <code>Config</code> va <code>run</code> ni <em>src/lib.rs</em> ichiga ko'chirish</span></p>
+<p>Biz <code>pub</code> kalit so‘zidan erkin foydalandik: <code>Config</code> da, uning maydonlari va <code>build</code> metodida va <code>run</code> funksiyasida. Endi bizda testdan o'tkazishimiz mumkin bo'lgan ommaviy(public) API mavjud kutubxona cratesi bor!</p>
+<p>Endi biz <em>src/lib.rs</em> ga ko'chirilgan kodni 12-14 ro'yxatda ko'rsatilganidek <em>src/main.rs</em> dagi binary crate doirasiga olib kirishimiz kerak.</p>
+<p><span class="filename">Fayl nomi: src/main.rs</span></p>
+<pre><code class="language-rust ignore">use std::env;
+use std::process;
+
+use minigrep::Config;
+
+fn main() {
+    // --snip--
+<span class="boring">    let args: Vec&lt;String&gt; = env::args().collect();
+</span><span class="boring">
+</span><span class="boring">    let config = Config::build(&amp;args).unwrap_or_else(|err| {
+</span><span class="boring">        println!(&quot;Argumentlarni tahlil qilish muammosi: {err}&quot;);
+</span><span class="boring">        process::exit(1);
+</span><span class="boring">    });
+</span><span class="boring">
+</span><span class="boring">    println!(&quot;{} qidirilmoqda&quot;, config.sorov);
+</span><span class="boring">    println!(&quot;{} faylida&quot;, config.fayl_yoli);
+</span><span class="boring">
+</span>    if let Err(e) = minigrep::run(config) {
+        // --snip--
+<span class="boring">        println!(&quot;Dastur xatosi: {e}&quot;);
+</span><span class="boring">        process::exit(1);
+</span>    }
+}
+</code></pre>
+<p><span class="caption">Ro'yxat 12-14: <em>src/main.rs</em> da <code>minigrep</code> kutubxona cratesidan foydalanish</span></p>
+<p>Kutubxona cratesidan <code>Config</code> turini binary crate ko'lamiga olib kirish uchun <code>use minigrep::Config</code> qatorini qo'shamiz va <code>run</code> funksiyasiga crate nomimiz bilan prefix qo'shamiz. Endi barcha funksiyalar ulanishi va ishlashi kerak. Dasturni <code>cargo run</code> bilan ishga tushiring va hamma narsa to'g'ri ishlashiga ishonch hosil qiling.</p>
+<p>Vouv! Bu juda ko'p ish edi, lekin biz kelajakda muvaffaqiyatga erishdik. Endi xatolarni hal qilish ancha oson va biz kodni modulliroq qildik. Deyarli barcha ishlarimiz bundan buyon <em>src/lib.rs</em> da amalga oshiriladi.</p>
+<p>Keling, eski kod bilan qiyin bo'lgan, ammo yangi kod bilan oson bo'lgan narsani qilish orqali ushbu yangi modullikdan foydalanaylik: biz bir nechta testlarni yozamiz!</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="ch12-02-reading-a-file.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a rel="next" href="ch12-04-testing-the-librarys-functionality.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="ch12-02-reading-a-file.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a rel="next" href="ch12-04-testing-the-librarys-functionality.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        <script type="text/javascript" src="ferris.js"></script>
+    </body>
+</html>

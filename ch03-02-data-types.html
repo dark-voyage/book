@@ -1,0 +1,448 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Ma&#x27;lumotlar turlari - Rust dasturlash tili</title>
+        <!-- Custom HTML head -->
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="ferris.css">
+        <link rel="stylesheet" href="theme/2018-edition.css">
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="title-page.html">Rust dasturlash tili</a></li><li class="chapter-item expanded affix "><a href="foreword.html">Muqaddima</a></li><li class="chapter-item expanded affix "><a href="ch00-00-introduction.html">Kirish</a></li><li class="chapter-item expanded "><a href="ch01-00-getting-started.html"><strong aria-hidden="true">1.</strong> Ishni boshlash</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch01-01-installation.html"><strong aria-hidden="true">1.1.</strong> O'rnatish</a></li><li class="chapter-item expanded "><a href="ch01-02-hello-world.html"><strong aria-hidden="true">1.2.</strong> Hello, World!</a></li><li class="chapter-item expanded "><a href="ch01-03-hello-cargo.html"><strong aria-hidden="true">1.3.</strong> Hello, Cargo!</a></li></ol></li><li class="chapter-item expanded "><a href="ch02-00-guessing-game-tutorial.html"><strong aria-hidden="true">2.</strong> Taxmin qilish o'yinini dasturlash</a></li><li class="chapter-item expanded "><a href="ch03-00-common-programming-concepts.html"><strong aria-hidden="true">3.</strong> Umumiy dasturlash tushunchalari</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch03-01-variables-and-mutability.html"><strong aria-hidden="true">3.1.</strong> O'zgaruvchilar va o'zgaruvchanlik</a></li><li class="chapter-item expanded "><a href="ch03-02-data-types.html" class="active"><strong aria-hidden="true">3.2.</strong> Ma'lumotlar turlari</a></li><li class="chapter-item expanded "><a href="ch03-03-how-functions-work.html"><strong aria-hidden="true">3.3.</strong> Funksiyalar</a></li><li class="chapter-item expanded "><a href="ch03-04-comments.html"><strong aria-hidden="true">3.4.</strong> Izohlar</a></li><li class="chapter-item expanded "><a href="ch03-05-control-flow.html"><strong aria-hidden="true">3.5.</strong> Control Flow</a></li></ol></li><li class="chapter-item expanded "><a href="ch04-00-understanding-ownership.html"><strong aria-hidden="true">4.</strong> Ownershipni tushunish</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch04-01-what-is-ownership.html"><strong aria-hidden="true">4.1.</strong> Ownership nima?</a></li><li class="chapter-item expanded "><a href="ch04-02-references-and-borrowing.html"><strong aria-hidden="true">4.2.</strong> Referencelar va  Borrowing</a></li><li class="chapter-item expanded "><a href="ch04-03-slices.html"><strong aria-hidden="true">4.3.</strong> Slice turi</a></li></ol></li><li class="chapter-item expanded "><a href="ch05-00-structs.html"><strong aria-hidden="true">5.</strong> Tegishli ma'lumotlarni tuzish uchun Structdan foydalanish</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch05-01-defining-structs.html"><strong aria-hidden="true">5.1.</strong> Structlarni aniqlash va yaratish</a></li><li class="chapter-item expanded "><a href="ch05-02-example-structs.html"><strong aria-hidden="true">5.2.</strong> Structs yordamida namunaviy dastur</a></li><li class="chapter-item expanded "><a href="ch05-03-method-syntax.html"><strong aria-hidden="true">5.3.</strong> Metod sintaksisi</a></li></ol></li><li class="chapter-item expanded "><a href="ch06-00-enums.html"><strong aria-hidden="true">6.</strong> Enumlar va patternlarni moslashtirish</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch06-01-defining-an-enum.html"><strong aria-hidden="true">6.1.</strong> Enumni aniqlash</a></li><li class="chapter-item expanded "><a href="ch06-02-match.html"><strong aria-hidden="true">6.2.</strong> match Control Flow konstruksiyasi</a></li><li class="chapter-item expanded "><a href="ch06-03-if-let.html"><strong aria-hidden="true">6.3.</strong> if let bilan qisqacha Control Flow</a></li></ol></li><li class="chapter-item expanded "><a href="ch07-00-managing-growing-projects-with-packages-crates-and-modules.html"><strong aria-hidden="true">7.</strong> O'sib borayotgan loyihalarni Paketlar, Cratelar va Modullar bilan boshqarish</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch07-01-packages-and-crates.html"><strong aria-hidden="true">7.1.</strong> Paketlar va Cratelar</a></li><li class="chapter-item expanded "><a href="ch07-02-defining-modules-to-control-scope-and-privacy.html"><strong aria-hidden="true">7.2.</strong> Qo'llanish doirasi va maxfiylikni nazorat qilish uchun modullarni aniqlash</a></li><li class="chapter-item expanded "><a href="ch07-03-paths-for-referring-to-an-item-in-the-module-tree.html"><strong aria-hidden="true">7.3.</strong> Modul daraxtidagi elementga murojaat qilish yo'llari</a></li><li class="chapter-item expanded "><a href="ch07-04-bringing-paths-into-scope-with-the-use-keyword.html"><strong aria-hidden="true">7.4.</strong> use kalit so'zi bilan yo'llarni qamrab olish</a></li><li class="chapter-item expanded "><a href="ch07-05-separating-modules-into-different-files.html"><strong aria-hidden="true">7.5.</strong> Modullarni turli fayllarga ajratish</a></li></ol></li><li class="chapter-item expanded "><a href="ch08-00-common-collections.html"><strong aria-hidden="true">8.</strong> Umumiy to'plamlar</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch08-01-vectors.html"><strong aria-hidden="true">8.1.</strong> Vectorlar bilan qiymatlar ro'yxatini saqlash</a></li><li class="chapter-item expanded "><a href="ch08-02-strings.html"><strong aria-hidden="true">8.2.</strong> UTF-8 kodlangan matnni Stringlar bilan saqlash</a></li><li class="chapter-item expanded "><a href="ch08-03-hash-maps.html"><strong aria-hidden="true">8.3.</strong> Hash Mapda bog'langan qiymatlarga ega kalitlarni saqlash</a></li></ol></li><li class="chapter-item expanded "><a href="ch09-00-error-handling.html"><strong aria-hidden="true">9.</strong> Xatolar bilan ishlash</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch09-01-unrecoverable-errors-with-panic.html"><strong aria-hidden="true">9.1.</strong> panic! bilan tuzatib bo'lmaydigan xatolar</a></li><li class="chapter-item expanded "><a href="ch09-02-recoverable-errors-with-result.html"><strong aria-hidden="true">9.2.</strong> Result bilan tiklanadigan xatolar</a></li><li class="chapter-item expanded "><a href="ch09-03-to-panic-or-not-to-panic.html"><strong aria-hidden="true">9.3.</strong> panic! yoki panic! emas</a></li></ol></li><li class="chapter-item expanded "><a href="ch10-00-generics.html"><strong aria-hidden="true">10.</strong> Umumiy turlar, traitlar va lifetime</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch10-01-syntax.html"><strong aria-hidden="true">10.1.</strong> Generik ma'lumotlar turlari</a></li><li class="chapter-item expanded "><a href="ch10-02-traits.html"><strong aria-hidden="true">10.2.</strong> Traitlar: umumiy xatti-harakatni aniqlash</a></li><li class="chapter-item expanded "><a href="ch10-03-lifetime-syntax.html"><strong aria-hidden="true">10.3.</strong> Referencelarni lifetime bilan tekshirish</a></li></ol></li><li class="chapter-item expanded "><a href="ch11-00-testing.html"><strong aria-hidden="true">11.</strong> Avtomatlashtirilgan testlarni yozish</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch11-01-writing-tests.html"><strong aria-hidden="true">11.1.</strong> Testlarni qanday yozish kerak</a></li><li class="chapter-item expanded "><a href="ch11-02-running-tests.html"><strong aria-hidden="true">11.2.</strong> Sinovlar qanday o'tkazilishini nazorat qilish</a></li><li class="chapter-item expanded "><a href="ch11-03-test-organization.html"><strong aria-hidden="true">11.3.</strong> Test tashkil etish</a></li></ol></li><li class="chapter-item expanded "><a href="ch12-00-an-io-project.html"><strong aria-hidden="true">12.</strong> I/O loyihasi: Buyruqlar qatori dasturini yaratish</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch12-01-accepting-command-line-arguments.html"><strong aria-hidden="true">12.1.</strong> Buyruqlar qatori argumentini qabul qilishs</a></li><li class="chapter-item expanded "><a href="ch12-02-reading-a-file.html"><strong aria-hidden="true">12.2.</strong> Faylni o'qish</a></li><li class="chapter-item expanded "><a href="ch12-03-improving-error-handling-and-modularity.html"><strong aria-hidden="true">12.3.</strong> Modullikni yaxshilash va xatolarni qayta ishlash uchun refactoring</a></li><li class="chapter-item expanded "><a href="ch12-04-testing-the-librarys-functionality.html"><strong aria-hidden="true">12.4.</strong> Sinovga asoslangan ishlab chiqish bilan kutubxonaning funksionalligini rivojlantirish</a></li><li class="chapter-item expanded "><a href="ch12-05-working-with-environment-variables.html"><strong aria-hidden="true">12.5.</strong> Environment o'zgaruvchilari bilan ishlash</a></li><li class="chapter-item expanded "><a href="ch12-06-writing-to-stderr-instead-of-stdout.html"><strong aria-hidden="true">12.6.</strong> Xato xabarlarini standart chiqish o'rniga standart xatoga yozish</a></li></ol></li><li class="chapter-item expanded "><a href="ch13-00-functional-features.html"><strong aria-hidden="true">13.</strong> Funksional til xususiyatlari: iteratorlar va closurelar</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch13-01-closures.html"><strong aria-hidden="true">13.1.</strong> Closurelar: Environmentni qamrab oladigan anonim funksiyalar</a></li><li class="chapter-item expanded "><a href="ch13-02-iterators.html"><strong aria-hidden="true">13.2.</strong> Iteratorlar bilan bir qator elementlarga ishlov berish</a></li><li class="chapter-item expanded "><a href="ch13-03-improving-our-io-project.html"><strong aria-hidden="true">13.3.</strong> I/O loyihamizni takomillashtirish</a></li><li class="chapter-item expanded "><a href="ch13-04-performance.html"><strong aria-hidden="true">13.4.</strong> Ishlash samaradorligini solishtirish: Looplar va iteratorlar</a></li></ol></li><li class="chapter-item expanded "><a href="ch14-00-more-about-cargo.html"><strong aria-hidden="true">14.</strong> Cargo va Crates.io haqida ko'proq</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch14-01-release-profiles.html"><strong aria-hidden="true">14.1.</strong> Reliz profillari bilan structlarni moslashtirish</a></li><li class="chapter-item expanded "><a href="ch14-02-publishing-to-crates-io.html"><strong aria-hidden="true">14.2.</strong> Crateni Crates.io-ga nashr qilish</a></li><li class="chapter-item expanded "><a href="ch14-03-cargo-workspaces.html"><strong aria-hidden="true">14.3.</strong> Cargo Workspacelar</a></li><li class="chapter-item expanded "><a href="ch14-04-installing-binaries.html"><strong aria-hidden="true">14.4.</strong> Binary fayllarni Crates.io'dan cargo install bilan o'rnatish</a></li><li class="chapter-item expanded "><a href="ch14-05-extending-cargo.html"><strong aria-hidden="true">14.5.</strong> Maxsus buyruqlar bilan Cargoni kengaytirish</a></li></ol></li><li class="chapter-item expanded "><a href="ch15-00-smart-pointers.html"><strong aria-hidden="true">15.</strong> Smart Pointerlar</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch15-01-box.html"><strong aria-hidden="true">15.1.</strong> Heapdagi ma'lumotlarni ko'rsatish uchun Box&lt;T&gt; dan foydalanish</a></li><li class="chapter-item expanded "><a href="ch15-02-deref.html"><strong aria-hidden="true">15.2.</strong> Deref Traitidan foydalangan holda oddiy referencelar kabi Smart Pointerlar bilan ishlash</a></li><li class="chapter-item expanded "><a href="ch15-03-drop.html"><strong aria-hidden="true">15.3.</strong> Drop Traiti bilan tozalashda kodni ishga tushirish</a></li><li class="chapter-item expanded "><a href="ch15-04-rc.html"><strong aria-hidden="true">15.4.</strong> Rc&lt;T&gt;, reference hisoblangan Smart Pointer</a></li><li class="chapter-item expanded "><a href="ch15-05-interior-mutability.html"><strong aria-hidden="true">15.5.</strong> RefCell&lt;T&gt; va ichki o'zgaruvchanlik namunasi</a></li><li class="chapter-item expanded "><a href="ch15-06-reference-cycles.html"><strong aria-hidden="true">15.6.</strong> Reference Cycles Can Leak Memory</a></li></ol></li><li class="chapter-item expanded "><a href="ch16-00-concurrency.html"><strong aria-hidden="true">16.</strong> Qo'rqmas parallellik</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch16-01-threads.html"><strong aria-hidden="true">16.1.</strong> Kodni bir vaqtning o'zida ishga tushirish uchun threadlardan foydalanish</a></li><li class="chapter-item expanded "><a href="ch16-02-message-passing.html"><strong aria-hidden="true">16.2.</strong> Threadlar orasidagi ma'lumotlarni uzatish uchun xabar uzatishdan(Message Passing) foydalanish</a></li><li class="chapter-item expanded "><a href="ch16-03-shared-state.html"><strong aria-hidden="true">16.3.</strong> Shared-State Concurrency</a></li><li class="chapter-item expanded "><a href="ch16-04-extensible-concurrency-sync-and-send.html"><strong aria-hidden="true">16.4.</strong> Sync va Send traitlari bilan kengaytiriladigan parallellik</a></li></ol></li><li class="chapter-item expanded "><a href="ch17-00-oop.html"><strong aria-hidden="true">17.</strong> Rustning ob'ektga yo'naltirilgan dasturlash xususiyatlari- OOP</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch17-01-what-is-oo.html"><strong aria-hidden="true">17.1.</strong> Ob'ektga yo'naltirilgan tillarning xususiyatlari</a></li><li class="chapter-item expanded "><a href="ch17-02-trait-objects.html"><strong aria-hidden="true">17.2.</strong> Har xil turdagi qiymatlarga ruxsat beruvchi trait ob'ektlaridan foydalanish</a></li><li class="chapter-item expanded "><a href="ch17-03-oo-design-patterns.html"><strong aria-hidden="true">17.3.</strong> Ob'ektga yo'naltirilgan dizayn patternini implement qilish</a></li></ol></li><li class="chapter-item expanded "><a href="ch18-00-patterns.html"><strong aria-hidden="true">18.</strong> Patternlar va Matching</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch18-01-all-the-places-for-patterns.html"><strong aria-hidden="true">18.1.</strong> All the Places Patterns Can Be Used</a></li><li class="chapter-item expanded "><a href="ch18-02-refutability.html"><strong aria-hidden="true">18.2.</strong> Refutability: Whether a Pattern Might Fail to Match</a></li><li class="chapter-item expanded "><a href="ch18-03-pattern-syntax.html"><strong aria-hidden="true">18.3.</strong> Pattern Sintaksisi</a></li></ol></li><li class="chapter-item expanded "><a href="ch19-00-advanced-features.html"><strong aria-hidden="true">19.</strong> Kengaytirilgan Xususiyatlar</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch19-01-unsafe-rust.html"><strong aria-hidden="true">19.1.</strong> Xavfsiz Rust</a></li><li class="chapter-item expanded "><a href="ch19-03-advanced-traits.html"><strong aria-hidden="true">19.2.</strong> Murakkab Traitlar</a></li><li class="chapter-item expanded "><a href="ch19-04-advanced-types.html"><strong aria-hidden="true">19.3.</strong> Kengaytirilgan Turlar</a></li><li class="chapter-item expanded "><a href="ch19-05-advanced-functions-and-closures.html"><strong aria-hidden="true">19.4.</strong> Kengaytirilgan funksiyalar va closurelar</a></li><li class="chapter-item expanded "><a href="ch19-06-macros.html"><strong aria-hidden="true">19.5.</strong> Makrolar</a></li></ol></li><li class="chapter-item expanded "><a href="ch20-00-final-project-a-web-server.html"><strong aria-hidden="true">20.</strong> Yakuniy loyiha: Ko'p tarmoqli veb-serverni qurish</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch20-01-single-threaded.html"><strong aria-hidden="true">20.1.</strong> Yagona tarmoqli veb-serverni qurish</a></li><li class="chapter-item expanded "><a href="ch20-02-multithreaded.html"><strong aria-hidden="true">20.2.</strong> Bizning yagona tarmoqli serverimizni ko'p tarmoqli serverga aylantirish</a></li><li class="chapter-item expanded "><a href="ch20-03-graceful-shutdown-and-cleanup.html"><strong aria-hidden="true">20.3.</strong> Ajoyib o'chirish va tozalash</a></li></ol></li><li class="chapter-item expanded "><a href="appendix-00.html"><strong aria-hidden="true">21.</strong> Ilova</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="appendix-01-keywords.html"><strong aria-hidden="true">21.1.</strong> A - Kalit so'zlar</a></li><li class="chapter-item expanded "><a href="appendix-02-operators.html"><strong aria-hidden="true">21.2.</strong> B - Operatorlar va Symbollar</a></li><li class="chapter-item expanded "><a href="appendix-03-derivable-traits.html"><strong aria-hidden="true">21.3.</strong> C - Hosilaviy Traitlar</a></li><li class="chapter-item expanded "><a href="appendix-04-useful-development-tools.html"><strong aria-hidden="true">21.4.</strong> D - Foydali Development Toollar</a></li><li class="chapter-item expanded "><a href="appendix-05-editions.html"><strong aria-hidden="true">21.5.</strong> E - Nashrlar</a></li><li class="chapter-item expanded "><a href="appendix-06-translation.html"><strong aria-hidden="true">21.6.</strong> F - Kitobning tarjimalari</a></li><li class="chapter-item expanded "><a href="appendix-07-nightly-rust.html"><strong aria-hidden="true">21.7.</strong> G - Rust qanday yasaladi va “Nightly Rust”</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Rust dasturlash tili</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/rust-lang/book" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h2 id="malumotlar-turlari"><a class="header" href="#malumotlar-turlari">Ma'lumotlar turlari</a></h2>
+<p>Rust-dagi har bir qiymat ma'lum bir <em>ma'lumot turiga</em> tegishli bo'lib, Rustga qanday ma'lumotlar ko'rsatilayotganligini bildiradi, shuning uchun u ushbu ma'lumotlar bilan qanday ishlashni biladi. Biz ikkita ma'lumotlar turini ko'rib chiqamiz: skalyar va birikma.</p>
+<p>Esda tutingki, Rust <em>statik tarzda yozilgan</em> tildir, ya'ni kompilyatsiya vaqtida barcha o'zgaruvchilarning turlarini bilishi kerak. Kompilyator odatda qiymat va uni qanday ishlatishimiz asosida biz qaysi turdan foydalanmoqchi ekanligimiz haqida xulosa chiqarishi mumkin.
+Ko‘p turlar mumkin bo‘lgan hollarda, masalan, 2-bobdagi <a href="ch02-00-guessing-game-tutorial.html#comparing-the-guess-to-the-secret-number">“Tahminni maxfiy raqam bilan solishtirish”</a><!-- ignore --> bo‘limidagi <code>parse</code> yordamida <code>String</code>ni raqamli turga o‘zgartirganimizda, quyidagi turdagi izohni qo‘shishimiz kerak:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let taxmin: u32 = &quot;42&quot;.parse().expect(&quot;Raqam emas!&quot;);
+<span class="boring">}
+</span></code></pre></pre>
+<p>Oldingi kodda ko'rsatilgan <code>: u32</code> turidagi izohni qo'shmasak, Rust quyidagi xatoni ko'rsatadi, ya'ni kompilyator bizdan qaysi turdan foydalanishni xohlayotganimizni bilish uchun qo'shimcha ma'lumotga muhtoj:</p>
+<pre><code class="language-console">$ cargo build
+   Compiling no_type_annotations v0.1.0 (file:///projects/no_type_annotations)
+error[E0282]: type annotations needed
+ --&gt; src/main.rs:2:9
+  |
+2 |     let taxmin = &quot;42&quot;.parse().expect(&quot;Raqam emas!&quot;);
+  |         ^^^^^
+  |
+help: consider giving `taxmin` an explicit type
+  |
+2 |     let taxmin: _ = &quot;42&quot;.parse().expect(&quot;Raqam emas!&quot;);
+  |              +++
+
+For more information about this error, try `rustc --explain E0282`.
+error: could not compile `no_type_annotations` due to previous error
+</code></pre>
+<p>Boshqa ma'lumotlar turlari uchun turli turdagi izohlarni ko'rasiz.</p>
+<h3 id="skalyar-turlar"><a class="header" href="#skalyar-turlar">Skalyar Turlar</a></h3>
+<p><em>Skalyar</em> turi bitta qiymatni ifodalaydi. Rust to'rtta asosiy skalyar turga ega: integerlar, floating-point number, boolean va belgilar. Siz ularni boshqa dasturlash tillaridan bilishingiz mumkin. Keling, ularning Rustda qanday ishlashini ko'rib chiqaylik.</p>
+<h4 id="integer-turlari"><a class="header" href="#integer-turlari">Integer Turlari</a></h4>
+<p><em>Integer</em> kasr komponenti bo‘lmagan sondir. Biz 2-bobda <code>u32</code> tipidagi bitta <em>integer</em> sonni ishlatdik. Ushbu turdagi deklaratsiya u bilan bog'langan qiymat 32 bit bo'sh joyni egallagan belgisiz butun son bo'lishi kerakligini bildiradi (Signed integer sonlar <code>u</code> o'rniga <code>i</code> bilan boshlanadi). 3-1-jadvalda Rust-da o'rnatilgan integer son turlari ko'rsatilgan. Integer son qiymatining turini e'lon qilish uchun biz ushbu variantlardan foydalanishimiz mumkin.</p>
+<p><span class="caption">3-1-jadval: Rustdagi Integer sonlar turlari</span></p>
+<table><thead><tr><th>Uzunlik</th><th>Signed</th><th>Unsigned</th></tr></thead><tbody>
+<tr><td>8-bit</td><td><code>i8</code></td><td><code>u8</code></td></tr>
+<tr><td>16-bit</td><td><code>i16</code></td><td><code>u16</code></td></tr>
+<tr><td>32-bit</td><td><code>i32</code></td><td><code>u32</code></td></tr>
+<tr><td>64-bit</td><td><code>i64</code></td><td><code>u64</code></td></tr>
+<tr><td>128-bit</td><td><code>i128</code></td><td><code>u128</code></td></tr>
+<tr><td>arch</td><td><code>isize</code></td><td><code>usize</code></td></tr>
+</tbody></table>
+<p>Signedlar kichkina <code>i</code> harfi bilan boshlanadi, Unsigned esa kichik <code>u</code> harfi bilan boshlanadi.</p>
+<p>Har bir variant signed yoki unsigned bo'lishi mumkin va aniq o'lchamga ega.
+<em>Signed</em> va <em>Unsigned</em> raqam manfiy boʻlishi mumkinmi yoki yoʻqligini anglatadi, boshqacha qilib aytganda, raqam u bilan birga belgiga ega boʻlishi (signed) boʻlishi kerakmi yoki u faqat ijobiy bo'ladimi va shuning uchun belgisiz (unsigned) ifodalanishi mumkinmi. Bu raqamlarni qog'ozga yozishga o'xshaydi: belgi muhim bo'lsa, raqam ortiqcha yoki minus belgisi bilan ko'rsatiladi; ammo, agar raqamni ijobiy deb hisoblash xavfsiz bo'lsa, u hech qanday belgisiz ko'rsatiladi.
+Signed raqamlar <a href="https://en.wikipedia.org/wiki/Two%27s_complement">ikkita to'ldiruvchi</a><!-- ignore--> ko'rinish yordamida saqlanadi.</p>
+<p>Har bir signed variant -(2<sup>n - 1</sup>) dan 2<sup>n -
+1</sup> -1 gacha bo'lgan raqamlarni saqlashi mumkin, bu erda <em>n</em> variant foydalanadigan bitlar soni.
+Shunday qilib, <code>i8</code> -(2<sup>7</sup>) dan 2<sup>7</sup> - 1, gacha bo'lgan raqamlarni saqlashi mumkin, bu tengdir -128 dan 127 gacha.
+Unsigned variantlar 0 dan 2<sup>n</sup> - 1 gacha raqamlarni saqlashi mumkin, shuning uchun <code>u8</code> 0 dan 2<sup>8</sup> - 1 gacha bo'lgan raqamlarni saqlashi mumkin, bu 0 dan 255 gacha.</p>
+<p>Bundan tashqari, <code>isize</code> va <code>usize</code> turlari dasturingiz ishlayotgan kompyuterning arxitekturasiga bog'liq bo'lib, u jadvalda “arch” sifatida ko'rsatilgan: agar siz 64 bitli arxitekturada bo'lsangiz 64 bit va 32 bitli arxitekturada bo'lsangiz 32 bit.</p>
+<p>Integer sonlarni 3-2-jadvalda ko'rsatilgan istalgan shaklda yozishingiz mumkin. E'tibor bering, bir nechta raqamli turlar bo'lishi mumkin bo'lgan son harflari turni belgilash uchun <code>57u8</code> kabi tur qo'shimchasiga ruxsat beradi. Raqamni o'qishni osonlashtirish uchun <code>_</code> dan raqamli harflar ham foydalanishi mumkin, masalan, <code>1_000</code>, siz <code>1000</code> ni ko'rsatganingizdek bir xil qiymatga ega bo'ladi.</p>
+<p><span class="caption">3-2-jadval: Rustdagi Integer literallar</span></p>
+<table><thead><tr><th>Raqamli harflar</th><th>Misol</th></tr></thead><tbody>
+<tr><td>O'nlik</td><td><code>98_222</code></td></tr>
+<tr><td>O'n oltilik</td><td><code>0xff</code></td></tr>
+<tr><td>Sakkizlik</td><td><code>0o77</code></td></tr>
+<tr><td>Ikkilik</td><td><code>0b1111_0000</code></td></tr>
+<tr><td>Bayt (faqat &quot;u8&quot;)</td><td><code>b'A'</code></td></tr>
+</tbody></table>
+<p>Xo'sh, qaysi turdagi integer sonni ishlatishni qanday bilasiz? Agar ishonchingiz komil bo'lmasa, Rustning standart sozlamalari odatda boshlash uchun yaxshi joylardir: integer son turlari standart bo'yicha <code>i32</code> dir. <code>isize</code> yoki <code>usize</code> dan foydalanadigan asosiy holat to'plamning bir turini indekslashdir.</p>
+<blockquote>
+<h5 id="integer-overflow"><a class="header" href="#integer-overflow">Integer Overflow</a></h5>
+<p>Aytaylik, sizda 0 dan 255 gacha bo'lgan qiymatlarni ushlab turadigan <code>u8</code> tipidagi o'zgaruvchi bor.
+Agar siz o'zgaruvchini ushbu diapazondan tashqaridagi qiymatga o'zgartirishga harakat qilsangiz,
+masalan, 256, <em>integer overflow</em> sodir bo'ladi, bu ikki xatti-harakatdan biriga olib kelishi mumkin.
+Debug mode rejimida kompilyatsiya qilayotganingizda, Rust butun sonlarning to'lib ketishini
+tekshirishni o'z ichiga oladi, bu esa dasturni ishga tushirish vaqtida <em>panic</em> chiqaradi. Rust
+dastur xato bilan chiqqanda <em>panicking</em> atamasini ishlatadi; Biz panic haqida 9-bobdagi
+<a href="ch09-01-unrecoverable-errors-with-panic.html">“<code>panic</code> bilan tuzatib bo'lmaydigan xatolar”</a><!-- ignore -->
+bo'limda batafsil ko'rib chiqamiz</p>
+<p><code>--release</code> buyrug'i bilan reliz rejimida kompilyatsiya qilayotganingizda, Rust
+panic keltirib chiqaradigan butun sonlarni tekshirishni <em>o'z ichiga olmaydi</em>.
+overflow occur sodir bo'ladi Rust <em>ikkitasini to'ldiruvchi wrapni</em> bajaradi. Qisqa qilib
+aytganda, turdagi maksimal qiymatdan kattaroq qiymatlar, tur ushlab turishi mumkin bo'lgan minimal
+qiymatlargacha &quot;wrap&quot; ni tashkil qiladi. <code>u8</code> holatida 256 qiymati 0 ga, 257 qiymati
+1 ga aylanadi va hokazo. Dastur panic qo'ymaydi, lekin o'zgaruvchi
+siz kutgan qiymatga ega bo'lmaydi. Butun sonlarni wrapga tayanish
+xato hisoblanadi. Owerflow ehtimolini aniq ko'rib chiqish uchun siz prime sonlar uchun
+standart kutubxona tomonidan taqdim etilgan ushbu metodlar oilalaridan foydalanishingiz mumkin:</p>
+<ul>
+<li>Barcha modelarni <code>wrapping_*</code> metodlari bilan oʻrash, masalan, <code>wrapping_add</code>.</li>
+<li>Agar <code>checked_*</code> metodlari owerflow boʻlsa, <code>None</code> qiymatini qaytaring.</li>
+<li>Qiymat va boolean qiymatni qaytaring, bu <code>overflowing_*</code> metodlari
+bilan overflow bo'lganini ko'rsatadi.</li>
+<li>Qiymatning minimal yoki maksimal qiymatlarida <code>saturating_*</code>
+metodllari bilan saturate bo'lgan.</li>
+</ul>
+</blockquote>
+<h4 id="floating-point-turlari"><a class="header" href="#floating-point-turlari">Floating-Point Turlari</a></h4>
+<p>Rust shuningdek <em>floating-point raqamlar</em> uchun ikkita primitive turga ega, ular kasrli raqamlardir.
+Rust-ning floating-point turlari <code>f32</code> va <code>f64</code> bo'lib, ular mos ravishda 32 bit va 64 bit o'lchamga ega.
+Standart tur <code>f64</code> dir, chunki zamonaviy protsessorlarda u <code>f32</code> bilan bir xil tezlikda, lekin aniqroq bo'lishga qodir.
+Barcha floating-point turlari signeddir.</p>
+<p>Bu yerda harakatdagi floating-point raqamlarni ko'rsatadigan misol:</p>
+<p><span class="filename">Fayl nomi: src/main.rs</span></p>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    let x = 2.0; // f64
+
+    let y: f32 = 3.0; // f32
+}
+</code></pre></pre>
+<p>Floating-point raqamlari IEEE-754 standartiga muvofiq taqdim etiladi. <code>f32</code> turi bitta aniqlikdagi floatdir va <code>f64</code> ikki tomonlama aniqlikka ega.</p>
+<h4 id="raqamli-operatsiyalar"><a class="header" href="#raqamli-operatsiyalar">Raqamli operatsiyalar</a></h4>
+<p>Rust barcha turdagi raqamlar uchun kutilgan asosiy matematik operatsiyalarni qo'llab-quvvatlaydi: qo'shish, ayirish, ko'paytirish, bo'lish va qoldiq. Butun sonni bo'lish noldan eng yaqin butun songa qisqaradi. Quyidagi kod <code>let</code> iborasida har bir raqamli operatsiyadan qanday foydalanishni ko'rsatadi:</p>
+<p><span class="filename">Fayl nomi: src/main.rs</span></p>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    // qo'shish
+    let qoshish = 5 + 10;
+
+    // ayirish
+    let ayrish = 95.5 - 4.3;
+
+    // ko'paytirish
+    let kopaytirish = 4 * 30;
+
+    // bo'lish
+    let bolish = 56.7 / 32.2;
+    let manfiy = -5 / 3; // Natijalar -1
+
+    // qoldiq
+    let qoldiq = 43 % 5;
+}
+</code></pre></pre>
+<p>Ushbu bayonotlardagi har bir ifoda matematik operatordan foydalanadi va bitta qiymatga baholanadi, keyin esa o'zgaruvchiga bog'lanadi. <a href="appendix-02-operators.html">B ilovasi</a><!-- ignore --> da
+Rust taqdim etgan barcha operatorlar ro'yxati mavjud.</p>
+<h4 id="boolean-turi"><a class="header" href="#boolean-turi">Boolean turi</a></h4>
+<p>Ko'pgina boshqa dasturlash tillarida bo'lgani kabi, Rust-da ham Boolean turi ikkita mumkin bo'lgan qiymatga ega: <code>true</code> va <code>false</code>. Boolean hajmi bir baytga teng.
+Rustdagi boolean turi <code>bool</code> yordamida belgilanadi. Misol uchun:</p>
+<p><span class="filename">Fayl nomi: src/main.rs</span></p>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    let t = true;
+
+    let f: bool = false; // aniq turdagi izoh bilan
+}
+</code></pre></pre>
+<p>Boolean qiymatlardan foydalanishning asosiy metodi shartlardir, masalan, <code>if</code> ifodasidir. Rustda <code>if</code> iboralari qanday ishlashini <a href="ch03-05-control-flow.html#control-flow">“Control Flow”</a><!-- ignore --> bo‘limida ko‘rib chiqamiz.</p>
+<h4 id="belgilarcharacter-turi"><a class="header" href="#belgilarcharacter-turi">Belgilar(Character) turi</a></h4>
+<p>Rustning <code>char</code> turi tilning eng primitive alifbo turidir. Mana <code>char</code> qiymatlarini e'lon qilishning ba`zi misollari:</p>
+<p><span class="filename">Fayl nomi: src/main.rs</span></p>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    let c = 'z';
+    let z: char = 'ℤ'; // aniq turdagi izoh bilan
+    let yurak_kozli_mushuk = '😻';
+}
+</code></pre></pre>
+<p>E'tibor bering, biz qo'sh tirnoq ishlatadigan satr harflaridan farqli o'laroq, <code>char</code> harflarini bitta tirnoq bilan belgilaymiz. Rustning <code>char</code> turi to'rt bayt o'lchamga ega va Unicode Scalar qiymatini ifodalaydi, ya'ni u ASCIIdan ko'ra ko'proq narsani anglatishi mumkin.
+Urg'uli harflar; Xitoy, yapon va koreys belgilar; emoji; va nol kenglikdagi boʻshliqlar Rust-dagi barcha haqiqiy <code>char</code> qiymatlaridir. Unicode Scalar qiymatlari <code>U+0000</code>dan <code>U+D7FF</code>gacha va <code>U+E000</code>dan <code>U+10FFFF</code>gacha.
+Biroq, “character” aslida Unicode-da tushuncha emas, shuning uchun “character” nima ekanligi haqidagi Rustdagi <code>char</code> bilan mos kelmasligi mumkin. Biz ushbu mavzuni 8-bobdagi <a href="ch08-02-strings.html#storing-utf-8-encoded-text-with-strings">“UTF-8 kodlangan matnni satrlar bilan saqlash”</a><!-- ignore --> bo'limida batafsil muhokama qilamiz.</p>
+<h3 id="murakkab-turlar"><a class="header" href="#murakkab-turlar">Murakkab turlar</a></h3>
+<p><em>Murakkab turlar</em> bir nechta qiymatlarni bir turga to'plashi mumkin.Rust ikkita primitive birikma turiga ega: tuplelar va arraylar.</p>
+<h4 id="tuple-turi"><a class="header" href="#tuple-turi">Tuple turi</a></h4>
+<p><em>tuple</em> - bu turli xil turlarga ega bo'lgan bir qator qiymatlarni bitta qo'shma turga birlashtirishning umumiy metodi.Tuplelar belgilangan uzunlikka ega: bir marta e'lon qilingandan so'ng, ular o'sishi yoki kichrayishi mumkin emas.</p>
+<p>Qavslar ichida vergul bilan ajratilgan qiymatlar ro'yxatini yozish orqali tuple yaratamiz. Tupledagi har bir pozitsiya o'z turiga ega va tupledagi turli qiymatlarning turlari bir xil bo'lishi shart emas. Ushbu misolda biz ixtiyoriy turdagi izohlarni qo'shdik:</p>
+<p><span class="filename">Fayl nomi: src/main.rs</span></p>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    let tup: (i32, f64, u8) = (500, 6.4, 1);
+}
+</code></pre></pre>
+<p><code>tup</code> o'zgaruvchisi butun tuplega bog'lanadi, chunki tuple bitta birikma element hisoblanadi. Tupledan individual qiymatlarni olish uchun biz tuple qiymatini buzish uchun pattern moslashuvidan foydalanishimiz mumkin, masalan:</p>
+<p><span class="filename">Fayl nomi: src/main.rs</span></p>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    let tup = (500, 6.4, 1);
+
+    let (x, y, z) = tup;
+
+    println!(&quot;y qiymati: {y}&quot;);
+}
+</code></pre></pre>
+<p>Bu dastur avval tuple yaratadi va uni <code>tup</code> o'zgaruvchisiga bog'laydi.Keyin u <code>tup</code>ni olish va uni uchta alohida o‘zgaruvchiga, <code>x</code>, <code>y</code> va <code>z</code> ga aylantirish uchun <code>let</code> bilan pattern ishlatadi. Bu  <em>destruktura</em> deb ataladi, chunki u bitta tupleni uch qismga ajratadi. Nihoyat, dastur <code>y</code> qiymatini chop etadi, bu <code>6,4</code>.</p>
+<p>Shuningdek, biz to'g'ridan-to'g'ri nuqta (<code>.</code>) va undan keyin kirishni xohlagan qiymat indeksidan foydalanib, tuple elementiga kirishimiz mumkin. Misol uchun:</p>
+<p><span class="filename">Fayl nomi: src/main.rs</span></p>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    let x: (i32, f64, u8) = (500, 6.4, 1);
+
+    let besh_yuz = x.0;
+
+    let olti_butun_tort= x.1;
+
+    let bir = x.2;
+}
+</code></pre></pre>
+<p>Bu dastur <code>x</code> tuplesini yaratadi va so'ngra o'z indekslari yordamida tuplening har bir elementiga kiradi. Ko'pgina dasturlash tillarida bo'lgani kabi, tupledagi birinchi indeks 0 ga teng.</p>
+<p>Hech qanday qiymatsiz tuple maxsus nomga, <em>unit</em> ega. Bu qiymat va unga mos keladigan tur <code>()</code> yoziladi va bo'sh qiymat yoki bo'sh qaytish turini ifodalaydi. Ifodalar, agar ular boshqa qiymatni qaytarmasa, bilvosita birlik qiymatini qaytaradi.</p>
+<h4 id="array-turi"><a class="header" href="#array-turi">Array Turi</a></h4>
+<p>Bir nechta qiymatlar to'plamiga ega bo'lishning yana bir usuli <em>array</em>dir. Tupledan farqli o'laroq, arrayning har bir elementi bir xil turdagi bo'lishi kerak. Ba'zi boshqa tillardagi arraylardan farqli o'laroq, Rustdagi arraylar belgilangan uzunlikka ega.</p>
+<p>Biz arraydagi qiymatlarni kvadrat qavslar ichida vergul bilan ajratilgan ro'yxat sifatida yozamiz:</p>
+<p><span class="filename">Fayl nomi: src/main.rs</span></p>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    let a = [1, 2, 3, 4, 5];
+}
+</code></pre></pre>
+<p>Arraylar maʼlumotlaringizni toʻplamga emas, balki stekga ajratishni istasangiz foydali boʻladi (biz <a href="ch04-01-what-is-ownership.html#the-stack-and-the-heap">4-bobda</a><!-- ignore -->) stek va toʻplam haqida koʻproq gaplashamiz yoki sizda har doim maʼlum miqdordagi elementlar mavjudligini taʼminlashni istasangiz).
+Array vektor turi kabi moslashuvchan emas. <em>Vektor</em> standart kutubxona tomonidan taqdim etilgan o'xshash to'plam turi bo'lib, uning hajmini o'stirish yoki kichraytirishi mumkin. Agar array yoki vektordan foydalanishga ishonchingiz komil bo'lmasa, vektordan foydalanishingiz mumkin.
+<a href="ch08-01-vectors.html">8-bobda</a><!-- ignore --> vektorlar batafsilroq muhokama qilinadi.</p>
+<p>Biroq, agar elementlar sonini o'zgartirish kerak bo'lmasligini bilsangiz, arraylar foydaliroq bo'ladi. Misol uchun, agar siz dasturda oy nomlaridan foydalansangiz, vektordan ko'ra massivdan foydalanar edingiz, chunki u har doim 12 ta elementdan iborat bo'lishini bilasiz:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let oylar = [&quot;Yanvar&quot;, &quot;Fevral&quot;, &quot;Mart&quot;, &quot;Aprel&quot;, &quot;May&quot;, &quot;Iyun&quot;, &quot;Iyul&quot;,
+              &quot;Avgust&quot;, &quot;Setabr&quot;, &quot;Oktabr&quot;, &quot;Noyabr&quot;, &quot;Dekabr&quot;];
+<span class="boring">}
+</span></code></pre></pre>
+<p>Siz har bir element turi, nuqta-vergul va arraydagi elementlar soni bilan kvadrat qavslar yordamida array turini yozasiz, masalan:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let a: [i32; 5] = [1, 2, 3, 4, 5];
+<span class="boring">}
+</span></code></pre></pre>
+<p>Bu erda <code>i32</code> har bir elementning turi. Nuqtali verguldan keyin <code>5</code> raqami array beshta elementdan iboratligini bildiradi.</p>
+<p>Bundan tashqari, har bir element uchun bir xil qiymatni o'z ichiga olgan arrayni boshlang'ich qiymatdan keyin nuqta-vergul qo'yib, so'ngra bu yerda ko'rsatilgandek kvadrat qavs ichida array uzunligini belgilash orqali ishga tushirishingiz mumkin:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let a = [3; 5];
+<span class="boring">}
+</span></code></pre></pre>
+<p><code>a</code> nomli array dastlab <code>3</code> qiymatiga o'rnatiladigan <code>5</code> elementni o'z ichiga oladi. Bu <code>let a = [3, 3, 3, 3, 3];</code> yozish bilan bir xil, ammo qisqaroq tarzda.</p>
+<h5 id="array-elementlariga-kirish"><a class="header" href="#array-elementlariga-kirish">Array elementlariga kirish</a></h5>
+<p>Array - bu stekda taqsimlanishi mumkin bo'lgan ma'lum, qat'iy o'lchamdagi xotiraning bitta bo'lagi. Siz indekslash yordamida array elementlariga kirishingiz mumkin, masalan:</p>
+<p><span class="filename">Fayl nomi: src/main.rs</span></p>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    let a = [1, 2, 3, 4, 5];
+
+    let birinchi = a[0];
+    let ikkinchi = a[1];
+}
+</code></pre></pre>
+<p>Bu misolda <code>birinchi</code> deb nomlangan o‘zgaruvchi <code>1</code> qiymatini oladi, chunki bu arraydagi <code>[0]</code> indeksidagi qiymatdir. <code>ikkinchi</code> deb nomlangan ozgaruvchi arraydagi <code>[1]</code> indeksidan <code>2</code> qiymatini oladi.</p>
+<h5 id="yaroqsiz-array-elementlariga-kirish"><a class="header" href="#yaroqsiz-array-elementlariga-kirish">Yaroqsiz Array elementlariga kirish</a></h5>
+<p>Keling, array oxiridan o‘tgan array elementiga kirishga harakat qilsangiz nima bo‘lishini ko‘rib chiqamiz. Aytaylik, foydalanuvchidan array indeksini olish uchun 2-bobdagi taxminiy o‘yinga o‘xshash ushbu kodni ishlatasiz:</p>
+<p><span class="filename">Fayl nomi: src/main.rs</span></p>
+<pre><code class="language-rust ignore panics">use std::io;
+
+fn main() {
+    let a = [1, 2, 3, 4, 5];
+
+    println!(&quot;Iltimos, array indeksini kiriting.&quot;);
+
+    let mut index = String::new();
+
+    io::stdin()
+        .read_line(&amp;mut index)
+        .expect(&quot;Satrni o‘qib bo‘lmadi&quot;);
+
+    let index: usize = index
+        .trim()
+        .parse()
+        .expect(&quot;Kiritilgan indeks raqam emas&quot;);
+
+    let element = a[index];
+
+    println!(&quot;{index} indeksidagi elementning qiymati: {element}&quot;);
+}
+</code></pre>
+<p>Ushbu kod muvaffaqiyatli kompilyatsiya qilinadi.Agar siz ushbu kodni <code>cargo run</code> yordamida ishga tushirsangiz va <code>0</code>, <code>1</code>, <code>2</code>, <code>3</code> yoki <code>4</code> kiritsangiz, dastur arraydagi ushbu indeksdagi mos qiymatni chop etadi. Buning o'rniga array oxiridan o'tgan raqamni kiritsangiz, masalan, <code>10</code>, siz shunday chiqishni ko'rasiz:</p>
+<!-- manual-regeneration
+cd listings/ch03-common-programming-concepts/no-listing-15-invalid-array-access
+cargo run
+10
+-->
+<pre><code class="language-console">thread 'main' panicked at 'index out of bounds: the len is 5 but the index is 10', src/main.rs:19:19
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+</code></pre>
+<p>Dastur indekslash operatsiyasida yaroqsiz qiymatdan foydalanish nuqtasida <em>runtime</em> xatosiga olib keldi. Dastur xato xabari bilan chiqdi va yakuniy <code>println!</code> bayonotini bajarmadi. Indekslash yordamida elementga kirishga harakat qilganingizda, Rust siz ko'rsatgan indeks array uzunligidan kamroq ekanligini tekshiradi. Agar indeks uzunlikdan kattaroq yoki unga teng bo'lsa, Rust panic chiqaradi. Bu tekshirish runtimeda amalga oshirilishi kerak, ayniqsa bu holatda, chunki kompilyator foydalanuvchi kodni keyinroq ishga tushirganda qanday qiymat kiritishini bila olmaydi.</p>
+<p>Bu Rustning xotira xavfsizligi tamoyillarining amaldagi namunasidir. Ko'pgina low-leveldagi tillarda bunday tekshirish amalga oshirilmaydi va noto'g'ri indeksni taqdim etganingizda, yaroqsiz xotiraga kirish mumkin. Rust xotiraga kirishga ruxsat berish va davom ettirish o'rniga darhol chiqish orqali sizni bunday xatolardan himoya qiladi. 9-bobda Rust-ning xatolarini qanday hal qilish va siz panic qo'ymaydigan va yaroqsiz xotiraga kirishga ruxsat bermaydigan o'qilishi mumkin bo'lgan xavfsiz kodni qanday yozishingiz mumkinligi muhokama qilinadi.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="ch03-01-variables-and-mutability.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a rel="next" href="ch03-03-how-functions-work.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="ch03-01-variables-and-mutability.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a rel="next" href="ch03-03-how-functions-work.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        <script type="text/javascript" src="ferris.js"></script>
+    </body>
+</html>

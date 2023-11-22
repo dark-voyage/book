@@ -1,0 +1,951 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Taxmin qilish o&#x27;yinini dasturlash - Rust dasturlash tili</title>
+        <!-- Custom HTML head -->
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="ferris.css">
+        <link rel="stylesheet" href="theme/2018-edition.css">
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="title-page.html">Rust dasturlash tili</a></li><li class="chapter-item expanded affix "><a href="foreword.html">Muqaddima</a></li><li class="chapter-item expanded affix "><a href="ch00-00-introduction.html">Kirish</a></li><li class="chapter-item expanded "><a href="ch01-00-getting-started.html"><strong aria-hidden="true">1.</strong> Ishni boshlash</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch01-01-installation.html"><strong aria-hidden="true">1.1.</strong> O'rnatish</a></li><li class="chapter-item expanded "><a href="ch01-02-hello-world.html"><strong aria-hidden="true">1.2.</strong> Hello, World!</a></li><li class="chapter-item expanded "><a href="ch01-03-hello-cargo.html"><strong aria-hidden="true">1.3.</strong> Hello, Cargo!</a></li></ol></li><li class="chapter-item expanded "><a href="ch02-00-guessing-game-tutorial.html" class="active"><strong aria-hidden="true">2.</strong> Taxmin qilish o'yinini dasturlash</a></li><li class="chapter-item expanded "><a href="ch03-00-common-programming-concepts.html"><strong aria-hidden="true">3.</strong> Umumiy dasturlash tushunchalari</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch03-01-variables-and-mutability.html"><strong aria-hidden="true">3.1.</strong> O'zgaruvchilar va o'zgaruvchanlik</a></li><li class="chapter-item expanded "><a href="ch03-02-data-types.html"><strong aria-hidden="true">3.2.</strong> Ma'lumotlar turlari</a></li><li class="chapter-item expanded "><a href="ch03-03-how-functions-work.html"><strong aria-hidden="true">3.3.</strong> Funksiyalar</a></li><li class="chapter-item expanded "><a href="ch03-04-comments.html"><strong aria-hidden="true">3.4.</strong> Izohlar</a></li><li class="chapter-item expanded "><a href="ch03-05-control-flow.html"><strong aria-hidden="true">3.5.</strong> Control Flow</a></li></ol></li><li class="chapter-item expanded "><a href="ch04-00-understanding-ownership.html"><strong aria-hidden="true">4.</strong> Ownershipni tushunish</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch04-01-what-is-ownership.html"><strong aria-hidden="true">4.1.</strong> Ownership nima?</a></li><li class="chapter-item expanded "><a href="ch04-02-references-and-borrowing.html"><strong aria-hidden="true">4.2.</strong> Referencelar va  Borrowing</a></li><li class="chapter-item expanded "><a href="ch04-03-slices.html"><strong aria-hidden="true">4.3.</strong> Slice turi</a></li></ol></li><li class="chapter-item expanded "><a href="ch05-00-structs.html"><strong aria-hidden="true">5.</strong> Tegishli ma'lumotlarni tuzish uchun Structdan foydalanish</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch05-01-defining-structs.html"><strong aria-hidden="true">5.1.</strong> Structlarni aniqlash va yaratish</a></li><li class="chapter-item expanded "><a href="ch05-02-example-structs.html"><strong aria-hidden="true">5.2.</strong> Structs yordamida namunaviy dastur</a></li><li class="chapter-item expanded "><a href="ch05-03-method-syntax.html"><strong aria-hidden="true">5.3.</strong> Metod sintaksisi</a></li></ol></li><li class="chapter-item expanded "><a href="ch06-00-enums.html"><strong aria-hidden="true">6.</strong> Enumlar va patternlarni moslashtirish</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch06-01-defining-an-enum.html"><strong aria-hidden="true">6.1.</strong> Enumni aniqlash</a></li><li class="chapter-item expanded "><a href="ch06-02-match.html"><strong aria-hidden="true">6.2.</strong> match Control Flow konstruksiyasi</a></li><li class="chapter-item expanded "><a href="ch06-03-if-let.html"><strong aria-hidden="true">6.3.</strong> if let bilan qisqacha Control Flow</a></li></ol></li><li class="chapter-item expanded "><a href="ch07-00-managing-growing-projects-with-packages-crates-and-modules.html"><strong aria-hidden="true">7.</strong> O'sib borayotgan loyihalarni Paketlar, Cratelar va Modullar bilan boshqarish</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch07-01-packages-and-crates.html"><strong aria-hidden="true">7.1.</strong> Paketlar va Cratelar</a></li><li class="chapter-item expanded "><a href="ch07-02-defining-modules-to-control-scope-and-privacy.html"><strong aria-hidden="true">7.2.</strong> Qo'llanish doirasi va maxfiylikni nazorat qilish uchun modullarni aniqlash</a></li><li class="chapter-item expanded "><a href="ch07-03-paths-for-referring-to-an-item-in-the-module-tree.html"><strong aria-hidden="true">7.3.</strong> Modul daraxtidagi elementga murojaat qilish yo'llari</a></li><li class="chapter-item expanded "><a href="ch07-04-bringing-paths-into-scope-with-the-use-keyword.html"><strong aria-hidden="true">7.4.</strong> use kalit so'zi bilan yo'llarni qamrab olish</a></li><li class="chapter-item expanded "><a href="ch07-05-separating-modules-into-different-files.html"><strong aria-hidden="true">7.5.</strong> Modullarni turli fayllarga ajratish</a></li></ol></li><li class="chapter-item expanded "><a href="ch08-00-common-collections.html"><strong aria-hidden="true">8.</strong> Umumiy to'plamlar</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch08-01-vectors.html"><strong aria-hidden="true">8.1.</strong> Vectorlar bilan qiymatlar ro'yxatini saqlash</a></li><li class="chapter-item expanded "><a href="ch08-02-strings.html"><strong aria-hidden="true">8.2.</strong> UTF-8 kodlangan matnni Stringlar bilan saqlash</a></li><li class="chapter-item expanded "><a href="ch08-03-hash-maps.html"><strong aria-hidden="true">8.3.</strong> Hash Mapda bog'langan qiymatlarga ega kalitlarni saqlash</a></li></ol></li><li class="chapter-item expanded "><a href="ch09-00-error-handling.html"><strong aria-hidden="true">9.</strong> Xatolar bilan ishlash</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch09-01-unrecoverable-errors-with-panic.html"><strong aria-hidden="true">9.1.</strong> panic! bilan tuzatib bo'lmaydigan xatolar</a></li><li class="chapter-item expanded "><a href="ch09-02-recoverable-errors-with-result.html"><strong aria-hidden="true">9.2.</strong> Result bilan tiklanadigan xatolar</a></li><li class="chapter-item expanded "><a href="ch09-03-to-panic-or-not-to-panic.html"><strong aria-hidden="true">9.3.</strong> panic! yoki panic! emas</a></li></ol></li><li class="chapter-item expanded "><a href="ch10-00-generics.html"><strong aria-hidden="true">10.</strong> Umumiy turlar, traitlar va lifetime</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch10-01-syntax.html"><strong aria-hidden="true">10.1.</strong> Generik ma'lumotlar turlari</a></li><li class="chapter-item expanded "><a href="ch10-02-traits.html"><strong aria-hidden="true">10.2.</strong> Traitlar: umumiy xatti-harakatni aniqlash</a></li><li class="chapter-item expanded "><a href="ch10-03-lifetime-syntax.html"><strong aria-hidden="true">10.3.</strong> Referencelarni lifetime bilan tekshirish</a></li></ol></li><li class="chapter-item expanded "><a href="ch11-00-testing.html"><strong aria-hidden="true">11.</strong> Avtomatlashtirilgan testlarni yozish</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch11-01-writing-tests.html"><strong aria-hidden="true">11.1.</strong> Testlarni qanday yozish kerak</a></li><li class="chapter-item expanded "><a href="ch11-02-running-tests.html"><strong aria-hidden="true">11.2.</strong> Sinovlar qanday o'tkazilishini nazorat qilish</a></li><li class="chapter-item expanded "><a href="ch11-03-test-organization.html"><strong aria-hidden="true">11.3.</strong> Test tashkil etish</a></li></ol></li><li class="chapter-item expanded "><a href="ch12-00-an-io-project.html"><strong aria-hidden="true">12.</strong> I/O loyihasi: Buyruqlar qatori dasturini yaratish</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch12-01-accepting-command-line-arguments.html"><strong aria-hidden="true">12.1.</strong> Buyruqlar qatori argumentini qabul qilishs</a></li><li class="chapter-item expanded "><a href="ch12-02-reading-a-file.html"><strong aria-hidden="true">12.2.</strong> Faylni o'qish</a></li><li class="chapter-item expanded "><a href="ch12-03-improving-error-handling-and-modularity.html"><strong aria-hidden="true">12.3.</strong> Modullikni yaxshilash va xatolarni qayta ishlash uchun refactoring</a></li><li class="chapter-item expanded "><a href="ch12-04-testing-the-librarys-functionality.html"><strong aria-hidden="true">12.4.</strong> Sinovga asoslangan ishlab chiqish bilan kutubxonaning funksionalligini rivojlantirish</a></li><li class="chapter-item expanded "><a href="ch12-05-working-with-environment-variables.html"><strong aria-hidden="true">12.5.</strong> Environment o'zgaruvchilari bilan ishlash</a></li><li class="chapter-item expanded "><a href="ch12-06-writing-to-stderr-instead-of-stdout.html"><strong aria-hidden="true">12.6.</strong> Xato xabarlarini standart chiqish o'rniga standart xatoga yozish</a></li></ol></li><li class="chapter-item expanded "><a href="ch13-00-functional-features.html"><strong aria-hidden="true">13.</strong> Funksional til xususiyatlari: iteratorlar va closurelar</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch13-01-closures.html"><strong aria-hidden="true">13.1.</strong> Closurelar: Environmentni qamrab oladigan anonim funksiyalar</a></li><li class="chapter-item expanded "><a href="ch13-02-iterators.html"><strong aria-hidden="true">13.2.</strong> Iteratorlar bilan bir qator elementlarga ishlov berish</a></li><li class="chapter-item expanded "><a href="ch13-03-improving-our-io-project.html"><strong aria-hidden="true">13.3.</strong> I/O loyihamizni takomillashtirish</a></li><li class="chapter-item expanded "><a href="ch13-04-performance.html"><strong aria-hidden="true">13.4.</strong> Ishlash samaradorligini solishtirish: Looplar va iteratorlar</a></li></ol></li><li class="chapter-item expanded "><a href="ch14-00-more-about-cargo.html"><strong aria-hidden="true">14.</strong> Cargo va Crates.io haqida ko'proq</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch14-01-release-profiles.html"><strong aria-hidden="true">14.1.</strong> Reliz profillari bilan structlarni moslashtirish</a></li><li class="chapter-item expanded "><a href="ch14-02-publishing-to-crates-io.html"><strong aria-hidden="true">14.2.</strong> Crateni Crates.io-ga nashr qilish</a></li><li class="chapter-item expanded "><a href="ch14-03-cargo-workspaces.html"><strong aria-hidden="true">14.3.</strong> Cargo Workspacelar</a></li><li class="chapter-item expanded "><a href="ch14-04-installing-binaries.html"><strong aria-hidden="true">14.4.</strong> Binary fayllarni Crates.io'dan cargo install bilan o'rnatish</a></li><li class="chapter-item expanded "><a href="ch14-05-extending-cargo.html"><strong aria-hidden="true">14.5.</strong> Maxsus buyruqlar bilan Cargoni kengaytirish</a></li></ol></li><li class="chapter-item expanded "><a href="ch15-00-smart-pointers.html"><strong aria-hidden="true">15.</strong> Smart Pointerlar</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch15-01-box.html"><strong aria-hidden="true">15.1.</strong> Heapdagi ma'lumotlarni ko'rsatish uchun Box&lt;T&gt; dan foydalanish</a></li><li class="chapter-item expanded "><a href="ch15-02-deref.html"><strong aria-hidden="true">15.2.</strong> Deref Traitidan foydalangan holda oddiy referencelar kabi Smart Pointerlar bilan ishlash</a></li><li class="chapter-item expanded "><a href="ch15-03-drop.html"><strong aria-hidden="true">15.3.</strong> Drop Traiti bilan tozalashda kodni ishga tushirish</a></li><li class="chapter-item expanded "><a href="ch15-04-rc.html"><strong aria-hidden="true">15.4.</strong> Rc&lt;T&gt;, reference hisoblangan Smart Pointer</a></li><li class="chapter-item expanded "><a href="ch15-05-interior-mutability.html"><strong aria-hidden="true">15.5.</strong> RefCell&lt;T&gt; va ichki o'zgaruvchanlik namunasi</a></li><li class="chapter-item expanded "><a href="ch15-06-reference-cycles.html"><strong aria-hidden="true">15.6.</strong> Reference Cycles Can Leak Memory</a></li></ol></li><li class="chapter-item expanded "><a href="ch16-00-concurrency.html"><strong aria-hidden="true">16.</strong> Qo'rqmas parallellik</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch16-01-threads.html"><strong aria-hidden="true">16.1.</strong> Kodni bir vaqtning o'zida ishga tushirish uchun threadlardan foydalanish</a></li><li class="chapter-item expanded "><a href="ch16-02-message-passing.html"><strong aria-hidden="true">16.2.</strong> Threadlar orasidagi ma'lumotlarni uzatish uchun xabar uzatishdan(Message Passing) foydalanish</a></li><li class="chapter-item expanded "><a href="ch16-03-shared-state.html"><strong aria-hidden="true">16.3.</strong> Shared-State Concurrency</a></li><li class="chapter-item expanded "><a href="ch16-04-extensible-concurrency-sync-and-send.html"><strong aria-hidden="true">16.4.</strong> Sync va Send traitlari bilan kengaytiriladigan parallellik</a></li></ol></li><li class="chapter-item expanded "><a href="ch17-00-oop.html"><strong aria-hidden="true">17.</strong> Rustning ob'ektga yo'naltirilgan dasturlash xususiyatlari- OOP</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch17-01-what-is-oo.html"><strong aria-hidden="true">17.1.</strong> Ob'ektga yo'naltirilgan tillarning xususiyatlari</a></li><li class="chapter-item expanded "><a href="ch17-02-trait-objects.html"><strong aria-hidden="true">17.2.</strong> Har xil turdagi qiymatlarga ruxsat beruvchi trait ob'ektlaridan foydalanish</a></li><li class="chapter-item expanded "><a href="ch17-03-oo-design-patterns.html"><strong aria-hidden="true">17.3.</strong> Ob'ektga yo'naltirilgan dizayn patternini implement qilish</a></li></ol></li><li class="chapter-item expanded "><a href="ch18-00-patterns.html"><strong aria-hidden="true">18.</strong> Patternlar va Matching</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch18-01-all-the-places-for-patterns.html"><strong aria-hidden="true">18.1.</strong> All the Places Patterns Can Be Used</a></li><li class="chapter-item expanded "><a href="ch18-02-refutability.html"><strong aria-hidden="true">18.2.</strong> Refutability: Whether a Pattern Might Fail to Match</a></li><li class="chapter-item expanded "><a href="ch18-03-pattern-syntax.html"><strong aria-hidden="true">18.3.</strong> Pattern Sintaksisi</a></li></ol></li><li class="chapter-item expanded "><a href="ch19-00-advanced-features.html"><strong aria-hidden="true">19.</strong> Kengaytirilgan Xususiyatlar</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch19-01-unsafe-rust.html"><strong aria-hidden="true">19.1.</strong> Xavfsiz Rust</a></li><li class="chapter-item expanded "><a href="ch19-03-advanced-traits.html"><strong aria-hidden="true">19.2.</strong> Murakkab Traitlar</a></li><li class="chapter-item expanded "><a href="ch19-04-advanced-types.html"><strong aria-hidden="true">19.3.</strong> Kengaytirilgan Turlar</a></li><li class="chapter-item expanded "><a href="ch19-05-advanced-functions-and-closures.html"><strong aria-hidden="true">19.4.</strong> Kengaytirilgan funksiyalar va closurelar</a></li><li class="chapter-item expanded "><a href="ch19-06-macros.html"><strong aria-hidden="true">19.5.</strong> Makrolar</a></li></ol></li><li class="chapter-item expanded "><a href="ch20-00-final-project-a-web-server.html"><strong aria-hidden="true">20.</strong> Yakuniy loyiha: Ko'p tarmoqli veb-serverni qurish</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch20-01-single-threaded.html"><strong aria-hidden="true">20.1.</strong> Yagona tarmoqli veb-serverni qurish</a></li><li class="chapter-item expanded "><a href="ch20-02-multithreaded.html"><strong aria-hidden="true">20.2.</strong> Bizning yagona tarmoqli serverimizni ko'p tarmoqli serverga aylantirish</a></li><li class="chapter-item expanded "><a href="ch20-03-graceful-shutdown-and-cleanup.html"><strong aria-hidden="true">20.3.</strong> Ajoyib o'chirish va tozalash</a></li></ol></li><li class="chapter-item expanded "><a href="appendix-00.html"><strong aria-hidden="true">21.</strong> Ilova</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="appendix-01-keywords.html"><strong aria-hidden="true">21.1.</strong> A - Kalit so'zlar</a></li><li class="chapter-item expanded "><a href="appendix-02-operators.html"><strong aria-hidden="true">21.2.</strong> B - Operatorlar va Symbollar</a></li><li class="chapter-item expanded "><a href="appendix-03-derivable-traits.html"><strong aria-hidden="true">21.3.</strong> C - Hosilaviy Traitlar</a></li><li class="chapter-item expanded "><a href="appendix-04-useful-development-tools.html"><strong aria-hidden="true">21.4.</strong> D - Foydali Development Toollar</a></li><li class="chapter-item expanded "><a href="appendix-05-editions.html"><strong aria-hidden="true">21.5.</strong> E - Nashrlar</a></li><li class="chapter-item expanded "><a href="appendix-06-translation.html"><strong aria-hidden="true">21.6.</strong> F - Kitobning tarjimalari</a></li><li class="chapter-item expanded "><a href="appendix-07-nightly-rust.html"><strong aria-hidden="true">21.7.</strong> G - Rust qanday yasaladi va “Nightly Rust”</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Rust dasturlash tili</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/rust-lang/book" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="taxmin-qilish-oyinini-dasturlash"><a class="header" href="#taxmin-qilish-oyinini-dasturlash">Taxmin qilish o'yinini dasturlash</a></h1>
+<p>Keling, birgalikda amaliy loyiha orqali Rustga o'taylik! Ushbu bob sizni bir nechta umumiy Rust tushunchalari bilan tanishtirib, ulardan haqiqiy dasturda qanday foydalanishni ko'rsatib beradi.  Siz <code>let</code>, <code>match</code>, metodlari, bog'langan funksiyalar, external cratelardan foydalanish va boshqalar haqida bilib olasiz! Keyingi boblarda biz ushbu fikrlarni batafsilroq ko'rib chiqamiz. Ushbu bobda siz faqat asoslarni mashq qilasiz.</p>
+<p>Biz klassik boshlang'ich dasturlash muammosini amalga oshiramiz: taxmin qilish o'yini. Bu qanday ishlaydi: dastur 1 dan 100 gacha tasodifiy butun son hosil qiladi. Keyin u o'yinchini taxmin qilishni taklif qiladi.Tahmin kiritilgandan so'ng, dastur taxmin kichik yoki katta ekanligini ko'rsatadi. Agar taxmin to'g'ri bo'lsa, o'yin tabrik xabarini chop etadi va chiqadi.</p>
+<h2 id="yangi-loyiha-yaratish"><a class="header" href="#yangi-loyiha-yaratish">Yangi loyiha yaratish</a></h2>
+<p>Yangi loyihani o'rnatish uchun 1-bobda yaratgan <em>projects</em> jildiga o'ting va Cargo-dan foydalanib yangi loyiha yarating, masalan:</p>
+<pre><code class="language-console">$ cargo new taxminiy_raqam
+$ cd taxminiy_raqam
+</code></pre>
+<p>Birinchi <code>cargo new</code> buyrug'i birinchi argument sifatida loyiha nomini (<code>taxminiy_raqam</code>)ni oladi. Ikkinchi buyruq yangi loyiha jildiga kiradi.</p>
+<p>Yaratilgan <em>Cargo.toml</em> fayliga qarang:</p>
+<!-- manual-regeneration
+cd listings/ch02-guessing-game-tutorial
+rm -rf no-listing-01-cargo-new
+cargo new no-listing-01-cargo-new --name guessing_game
+cd no-listing-01-cargo-new
+cargo run > output.txt 2>&1
+cd ../../..
+-->
+<p><span class="filename">Fayl nomi: Cargo.toml</span></p>
+<pre><code class="language-toml">[package]
+name = &quot;taxminiy_raqam&quot;
+version = &quot;0.1.0&quot;
+edition = &quot;2021&quot;
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+</code></pre>
+<p>1-bobda ko'rganingizdek, <code>cargo new</code> siz uchun “Hello, world!” so'zini chop etadigan dastur yaratadi. <em>src/main.rs</em> faylini tekshiring:</p>
+<p><span class="filename">Fayl nomi: src/main.rs</span></p>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    println!(&quot;Hello, world!&quot;);
+}
+</code></pre></pre>
+<p>Keling, ushbu &quot;Hello, world!&quot; dasturni yarating va <code>cargo run</code> buyrug'i yordamida ishga tushiring :</p>
+<pre><code class="language-console">$ cargo run
+   Compiling taxminiy_raqam v0.1.0 (file:///projects/taxminiy_raqam)
+    Finished dev [unoptimized + debuginfo] target(s) in 1.50s
+     Running `target/debug/taxminiy_raqam`
+Hello, world!
+</code></pre>
+<p><code>run</code> buyrug‘i loyihani tezda takrorlash kerak bo‘lganda foydali bo‘ladi, biz bu o‘yinda qilganimizdek, keyingisiga o‘tishdan oldin har bir iteratsiyani tezda sinab ko‘ramiz.</p>
+<p><em>src/main.rs</em> faylini qayta oching. Siz ushbu fayldagi barcha kodlarni yozasiz.</p>
+<h2 id="taxmin-qilish-oyiniga-ishlov-berish"><a class="header" href="#taxmin-qilish-oyiniga-ishlov-berish">Taxmin qilish o'yiniga ishlov berish</a></h2>
+<p>Taxmin qilish o'yini dasturining birinchi qismi foydalanuvchi kiritishini so'raydi, ushbu kiritishni qayta ishlaydi va kirish kutilgan shaklda ekanligini tekshiradi. Boshlash uchun biz o'yinchiga taxmin kiritishga ruxsat beramiz. 2-1 ro'yxatdagi kodni <em>src/main.rs</em> ichiga kiriting.</p>
+<p><span class="filename">Fayl nomi: src/main.rs</span></p>
+<pre><code class="language-rust ignore">use std::io;
+
+fn main() {
+    println!(&quot;Raqamni topish o'yini!&quot;);
+
+    println!(&quot;Iltimos, taxminingizni kiriting.&quot;);
+
+    let mut taxmin = String::new();
+
+    io::stdin()
+        .read_line(&amp;mut taxmin)
+        .expect(&quot;Satrni o‘qib bo‘lmadi&quot;);
+
+    println!(&quot;Sizning taxminingiz: {taxmin}&quot;);
+}
+</code></pre>
+<p><span class="caption">Ro'yxat 2-1: Foydalanuvchi tomonidan taxmin qilinadigan va uni chop etadigan kod</span></p>
+<p>Ushbu kod juda ko'p ma'lumotlarni o'z ichiga oladi, shuning uchun uni satrga o'tkazamiz. Foydalanuvchi kiritishini olish va natijani chiqish sifatida chop etish uchun biz <code>io</code> input/output kutubxonasini qamrab olishimiz kerak. <code>io</code> kutubxonasi <code>std</code> deb nomlanuvchi standart kutubxonadan keladi:</p>
+<pre><code class="language-rust ignore">use std::io;
+</code></pre>
+<p>Odatda, Rust standart kutubxonada belgilangan elementlar to'plamiga ega bo'lib, u har bir dastur doirasiga kiradi. Ushbu to'plam <em>prelude</em> deb ataladi va siz undagi hamma narsani <a href="../std/prelude/index.html">standart kutubxona texnik hujjatlarida</a> ko'rishingiz mumkin.</p>
+<p>Agar siz foydalanmoqchi bo'lgan tur preludeda bo'lmasa, siz ushbu turni <code>use</code> iborasi bilan aniq kiritishingiz kerak. <code>std::io</code> kutubxonasidan foydalanish sizga bir qator foydali xususiyatlarni, jumladan, foydalanuvchi kiritishini qabul qilish imkoniyatini beradi.</p>
+<p>1-bobda ko'rganingizdek, <code>main</code> funksiya dasturga kirish nuqtasidir:</p>
+<pre><code class="language-rust ignore"><span class="boring">use std::io;
+</span><span class="boring">
+</span>fn main() {
+<span class="boring">    println!(&quot;Raqamni topish o'yini!&quot;);
+</span><span class="boring">
+</span><span class="boring">    println!(&quot;Iltimos, taxminingizni kiriting.&quot;);
+</span><span class="boring">
+</span><span class="boring">    let mut taxmin = String::new();
+</span><span class="boring">
+</span><span class="boring">    io::stdin()
+</span><span class="boring">        .read_line(&amp;mut taxmin)
+</span><span class="boring">        .expect(&quot;Satrni o‘qib bo‘lmadi&quot;);
+</span><span class="boring">
+</span><span class="boring">    println!(&quot;Sizning taxminingiz: {taxmin}&quot;);
+</span><span class="boring">}
+</span></code></pre>
+<p><code>fn</code> sintaksisi yangi funktsiyani e'lon qiladi; Qavslar, <code>()</code>, hech qanday parametr yo'qligini bildiradi; va jingalak qavs, <code>{</code>, funksiyaning asosiy qismini boshlaydi.</p>
+<p>1-bobda ham bilib olganingizdek, <code>println!</code> bu ekranga satrni chop etuvchi makros:</p>
+<pre><code class="language-rust ignore"><span class="boring">use std::io;
+</span><span class="boring">
+</span><span class="boring">fn main() {
+</span>    println!(&quot;Raqamni topish o'yini!&quot;);
+
+    println!(&quot;Iltimos, taxminingizni kiriting.&quot;);
+<span class="boring">
+</span><span class="boring">    let mut taxmin = String::new();
+</span><span class="boring">
+</span><span class="boring">    io::stdin()
+</span><span class="boring">        .read_line(&amp;mut taxmin)
+</span><span class="boring">        .expect(&quot;Satrni o‘qib bo‘lmadi&quot;);
+</span><span class="boring">
+</span><span class="boring">    println!(&quot;Sizning taxminingiz: {taxmin}&quot;);
+</span><span class="boring">}
+</span></code></pre>
+<p>Ushbu kod o'yin nima ekanligini ko'rsatuvchi va foydalanuvchidan ma'lumot so'rashni chop etadi.</p>
+<h3 id="ozgaruvchilar-bilan-qiymatlarni-saqlash"><a class="header" href="#ozgaruvchilar-bilan-qiymatlarni-saqlash">O'zgaruvchilar bilan qiymatlarni saqlash</a></h3>
+<p>Keyinchalik, foydalanuvchi ma'lumotlarini saqlash uchun <em>o'zgaruvchi</em> yaratamiz, masalan:</p>
+<pre><code class="language-rust ignore"><span class="boring">use std::io;
+</span><span class="boring">
+</span><span class="boring">fn main() {
+</span><span class="boring">    println!(&quot;Raqamni topish o'yini!&quot;);
+</span><span class="boring">
+</span><span class="boring">    println!(&quot;Iltimos, taxminingizni kiriting.&quot;);
+</span><span class="boring">
+</span>    let mut taxmin = String::new();
+<span class="boring">
+</span><span class="boring">    io::stdin()
+</span><span class="boring">        .read_line(&amp;mut taxmin)
+</span><span class="boring">        .expect(&quot;Satrni o‘qib bo‘lmadi&quot;);
+</span><span class="boring">
+</span><span class="boring">    println!(&quot;Sizning taxminingiz: {taxmin}&quot;);
+</span><span class="boring">}
+</span></code></pre>
+<p>Endi dastur qiziqarli bo'lib bormoqda! Bu kichik satrda juda ko'p narsa bor. O'zgaruvchini yaratish uchun <code>let</code> iborasidan foydalanamiz. Mana yana bir misol:</p>
+<pre><code class="language-rust ignore">let olmalar = 5;
+</code></pre>
+<p>Bu qator <code>olmalar</code> nomli yangi o‘zgaruvchini yaratadi va uni 5 qiymatiga bog‘laydi. Rustda o'zgaruvchilar standard bo'yicha o'zgarmasdir, ya'ni o'zgaruvchiga qiymat berganimizdan keyin qiymat o'zgarmaydi.Biz ushbu kontseptsiyani 3-bobdagi <a href="ch03-01-variables-and-mutability.html#variables-and-mutability">”O'zgaruvchilar va O'zgaruvchanlik”</a><!-- ignore --> bo'limida batafsil muhokama qilamiz. Oʻzgaruvchini oʻzgaruvchan qilish uchun oʻzgaruvchi nomidan oldin <code>mut</code> qoʻshamiz:</p>
+<pre><code class="language-rust ignore">let olmalar = 5; // o'zgarmas
+let mut bananlar = 5; // o'zgaruvchan
+</code></pre>
+<blockquote>
+<p>Eslatma: <code>//</code> sintaksisi satr oxirigacha davom etadigan izohni
+boshlaydi. Rust izohlarda hamma narsani e'tiborsiz qoldiradi.
+Izohlarni <a href="ch03-04-comments.html">3-bobda</a><!-- ignore --> batafsilroq muhokama qilamiz.</p>
+</blockquote>
+<p>Taxmin qilish o'yin dasturiga qaytsak, endi bilasizki, <code>let mut taxmin</code> <code>taxmin</code> nomli o'zgaruvchan o'zgaruvchini kiritadi. Teng belgisi (<code>=</code>) Rustga biz hozir biror narsani oʻzgaruvchiga bogʻlamoqchi ekanligimizni bildiradi. Tenglik belgisining o'ng tomonida <code>taxmin</code> bog'langan qiymat joylashgan bo'lib, u <code>String::new</code> funksiyasini chaqirish natijasidir, bu <code>String</code>ning yangi nusxasini qaytaradi.
+<a href="../std/string/struct.String.html">String</a><!-- ignore --> standart kutubxona tomonidan taqdim etilgan string turi bo'lib, u rivojlantirib boriladigan, UTF-8 kodlangan matn bitidir.</p>
+<p><code>::new</code> qatoridagi <code>::</code> sintaksisi <code>new</code> <code>String</code> tipidagi bog'langan funksiya ekanligini bildiradi. <em>Assosiatsiyalangan funksiya</em> bu funksiya
+turida amalga oshiriladi, bu holda <code>String</code>. Ushbu <code>new</code> funksiya yangi, bo'sh qatorni yaratadi. Siz ko'p turdagi <code>new</code> funksiyani topasiz, chunki u qandaydir yangi qiymatni yaratadigan funksiyaning umumiy nomi.</p>
+<p>To'liq <code>let mut taxmin = String::new();</code> qatori hozirda <code>String</code> ning yangi, bo'sh nusxasiga bog'langan o'zgaruvchan o'zgaruvchini yaratadi.</p>
+<h3 id="foydalanuvchi-malumotlarini-qabul-qilish"><a class="header" href="#foydalanuvchi-malumotlarini-qabul-qilish">Foydalanuvchi ma'lumotlarini qabul qilish</a></h3>
+<p>Eslatib o'tamiz, biz dasturning birinchi qatoriga <code>use std::io;</code> bilan standart kutubxonadan input/output funksiyasini kiritgan edik. Endi biz <code>io</code> modulidan <code>stdin</code> funksiyasini chaqiramiz, bu bizga foydalanuvchi kiritishini boshqarish imkonini beradi:</p>
+<pre><code class="language-rust ignore"><span class="boring">use std::io;
+</span><span class="boring">
+</span><span class="boring">fn main() {
+</span><span class="boring">    println!(&quot;Raqamni topish o'yini!&quot;);
+</span><span class="boring">
+</span><span class="boring">    println!(&quot;Iltimos, taxminingizni kiriting.&quot;);
+</span><span class="boring">
+</span><span class="boring">    let mut taxmin = String::new();
+</span><span class="boring">
+</span>    io::stdin()
+        .read_line(&amp;mut taxmin)
+<span class="boring">        .expect(&quot;Satrni o‘qib bo‘lmadi&quot;);
+</span><span class="boring">
+</span><span class="boring">    println!(&quot;Sizning taxminingiz: {taxmin}&quot;);
+</span><span class="boring">}
+</span></code></pre>
+<p>Agar biz dasturning boshida <code>use std::io;</code> bilan <code>io</code> kutubxonasini import qilmagan bo'lsak, biz ushbu funktsiya chaqiruvini <code>std::io::stdin</code> sifatida yozish orqali funksiyadan foydalanishimiz xam mumkin. <code>stdin</code> funksiyasi <a href="../std/io/struct.Stdin.html"><code>std::io::Stdin</code></a><!-- ignore --> misolini qaytaradi, bu sizning terminalingiz uchun standart kirish uchun asosni ifodalovchi tur.</p>
+<p>Keyinchalik, <code>.read_line(&amp;mut taxmin)</code> qatori foydalanuvchidan ma'lumot olish uchun standart kiritish nuqtasidagi <a href="../std/io/struct.Stdin.html#method.read_line"><code>read_line</code></a><!--ignore --> metodini chaqiradi.
+Shuningdek, foydalanuvchi kiritgan maʼlumotlarni qaysi qatorda saqlash kerakligini aytish uchun <code>read_line</code> ga argument sifatida <code>&amp;mut taxmin</code> ni oʻtkazamiz. <code>read_line</code> ning toʻliq vazifasi foydalanuvchi nima yozganidan qatʼiy nazar standart kiritishga olish va uni satrga qoʻshishdir (uning mazmunini qayta yozmasdan), shuning uchun biz bu qatorni argument sifatida beramiz. String argumenti o'zgaruvchan bo'lishi kerak, shuning uchun metod string tarkibini o'zgartirishi mumkin.</p>
+<p><code>&amp;</code> bu argument reference(havola) ekanligini bildiradi, bu sizga kodingizning bir nechta qismlariga ushbu ma'lumotni xotiraga bir necha marta nusxalash kerak bo'lmasdan bitta ma'lumotga kirish imkonini beradi. Referencelar murakkab xususiyat bo'lib, Rustning asosiy afzalliklaridan biri havolalardan foydalanish qanchalik xavfsiz va oson ekanligidir. Ushbu dasturni tugatish uchun ko'p bilimlrga ega bo'lishingiz shart emas. Hozircha siz bilishingiz kerak bo'lgan narsa shundaki, o'zgaruvchilar singari, havolalar ham standard bo'yicha o'zgarmasdir. Demak, uni oʻzgaruvchan qilish uchun <code>&amp;taxmin</code> oʻrniga <code>&amp;mut taxmin</code> yozish kerak. (4-bobda havolalar ko'proq va yaxshiroq tushuntiriladi)</p>
+<!-- Old heading. Do not remove or links may break. -->
+<p><a id="handling-potential-failure-with-the-result-type"></a></p>
+<h3 id="potensial-nosozlikni-result-turi-bilan-hal-qilish"><a class="header" href="#potensial-nosozlikni-result-turi-bilan-hal-qilish">Potensial nosozlikni <code>Result</code> turi bilan hal qilish</a></h3>
+<p>Biz hali ham ushbu kod qatori ustida ishlayapmiz. Biz hozir matnning uchinchi qatorini muhokama qilmoqdamiz, lekin u hali ham bitta mantiqiy kod qatorining bir qismi ekanligini unutmang. Keyingi qism bu metod:</p>
+<pre><code class="language-rust ignore"><span class="boring">use std::io;
+</span><span class="boring">
+</span><span class="boring">fn main() {
+</span><span class="boring">    println!(&quot;Raqamni topish o'yini!&quot;);
+</span><span class="boring">
+</span><span class="boring">    println!(&quot;Iltimos, taxminingizni kiriting.&quot;);
+</span><span class="boring">
+</span><span class="boring">    let mut taxmin = String::new();
+</span><span class="boring">
+</span><span class="boring">    io::stdin()
+</span><span class="boring">        .read_line(&amp;mut taxmin)
+</span>        .expect(&quot;Satrni o‘qib bo‘lmadi&quot;);
+<span class="boring">
+</span><span class="boring">    println!(&quot;Sizning taxminingiz: {taxmin}&quot;);
+</span><span class="boring">}
+</span></code></pre>
+<p>Biz ushbu kodni quyidagicha yozishimiz mumkin edi:</p>
+<pre><code class="language-rust ignore">io::stdin().read_line(&amp;mut taxmin).expect(&quot;Satrni o‘qib bo‘lmadi&quot;);
+</code></pre>
+<p>Biroq, bitta uzun qatorni o'qish qiyin, shuning uchun uni bo'lish yaxshidir. <code>.method_name()</code> sintaksisi bilan metodni chaqirganda uzun qatorlarni ajratishga yordam berish uchun yangi qator va boshqa bo'shliqlarni kiritish ko'pincha oqilona. Endi bu kod nima qilishini muhokama qilaylik.</p>
+<p>Yuqorida aytib o'tilganidek, <code>read_line</code> foydalanuvchi kiritgan narsani biz unga o'tkazadigan qatorga qo'yadi, lekin u <code>Result</code> qiymatini ham qaytaradi. <a href="../std/result/enum.Result.html"><code>Result</code></a><!-- ignore --> - ko'pincha <em>enum</em> deb ataladigan <a href="ch06-00-enums.html"><em>enumeration</em></a><!-- ignore -->, bu bir nechta mumkin bo'lgan holatlardan birida bo'lishi mumkin bo'lgan tur. Har bir mumkin bo'lgan holatni <em>variant</em> deb ataymiz.</p>
+<p><a href="ch06-00-enums.html">6-bobda</a><!-- ignore --> enumlar batafsilroq yoritiladi. Ushbu <code>Result</code> turlarining maqsadi xatolarni qayta ishlash ma'lumotlarini kodlashdir.</p>
+<p><code>Result</code> variantlari <code>Ok</code> va <code>Err</code>. <code>Ok</code> varianti operatsiya muvaffaqiyatli bo'lganligini bildiradi va <code>Ok</code> ichida muvaffaqiyatli yaratilgan qiymat.
+<code>Err</code> varianti operatsiya bajarilmaganligini bildiradi va <code>Err</code> operatsiya qanday yoki nima uchun bajarilmagani haqida maʼlumotni oʻz ichiga oladi.</p>
+<p><code>Result</code> turidagi qiymatlar, har qanday turdagi qiymatlar kabi, ularda aniqlangan metodlarga ega. <code>Result</code> misolida siz murojat qilishingiz mumkin bo'lgan <a href="../std/result/enum.Result.html#method.expect"><code>expect</code> metodi</a><!-- ignore --> mavjud. Agar <code>Result</code> ning ushbu namunasi <code>Err</code> qiymati bo'lsa, <code>expect</code> dasturning ishlamay qolishiga olib keladi va <code>expect</code> ga argument sifatida siz uzatgan xabarni ko'rsatadi. Agar <code>read_line</code> metodi <code>Err</code>ni qaytarsa, bu asosiy operatsion tizimdan kelgan xato natijasi bo'lishi mumkin.</p>
+<p>Agar <code>Result</code>ning ushbu namunasi <code>Ok</code> qiymati bo‘lsa, <code>expect</code> <code>Ok</code> ushlab turgan qaytarish qiymatini oladi va siz undan foydalanishingiz uchun aynan shu qiymatni sizga qaytaradi.
+Bunday holda, bu qiymat foydalanuvchi kiritishidagi baytlar soni.</p>
+<p>Agar siz <code>expect</code> ga murojat qilmasangiz, dastur kompilyatsiya qilinadi, lekin siz ogohlantirish olasiz:</p>
+<pre><code class="language-console">$ cargo build
+   Compiling taxminiy_raqam v0.1.0 (file:///projects/taxminiy_raqam)
+warning: unused `Result` that must be used
+  --&gt; src/main.rs:10:5
+   |
+10 |     io::stdin().read_line(&amp;mut taxmin);
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = note: this `Result` may be an `Err` variant, which should be handled
+   = note: `#[warn(unused_must_use)]` on by default
+
+warning: `taxminiy_raqam` (bin &quot;taxminiy_raqam&quot;) generated 1 warning
+    Finished dev [unoptimized + debuginfo] target(s) in 0.59s
+</code></pre>
+<p>Rust <code>read_line</code> dan qaytarilgan <code>Result</code> qiymatini ishlatmaganligingiz haqida ogohlantiradi, bu dastur mumkin bo'lgan xatoni hal qilmaganligini ko'rsatadi.</p>
+<p>Ogohlantirishni yo'qotishning to'g'ri yo'li aslida xatolarni qayta ishlash kodini yozishdir, ammo bizning holatlarimizda muammo yuzaga kelganda biz ushbu dasturni ishdan chiqarishni xohlaymiz, shuning uchun biz <code>expect</code> dan foydalanishimiz mumkin. Xatolarni tiklash haqida [9-bobda]recover]<!-- ignore --> bilib olasiz.</p>
+<h3 id="qiymatlarni-println--bilan-chop-etish"><a class="header" href="#qiymatlarni-println--bilan-chop-etish">Qiymatlarni <code>println!</code>  bilan chop etish</a></h3>
+<p>Yopuvchi jingalak qavsdan tashqari, kodda hozirgacha muhokama qilinadigan yana bitta satr mavjud:</p>
+<pre><code class="language-rust ignore"><span class="boring">use std::io;
+</span><span class="boring">
+</span><span class="boring">fn main() {
+</span><span class="boring">    println!(&quot;Raqamni topish o'yini!&quot;);
+</span><span class="boring">
+</span><span class="boring">    println!(&quot;Iltimos, taxminingizni kiriting.&quot;);
+</span><span class="boring">
+</span><span class="boring">    let mut taxmin = String::new();
+</span><span class="boring">
+</span><span class="boring">    io::stdin()
+</span><span class="boring">        .read_line(&amp;mut taxmin)
+</span><span class="boring">        .expect(&quot;Satrni o‘qib bo‘lmadi&quot;);
+</span><span class="boring">
+</span>    println!(&quot;Sizning taxminingiz: {taxmin}&quot;);
+<span class="boring">}
+</span></code></pre>
+<p>Ushbu satr foydalanuvchi kiritishini o'z ichiga olgan qatorni chop etadi. <code>{}</code> jingalak qavslar to'plami o'rnini egallaydi: <code>{}</code> qiymatini joyida ushlab turadigan qisqichbaqa qisqichlari deb tasavvur qiling. O'zgaruvchining qiymatini chop etishda o'zgaruvchi nomi jingalak qavslar ichiga kirishi mumkin. Ifodani baholash natijasini chop etishda format satriga bo'sh jingalak qavslarni joylashtiring, so'ngra har bir bo'sh jingalak qavs o'rnini egallagan holda bir xil tartibda chop etish uchun vergul bilan ajratilgan iboralar ro'yxati bilan format qatoriga amal qiling. O‘zgaruvchini va ifoda natijasini <code>println!</code> ga bitta chaqiruvda chop etish quyidagicha ko‘rinadi:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let x = 5;
+let y = 10;
+
+println!(&quot;x = {x} va y + 2 = {}&quot;, y + 2);
+<span class="boring">}
+</span></code></pre></pre>
+<p>Bu kod <code>x = 5 va y + 2 = 12</code> ni chop etadi.</p>
+<h3 id="birinchi-qismni-sinovdan-otkazish"><a class="header" href="#birinchi-qismni-sinovdan-otkazish">Birinchi qismni sinovdan o'tkazish</a></h3>
+<p>Keling, taxmin qilish o'yinining birinchi qismini sinab ko'raylik. Uni <code>cargo run</code> yordamida ishga tushiring:</p>
+<!-- manual-regeneration
+cd listings/ch02-guessing-game-tutorial/listing-02-01/
+cargo clean
+cargo run
+input 6 -->
+<pre><code class="language-console">$ cargo run
+   Compiling taxminiy_raqam v0.1.0 (file:///projects/taxminiy_raqam)
+    Finished dev [unoptimized + debuginfo] target(s) in 6.44s
+     Running `target/debug/taxminiy_raqam`
+Raqamni topish o'yini!
+Iltimos, taxminingizni kiriting.
+6
+Sizni taxminingiz: 6
+</code></pre>
+<p>Shu nuqtada, o'yinning birinchi qismi tugadi: biz klaviaturadan ma'lumotlarni olamiz va keyin uni chop etamiz.</p>
+<h2 id="yashirin-raqam-yaratish"><a class="header" href="#yashirin-raqam-yaratish">Yashirin raqam yaratish</a></h2>
+<p>Keyinchalik, foydalanuvchi taxmin qilishga harakat qiladigan maxfiy raqamni yaratishimiz kerak. Yashirin raqam har safar boshqacha bo'lishi kerak, shuning uchun o'yinni bir necha marta o'ynash qiziqarli bo'ladi. O'yin juda qiyin bo'lmasligi uchun biz 1 dan 100 gacha bo'lgan tasodifiy raqamdan foydalanamiz. Rust hali o'zining standart kutubxonasida tasodifiy raqamlar funksiyasini o'z ichiga olmaydi. Biroq, Rust jamoasi ushbu funksiyaga <a href="https://crates.io/crates/rand"><code>rand</code> crate</a>i taqdim etadi.</p>
+<h3 id="koproq-funksionallikka-ega-bolish-uchun-cratedan-foydalanish"><a class="header" href="#koproq-funksionallikka-ega-bolish-uchun-cratedan-foydalanish">Ko'proq funksionallikka ega bo'lish uchun Cratedan foydalanish</a></h3>
+<p>Esda tutingki, crate Rust manba kodi fayllari to'plamidir. Biz qurayotgan loyiha <em>binary crate</em> bo'lib, u bajariladigan. <code>rand</code> crate boshqa dasturlarda foydalanish uchun moʻljallangan va mustaqil ravishda bajarib boʻlmaydigan kodni oʻz ichiga olgan <em>library crate</em>.</p>
+<p>Cargoning tashqi cratelarni muvofiqlashtirishi bu erda Cargp haqiqatan ham ishlaydi. <code>rand</code> dan foydalanadigan kodni yozishdan oldin, biz <em>Cargo.toml</em> faylini <code>rand</code> cratesini dependency sifatida qo‘shish uchun o‘zgartirishimiz kerak. Hozir o‘sha faylni oching va Cargo siz uchun yaratgan<code>[dependencies]</code> bo‘limi sarlavhasi ostiga quyidagi qatorni qo‘shing.<code>rand</code> ni aynan bizda boʻlganidek, ushbu versiya raqami bilan belgilaganingizga ishonch hosil qiling, aks holda ushbu qoʻllanmadagi kod misollari ishlamasligi mumkin:</p>
+<!-- When updating the version of `rand` used, also update the version of
+`rand` used in these files so they all match:
+* ch07-04-bringing-paths-into-scope-with-the-use-keyword.md
+* ch14-03-cargo-workspaces.md
+-->
+<p><span class="filename">Fayl nomi: Cargo.toml</span></p>
+<pre><code class="language-toml">[dependencies]
+rand = &quot;0.8.5&quot;
+</code></pre>
+<p><em>Cargo.toml</em> faylida sarlavhadan keyingi hamma narsa boshqa bo'lim boshlanmaguncha davom etadigan bo'limning bir qismidir. <code>[dependencies]</code> da siz Cargo loyihangiz qaysi tashqi cratelarga bog'liqligini va bu cratelarning qaysi versiyalari kerakligini aytasiz. Bunday holda, biz <code>rand</code> crateni <code>0.8.5</code> semantik versiya spetsifikatsiyasi bilan belgilaymiz. Cargo versiya raqamlarini yozish uchun standart bo'lgan <a href="http://semver.org">Semantic Versioning</a><!-- ignore -->ni (ba'zan <em>SemVer</em> deb ataladi) tushunadi. <code>0.8.5</code> spetsifikatsiyasi aslida <code>^0.8.5</code> ning qisqartmasi boʻlib, kamida 0.8.5, lekin 0.9.0 dan past boʻlgan har qanday versiyani bildiradi.</p>
+<p>Cargo ushbu versiyalarni 0.8.5 versiyasiga mos keladigan umumiy API-larga ega deb hisoblaydi va bu spetsifikatsiya sizga ushbu bobdagi kod bilan tuziladigan so‘nggi patch versiyasini olishingizni kafolatlaydi. 0.9.0 yoki undan kattaroq versiyalar quyidagi misollar ishlatadigan API bilan bir xil bo'lishi kafolatlanmaydi.</p>
+<p>Endi, hech qanday kodni o'zgartirmasdan, 2-2 ro'yxatda ko'rsatilganidek, loyihani build qilaylik.</p>
+<!-- manual-regeneration
+cd listings/ch02-guessing-game-tutorial/listing-02-02/
+rm Cargo.lock
+cargo clean
+cargo build -->
+<pre><code class="language-console">$ cargo build
+    Updating crates.io index
+  Downloaded rand v0.8.5
+  Downloaded libc v0.2.127
+  Downloaded getrandom v0.2.7
+  Downloaded cfg-if v1.0.0
+  Downloaded ppv-lite86 v0.2.16
+  Downloaded rand_chacha v0.3.1
+  Downloaded rand_core v0.6.3
+   Compiling libc v0.2.127
+   Compiling getrandom v0.2.7
+   Compiling cfg-if v1.0.0
+   Compiling ppv-lite86 v0.2.16
+   Compiling rand_core v0.6.3
+   Compiling rand_chacha v0.3.1
+   Compiling rand v0.8.5
+   Compiling taxminiy_raqam v0.1.0 (file:///projects/taxminiy_raqam)
+    Finished dev [unoptimized + debuginfo] target(s) in 2.53s
+</code></pre>
+<p><span class="caption">Ro'yxat 2-2: rand cratesini dependency sifatida qo'shgandan so'ng <code>cargo build</code> dan olingan natija</span></p>
+<p>Siz turli xil versiya raqamlarini (lekin ularning barchasi SemVer tufayli kod bilan mos keladi!) va turli xil satrlarni (operatsion tizimga qarab) ko'rishingiz mumkin va satrlar boshqa tartibda bo'lishi mumkin.</p>
+<p>Biz tashqi dependency qo'shganimizda, Cargo <a href="https://crates.io/">Crates.io</a> ma'lumotlarining nusxasi bo'lgan  <em>registry</em> dan dependency uchun zarur bo'lgan barcha narsalarning so'nggi versiyalarini oladi.Crates.io - bu Rust ekotizimidagi odamlar o'zlarining ochiq manbali Rust loyihalarini boshqalar foydalanishi uchun joylashtiradigan joy.</p>
+<p>registrni yangilagandan so'ng, Cargo  <code>[dependencies]</code>  bo'limini tekshiradi va ro'yxatda hali yuklab olinmagan cratelarni yuklab oladi. Bu holatda, garchi biz faqat <code>rand</code> ni dependency sifatida ko'rsatgan bo'lsak-da, Cargo <code>rand</code> ishlashga bog'liq bo'lgan boshqa cratelarni ham oldi. Cratelarni yuklab olgandan so'ng, Rust ularni kompilyatsiya qiladi va keyin mavjud bo'lgan dependency bilan loyihani tuzadi.</p>
+<p>Agar siz hech qanday o'zgartirishlarsiz darhol <code>cargo build</code> ni qayta ishga tushirsangiz, <code>Finished</code> qatoridan boshqa hech qanday natija olmaysiz. Cargo allaqachon dependencylarni yuklab olganini va kompilyatsiya qilganini biladi va siz <em>Cargo.toml</em> faylida ular haqida hech narsani o'zgartirmagansiz. Cargo, shuningdek, kodingiz haqida hech narsani o'zgartirmaganligingizni biladi, shuning uchun u ham uni qayta kompilyatsiya qilmaydi. Hech narsa qilmasdan, u shunchaki chiqib ketadi.</p>
+<p>Agar siz <em>src/main.rs</em> faylini ochsangiz, ahamiyatsiz o'zgarishlarni amalga oshirsangiz va keyin uni saqlab va qayta build qilsangiz, siz faqat ikkita chiqish qatorini ko'rasiz:</p>
+<!-- manual-regeneration
+cd listings/ch02-guessing-game-tutorial/listing-02-02/
+touch src/main.rs
+cargo build -->
+<pre><code class="language-console">$ cargo build
+   Compiling taxminiy_raqam v0.1.0 (file:///projects/taxminiy_raqam)
+    Finished dev [unoptimized + debuginfo] target(s) in 2.53 secs
+</code></pre>
+<p>Bu satrlar shuni ko'rsatadiki, Cargo faqat <em>src/main.rs</em> fayliga kichik o'zgartirishingiz bilan buildni yangilaydi. Sizning dependencylaringiz o'zgarmadi, shuning uchun Cargo allaqachon yuklab olingan va ular uchun tuzilgan narsadan qayta foydalanishi mumkinligini biladi..</p>
+<h4 id="cargolock-fayli-bilan-qayta-tiklanadigan-tuzilmalarni-taminlash"><a class="header" href="#cargolock-fayli-bilan-qayta-tiklanadigan-tuzilmalarni-taminlash"><em>Cargo.lock</em> fayli bilan qayta tiklanadigan tuzilmalarni ta'minlash</a></h4>
+<p>Cargoda siz yoki boshqa birov kodingizni har safar yaratganingizda bir xil artefaktni qayta tiklashingiz mumkinligini ta'minlaydigan mexanizm mavjud: Siz aksini ko'rsatmaguningizcha, cargo faqat siz ko'rsatgan dependency versiyalaridan foydalanadi. Masalan, kelasi hafta <code>rand</code> cratening 0.8.6 versiyasi chiqadi va bu versiyada muhim xatoliklar tuzatilgan, lekin u sizning kodingizni buzadigan regressiyani ham o‘z ichiga oladi. Buni hal qilish uchun Rust birinchi marta  <code>cargo build</code> dasturini ishga tushirganingizda <em>Cargo.lock</em> faylini yaratadi, shuning uchun biz endi bu <em>guessing_game</em> jildida mavjud.</p>
+<p>Loyihani birinchi marta yaratganingizda, Cargo mezonlarga mos keladigan dependencylarning barcha versiyalarini aniqlaydi va keyin ularni <em>Cargo.lock</em> fayliga yozadi. Keyingi loyihangizni yaratganingizda, Cargo <em>Cargo.lock</em> fayli mavjudligini ko'radi va versiyalarni qayta aniqlash uchun barcha ishlarni bajarishdan ko'ra, u erda ko'rsatilgan versiyalardan foydalanadi. Bu sizga avtomatik ravishda takrorlanadigan tuzilishga ega bo'lish imkonini beradi. Boshqacha qilib aytganda, <em>Cargo.lock</em> fayli tufayli loyihangiz aniq yangilanmaguningizcha 0.8.5 da qoladi.
+<em>Cargo.lock</em> fayli qayta tiklanadigan tuzilmalar uchun muhim bo'lgani uchun u ko'pincha loyihangizdagi kodning qolgan qismi bilan manba nazoratida tekshiriladi.</p>
+<h4 id="yangi-versiyani-olish-uchun-crateni-yangilash"><a class="header" href="#yangi-versiyani-olish-uchun-crateni-yangilash">Yangi versiyani olish uchun Crateni yangilash</a></h4>
+<p>Crateni yangilamoqchi bo'lsangiz, Cargo <code>update</code> buyrug'ini beradi, bu buyruq <em>Cargo.lock</em> faylini e'tiborsiz qoldiradi va <em>Cargo.toml</em> dagi texnik xususiyatlaringizga mos keladigan barcha so'nggi versiyalarni aniqlaydi. Keyin Cargo ushbu versiyalarni <em>Cargo.lock</em> fayliga yozadi. Aks holda, standart bo'yicha, Cargo faqat 0.8.5 dan katta va 0.9.0 dan kichik versiyalarni qidiradi. Agar <code>rand</code> cratesi ikkita yangi 0.8.6 va 0.9.0 versiyalarini chiqargan bo'lsa, <code>cargo update</code> ni ishga tushirgan bo'lsangiz, quyidagilarni ko'rasiz:</p>
+<!-- manual-regeneration
+cd listings/ch02-guessing-game-tutorial/listing-02-02/
+cargo update
+assuming there is a new 0.8.x version of rand; otherwise use another update
+as a guide to creating the hypothetical output shown here -->
+<pre><code class="language-console">$ cargo update
+    Updating crates.io index
+    Updating rand v0.8.5 -&gt; v0.8.6
+</code></pre>
+<p>Cargo 0.9.0 versiyasiga e'tibor bermaydi. Bu vaqtda siz <em>Cargo.lock</em> faylingizda oʻzgarishlarni ham sezasiz, bunda siz hozir foydalanayotgan <code>rand</code>  cratesi versiyasi 0.8.6. <code>rand</code> 0.9.0 versiyasidan yoki 0.9.<em>x</em> seriyasining istalgan versiyasidan foydalanish uchun <em>Cargo.toml</em> faylini quyidagi koʻrinishda yangilashingiz kerak boʻladi:</p>
+<pre><code class="language-toml">[dependencies]
+rand = &quot;0.9.0&quot;
+</code></pre>
+<p>Keyingi safar <code>cargo build</code>ni ishga tushirganingizda, Cargo mavjud cratelar reestrini yangilaydi va siz ko‘rsatgan yangi versiyaga muvofiq <code>rand</code> talablaringizni qayta baholaydi.</p>
+<p><a href="http://doc.crates.io">Cargo</a><!-- ignore --> va uning <a href="http://doc.crates.io/crates-io.html">ekotizimlari</a><!-- ignore --> haqida ko'p gapirish mumkin, biz ularni 14-bobda muhokama qilamiz, ammo hozircha bilishingiz kerak bo'lgan narsa shu. Cargo kutubxonalarni qayta ishlatishni juda osonlashtiradi, shuning uchun Rustaceans bir nechta paketlardan yig'ilgan kichikroq loyihalarni yozishga qodir.</p>
+<h3 id="tasodifiy-raqamni-yaratish"><a class="header" href="#tasodifiy-raqamni-yaratish">Tasodifiy raqamni yaratish</a></h3>
+<p>Keling, taxmin qilish uchun raqam yaratishda <code>rand</code> dan foydalanishni boshlaylik. Keyingi qadam 2-3 ro'yxatda ko'rsatilganidek <em>src/main.rs</em> ni yangilashdir.</p>
+<p><span class="filename">Fayl nomi: src/main.rs</span></p>
+<pre><code class="language-rust ignore">use std::io;
+use rand::Rng;
+
+fn main() {
+    println!(&quot;Raqamni topish o'yini!&quot;);
+
+    let yashirin_raqam = rand::thread_rng().gen_range(1..=100);
+
+    println!(&quot;Yashirin raqam: {yashirin_raqam}&quot;);
+
+    println!(&quot;Iltimos, taxminingizni kiriting.&quot;);
+
+    let mut taxmin = String::new();
+
+    io::stdin()
+        .read_line(&amp;mut taxmin)
+        .expect(&quot;Satrni o‘qib bo‘lmadi&quot;);
+
+    println!(&quot;Sizning taxminingiz: {taxmin}&quot;);
+}
+</code></pre>
+<p><span class="caption">Ro'yxat 2-3: Tasodifiy raqam yaratish uchun kod qo'shiladi</span></p>
+<p>Avval <code>use rand::Rng;</code> qatorini qo'shamiz. <code>Rng</code> traiti tasodifiy sonlar generatorlari qo'llaydigan metodlarni belgilaydi va biz ushbu usullardan foydalanishimiz uchun bu trait mos bo'lishi kerak. 10-bobda traitlar batafsil yoritiladi.</p>
+<p>Keyin o'rtada ikkita qator qo'shamiz. Birinchi qatorda biz <code>rand::thread_rng</code> funksiyasini chaqiramiz, bu bizga biz foydalanmoqchi bo'lgan tasodifiy sonlar generatorini beradi: joriy bajarilish oqimi uchun mahalliy bo'lgan va operatsion tizim tomonidan ekilgan. Keyin tasodifiy sonlar generatorida <code>gen_range</code> metodini chaqiramiz. Bu metod biz <code>use rand::Rng;</code>  iborasi bilan qamrab olgan <code>Rng</code> traiti bilan aniqlanadi. <code>gen_range</code> metodi argument sifatida diapazon ifodasini oladi va diapazonda tasodifiy son hosil qiladi. Biz bu yerda foydalanayotgan diapazon ifodasi turi <code>start..=end</code>  shaklini oladi va pastki va yuqori chegaralarni qamrab oladi, shuning uchun biz 1 va 100 oralig‘idagi raqamni so‘rash uchun <code>1..=100</code> ni belgilashimiz kerak. .</p>
+<blockquote>
+<p>Eslatma: Siz faqat qaysi traitlardan foydalanishni va qaysi metodlar va funktsiyalarni
+cratedan chaqirishni bila olmaysiz, shuning uchun har bir crateda foydalanish bo'yicha
+ko'rsatmalar mavjud. Cargo-ning yana bir qulay xususiyati shundaki, <code>cargo doc --open</code> buyrug'ini
+ishga tushirish sizning barcha dependencylar tomonidan taqdim etilgan texnik hujjatlarni
+mahalliy sifatida tuzadi va uni brauzeringizda ochadi. Agar siz <code>rand</code> cratedagi boshqa
+funksiyalarga qiziqsangiz, masalan, <code>cargo doc --open</code> ni ishga tushiring va chap tomondagi
+yon paneldagi <code>rand</code> tugmasini bosing.</p>
+</blockquote>
+<p>Ikkinchi yangi qator maxfiy raqamni chop etadi. Bu dasturni ishlab chiqishda uni sinab ko'rishimiz uchun foydalidir, lekin biz uni oxirgi versiyadan o'chirib tashlaymiz. Agar dastur boshlanishi bilanoq javobni chop etsa, bu unchalik o'yin emas!</p>
+<p>Dasturni bir necha marta ishga tushirishga harakat qiling:</p>
+<!-- manual-regeneration
+cd listings/ch02-guessing-game-tutorial/listing-02-03/
+cargo run
+4
+cargo run
+5
+-->
+<pre><code class="language-console">$ cargo run
+   Compiling taxminiy_raqam v0.1.0 (file:///projects/taxminiy_raqam)
+    Finished dev [unoptimized + debuginfo] target(s) in 2.53s
+     Running `target/debug/taxminiy_raqam`
+Raqamni topish o'yini!
+Yashirin raqam: 7
+Iltimos, taxminingizni kiriting.
+4
+Siznig taxminingiz: 4
+
+$ cargo run
+    Finished dev [unoptimized + debuginfo] target(s) in 0.02s
+     Running `target/debug/taxminiy_raqam`
+Raqamni topish o'yini!
+Yashirin raqam: 83
+Iltimos, taxminingizni kiriting.
+5
+Siznig taxminingiz: 5
+</code></pre>
+<p>Siz turli xil tasodifiy raqamlarni olishingiz kerak va ularning barchasi 1 dan 100 gacha raqamlar bo'lishi kerak. Ajoyib ish!</p>
+<h2 id="taxminni-maxfiy-raqam-bilan-solishtirish"><a class="header" href="#taxminni-maxfiy-raqam-bilan-solishtirish">Taxminni maxfiy raqam bilan solishtirish</a></h2>
+<p>Endi bizda foydalanuvchi kiritishi va tasodifiy raqam bor, biz ularni solishtirishimiz mumkin. Ushbu qadam 2-4 ro'yxatda ko'rsatilgan. E'tibor bering, bu kod hozircha kompilatsiya bo'lmaydi, biz tushuntiramiz.</p>
+<p><span class="filename">Fayl nomi: src/main.rs</span></p>
+<pre><code class="language-rust ignore does_not_compile">use rand::Rng;
+use std::cmp::Ordering;
+use std::io;
+
+fn main() {
+    // --snip--
+<span class="boring">    println!(&quot;Raqamni topish o'yini!&quot;);
+</span><span class="boring">
+</span><span class="boring">    let yashirin_raqam = rand::thread_rng().gen_range(1..=100);
+</span><span class="boring">
+</span><span class="boring">    println!(&quot;Yashirin raqam: {yashirin_raqam}&quot;);
+</span><span class="boring">
+</span><span class="boring">    println!(&quot;Iltimos, taxminingizni kiriting.&quot;);
+</span><span class="boring">
+</span><span class="boring">    let mut taxmin = String::new();
+</span><span class="boring">
+</span><span class="boring">    io::stdin()
+</span><span class="boring">        .read_line(&amp;mut taxmin)
+</span><span class="boring">        .expect(&quot;Satrni o‘qib bo‘lmadi&quot;);
+</span>
+    println!(&quot;Sizning taxminingiz: {taxmin}&quot;);
+
+    match taxmin.cmp(&amp;yashirin_raqam) {
+        Ordering::Less =&gt; println!(&quot;Raqam Kichik!&quot;),
+        Ordering::Greater =&gt; println!(&quot;Raqam katta!&quot;),
+        Ordering::Equal =&gt; println!(&quot;Siz yutdingiz!&quot;),
+    }
+}
+</code></pre>
+<p><span class="caption">Ro'yxat 2-4: Ikki raqamni solishtirishning mumkin bo'lgan qaytish qiymatlarini boshqarish</span></p>
+<p>Avval biz standart kutubxonadan <code>std::cmp::Ording</code> deb nomlangan turni olib keladigan yana bir <code>use</code> iborasini qo'shamiz. <code>Ordering</code> turi boshqa raqam boʻlib, <code>Less</code>, <code>Greater</code> va <code>Equal</code> variantlariga ega. Bu ikkita qiymatni solishtirganda mumkin bo'lgan uchta natijadir.</p>
+<p>Keyin pastki qismida <code>Ordering</code> turidan foydalanadigan beshta yangi qator qo'shamiz. <code>cmp</code> metodi ikkita qiymatni solishtiradi va uni solishtirish mumkin bo'lgan har qanday narsani chaqirish mumkin. Siz solishtirmoqchi bo'lgan narsaga reference kerak: bu erda <code>taxmin</code> bilan <code>yashirin_raqam</code> solishtiriladi. Keyin u biz <code>use</code>  iborasi bilan qamrab olgan <code>Ordering</code>  raqamining variantini qaytaradi. Biz <code>taxmin</code> va <code>yashirin_raqam</code> qiymatlari bilan <code>cmp</code> ga murojatdan <code>Ordering</code> ning qaysi varianti qaytarilganiga qarab, keyin nima qilish kerakligini hal qilish uchun <a href="ch06-02-match.html"><code>match</code></a><!-- ignore --> ifodasidan foydalanamiz.</p>
+<p><code>Match</code> ifodasi <em>arms</em> dan tuzilgan. Arm mos keladigan <em>pattern</em> va agar <code>match</code> ga berilgan qiymat armning patterniga mos kelsa, bajarilishi kerak bo'lgan koddan iborat. Rust <code>match</code> ga berilgan qiymatni oladi va har bir armning patternini o'z navbatida ko'rib chiqadi. Patternlar va <code>match</code> konstruksiyasi Rust-ning kuchli xususiyatlari hisoblanadi: ular sizning kodingiz duch kelishi mumkin bo'lgan turli vaziyatlarni ifodalash imkonini beradi va ularning barchasini boshqarishingizga ishonch hosil qiladi. Bu xususiyatlar mos ravishda 6-bobda va 18-bobda batafsil yoritiladi.</p>
+<p>Keling, bu yerda ishlatadigan <code>match</code> iborasi bilan bir misolni ko'rib chiqaylik. Aytaylik, foydalanuvchi 50 ni taxmin qilgan va bu safar tasodifiy yaratilgan maxfiy raqam 38 ni tashkil qiladi.</p>
+<p>Kod 50 ni 38 ga solishtirganda, <code>cmp</code> metodi <code>Ordering::Greater</code> ni qaytaradi, chunki 50 38 dan katta. <code>match</code> ifodasi <code>Ordering::Greater</code> qiymatini oladi va har bir armning patternini tekshirishni boshlaydi. U birinchi armning <code>Ordering::Less</code> patternini koʻrib chiqadi va <code>Ordering::Greater</code> qiymati <code>Ordering::Less</code> qiymatiga mos kelmasligini koʻradi, shuning uchun u armdagi kodga eʼtibor bermaydi va keyingi armga oʻtadi. Keyingi armning namunasi <code>Ordering::Greater</code> boʻlib, <code>Ordering::Greater</code> bilan <em>does</em> match  keladi! Oʻsha armdagi bogʻlangan kod ishga tushadi va ekranga <code>Raqam katta!</code> deb chop etiladi. <code>match</code> iborasi birinchi muvaffaqiyatli o'yindan keyin tugaydi, shuning uchun bu senariydagi oxirgi armni ko'rib chiqmaydi.</p>
+<p>Biroq, 2-4 ro'yxatdagi kod hali kompilyatsiya qilinmaydi. Keling, sinab ko'raylik:</p>
+<!--
+The error numbers in this output should be that of the code **WITHOUT** the
+anchor or snip comments
+-->
+<pre><code class="language-console">$ cargo build
+   Compiling libc v0.2.86
+   Compiling getrandom v0.2.2
+   Compiling cfg-if v1.0.0
+   Compiling ppv-lite86 v0.2.10
+   Compiling rand_core v0.6.2
+   Compiling rand_chacha v0.3.0
+   Compiling rand v0.8.5
+   Compiling taxminiy_raqam v0.1.0 (file:///projects/taxminiy_raqam)
+error[E0308]: mismatched types
+  --&gt; src/main.rs:22:21
+   |
+22 |     match taxmin.cmp(&amp;yashirin_raqam) {
+   |                 --- ^^^^^^^^^^^^^^ expected struct `String`, found integer
+   |                 |
+   |                 arguments to this function are incorrect
+   |
+   = note: expected reference `&amp;String`
+              found reference `&amp;{integer}`
+note: associated function defined here
+  --&gt; /rustc/d5a82bbd26e1ad8b7401f6a718a9c57c96905483/library/core/src/cmp.rs:783:8
+
+For more information about this error, try `rustc --explain E0308`.
+error: could not compile `taxminiy_raqame` due to previous error
+</code></pre>
+<p>Xatoning asosi <em>mos kelmaydigan turlar</em> mavjudligini bildiradi. Rust kuchli, statik turdagi tizimga ega. Biroq, u ham turdagi inference ega. Biz <code>let mut taxmin = String::new()</code> deb yozganimizda, Rust <code>taxmin</code> <code>String</code> bo'lishi kerak degan xulosaga keldi va bizni turni yozishga majburlamadi. Boshqa tomondan, <code>yashirin_raqam</code> raqam turidir. Rust raqamlarining bir nechta turlari 1 dan 100 gacha qiymatga ega bo'lishi mumkin: <code>i32</code>, 32 bitli raqam; <code>u32</code>, unsigned 32-bitli raqam; <code>i64</code>, 64-bitli raqam; boshqalar kabi. Agar boshqacha koʻrsatilmagan boʻlsa, Rust standart boʻyicha <code>i32</code> ga oʻrnatiladi, bu <code>yashirin_raqam</code> turiga, agar siz Rustning boshqa raqamli turini chiqarishiga olib keladigan turdagi maʼlumotlarni boshqa joyga qoʻshmasangiz. Xatoning sababi shundaki, Rust string va raqam turini taqqoslay olmaydi.</p>
+<p>Oxir-oqibat, biz dastur tomonidan kiritilgan <code>String</code> ni haqiqiy son turiga aylantirmoqchimiz, shuning uchun uni raqamli raqam bilan yashirin raqam bilan solishtirishimiz mumkin.Buni <code>main</code> funksiya tanasiga ushbu qatorni qo'shish orqali qilamiz:</p>
+<p><span class="filename">Fayl nomi: src/main.rs</span></p>
+<pre><code class="language-rust ignore"><span class="boring">use rand::Rng;
+</span><span class="boring">use std::cmp::Ordering;
+</span><span class="boring">use std::io;
+</span><span class="boring">
+</span><span class="boring">fn main() {
+</span><span class="boring">    println!(&quot;Raqamni topish o'yini!&quot;);
+</span><span class="boring">
+</span><span class="boring">    let yashirin_raqam = rand::thread_rng().gen_range(1..=100);
+</span><span class="boring">
+</span><span class="boring">    println!(&quot;Yashirin raqam: {yashirin_raqam}&quot;);
+</span><span class="boring">
+</span><span class="boring">    println!(&quot;Iltimos, taxminingizni kiriting.&quot;);
+</span><span class="boring">
+</span>    // --snip--
+
+    let mut taxmin = String::new();
+
+    io::stdin()
+        .read_line(&amp;mut taxmin)
+        .expect(&quot;Satrni o‘qib bo‘lmadi&quot;);
+
+    let taxmin: u32 = taxmin.trim().parse().expect(&quot;Iltimos, raqam yozing!&quot;);
+
+    println!(&quot;Sizning taxminingiz: {taxmin}&quot;);
+
+    match taxmin.cmp(&amp;yashirin_raqam) {
+        Ordering::Less =&gt; println!(&quot;Raqam Kichik!&quot;),
+        Ordering::Greater =&gt; println!(&quot;Raqam katta!&quot;),
+        Ordering::Equal =&gt; println!(&quot;Siz yutdingiz!&quot;),
+    }
+<span class="boring">}
+</span></code></pre>
+<p>Satr</p>
+<pre><code class="language-rust ignore">let taxmin: u32 = taxmin.trim().parse().expect(&quot;Iltimos, raqam yozing!&quot;);
+</code></pre>
+<p>Biz <code>taxmin</code> nomli o'zgaruvchini yaratamiz. Ammo shoshilmang, dasturda allaqachon <code>taxmin</code> nomli o'zgaruvchi mavjud emasmi? Bu shunday, lekin foydali Rust bizga <code>taxmin</code> ning oldingi qiymatini yangisi bilan ergashtirish imkonini beradi. <em>Shadowing</em> bizga ikkita noyob oʻzgaruvchini yaratish oʻrniga, <code>taxmin</code> oʻzgaruvchi nomidan qayta foydalanish imkonini beradi, masalan, <code>taxmin_str</code> va <code>taxmin</code>. Biz buni <a href="ch03-01-variables-and-mutability.html#shadowing">3-bobda</a><!-- ignore --> batafsil ko'rib chiqamiz, ammo hozircha shuni bilingki, bu xususiyat ko'pincha qiymatni bir turdan boshqa turga aylantirmoqchi bo'lganingizda ishlatiladi.</p>
+<p>Biz bu yangi o'zgaruvchini <code>taxmin.trim().parse()</code> ifodasiga bog'laymiz. Ifodadagi <code>taxmin</code> matni qator sifatida kiritilgan asl <code>taxmin</code> o'zgaruvchisiga ishora qiladi. <code>String</code> misolidagi <code>trim</code> metodi boshida va oxiridagi har qanday bo‘shliqni yo‘q qiladi, bu qatorni faqat raqamli ma’lumotlarni o‘z ichiga olishi mumkin bo‘lgan <code>u32</code> bilan solishtirishimiz uchun buni qilishimiz kerak. Foydalanuvchi <code>read_line</code> ni to'ldirish uchun <span class="keystroke">enter</span>tugmasini bosib, ularni kiritishi kerak
+satrga yangi satr belgisini qo'shadigan taxmin. Masalan, agar foydalanuvchi <span class="keystroke">5</span> raqamini kiritsa va va <span class="keystroke">enter</span> tugmasini bossa <code>taxmin</code> shunday ko'rinadi: <code>5\n</code>.
+<code>\n</code> “yangi qator”ni bildiradi. (Windows tizimida <span class="keystroke">enter</span> tugmasini bosish natijasida carriage qaytariladi va yangi qator <code>\r\n</code> chiqadi.)
+<code>trim</code> metodi <code>\n</code> yoki <code>\r\n</code>ni yo'q qiladi, natijada atigi <code>5</code> bo`ladi.</p>
+<p>Satrlardagi <a href="../std/primitive.str.html#method.parse"><code>parse</code> metodi</a><!-- ignore --> qatorni boshqa turga aylantiradi.
+Bu yerda biz uni stringdan raqamga aylantirish uchun foydalanamiz. Biz Rustga <code>let taxmin: u32</code> yordamida kerakli raqam turini aytishimiz kerak. <code>taxmin</code> dan keyin ikki nuqta (<code>:</code>) Rustga o'zgaruvchining turiga izoh berishimizni aytadi. Rust bir nechta o'rnatilgan raqam turlariga ega; Bu yerda koʻrilgan <code>u32</code> unsigned, 32-bitli butun son.
+Bu kichik ijobiy raqam uchun yaxshi standart tanlovdir. Boshqa raqamlar turlari haqida <a href="ch03-02-data-types.html#integer-types">3-bobda</a><!-- ignore --> bilib olasiz.</p>
+<p>Bundan tashqari, ushbu misol dasturidagi <code>u32</code> annotation va <code>yashirin_raqam</code> bilan taqqoslash Rust <code>yashirin_raqam</code> ham <code>u32</code> bo'lishi kerak degan xulosaga keladi. Shunday qilib, endi taqqoslash bir xil turdagi ikkita qiymat o'rtasida bo'ladi!</p>
+<p><code>parse</code> metodii faqat mantiqiy ravishda raqamlarga aylantirilishi mumkin bo'lgan belgilarda ishlaydi va shuning uchun osongina xatolarga olib kelishi mumkin. Agar, masalan, satrda <code>A👍%</code> bo'lsa, uni raqamga aylantirishning hech qanday metodi bo'lmaydi. Muvaffaqiyatsiz bo'lishi mumkinligi sababli, <code>parse</code> metodii <code>read_line</code> metodi kabi <code>Result</code> turini qaytaradi (oldingi [&quot;<code>Result</code> bilan potentsial muvaffaqiyatsizlikni ko'rib chiqish&quot;] bo'limida muhokama qilingan)(#handling-potential-failure-with-result)<!-- ignore-->). Biz ushbu <code>Result</code> ga yana <code>expect</code> metodini qo'llash orqali xuddi shunday munosabatda bo'lamiz. Agar <code>parse</code> qatordan raqam yarata olmagani uchun <code>Err</code> <code>Result</code> variantini qaytarsa, <code>expect</code> chaqiruvi o‘yinni buzadi va biz bergan xabarni chop etadi.
+Agar <code>parse</code> qatorni raqamga muvaffaqiyatli aylantira olsa, u <code>Result</code>ning <code>Ok</code> variantini qaytaradi va <code>expect</code> biz xohlagan raqamni <code>Ok</code> qiymatidan qaytaradi.</p>
+<p>Endi dasturni ishga tushiramiz:</p>
+<!-- manual-regeneration
+cd listings/ch02-guessing-game-tutorial/no-listing-03-convert-string-to-number/
+cargo run
+  76
+-->
+<pre><code class="language-console">$ cargo run
+   Compiling taxminiy_raqam v0.1.0 (file:///projects/taxminiy_raqam)
+    Finished dev [unoptimized + debuginfo] target(s) in 0.43s
+     Running `target/debug/taxminiy_raqam`
+Raqamni topish o'yini!
+Yashirin raqam: 58
+Iltimos, taxminingizni kiriting.
+  76
+Sizning taxminingiz: 76
+Raqam katta!
+</code></pre>
+<p>Yaxshi! Tahmindan oldin bo'shliqlar qo'shilgan bo'lsa ham, dastur foydalanuvchi 76 ni taxmin qilganini aniqladi. Har xil turdagi kirishlar bilan turli xatti-harakatlarni tekshirish uchun dasturni bir necha marta ishga tushiring: raqamni to'g'ri taxmin qiling, katta raqamni taxmin qiling va kichik raqamni taxmin qiling.</p>
+<p>Hozir bizda o'yinning ko'p qismi ishlayapti, lekin foydalanuvchi faqat bitta taxmin qila oladi. Keling, buni loop qo'shish orqali o'zgartiraylik!</p>
+<h2 id="loop-bilan-bir-nechta-taxminlarga-ruxsat-berish"><a class="header" href="#loop-bilan-bir-nechta-taxminlarga-ruxsat-berish">Loop bilan bir nechta taxminlarga ruxsat berish</a></h2>
+<p><code>loop</code> kalit so'zi cheksiz tsiklni yaratadi. Biz foydalanuvchilarga raqamni taxmin qilishda ko'proq imkoniyat berish uchun tsikl qo'shamiz:
+<span class="filename">Fayl nomi: src/main.rs</span></p>
+<pre><code class="language-rust ignore"><span class="boring">use rand::Rng;
+</span><span class="boring">use std::cmp::Ordering;
+</span><span class="boring">use std::io;
+</span><span class="boring">
+</span><span class="boring">fn main() {
+</span><span class="boring">    println!(&quot;Raqamni topish o'yini!&quot;);
+</span><span class="boring">
+</span><span class="boring">    let yashirin_raqam = rand::thread_rng().gen_range(1..=100);
+</span><span class="boring">
+</span>    // --snip--
+
+    println!(&quot;Yashirin raqam: {yashirin_raqam}&quot;);
+
+    loop {
+        println!(&quot;Iltimos, taxminingizni kiriting.&quot;);
+
+        // --snip--
+
+<span class="boring">
+</span><span class="boring">        let mut taxmin = String::new();
+</span><span class="boring">
+</span><span class="boring">        io::stdin()
+</span><span class="boring">            .read_line(&amp;mut taxmin)
+</span><span class="boring">            .expect(&quot;Satrni o‘qib bo‘lmadi&quot;);
+</span><span class="boring">
+</span><span class="boring">        let taxmin: u32 = taxmin.trim().parse().expect(&quot;Iltimos, raqam yozing!&quot;);
+</span><span class="boring">
+</span><span class="boring">        println!(&quot;Sizning taxminingiz: {taxmin}&quot;);
+</span><span class="boring">
+</span>        match taxmin.cmp(&amp;yashirin_raqam) {
+            Ordering::Less =&gt; println!(&quot;Raqam Kichik!&quot;),
+            Ordering::Greater =&gt; println!(&quot;Raqam katta!&quot;),
+            Ordering::Equal =&gt; println!(&quot;Siz yutdingiz!&quot;),
+        }
+    }
+}
+</code></pre>
+<p>Ko'rib turganingizdek, biz hamma narsani taxminiy kiritish so'rovidan boshlab tsiklga o'tkazdik. Ilova ichidagi satrlarni har birida yana to'rtta bo'sh joydan o'tkazganingizga ishonch hosil qiling va dasturni qayta ishga tushiring. Dastur endi boshqa bir taxminni abadiy yani har doim so'raydi, bu aslida yangi muammoni keltirib chiqaradi. Foydalanuvchi chiqa olmaydiganga o'xshaydi!</p>
+<p>Foydalanuvchi har doim <span class="keystroke">ctrl-c</span> klaviatura yorlig'i yordamida dasturni to'xtatishi mumkin. Ammo bu to'yib bo'lmaydigan yirtqich hayvondan qochishning yana bir yo'li bor, <a href="#comparing-the-guess-to-the-secret-number">“Taxminni maxfiy raqam bilan solishtirish“</a><!--ignore -->: mavzusidagi <code>parse</code> muhokamasida aytib o'tilganidek, agar foydalanuvchi raqam bo'lmagan javobni kiritsa, dastur buziladi. Bu yerda ko'rsatilganidek, foydalanuvchiga chiqishga ruxsat berish uchun undan foydalanishimiz mumkin</p>
+<!-- manual-regeneration
+cd listings/ch02-guessing-game-tutorial/no-listing-04-looping/
+cargo run
+(too small guess)
+(too big guess)
+(correct guess)
+quit
+-->
+<pre><code class="language-console">$ cargo run
+   Compiling taxminiy_raqam v0.1.0 (file:///projects/taxminiy_raqam)
+    Finished dev [unoptimized + debuginfo] target(s) in 1.50s
+     Running `target/debug/taxminiy_raqam`
+Raqamni topish o'yini!
+Yashirin raqam: 59
+Iltimos, taxminingizni kiriting.
+45
+Sizning taxminingiz: 45
+Raqam Kichik!
+Iltimos, taxminingizni kiriting.
+60
+Sizning taxminingiz: 60
+Raqam katta!
+Iltimos, taxminingizni kiriting.
+59
+Sizning taxminingiz: 59
+Siz yutdingiz!
+Iltimos, taxminingizni kiriting.
+quit
+thread 'main' panicked at 'Please type a number!: ParseIntError { kind: InvalidDigit }', src/main.rs:28:47
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+</code></pre>
+<p><code>quit</code> deb yozsangiz, o‘yin tugaydi, lekin siz ko‘rganingizdek, boshqa raqam bo‘lmagan ma’lumotlarni kiritish ham shunday bo‘ladi. Bu, eng kamida, suboptimaldir; Biz to'g'ri raqam taxmin qilinganda ham o'yin to'xtashini xohlaymiz.</p>
+<h3 id="togri-taxmindan-keyin-chiqish"><a class="header" href="#togri-taxmindan-keyin-chiqish">To'g'ri taxmindan keyin chiqish</a></h3>
+<p>Keling, foydalanuvchi g'alaba qozonganida <code>break</code> iborasini qo'shish orqali o'yinni to'xtatish uchun dasturlashtiramiz:</p>
+<p><span class="filename">Fayl nomi: src/main.rs</span></p>
+<pre><code class="language-rust ignore"><span class="boring">use rand::Rng;
+</span><span class="boring">use std::cmp::Ordering;
+</span><span class="boring">use std::io;
+</span><span class="boring">
+</span><span class="boring">fn main() {
+</span><span class="boring">    println!(&quot;Raqamni topish o'yini!&quot;);
+</span><span class="boring">
+</span><span class="boring">    let yashirin_raqam = rand::thread_rng().gen_range(1..=100);
+</span><span class="boring">
+</span><span class="boring">    println!(&quot;Yashirin raqam: {yashirin_raqam}&quot;);
+</span><span class="boring">
+</span><span class="boring">    loop {
+</span><span class="boring">        println!(&quot;Iltimos, taxminingizni kiriting.&quot;);
+</span><span class="boring">
+</span><span class="boring">        let mut taxmin = String::new();
+</span><span class="boring">
+</span><span class="boring">        io::stdin()
+</span><span class="boring">            .read_line(&amp;mut taxmin)
+</span><span class="boring">            .expect(&quot;Satrni o‘qib bo‘lmadi&quot;);
+</span><span class="boring">
+</span><span class="boring">        let taxmin: u32 = taxmin.trim().parse().expect(&quot;Iltimos, raqam yozing!&quot;);
+</span><span class="boring">
+</span><span class="boring">        println!(&quot;Sizning taxminingiz: {taxmin}&quot;);
+</span><span class="boring">
+</span>        // --snip--
+
+        match taxmin.cmp(&amp;yashirin_raqam) {
+            Ordering::Less =&gt; println!(&quot;Raqam Kichik!&quot;),
+            Ordering::Greater =&gt; println!(&quot;Raqam katta!&quot;),
+            Ordering::Equal =&gt; {
+                println!(&quot;Siz yutdingiz!&quot;);
+                break;
+            }
+        }
+    }
+}
+</code></pre>
+<p><code>Siz yutdingiz!</code> so‘ng <code>break</code> qatorini qo‘shish foydalanuvchi maxfiy raqamni to‘g‘ri taxmin qilganda dasturni tsikldan chiqadi. Loopdan chiqish dasturdan chiqishni ham anglatadi, chunki sikl <code>main</code> ning oxirgi qismidir.</p>
+<h3 id="notogri-kiritish"><a class="header" href="#notogri-kiritish">Noto'g'ri kiritish</a></h3>
+<p>O'yinning xatti-harakatlarini yanada yaxshilash uchun, foydalanuvchi raqamlardan boshqa belgilar kiritganda dasturni ishdan chiqargandan ko'ra, foydalanuvchi taxmin qilishni davom ettirishi uchun o'yinni raqam bo'lmagan belgilarga e'tibor bermaslikka harakat qildiraylik. Buni 2-5 roʻyxatda koʻrsatilganidek, <code>taxmin</code> satrdan <code>u32</code> ga aylantirilgan qatorni oʻzgartirish orqali amalga oshirishimiz mumkin.</p>
+<p><span class="filename">Fayl nomi: src/main.rs</span></p>
+<pre><code class="language-rust ignore"><span class="boring">use rand::Rng;
+</span><span class="boring">use std::cmp::Ordering;
+</span><span class="boring">use std::io;
+</span><span class="boring">
+</span><span class="boring">fn main() {
+</span><span class="boring">    println!(&quot;Raqamni topish o'yini!&quot;);
+</span><span class="boring">
+</span><span class="boring">    let yashirin_raqam = rand::thread_rng().gen_range(1..=100);
+</span><span class="boring">
+</span><span class="boring">    println!(&quot;Yashirin raqam: {yashirin_raqam}&quot;);
+</span><span class="boring">
+</span><span class="boring">    loop {
+</span><span class="boring">        println!(&quot;Iltimos, taxminingizni kiriting.&quot;);
+</span><span class="boring">
+</span><span class="boring">        let mut taxmin = String::new();
+</span><span class="boring">
+</span>        // --snip--
+
+        io::stdin()
+            .read_line(&amp;mut taxmin)
+            .expect(&quot;Satrni o‘qib bo‘lmadi&quot;);
+
+        let taxmin: u32 = match taxmin.trim().parse() {
+            Ok(num) =&gt; num,
+            Err(_) =&gt; continue,
+        };
+
+        println!(&quot;Sizning taxminingiz: {taxmin}&quot;);
+
+        // --snip--
+<span class="boring">
+</span><span class="boring">        match taxmin.cmp(&amp;yashirin_raqam) {
+</span><span class="boring">            Ordering::Less =&gt; println!(&quot;Raqam Kichik!&quot;),
+</span><span class="boring">            Ordering::Greater =&gt; println!(&quot;Raqam katta!&quot;),
+</span><span class="boring">            Ordering::Equal =&gt; {
+</span><span class="boring">                println!(&quot;Siz yutdingiz!&quot;);
+</span><span class="boring">                break;
+</span><span class="boring">            }
+</span><span class="boring">        }
+</span><span class="boring">    }
+</span><span class="boring">}
+</span></code></pre>
+<p><span class="caption">Ro'yxat 2-5: Raqamsiz taxminga e'tibor bermaslik va dasturni ishdan chiqarish o'rniga boshqa taxminni so'rash</span></p>
+<p>Xato ustida ishlamay qolishdan xatoni hal qilishga o‘tish uchun biz <code>expect</code> chaqiruvidan <code>match</code> ifodasiga o‘tamiz. Esda tutingki, <code>parse</code> <code>Result</code> turini qaytaradi, <code>Result</code> esa <code>Ok</code> va <code>Err</code> variantlariga ega bo'lgan raqamdir. Biz bu yerda <code>cmp</code> metodining <code>Ordering</code> natijasi bilan bo‘lgani kabi <code>match</code> ifodasidan foydalanmoqdamiz.</p>
+<p>Agar <code>parse</code> qatorni raqamga muvaffaqiyatli aylantira olsa, natijada olingan raqamni o'z ichiga olgan <code>Ok</code> qiymatini qaytaradi. Bu <code>Ok</code> qiymati birinchi armning patterniga mos keladi va <code>match</code> ifodasi <code>parse</code> ishlab chiqarilgan va <code>Ok</code> qiymatiga qo'ygan <code>num</code> qiymatini qaytaradi. Bu raqam biz yaratayotgan yangi <code>taxmin</code>  o'zgaruvchisida biz xohlagan joyda tugaydi</p>
+<p>Agar <code>parse</code> satrni raqamga aylantira olmasa xato haqida qo'shimcha ma'lumotni o'z ichiga olgan <code>Err</code> qiymatini qaytaradi. <code>Err</code> qiymati birinchi <code>match</code> bo‘limidagi <code>Ok(num)</code> patterniga mos kelmaydi, lekin ikkinchi armdagi <code>Err(_)</code> patterniga mos keladi. Pastki chiziq, <code>_</code>, diqqatga sazovor qiymatdir; bu misolda biz barcha <code>Err</code> qiymatlariga, ular ichida qanday ma'lumotlar bo'lishidan qat'iy nazar, mos kelmoqchimiz deymiz. Shunday qilib, dastur ikkinchi armning <code>continue</code> kodini bajaradi, bu dasturga <code>loop</code> ning keyingi iteratsiyasiga o'tishni va boshqa taxminni so'rashni aytadi. Shunday qilib, dastur <code>parse</code> duch kelishi mumkin bo'lgan barcha xatolarga e'tibor bermaydi!</p>
+<p>Endi dasturdagi hamma narsa kutilganidek ishlashi kerak. Keling, sinab ko'raylik:</p>
+<!-- manual-regeneration
+cd listings/ch02-guessing-game-tutorial/listing-02-05/
+cargo run
+(too small guess)
+(too big guess)
+foo
+(correct guess)
+-->
+<pre><code class="language-console">$ cargo run
+   Compiling taxminiy_raqam v0.1.0 (file:///projects/taxminiy_raqam)
+    Finished dev [unoptimized + debuginfo] target(s) in 4.45s
+     Running `target/debug/taxminiy_raqam`
+Raqamni topish o'yini!
+Yashirin raqam: 61
+Iltimos, taxminingizni kiriting.
+10
+Sizning taxminingiz: 10
+Raqam Kichik!
+Iltimos, taxminingizni kiriting.
+99
+Sizning taxminingiz: 99
+Raqam katta!
+Iltimos, taxminingizni kiriting.
+foo
+Iltimos, taxminingizni kiriting.
+61
+Sizning taxminingiz: 61
+Siz yutdingiz!
+</code></pre>
+<p>Ajoyib! Bitta kichik so'nggi tweak bilan biz taxmin qilish o'yinini tugatamiz. Eslatib o'tamiz, dastur hali ham maxfiy raqamni chop etmoqda. Bu sinov uchun yaxshi ishladi, lekin o'yinni buzadi. Maxfiy raqamni chiqaradigan <code>println!</code>ni o'chirib tashlaymiz. 2-6 ro'yxat yakuniy kodni ko'rishingiz mumkin.</p>
+<p><span class="filename">Fayl nomi: src/main.rs</span></p>
+<pre><code class="language-rust ignore">use rand::Rng;
+use std::cmp::Ordering;
+use std::io;
+
+fn main() {
+    println!(&quot;Raqamni topish o'yini!&quot;);
+
+    let yashirin_raqam = rand::thread_rng().gen_range(1..=100);
+
+    loop {
+        println!(&quot;Iltimos, taxminingizni kiriting.&quot;);
+
+        let mut taxmin = String::new();
+
+        io::stdin()
+            .read_line(&amp;mut taxmin)
+            .expect(&quot;Satrni o‘qib bo‘lmadi&quot;);
+
+        let taxmin: u32 = match taxmin.trim().parse() {
+            Ok(num) =&gt; num,
+            Err(_) =&gt; continue,
+        };
+
+        println!(&quot;Sizning taxminingiz: {taxmin}&quot;);
+
+        match taxmin.cmp(&amp;yashirin_raqam) {
+            Ordering::Less =&gt; println!(&quot;Raqam Kichik!&quot;),
+            Ordering::Greater =&gt; println!(&quot;Raqam katta!&quot;),
+            Ordering::Equal =&gt; {
+                println!(&quot;Siz yutdingiz!&quot;);
+                break;
+            }
+        }
+    }
+}
+</code></pre>
+<p><span class="caption">Ro'yxat 2-6: To'liq taxmin qilish o'yin kodini</span></p>
+<p>Shu nuqtada, siz taxmin qilish o'yinini muvaffaqiyatli yaratdingiz. Tabriklaymiz!</p>
+<h2 id="xulosa"><a class="header" href="#xulosa">Xulosa</a></h2>
+<p>Ushbu loyiha sizni Rustning ko'plab yangi tushunchalari bilan tanishtirishning amaliy usuli bo'ldi: <code>let</code>, <code>match</code>, funktsiyalar, tashqi cratelardan foydalanish va boshqalar. Keyingi bir necha boblarda siz ushbu tushunchalar haqida batafsilroq bilib olasiz. 3-bob ko'pchilik dasturlash tillarida mavjud bo'lgan o'zgaruvchilar, ma'lumotlar turlari va funktsiyalari kabi tushunchalarni qamrab oladi va ulardan Rustda qanday foydalanishni ko'rsatadi. 4-bobda Rust tilini boshqa tillardan ajratib turadigan egalik huquqi o‘rganiladi. 5-bobda tuzilmalar va metodlar sintaksisi muhokama qilinadi va 6-bobda enumlar qanday ishlashi tushuntiriladi.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="ch01-03-hello-cargo.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a rel="next" href="ch03-00-common-programming-concepts.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="ch01-03-hello-cargo.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a rel="next" href="ch03-00-common-programming-concepts.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        <script type="text/javascript" src="ferris.js"></script>
+    </body>
+</html>

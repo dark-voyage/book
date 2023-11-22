@@ -1,0 +1,640 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Referencelarni lifetime bilan tekshirish - Rust dasturlash tili</title>
+        <!-- Custom HTML head -->
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="ferris.css">
+        <link rel="stylesheet" href="theme/2018-edition.css">
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="title-page.html">Rust dasturlash tili</a></li><li class="chapter-item expanded affix "><a href="foreword.html">Muqaddima</a></li><li class="chapter-item expanded affix "><a href="ch00-00-introduction.html">Kirish</a></li><li class="chapter-item expanded "><a href="ch01-00-getting-started.html"><strong aria-hidden="true">1.</strong> Ishni boshlash</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch01-01-installation.html"><strong aria-hidden="true">1.1.</strong> O'rnatish</a></li><li class="chapter-item expanded "><a href="ch01-02-hello-world.html"><strong aria-hidden="true">1.2.</strong> Hello, World!</a></li><li class="chapter-item expanded "><a href="ch01-03-hello-cargo.html"><strong aria-hidden="true">1.3.</strong> Hello, Cargo!</a></li></ol></li><li class="chapter-item expanded "><a href="ch02-00-guessing-game-tutorial.html"><strong aria-hidden="true">2.</strong> Taxmin qilish o'yinini dasturlash</a></li><li class="chapter-item expanded "><a href="ch03-00-common-programming-concepts.html"><strong aria-hidden="true">3.</strong> Umumiy dasturlash tushunchalari</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch03-01-variables-and-mutability.html"><strong aria-hidden="true">3.1.</strong> O'zgaruvchilar va o'zgaruvchanlik</a></li><li class="chapter-item expanded "><a href="ch03-02-data-types.html"><strong aria-hidden="true">3.2.</strong> Ma'lumotlar turlari</a></li><li class="chapter-item expanded "><a href="ch03-03-how-functions-work.html"><strong aria-hidden="true">3.3.</strong> Funksiyalar</a></li><li class="chapter-item expanded "><a href="ch03-04-comments.html"><strong aria-hidden="true">3.4.</strong> Izohlar</a></li><li class="chapter-item expanded "><a href="ch03-05-control-flow.html"><strong aria-hidden="true">3.5.</strong> Control Flow</a></li></ol></li><li class="chapter-item expanded "><a href="ch04-00-understanding-ownership.html"><strong aria-hidden="true">4.</strong> Ownershipni tushunish</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch04-01-what-is-ownership.html"><strong aria-hidden="true">4.1.</strong> Ownership nima?</a></li><li class="chapter-item expanded "><a href="ch04-02-references-and-borrowing.html"><strong aria-hidden="true">4.2.</strong> Referencelar va  Borrowing</a></li><li class="chapter-item expanded "><a href="ch04-03-slices.html"><strong aria-hidden="true">4.3.</strong> Slice turi</a></li></ol></li><li class="chapter-item expanded "><a href="ch05-00-structs.html"><strong aria-hidden="true">5.</strong> Tegishli ma'lumotlarni tuzish uchun Structdan foydalanish</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch05-01-defining-structs.html"><strong aria-hidden="true">5.1.</strong> Structlarni aniqlash va yaratish</a></li><li class="chapter-item expanded "><a href="ch05-02-example-structs.html"><strong aria-hidden="true">5.2.</strong> Structs yordamida namunaviy dastur</a></li><li class="chapter-item expanded "><a href="ch05-03-method-syntax.html"><strong aria-hidden="true">5.3.</strong> Metod sintaksisi</a></li></ol></li><li class="chapter-item expanded "><a href="ch06-00-enums.html"><strong aria-hidden="true">6.</strong> Enumlar va patternlarni moslashtirish</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch06-01-defining-an-enum.html"><strong aria-hidden="true">6.1.</strong> Enumni aniqlash</a></li><li class="chapter-item expanded "><a href="ch06-02-match.html"><strong aria-hidden="true">6.2.</strong> match Control Flow konstruksiyasi</a></li><li class="chapter-item expanded "><a href="ch06-03-if-let.html"><strong aria-hidden="true">6.3.</strong> if let bilan qisqacha Control Flow</a></li></ol></li><li class="chapter-item expanded "><a href="ch07-00-managing-growing-projects-with-packages-crates-and-modules.html"><strong aria-hidden="true">7.</strong> O'sib borayotgan loyihalarni Paketlar, Cratelar va Modullar bilan boshqarish</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch07-01-packages-and-crates.html"><strong aria-hidden="true">7.1.</strong> Paketlar va Cratelar</a></li><li class="chapter-item expanded "><a href="ch07-02-defining-modules-to-control-scope-and-privacy.html"><strong aria-hidden="true">7.2.</strong> Qo'llanish doirasi va maxfiylikni nazorat qilish uchun modullarni aniqlash</a></li><li class="chapter-item expanded "><a href="ch07-03-paths-for-referring-to-an-item-in-the-module-tree.html"><strong aria-hidden="true">7.3.</strong> Modul daraxtidagi elementga murojaat qilish yo'llari</a></li><li class="chapter-item expanded "><a href="ch07-04-bringing-paths-into-scope-with-the-use-keyword.html"><strong aria-hidden="true">7.4.</strong> use kalit so'zi bilan yo'llarni qamrab olish</a></li><li class="chapter-item expanded "><a href="ch07-05-separating-modules-into-different-files.html"><strong aria-hidden="true">7.5.</strong> Modullarni turli fayllarga ajratish</a></li></ol></li><li class="chapter-item expanded "><a href="ch08-00-common-collections.html"><strong aria-hidden="true">8.</strong> Umumiy to'plamlar</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch08-01-vectors.html"><strong aria-hidden="true">8.1.</strong> Vectorlar bilan qiymatlar ro'yxatini saqlash</a></li><li class="chapter-item expanded "><a href="ch08-02-strings.html"><strong aria-hidden="true">8.2.</strong> UTF-8 kodlangan matnni Stringlar bilan saqlash</a></li><li class="chapter-item expanded "><a href="ch08-03-hash-maps.html"><strong aria-hidden="true">8.3.</strong> Hash Mapda bog'langan qiymatlarga ega kalitlarni saqlash</a></li></ol></li><li class="chapter-item expanded "><a href="ch09-00-error-handling.html"><strong aria-hidden="true">9.</strong> Xatolar bilan ishlash</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch09-01-unrecoverable-errors-with-panic.html"><strong aria-hidden="true">9.1.</strong> panic! bilan tuzatib bo'lmaydigan xatolar</a></li><li class="chapter-item expanded "><a href="ch09-02-recoverable-errors-with-result.html"><strong aria-hidden="true">9.2.</strong> Result bilan tiklanadigan xatolar</a></li><li class="chapter-item expanded "><a href="ch09-03-to-panic-or-not-to-panic.html"><strong aria-hidden="true">9.3.</strong> panic! yoki panic! emas</a></li></ol></li><li class="chapter-item expanded "><a href="ch10-00-generics.html"><strong aria-hidden="true">10.</strong> Umumiy turlar, traitlar va lifetime</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch10-01-syntax.html"><strong aria-hidden="true">10.1.</strong> Generik ma'lumotlar turlari</a></li><li class="chapter-item expanded "><a href="ch10-02-traits.html"><strong aria-hidden="true">10.2.</strong> Traitlar: umumiy xatti-harakatni aniqlash</a></li><li class="chapter-item expanded "><a href="ch10-03-lifetime-syntax.html" class="active"><strong aria-hidden="true">10.3.</strong> Referencelarni lifetime bilan tekshirish</a></li></ol></li><li class="chapter-item expanded "><a href="ch11-00-testing.html"><strong aria-hidden="true">11.</strong> Avtomatlashtirilgan testlarni yozish</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch11-01-writing-tests.html"><strong aria-hidden="true">11.1.</strong> Testlarni qanday yozish kerak</a></li><li class="chapter-item expanded "><a href="ch11-02-running-tests.html"><strong aria-hidden="true">11.2.</strong> Sinovlar qanday o'tkazilishini nazorat qilish</a></li><li class="chapter-item expanded "><a href="ch11-03-test-organization.html"><strong aria-hidden="true">11.3.</strong> Test tashkil etish</a></li></ol></li><li class="chapter-item expanded "><a href="ch12-00-an-io-project.html"><strong aria-hidden="true">12.</strong> I/O loyihasi: Buyruqlar qatori dasturini yaratish</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch12-01-accepting-command-line-arguments.html"><strong aria-hidden="true">12.1.</strong> Buyruqlar qatori argumentini qabul qilishs</a></li><li class="chapter-item expanded "><a href="ch12-02-reading-a-file.html"><strong aria-hidden="true">12.2.</strong> Faylni o'qish</a></li><li class="chapter-item expanded "><a href="ch12-03-improving-error-handling-and-modularity.html"><strong aria-hidden="true">12.3.</strong> Modullikni yaxshilash va xatolarni qayta ishlash uchun refactoring</a></li><li class="chapter-item expanded "><a href="ch12-04-testing-the-librarys-functionality.html"><strong aria-hidden="true">12.4.</strong> Sinovga asoslangan ishlab chiqish bilan kutubxonaning funksionalligini rivojlantirish</a></li><li class="chapter-item expanded "><a href="ch12-05-working-with-environment-variables.html"><strong aria-hidden="true">12.5.</strong> Environment o'zgaruvchilari bilan ishlash</a></li><li class="chapter-item expanded "><a href="ch12-06-writing-to-stderr-instead-of-stdout.html"><strong aria-hidden="true">12.6.</strong> Xato xabarlarini standart chiqish o'rniga standart xatoga yozish</a></li></ol></li><li class="chapter-item expanded "><a href="ch13-00-functional-features.html"><strong aria-hidden="true">13.</strong> Funksional til xususiyatlari: iteratorlar va closurelar</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch13-01-closures.html"><strong aria-hidden="true">13.1.</strong> Closurelar: Environmentni qamrab oladigan anonim funksiyalar</a></li><li class="chapter-item expanded "><a href="ch13-02-iterators.html"><strong aria-hidden="true">13.2.</strong> Iteratorlar bilan bir qator elementlarga ishlov berish</a></li><li class="chapter-item expanded "><a href="ch13-03-improving-our-io-project.html"><strong aria-hidden="true">13.3.</strong> I/O loyihamizni takomillashtirish</a></li><li class="chapter-item expanded "><a href="ch13-04-performance.html"><strong aria-hidden="true">13.4.</strong> Ishlash samaradorligini solishtirish: Looplar va iteratorlar</a></li></ol></li><li class="chapter-item expanded "><a href="ch14-00-more-about-cargo.html"><strong aria-hidden="true">14.</strong> Cargo va Crates.io haqida ko'proq</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch14-01-release-profiles.html"><strong aria-hidden="true">14.1.</strong> Reliz profillari bilan structlarni moslashtirish</a></li><li class="chapter-item expanded "><a href="ch14-02-publishing-to-crates-io.html"><strong aria-hidden="true">14.2.</strong> Crateni Crates.io-ga nashr qilish</a></li><li class="chapter-item expanded "><a href="ch14-03-cargo-workspaces.html"><strong aria-hidden="true">14.3.</strong> Cargo Workspacelar</a></li><li class="chapter-item expanded "><a href="ch14-04-installing-binaries.html"><strong aria-hidden="true">14.4.</strong> Binary fayllarni Crates.io'dan cargo install bilan o'rnatish</a></li><li class="chapter-item expanded "><a href="ch14-05-extending-cargo.html"><strong aria-hidden="true">14.5.</strong> Maxsus buyruqlar bilan Cargoni kengaytirish</a></li></ol></li><li class="chapter-item expanded "><a href="ch15-00-smart-pointers.html"><strong aria-hidden="true">15.</strong> Smart Pointerlar</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch15-01-box.html"><strong aria-hidden="true">15.1.</strong> Heapdagi ma'lumotlarni ko'rsatish uchun Box&lt;T&gt; dan foydalanish</a></li><li class="chapter-item expanded "><a href="ch15-02-deref.html"><strong aria-hidden="true">15.2.</strong> Deref Traitidan foydalangan holda oddiy referencelar kabi Smart Pointerlar bilan ishlash</a></li><li class="chapter-item expanded "><a href="ch15-03-drop.html"><strong aria-hidden="true">15.3.</strong> Drop Traiti bilan tozalashda kodni ishga tushirish</a></li><li class="chapter-item expanded "><a href="ch15-04-rc.html"><strong aria-hidden="true">15.4.</strong> Rc&lt;T&gt;, reference hisoblangan Smart Pointer</a></li><li class="chapter-item expanded "><a href="ch15-05-interior-mutability.html"><strong aria-hidden="true">15.5.</strong> RefCell&lt;T&gt; va ichki o'zgaruvchanlik namunasi</a></li><li class="chapter-item expanded "><a href="ch15-06-reference-cycles.html"><strong aria-hidden="true">15.6.</strong> Reference Cycles Can Leak Memory</a></li></ol></li><li class="chapter-item expanded "><a href="ch16-00-concurrency.html"><strong aria-hidden="true">16.</strong> Qo'rqmas parallellik</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch16-01-threads.html"><strong aria-hidden="true">16.1.</strong> Kodni bir vaqtning o'zida ishga tushirish uchun threadlardan foydalanish</a></li><li class="chapter-item expanded "><a href="ch16-02-message-passing.html"><strong aria-hidden="true">16.2.</strong> Threadlar orasidagi ma'lumotlarni uzatish uchun xabar uzatishdan(Message Passing) foydalanish</a></li><li class="chapter-item expanded "><a href="ch16-03-shared-state.html"><strong aria-hidden="true">16.3.</strong> Shared-State Concurrency</a></li><li class="chapter-item expanded "><a href="ch16-04-extensible-concurrency-sync-and-send.html"><strong aria-hidden="true">16.4.</strong> Sync va Send traitlari bilan kengaytiriladigan parallellik</a></li></ol></li><li class="chapter-item expanded "><a href="ch17-00-oop.html"><strong aria-hidden="true">17.</strong> Rustning ob'ektga yo'naltirilgan dasturlash xususiyatlari- OOP</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch17-01-what-is-oo.html"><strong aria-hidden="true">17.1.</strong> Ob'ektga yo'naltirilgan tillarning xususiyatlari</a></li><li class="chapter-item expanded "><a href="ch17-02-trait-objects.html"><strong aria-hidden="true">17.2.</strong> Har xil turdagi qiymatlarga ruxsat beruvchi trait ob'ektlaridan foydalanish</a></li><li class="chapter-item expanded "><a href="ch17-03-oo-design-patterns.html"><strong aria-hidden="true">17.3.</strong> Ob'ektga yo'naltirilgan dizayn patternini implement qilish</a></li></ol></li><li class="chapter-item expanded "><a href="ch18-00-patterns.html"><strong aria-hidden="true">18.</strong> Patternlar va Matching</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch18-01-all-the-places-for-patterns.html"><strong aria-hidden="true">18.1.</strong> All the Places Patterns Can Be Used</a></li><li class="chapter-item expanded "><a href="ch18-02-refutability.html"><strong aria-hidden="true">18.2.</strong> Refutability: Whether a Pattern Might Fail to Match</a></li><li class="chapter-item expanded "><a href="ch18-03-pattern-syntax.html"><strong aria-hidden="true">18.3.</strong> Pattern Sintaksisi</a></li></ol></li><li class="chapter-item expanded "><a href="ch19-00-advanced-features.html"><strong aria-hidden="true">19.</strong> Kengaytirilgan Xususiyatlar</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch19-01-unsafe-rust.html"><strong aria-hidden="true">19.1.</strong> Xavfsiz Rust</a></li><li class="chapter-item expanded "><a href="ch19-03-advanced-traits.html"><strong aria-hidden="true">19.2.</strong> Murakkab Traitlar</a></li><li class="chapter-item expanded "><a href="ch19-04-advanced-types.html"><strong aria-hidden="true">19.3.</strong> Kengaytirilgan Turlar</a></li><li class="chapter-item expanded "><a href="ch19-05-advanced-functions-and-closures.html"><strong aria-hidden="true">19.4.</strong> Kengaytirilgan funksiyalar va closurelar</a></li><li class="chapter-item expanded "><a href="ch19-06-macros.html"><strong aria-hidden="true">19.5.</strong> Makrolar</a></li></ol></li><li class="chapter-item expanded "><a href="ch20-00-final-project-a-web-server.html"><strong aria-hidden="true">20.</strong> Yakuniy loyiha: Ko'p tarmoqli veb-serverni qurish</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch20-01-single-threaded.html"><strong aria-hidden="true">20.1.</strong> Yagona tarmoqli veb-serverni qurish</a></li><li class="chapter-item expanded "><a href="ch20-02-multithreaded.html"><strong aria-hidden="true">20.2.</strong> Bizning yagona tarmoqli serverimizni ko'p tarmoqli serverga aylantirish</a></li><li class="chapter-item expanded "><a href="ch20-03-graceful-shutdown-and-cleanup.html"><strong aria-hidden="true">20.3.</strong> Ajoyib o'chirish va tozalash</a></li></ol></li><li class="chapter-item expanded "><a href="appendix-00.html"><strong aria-hidden="true">21.</strong> Ilova</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="appendix-01-keywords.html"><strong aria-hidden="true">21.1.</strong> A - Kalit so'zlar</a></li><li class="chapter-item expanded "><a href="appendix-02-operators.html"><strong aria-hidden="true">21.2.</strong> B - Operatorlar va Symbollar</a></li><li class="chapter-item expanded "><a href="appendix-03-derivable-traits.html"><strong aria-hidden="true">21.3.</strong> C - Hosilaviy Traitlar</a></li><li class="chapter-item expanded "><a href="appendix-04-useful-development-tools.html"><strong aria-hidden="true">21.4.</strong> D - Foydali Development Toollar</a></li><li class="chapter-item expanded "><a href="appendix-05-editions.html"><strong aria-hidden="true">21.5.</strong> E - Nashrlar</a></li><li class="chapter-item expanded "><a href="appendix-06-translation.html"><strong aria-hidden="true">21.6.</strong> F - Kitobning tarjimalari</a></li><li class="chapter-item expanded "><a href="appendix-07-nightly-rust.html"><strong aria-hidden="true">21.7.</strong> G - Rust qanday yasaladi va “Nightly Rust”</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Rust dasturlash tili</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/rust-lang/book" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h2 id="referencelarni-lifetime-bilan-tekshirish"><a class="header" href="#referencelarni-lifetime-bilan-tekshirish">Referencelarni lifetime bilan tekshirish</a></h2>
+<p>Lifetimelar - biz allaqachon uchratgan generiklarning yana bir turi. Turning biz xohlagan xatti-harakatga ega bo'lishini ta'minlash o'rniga, lifetime referencelar biz uchun kerak bo'lganda haqiqiyligini ta'minlaydi.</p>
+<p>4-bobdagi [“Referencelar va Borrowing”](<a href="ch04-02-references-and-borrowing.html#references-and-borrowing">references-and-borrowing</a><!-- ignore -->) bo‘limida biz muhokama qilmagan bir tafsilot shundan iboratki, Rust-dagi har bir referenceda o‘sha referencening amal qilish doirasi <em>lifetime</em> bo‘ladi. Ko'pincha, lifetimelar yashirin va inferred bo'ladi,
+ko'p hollarda bo'lgani kabi, turlar ham inferred qilinadi.Biz faqat bir nechta tur mumkin bo'lganda turlarga izoh berishimiz kerak. Shunga o'xshab, biz referencelarning lifetime bir necha xil yo'llar bilan bog'lanishi mumkin bo'lgan lifetimelarini izohlashimiz kerak. Rust bizdan runtimeda ishlatiladigan haqiqiy referencelar haqiqiy bo'lishini ta'minlash uchun generik lifetime parametrlaridan foydalangan holda munosabatlarga izoh berishimizni talab qiladi.</p>
+<p>Lifetimeni izohlash boshqa dasturlash tillarining ko'pchiligida mavjud bo'lgan tushuncha ham emas, shuning uchun bu notanish tuyuladi. Garchi biz ushbu bobda lifetimeni to'liq qamrab olmasak ham, kontseptsiyadan qulay bo'lishingiz uchun lifetime sintaksisga duch kelishingiz mumkin bo'lgan umumiy usullarni muhokama qilamiz.</p>
+<h3 id="lifetimeda-dangling-referencelarni-oldini-olish"><a class="header" href="#lifetimeda-dangling-referencelarni-oldini-olish">Lifetimeda dangling referencelarni oldini olish</a></h3>
+<p>Lifetimening asosiy maqsadi dasturga reference qilish uchun mo'ljallangan ma'lumotlardan boshqa ma'lumotlarga reference qilishiga olib keladigan <em>dangling referencelar</em> ning oldini olishdir.
+10-16 ro'yxatdagi dasturni ko'rib chiqing, uning tashqi va ichki ko'lami(tashqi va ichki ishlash doirasi) bor.</p>
+<pre><code class="language-rust ignore does_not_compile">fn main() {
+    let r;
+
+    {
+        let x = 5;
+        r = &amp;x;
+    }
+
+    println!(&quot;r: {}&quot;, r);
+}
+</code></pre>
+<p><span class="caption">Ro'yxat 10-16: Qiymati ishlash doiradan chiqib ketgan referencedan foydalanishga urinish</span></p>
+<blockquote>
+<p>Eslatma: 10-16, 10-17 va 10-23 ro'yxatlardagi misollar o'zgaruvchilarni
+ularga boshlang'ich qiymat bermasdan e'lon qiladi, shuning uchun o'zgaruvchi nomi
+tashqi doirada mavjud. Bir qarashda, bu Rustning null qiymatlari yo'qligiga zid
+bo'lib tuyulishi mumkin. Biroq, agar biz o'zgaruvchiga qiymat berishdan oldin
+foydalanmoqchi bo'lsak, biz kompilyatsiya vaqtida xatoga duch kelamiz, bu Rust
+haqiqatan ham null qiymatlarga ruxsat bermasligini ko'rsatadi.</p>
+</blockquote>
+<p>Tashqi qamrov boshlang‘ich qiymati bo‘lmagan <code>r</code> nomli o‘zgaruvchini, ichki qamrov esa boshlang‘ich qiymati 5 bo‘lgan <code>x</code> nomli o‘zgaruvchini e’lon qiladi. Ichki doirada(qamrov) biz <code>x</code> ga reference sifatida <code>r</code> qiymatini belgilashga harakat qilamiz. Keyin ichki qamrov tugaydi va biz qiymatni <code>r</code> da chop etishga harakat qilamiz. Ushbu kod kompilyatsiya qilinmaydi, chunki biz undan foydalanishga urinishdan oldin <code>r</code> qiymati ko'rib chiqilmaydi. Mana xato xabari:</p>
+<pre><code class="language-console">$ cargo run
+   Compiling chapter10 v0.1.0 (file:///projects/chapter10)
+error[E0597]: `x` does not live long enough
+ --&gt; src/main.rs:6:13
+  |
+6 |         r = &amp;x;
+  |             ^^ borrowed value does not live long enough
+7 |     }
+  |     - `x` dropped here while still borrowed
+8 |
+9 |     println!(&quot;r: {}&quot;, r);
+  |                       - borrow later used here
+
+For more information about this error, try `rustc --explain E0597`.
+error: could not compile `chapter10` due to previous error
+</code></pre>
+<p><code>x</code> o'zgaruvchisi &quot;yetarlicha uzoq umr ko'rmaydi&quot;. Sababi, 7-qatorda ichki qamrov tugashi bilan <code>x</code> amaldan tashqarida bo'ladi. Lekin <code>r</code> tashqi doira uchun hamon amal qiladi; uning qamrovi kengroq bo'lgani uchun biz uni &quot;uzoq yashaydi&quot; deymiz. Agar Rust ushbu kodning ishlashiga ruxsat bergan bo'lsa, <code>r</code> <code>x</code> doiradan chiqib ketganda ajratilgan xotiraga reference bo'ladi va biz <code>r</code> bilan qilishga uringan har qanday narsa to'g'ri ishlamaydi. Xo'sh, Rust bu kodning yaroqsizligini qanday aniqlaydi?
+Bu borrow(qarz) tekshiruvidan foydalanadi.</p>
+<h3 id="borrow-tekshiruvchisi"><a class="header" href="#borrow-tekshiruvchisi">Borrow tekshiruvchisi</a></h3>
+<p>Rust kompilyatorida barcha borrowlar to'g'ri yoki yo'qligini aniqlash uchun ko'lamlarni taqqoslaydigan <em>borrow tekshiruvi(borrow checker)</em> mavjud. 10-17 ro'yxat 10-16 ro'yxati bilan bir xil kodni ko'rsatadi, ammo o'zgaruvchilarning lifetime(ishlash muddatini) ko'rsatadigan izohlar bilan.</p>
+<pre><code class="language-rust ignore does_not_compile">fn main() {
+    let r;                // ---------+-- 'a
+                          //          |
+    {                     //          |
+        let x = 5;        // -+-- 'b  |
+        r = &amp;x;           //  |       |
+    }                     // -+       |
+                          //          |
+    println!(&quot;r: {}&quot;, r); //          |
+}                         // ---------+
+</code></pre>
+<p><span class="caption">Roʻyxat 10-17: <code>r</code> va <code>x</code> ning mos ravishda <code>a</code> va <code>b</code> nomlari bilan ishlash lifetimening izohlari</span></p>
+<p>Bu yerda biz <code>r</code>ning lifetimeni <code>a</code> bilan va <code>x</code>ning lifetimeni <code>b</code> bilan izohladik. Ko'rib turganingizdek, ichki <code>b</code> bloki tashqi <code>'a</code> lifetime blokdan ancha kichik. Kompilyatsiya vaqtida Rust ikki lifetimening o'lchamini solishtiradi va <code>r</code> ning lifetime <code>'a</code> ekanligini, lekin u <code>'b</code> lifetime(umr bo'yi) xotiraga ishora qilishini ko'radi. Dastur rad etildi, chunki <code>'b</code> <code>'a</code> dan qisqaroq: reference mavzusi reference kabi uzoq vaqt yashamaydi.</p>
+<p>Ro'yxat 10-18 kodni tuzatadi, shuning uchun u dangling referencega ega emas va hech qanday xatosiz kompilyatsiya qilinadi.</p>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    let x = 5;            // ----------+-- 'b
+                          //           |
+    let r = &amp;x;           // --+-- 'a  |
+                          //   |       |
+    println!(&quot;r: {}&quot;, r); //   |       |
+                          // --+       |
+}                         // ----------+
+</code></pre></pre>
+<p><span class="caption">Ro'yxat 10-18: To'g'ri reference, chunki referencelar mos yozuvlardan ko'ra uzoqroq lifetimega ega</span></p>
+<p>Bu erda <code>x</code> <code>'b</code> muddatiga ega, bu holda <code>'a</code> dan kattaroqdir. Bu <code>r</code> <code>x</code> ga murojaat qilishi mumkin degan ma'noni anglatadi, chunki Rust <code>r</code> dagi reference har doim <code>x</code> amalda bo`lishini biladi.</p>
+<p>Endi siz referencelarning amal qilish muddati qayerda ekanligini va referencelar har doim haqiqiy boʻlishini taʼminlash uchun Rust lifetimeni qanday tahlil qilishini bilganingizdan soʻng, keling, funksiyalar kontekstida parametrlarning generik lifetime va qiymatlarni qaytarishni koʻrib chiqaylik.</p>
+<h3 id="funksiyalarning-generik-lifetime"><a class="header" href="#funksiyalarning-generik-lifetime">Funksiyalarning generik lifetime</a></h3>
+<p>Biz ikkita satr bo'lagining uzunligini qaytaradigan funksiyani yozamiz. Bu funksiya ikkita satr bo'lagini oladi va bitta satr bo'lagini qaytaradi. <code>eng_uzun</code> funksiyasini amalga oshirganimizdan so'ng, 10-19 ro'yxatdagi kod <code>Eng uzun satr - abcd</code> ni chop etishi kerak.</p>
+<p><span class="filename">Fayl nomi: src/main.rs</span></p>
+<pre><code class="language-rust ignore">fn main() {
+    let string1 = String::from(&quot;abcd&quot;);
+    let string2 = &quot;xyz&quot;;
+
+    let result = longest(string1.as_str(), string2);
+    println!(&quot;Eng uzun satr {}&quot;, result);
+}
+</code></pre>
+<p><span class="caption">Ro'yxat 10-19: Ikki qator boʻlagining uzunini topish uchun <code>eng_uzun</code> funksiyani chaqiruvchi <code>main</code> funksiya</span></p>
+<p>E'tibor bering, biz funksiya satrlarni emas, referencelar bo'lgan satr bo'laklarini olishni xohlaymiz, chunki biz <code>eng_uzun</code> funksiya uning parametrlariga egalik qilishni xohlamaymiz. 10 19 roʻyxatda biz foydalanadigan parametrlar nima uchun biz xohlagan parametrlar ekanligi haqida koʻproq muhokama qilish uchun 4-bobdagi <a href="ch04-03-slices.html#string-slices-as-parameters">“String slicelari parametr sifatida”</a><!-- ignore --> boʻlimiga qarang.</p>
+<p>Agar biz 10-20 ro'yxatda ko'rsatilganidek, <code>eng_uzun</code> funksiyasini amalga oshirishga harakat qilsak, u kompilyatsiya qilinmaydi.</p>
+<p><span class="filename">Fayl nomi: src/main.rs</span></p>
+<pre><code class="language-rust ignore does_not_compile"><span class="boring">fn main() {
+</span><span class="boring">    let string1 = String::from(&quot;abcd&quot;);
+</span><span class="boring">    let string2 = &quot;xyz&quot;;
+</span><span class="boring">
+</span><span class="boring">    let natija = eng_uzun(string1.as_str(), string2);
+</span><span class="boring">    println!(&quot;Eng uzun satr {}&quot;, natija);
+</span><span class="boring">}
+</span><span class="boring">
+</span>fn eng_uzun(x: &amp;str, y: &amp;str) -&gt; &amp;str {
+    if x.len() &gt; y.len() {
+        x
+    } else {
+        y
+    }
+}
+</code></pre>
+<p><span class="caption">Ro'yxat 10-20: Ikki qatorli boʻlakning uzunroq qismini qaytaradigan, lekin hali kompilyatsiya qilinmagan <code>eng_uzun</code> funksiyaning amalga oshirilishi</span></p>
+<p>Buning o'rniga biz lifetime haqida gapiradigan quyidagi xatoni olamiz:</p>
+<pre><code class="language-console">$ cargo run
+   Compiling chapter10 v0.1.0 (file:///projects/chapter10)
+error[E0106]: missing lifetime specifier
+ --&gt; src/main.rs:9:33
+  |
+9 | fn eng_uzun(x: &amp;str, y: &amp;str) -&gt; &amp;str {
+  |               ----     ----     ^ expected named lifetime parameter
+  |
+  = help: this function's return type contains a borrowed value, but the signature does not say whether it is borrowed from `x` or `y`
+help: consider introducing a named lifetime parameter
+  |
+9 | fn eng_uzun&lt;'a&gt;(x: &amp;'a str, y: &amp;'a str) -&gt; &amp;'a str {
+  |             ++++     ++          ++          ++
+
+For more information about this error, try `rustc --explain E0106`.
+error: could not compile `chapter10` due to previous error
+</code></pre>
+<p>Yordam matni shuni ko'rsatadiki, return(qaytarish) turiga umumiy lifetime parametri kerak, chunki Rust qaytarilayotgan reference <code>x</code> yoki <code>y</code> ga tegishli ekanligini aniqlay olmaydi. Aslida, biz ham bilmaymiz, chunki bu funksiyaning asosiy qismidagi <code>if</code> bloki <code>x</code> ga referenceni, <code>else</code> bloki esa <code>y</code> ga referenceni qaytaradi!</p>
+<p>Ushbu funksiyani aniqlaganimizda, biz ushbu funksiyaga o'tadigan aniq qiymatlarni bilmaymiz, shuning uchun <code>if</code> yoki <code>else</code> ishi bajarilishini bilmaymiz. Shuningdek, biz uzatiladigan referencelarning aniq amal qilish muddatini bilmaymiz, shuning uchun biz qaytaradigan(return) lifetime har doim haqiqiy bo'lishini aniqlash uchun 10-17 va 10-18 ro'yxatlarda bo'lgani kabi qamrovni ko'rib chiqa olmaymiz. Borrow tekshiruvchisi buni ham aniqlay olmaydi, chunki u <code>x</code> va <code>y</code> ning ishlash lifetime qaytarilgan qiymatning lifetime(ishlash muddati) bilan qanday bog'liqligini bilmaydi. Ushbu xatoni tuzatish uchun biz referencelar o'rtasidagi munosabatni aniqlaydigan umumiy lifetime parametrlarini qo'shamiz, shunda borrow tekshiruvi tahlilini amalga oshirishi mumkin.</p>
+<h3 id="lifetime-annotation-sintaksisi"><a class="header" href="#lifetime-annotation-sintaksisi">Lifetime annotation sintaksisi</a></h3>
+<p>Lifetime annotationlar referencelarning qancha yashashini ko'rishini o'zgartirmaydi. Aksincha, ular lifetimega ta'sir qilmasdan, bir-biriga ko'plab murojaatlarning umrbod lifetimelar munosabatlarini tasvirlaydi. Signature generik turdagi parametrni ko'rsatsa, funksiyalar har qanday turni qabul qilishi mumkin bo'lgani kabi, funksiyalar ham umumiy lifetime parametrini belgilash orqali har qanday xizmat muddati bilan murojaatlarni qabul qilishi mumkin.</p>
+<p>Lifetime annotationlar biroz noodatiy sintaksisga ega: lifetime parametrlarining nomlari apostrof (<code>'</code>) bilan boshlanishi kerak va odatda generik turlar kabi kichik va juda qisqa bo'ladi. Ko'pchilik lifetime annotation birinchi izoh uchun <code>'a</code> nomidan foydalanadi. Annotationi reference turidan ajratish uchun boʻsh joydan foydalanib, biz lifetime parametr annotationlarini referencening <code>&amp;</code> belgisidan keyin joylashtiramiz.</p>
+<p>Mana bir nechta misollar: lifetime parametri bo'lmagan <code>i32</code> ga reference, <code>'a</code> nomli lifetime parametriga ega <code>i32</code> ga reference va lifetime <code>'a</code> bo'lgan <code>i32</code> ga o'zgaruvchan reference.</p>
+<pre><code class="language-rust ignore">&amp;i32        // reference
+&amp;'a i32     // aniq lifetimega ega bo'lgan reference
+&amp;'a mut i32 // aniq lifetimega ega o'zgaruvchan reference
+</code></pre>
+<p>Bir umrlik lifetime annotatsiyaning o'zi katta ma'noga ega emas, chunki annotatsiyalar Rustga bir nechta referencelalarning lifetime generik parametrlari bir-biriga qanday bog'liqligini aytib berish uchun mo'ljallangan. Keling, <code>eng_uzun</code> funksiya kontekstida lifetime annotatsiyalarning bir-biriga qanday bog'liqligini ko'rib chiqaylik.</p>
+<h3 id="funksiya-signaturelaridagi-lifetime-annotatsiyalar"><a class="header" href="#funksiya-signaturelaridagi-lifetime-annotatsiyalar">Funksiya signaturelaridagi lifetime annotatsiyalar</a></h3>
+<p>Funksiya signaturelarida lifetime annotatsiyalardan foydalanish uchun biz generik <em>tur</em> parametrlari bilan qilganimiz kabi, funksiya nomi va parametrlar ro'yxati o'rtasida burchak qavslar ichida generik <em>lifetime</em> parametrlarini e'lon qilishimiz kerak.</p>
+<p>Biz signature quyidagi cheklovni ifodalashini istaymiz: qaytarilgan(return) reference ikkala parametr ham to'g'ri bo'lsa, haqiqiy bo'ladi. Bu parametrlarning lifetime(ishlash muddati) va qaytariladigan(return) qiymat o'rtasidagi bog'liqlikdir. 10-21 ro'yxatda ko'rsatilganidek, biz lifetimega <code>'a</code> deb nom beramiz va keyin uni har bir referencega qo'shamiz.</p>
+<p><span class="filename">Fayl nomi: src/main.rs</span></p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">fn main() {
+</span><span class="boring">    let string1 = String::from(&quot;abcd&quot;);
+</span><span class="boring">    let string2 = &quot;xyz&quot;;
+</span><span class="boring">
+</span><span class="boring">    let natija = eng_uzun(string1.as_str(), string2);
+</span><span class="boring">    println!(&quot;Eng uzun satr {}&quot;, natija);
+</span><span class="boring">}
+</span><span class="boring">
+</span>fn eng_uzun&lt;'a&gt;(x: &amp;'a str, y: &amp;'a str) -&gt; &amp;'a str {
+    if x.len() &gt; y.len() {
+        x
+    } else {
+        y
+    }
+}
+</code></pre></pre>
+<p><span class="caption">Ro'yxat 10-21: Signaturedagi barcha referencelar bir xil lifetimega(ishlash muddati) ega bo'lishi kerakligini ko'rsatuvchi <code>eng_uzun</code> funksiya ta'rifi <code>'a</code></span></p>
+<p>Ushbu kod 10-19-sonli ro'yxatdagi <code>main</code> funksiyadan foydalanganda biz xohlagan natijani kompilyatsiya qilishi va ishlab chiqarishi kerak.</p>
+<p>Funktsiya signaturesi endi Rustga ma'lum bir lifetimeda <code>'a</code> funksiyasi ikkita parametrni qabul qilishini aytadi, ularning har ikkalasi ham kamida lifetime <code>'a</code> bo'lgan string bo'laklaridir. Funktsiya signaturesi, shuningdek, Rustga funksiyadan qaytarilgan string bo'lagi hech bo'lmaganda <code>'a</code> lifetimegacha yashashini aytadi.
+Amalda, bu <code>eng_uzun</code> funksiya tomonidan qaytarilgan referencening lifetime, funksiya argumentlari bilan bog'liq bo'lgan qiymatlarning eng kichik lifetimesi bilan bir xil ekanligini anglatadi. Bu munosabatlar Rust ushbu kodni tahlil qilishda foydalanishini xohlaydigan narsadir.</p>
+<p>Esda tutingki, biz ushbu funksiya signaturesida lifetime parametrlarini belgilaganimizda, biz kiritilgan yoki qaytarilgan qiymatlarning lifetimeni o'zgartirmaymiz. Aksincha, biz borrowni tekshiruvchi(borrow checker) ushbu cheklovlarga rioya qilmaydigan har qanday qiymatlarni rad etishi kerakligini ta'kidlaymiz. Shuni esda tutingki, <code>eng_uzun</code> funksiya <code>x</code> va <code>y</code> qancha vaqt ishlashini aniq bilishi shart emas, faqat ushbu signatureni qondiradigan <code>'a</code> ga baʼzi bir qamrovni almashtirish mumkin.</p>
+<p>Funksiyalarda lifetimeni izohlashda annotationlar funksiya tanasida emas, balki funksiya signaturesida bo'ladi. Signaturedagi turlar singari, lifetime annotationlar funksiya shartnomasining bir qismiga aylanadi. Funktsiya signaturelari lifetime shartnomani o'z ichiga oladi, degan ma'noni anglatadi Rust kompilyatori tahlil qilish osonroq bo'lishi mumkin. Agar funksiyaga izoh berish yoki uni chaqirish bilan bog'liq muammo bo'lsa, kompilyator xatolari kodimizning bir qismiga va cheklovlarga aniqroq ishora qilishi mumkin. Buning o'rniga, Rust kompilyatori biz lifetime munosabatlari haqida ko'proq taxminlar qilgan bo'lsa, kompilyator faqat muammoning sababidan bir necha qadam uzoqda bizning kodimizdan foydalanishni ko'rsatishi mumkin.</p>
+<p>Biz <code>eng_uzun</code> ga aniq referencelar berganimizda, <code>'a</code> o‘rniga qo‘yilgan aniq lifetime <code>x</code> doirasining <code>y</code> doirasiga to‘g‘ri keladigan qismidir. Boshqacha qilib aytadigan bo'lsak, <code>'a</code> generik lifetimesi <code>x</code> va <code>y</code> ning eng kichik lifetimaga teng bo'lgan aniq lifetimeni oladi. Biz qaytarilgan(return) referencega bir xil lifetime parametri <code>'a</code> bilan izoh berganimiz sababli, qaytarilgan reference <code>x</code> va <code>y</code> lifetimening kichikroq uzunligi uchun ham amal qiladi.</p>
+<p>Keling, turli xil aniq lifetimelarga ega bo'lgan referencelarni o'tkazish orqali <code>eng_uzun</code> funksiyani qanday cheklashini ko'rib chiqaylik. Ro'yxat 10-22 - bu oddiy misol.</p>
+<p><span class="filename">Fayl nomi: src/main.rs</span></p>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    let string1 = String::from(&quot;uzundan uzun string&quot;);
+
+    {
+        let string2 = String::from(&quot;xyz&quot;);
+        let natija = eng_uzun(string1.as_str(), string2.as_str());
+        println!(&quot;Eng uzun satr {}&quot;, natija);
+    }
+}
+<span class="boring">
+</span><span class="boring">fn eng_uzun&lt;'a&gt;(x: &amp;'a str, y: &amp;'a str) -&gt; &amp;'a str {
+</span><span class="boring">    if x.len() &gt; y.len() {
+</span><span class="boring">        x
+</span><span class="boring">    } else {
+</span><span class="boring">        y
+</span><span class="boring">    }
+</span><span class="boring">}
+</span></code></pre></pre>
+<p><span class="caption">Ro'yxat 10-22: <code>eng_uzun</code> funksiyasidan foydalanish, turli xil aniq lifetimega ega <code>String</code> qiymatlariga referencelar</span></p>
+<p>Bu misolda <code>string1</code> tashqi qamrov oxirigacha amal qiladi, <code>string2</code> ichki qamrov oxirigacha amal qiladi va <code>natija</code> ichki doiraning oxirigacha amal qiladigan narsaga ishora qiladi. Ushbu kodni ishga tushiring va siz borrowni tekshiruvchi tasdiqlaganini ko'rasiz; u kompilyatsiya qiladi va <code>Eng uzun satr - uzundan uzun string</code> ni yaratadi.</p>
+<p>Keyinchalik, <code>natija</code>dagi referencening lifetime ikkita argumentning kichikroq lifetime bo'lishi kerakligini ko'rsatadigan misolni ko'rib chiqaylik. Biz <code>natija</code> o'zgaruvchisi deklaratsiyasini ichki doiradan tashqariga o'tkazamiz, lekin qiymatni belgilashni <code>string2</code> bilan doiradagi <code>natija</code> o'zgaruvchisiga qoldiramiz. Keyin, <code>natija</code>ni ishlatadigan <code>println!</code>ni ichki doira tugagandan so‘ng, ichki doiradan tashqariga o‘tkazamiz. 10-23 ro'yxatdagi kod kompilyatsiya qilinmaydi.</p>
+<p><span class="filename">Fayl nomi: src/main.rs</span></p>
+<pre><code class="language-rust ignore does_not_compile">fn main() {
+    let string1 = String::from(&quot;uzundan uzun string&quot;);
+    let natija;
+    {
+        let string2 = String::from(&quot;xyz&quot;);
+        natija = eng_uzun(string1.as_str(), string2.as_str());
+    }
+    println!(&quot;Eng uzun satr {}&quot;, natija);
+}
+<span class="boring">
+</span><span class="boring">fn eng_uzun&lt;'a&gt;(x: &amp;'a str, y: &amp;'a str) -&gt; &amp;'a str {
+</span><span class="boring">    if x.len() &gt; y.len() {
+</span><span class="boring">        x
+</span><span class="boring">    } else {
+</span><span class="boring">        y
+</span><span class="boring">    }
+</span><span class="boring">}
+</span></code></pre>
+<p><span class="caption">Ro'yxat 10-23: <code>string2</code> dan keyin <code>natija</code> dan foydalanishga urinish</span></p>
+<p>Ushbu kodni kompilyatsiya qilmoqchi bo'lganimizda, biz quyidagi xatoni olamiz:</p>
+<pre><code class="language-console">$ cargo run
+   Compiling chapter10 v0.1.0 (file:///projects/chapter10)
+error[E0597]: `string2` does not live long enough
+ --&gt; src/main.rs:6:44
+  |
+6 |         natija = eng_uzun(string1.as_str(), string2.as_str());
+  |                                             ^^^^^^^^^^^^^^^^ borrowed value does not live long enough
+7 |     }
+  |     - `string2` dropped here while still borrowed
+8 |     println!(&quot;Eng uzun satr {}&quot;, natija);
+  |                                  ------ borrow later used here
+
+For more information about this error, try `rustc --explain E0597`.
+error: could not compile `chapter10` due to previous error
+</code></pre>
+<p>Xato shuni ko'rsatadiki, <code>natija</code> <code>println!</code> bayonoti uchun haqiqiy bo'lishi uchun <code>string2</code> tashqi doiraning oxirigacha amal qilishi kerak. Rust buni biladi, chunki biz funksiya parametrlarining lifetimeni(ishlash muddati) va qiymatlarni bir xil <code>'a</code> parametridan foydalangan holda izohladik.</p>
+<p>Inson sifatida biz ushbu kodni ko'rib chiqamiz va <code>string1</code> <code>string2</code> dan uzunroq ekanligini ko'rishimiz mumkin va shuning uchun <code>natija</code> <code>string1</code> ga referenceni o'z ichiga oladi.
+<code>string1</code> hali amaldan tashqariga chiqmaganligi sababli, <code>string1</code>ga reference <code>println!</code> bayonoti uchun amal qiladi. Biroq, kompilyator bu holatda reference haqiqiy ekanligini ko'ra olmaydi. Biz Rustga aytdikki, <code>eng_uzun</code> funksiya tomonidan qaytarilgan referencening lifetime uzatilgan referencelarning lifetimesidan kichikroq vaqt bilan bir xil. Shuning uchun, borrowni tekshirish vositasi 10-23 ro'yxatdagi kodga ruxsat bermaydi, chunki noto'g'ri reference mavjud.</p>
+<p><code>eng_uzun</code> funksiyaga oʻtkazilgan referencelarning qiymatlari va amal lifetime va qaytarilgan(return) referencedan qanday foydalanishni oʻzgartiruvchi koʻproq tajribalar ishlab chiqishga harakat qiling. Kompilyatsiya qilishdan oldin tajribalaringiz borrow tekshiruvidan o'tadimi yoki yo'qmi haqida faraz qiling; keyin siz haq ekanligingizni tekshiring!</p>
+<h3 id="lifetime-nuqtai-nazaridan-fikrlash"><a class="header" href="#lifetime-nuqtai-nazaridan-fikrlash">Lifetime nuqtai nazaridan fikrlash</a></h3>
+<p>Lifetime parametrlarini belgilashingiz kerak bo'lgan metod sizning funksiyangiz nima qilayotganiga bog'liq. Misol uchun, agar biz <code>eng_uzun</code> funksiyasini amalga oshirishni har doim eng uzun satr bo'lagini emas, balki birinchi parametrni qaytarish uchun o'zgartirgan bo'lsak, <code>y</code> parametrida lifetimeni belgilashimiz shart emas. Quyidagi kod kompilyatsiya qilinadi:</p>
+<p><span class="filename">Fayl nomi: src/main.rs</span></p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">fn main() {
+</span><span class="boring">    let string1 = String::from(&quot;abcd&quot;);
+</span><span class="boring">    let string2 = &quot;efghijklmnopqrstuvwxyz&quot;;
+</span><span class="boring">
+</span><span class="boring">    let natija = eng_uzun(string1.as_str(), string2);
+</span><span class="boring">    println!(&quot;Eng uzun satr {}&quot;, natija);
+</span><span class="boring">}
+</span><span class="boring">
+</span>fn eng_uzun&lt;'a&gt;(x: &amp;'a str, y: &amp;str) -&gt; &amp;'a str {
+    x
+}
+</code></pre></pre>
+<p>Biz <code>x</code> parametri va qaytarish(return) turi uchun lifetime <code>'a</code> parametrini belgiladik, lekin <code>y</code> parametri uchun emas, chunki <code>y</code> ning lifetimesi <code>x</code> yoki qaytarish qiymati bilan hech qanday aloqasi yo'q.</p>
+<p>Funksiyadan mos yozuvlar qaytarilganda, qaytarish turi uchun lifetime parametri parametrlardan birining lifetime parametriga mos kelishi kerak. Agar qaytarilgan reference parametrlardan biriga tegishli bo'lmasa, u ushbu funksiya doirasida yaratilgan qiymatga murojaat qilishi kerak. Biroq, bu dangling reference bo'ladi, chunki funksiya oxirida qiymat doiradan chiqib ketadi.
+Kompilyatsiya qilmaydigan <code>eng_uzun</code> funksiyani amalga oshirishga urinishlarni ko'rib chiqing:</p>
+<p><span class="filename">Fayl nomi: src/main.rs</span></p>
+<pre><code class="language-rust ignore does_not_compile"><span class="boring">fn main() {
+</span><span class="boring">    let string1 = String::from(&quot;abcd&quot;);
+</span><span class="boring">    let string2 = &quot;xyz&quot;;
+</span><span class="boring">
+</span><span class="boring">    let natija = eng_uzun(string1.as_str(), string2);
+</span><span class="boring">    println!(&quot;Eng uzun satr {}&quot;, natija);
+</span><span class="boring">}
+</span><span class="boring">
+</span>fn eng_uzun&lt;'a&gt;(x: &amp;str, y: &amp;str) -&gt; &amp;'a str {
+    let natija = String::from(&quot;haqiqatan ham uzun satr&quot;);
+    natija.as_str()
+}
+</code></pre>
+<p>Bu erda, biz qaytish turi uchun lifetime parametr <code>'a</code> ni belgilagan bo'lsak ham, bu dastur kompilyatsiya qilinmaydi, chunki qaytish qiymatining lifetime parametrlarning lifetime bilan umuman bog'liq emas. Mana biz olgan xato xabari:</p>
+<pre><code class="language-console">$ cargo run
+   Compiling chapter10 v0.1.0 (file:///projects/chapter10)
+error[E0515]: cannot return reference to local variable `result`
+  --&gt; src/main.rs:11:5
+   |
+11 |     result.as_str()
+   |     ^^^^^^^^^^^^^^^ returns a reference to data owned by the current function
+
+For more information about this error, try `rustc --explain E0515`.
+error: could not compile `chapter10` due to previous error
+</code></pre>
+<p>Muammo shundaki, <code>natija</code> ishchi ko'lamdan tashqariga chiqadi va <code>eng_uzun</code> funksiya oxirida tozalanadi. Shuningdek, biz funksiyadan <code>natija</code>ga referenceni qaytarishga harakat qilyapmiz. Dangling referenceni o'zgartiradigan lifetime parametrlarini belgilashning iloji yo'q va Rust bizga dangling reference yaratishga ruxsat bermaydi. Bunday holda, eng yaxshi tuzatish mos yozuvlar emas, balki tegishli referencelar turini qaytarish bo'ladi, shuning uchun chaqiruv funksiyasi qiymatni tozalash uchun javobgar bo'ladi.</p>
+<p>Oxir oqibat, lifetime sintaksisi turli parametrlarning ishlash muddatini va funktsiyalarning qaytish qiymatlarini bog'lashdir. Ular ulangandan so'ng, Rust xotira xavfsizligini ta'minlaydigan operatsiyalarga ruxsat berish va dangling pointerlarni yaratish yoki xotira xavfsizligini boshqa tarzda buzadigan operatsiyalarga ruxsat berish uchun yetarli ma'lumotga ega.</p>
+<h3 id="struktura-tariflarida-lifetime-annotationlar"><a class="header" href="#struktura-tariflarida-lifetime-annotationlar">Struktura ta'riflarida lifetime annotationlar</a></h3>
+<p>Hozirgacha biz belgilagan structlar barcha egalik turlariga ega. Biz referencelarni saqlash uchun structlarni belgilashimiz mumkin, ammo bu holda structning ta'rifidagi har bir referencega lifetime annotation qo'shishimiz kerak bo'ladi. 10-24 roʻyxatda <code>ImportantExcerpt</code> nomli struktura mavjud boʻlib, u string sliceni saqlaydi.</p>
+<p><span class="filename">Fayl nomi: src/main.rs</span></p>
+<pre><pre class="playground"><code class="language-rust">struct ImportantExcerpt&lt;'a&gt; {
+    qism: &amp;'a str,
+}
+
+fn main() {
+    let roman = String::from(&quot;Meni yaxshi dasturchi edim. Bir necha yil oldin...&quot;);
+    let birinchi_jumla = roman.split('.').next().expect(&quot;'.' belgisini topib bo'lmadi.&quot;);
+    let i = ImportantExcerpt {
+        qism: birinchi_jumla,
+    };
+}
+</code></pre></pre>
+<p><span class="caption">Ro'yxat 10-24: Referencega ega bo'lgan struct, lifetime annotationni talab qiladi</span></p>
+<p>Bu structda bir satr boʻlagini oʻz ichiga oluvchi <code>qism</code> maydoni mavjud boʻlib, bu referencelardir. Generik(umumiy) ma'lumotlar turlarida bo'lgani kabi, biz structning nomidan keyin burchakli qavslar ichida generik lifetime parametrining nomini e'lon qilamiz, shuning uchun biz structning ta'rifi tanasida lifetime parametridan foydalanishimiz mumkin. Bu izoh <code>ImportantExcerpt</code> namunasi oʻzining <code>qism</code> maydonidagi referencedan uzoqlasha olmasligini bildiradi.</p>
+<p>Bu yerda <code>main</code> funksiyasi <code>roman</code> oʻzgaruvchisiga tegishli <code>String</code>ning birinchi jumlasiga referenceni oʻz ichiga olgan <code>ImportantExcerpt</code> strukturasining namunasini yaratadi. <code>roman</code>dagi ma'lumotlar <code>ImportantExcerpt</code> misoli yaratilishidan oldin mavjud. Bundan tashqari, <code>roman</code> <code>ImportantExcerpt</code> ishchi doirasi tashqariga chiqmagunicha, ishchi doiradan chiqib ketmaydi, shuning uchun <code>ImportantExcerpt</code> misolidagi reference haqiqiy hisoblanadi.</p>
+<h3 id="lifetime-elision"><a class="header" href="#lifetime-elision">Lifetime Elision</a></h3>
+<p>Siz har bir referencening lifetime(ishlash muddati) borligini va referencelardan foydalanadigan funksiyalar yoki structlar uchun lifetime parametrlarini belgilashingiz kerakligini bilib oldingiz. Biroq, 4-bobda biz 4-9-ro'yxatdagda funksiyaga ega bo'ldik, u keyin yana 10-25 ro'yxatda ko'rsatiladi, unda kod lifetime annotationsiz tuzilgan.</p>
+<p><span class="filename">Fayl nomi: src/lib.rs</span></p>
+<pre><pre class="playground"><code class="language-rust">fn first_word(s: &amp;str) -&gt; &amp;str {
+    let bytes = s.as_bytes();
+
+    for (i, &amp;item) in bytes.iter().enumerate() {
+        if item == b' ' {
+            return &amp;s[0..i];
+        }
+    }
+
+    &amp;s[..]
+}
+<span class="boring">
+</span><span class="boring">fn main() {
+</span><span class="boring">    let my_string = String::from(&quot;hello world&quot;);
+</span><span class="boring">
+</span><span class="boring">    // first_word works on slices of `String`s
+</span><span class="boring">    let word = first_word(&amp;my_string[..]);
+</span><span class="boring">
+</span><span class="boring">    let my_string_literal = &quot;hello world&quot;;
+</span><span class="boring">
+</span><span class="boring">    // first_word works on slices of string literals
+</span><span class="boring">    let word = first_word(&amp;my_string_literal[..]);
+</span><span class="boring">
+</span><span class="boring">    // Because string literals *are* string slices already,
+</span><span class="boring">    // this works too, without the slice syntax!
+</span><span class="boring">    let word = first_word(my_string_literal);
+</span><span class="boring">}
+</span></code></pre></pre>
+<p><span class="caption">Ro'yxat 10-25: Biz 4-9 ro'yxatda aniqlagan funksiya, parametr va qaytish(return) turi referencelar bo'lsa ham, lifetime annotationsiz(umrbod lifetime) tuzilgan.</span></p>
+<p>Ushbu funktsiyaning lifetime annotationlarsiz kompilyatsiya qilinishining sababi tarixiydir: Rust-ning dastlabki versiyalarida (1.0-dan oldingi) bu kod kompilyatsiya bo'lmagan bo'lardi, chunki har bir reference aniq ishlash muddatini talab qiladi. O'sha paytda funktsiya signaturesi quyidagicha yozilgan bo'lar edi:</p>
+<pre><code class="language-rust ignore">fn birinchi_belgi&lt;'a&gt;(s: &amp;'a str) -&gt; &amp;'a str {
+</code></pre>
+<p>Rust-da juda ko'p kod yozgandan so'ng, Rust jamoasi Rust dasturchilari muayyan vaziyatlarda bir xil lifetime annotatiolarni qayta-qayta kiritayotganini aniqladilar. Bu vaziyatlarni oldindan aytish mumkin edi va bir nechta deterministik patternlarga amal qildi. Ishlab chiquvchilar ushbu patternlarni kompilyator kodiga dasturlashtirdilar, shuning uchun borrow tekshiruvi ushbu vaziyatlarda lifetimeni(ishlash muddatini) aniqlay oladi va aniq izohlarga muhtoj bo'lmaydi.</p>
+<p>Rust tarixining ushbu qismi dolzarbdir, chunki ko'proq deterministik patternlar paydo bo'lishi va kompilyatorga qo'shilishi mumkin. Kelajakda undan ham kamroqlifetime annotationlar talab qilinishi mumkin.</p>
+<p>Rustning referencelarni tahlil qilishda dasturlashtirilgan patternlar <em>lifetime elision qoidalari(lifetime elision rules)</em> deb ataladi. Bu dasturchilar rioya qilishi kerak bo'lgan qoidalar emas; ular kompilyator ko'rib chiqadigan muayyan holatlar to'plamidir va agar sizning kodingiz ushbu holatlarga mos keladigan bo'lsa, lifetime vaqtlarini aniq yozishingiz shart emas.</p>
+<p>Elision qoidalari to'liq xulosa chiqarmaydi. Agar Rust qoidalarni qat'iy qo'llasa, lekin referencelarning qancha vaqt ishlashi(lifetime) haqida hali ham noaniqlik mavjud bo'lsa, kompilyator qolgan referencelarning lifetime(ishlash muddati) qancha bo'lishi kerakligini taxmin qila olmaydi. Taxmin qilish o'rniga, kompilyator sizga lifetime annotationlarni qo'shish orqali hal qilishingiz mumkin bo'lgan xatoni beradi.</p>
+<p>Funksiya yoki metod parametrlari bo‘yicha lifetime <em>kirish lifetime (input lifetimes)</em>, qaytariladigan(return) qiymatlar bo‘yicha lifetime <em>chiqish lifetimei (output lifetimes)</em> deb ataladi.</p>
+<p>Aniq izohlar(annotation) bo'lmasa, kompilyator referencelarning lifetimeni aniqlash uchun uchta qoidadan foydalanadi. Birinchi qoida kirish lifetimega(input lifetimes), ikkinchi va uchinchi qoidalar esa chiqish lifetimega(output lifetimes) tegishli. Agar kompilyator uchta qoidaning oxiriga yetib borsa va hali ham lifetimeni(foydalanish muddati) aniqlay olmaydigan referencelar mavjud bo'lsa, kompilyator xato bilan to'xtaydi.
+Bu qoidalar <code>fn</code> ta'riflari hamda <code>impl</code> bloklari uchun amal qiladi.</p>
+<p>Birinchi qoida shundaki, kompilyator mos yozuvlar bo'lgan har bir parametrga lifetime parametrni belgilaydi.</p>
+<p>Ikkinchi qoida shuki, agar aynan bitta kirish lifetime(input) parametri mavjud boʻlsa, u lifetime barcha chiqish(output) lifetime parametrlariga tayinlanadi: <code>fn foo&lt;'a&gt;(x: &amp;'a i32) -&gt; &amp;'a i32</code>.</p>
+<p>Uchinchi qoida shundaki, agar kirish lifetime bir nechta parametrlar mavjud bo'lsa, lekin ulardan biri <code>&amp;self</code> yoki <code>&amp;mut self</code> bo'lsa, chunki bu metod bo'lsa, <code>self</code> lifetime barcha chiqish lifetime parametrlariga tayinlanadi. Ushbu uchinchi qoida metodlarni o'qish va yozishni ancha yaxshi qiladi, chunki kamroq belgilar kerak.</p>
+<p>Tasavvur qilaylik, biz kompilyatormiz. 10-25 roʻyxatdagi <code>birinchi_belgi</code> funksiyasi signaturesidagi referencelarning lifetimeni(amal qilish muddati) aniqlash uchun biz ushbu qoidalarni qoʻllaymiz. Signature referencelalar bilan bog'liq bo'lmagan lifetimesiz(muddatsiz) boshlanadi:</p>
+<pre><code class="language-rust ignore">fn birinchi_belgi(s: &amp;str) -&gt; &amp;str {
+</code></pre>
+<p>Keyin kompilyator birinchi qoidani qo'llaydi, bu har bir parametr o'z lifetimesini oladi. Biz uni odatdagidek <code>'a</code> deb ataymiz, shuning uchun endi signature quyidagicha:</p>
+<pre><code class="language-rust ignore">fn birinchi_belgi&lt;'a&gt;(s: &amp;'a str) -&gt; &amp;str {
+</code></pre>
+<p>Ikkinchi qoida amal qiladi, chunki aynan bitta kirish lifetime mavjud. Ikkinchi qoida bitta kirish(input) parametrining lifetime chiqish lifetimesiga tayinlanishini bildiradi, shuning uchun signature endi quyidagicha:</p>
+<pre><code class="language-rust ignore">fn birinchi_belgi&lt;'a&gt;(s: &amp;'a str) -&gt; &amp;'a str {
+</code></pre>
+<p>Endi ushbu funksiya signaturesidagi barcha referencelar lifetimesiga ega va kompilyator dasturchiga ushbu funksiya signaturesidagi lifetimeni izohlashiga hojat qoldirmasdan tahlilini davom ettirishi mumkin.</p>
+<p>Keling, yana bir misolni ko'rib chiqaylik, bu safar biz 10 20 ro'yxatda ishlashni boshlaganimizda lifetime parametrlarga ega bo'lmagan <code>eng_uzun</code> funksiyadan foydalangan holda:</p>
+<pre><code class="language-rust ignore">fn eng_uzun(x: &amp;str, y: &amp;str) -&gt; &amp;str {
+</code></pre>
+<p>Keling, birinchi qoidani qo'llaymiz: har bir parametr o'z lifetimeni oladi. Bu safar bizda bitta emas, ikkita parametr bor, shuning uchun bizda ikkita lifetime bor:</p>
+<pre><code class="language-rust ignore">fn eng_uzun&lt;'a, 'b&gt;(x: &amp;'a str, y: &amp;'b str) -&gt; &amp;str {
+</code></pre>
+<p>Siz ikkinchi qoida qo'llanilmasligini ko'rishingiz mumkin, chunki bir nechta kirish lifetime mavjud. Uchinchi qoida ham qo'llanilmaydi, chunki <code>eng_uzun</code> - bu metod emas, balki funksiya, shuning uchun parametrlarning hech biri <code>self</code> emas. Barcha uchta qoidani ko'rib chiqqandan so'ng, biz qaytish(return) turining lifetime nima ekanligini hali aniqlay olmadik. Shuning uchun biz 10-20 ro'yxatdagi kodni kompilyatsiya qilishda xatoga yo'l qo'ydik: kompilyator lifetime elision qoidalari bo'yicha ishladi, lekin signaturedagi referencelarning butun lifetimeni aniqlay olmadi.</p>
+<p>Uchinchi qoida haqiqatan ham faqat metod signaturelarida amal qilganligi sababli, biz ushbu kontekstda lifetimeni ko'rib chiqamiz, nima uchun uchinchi qoida biz metod signaturelariga tez-tez izoh qo'yishimiz shart emasligini tushunish uchun.</p>
+<h3 id="metod-tariflaridadefination-lifetime-annotationlar"><a class="header" href="#metod-tariflaridadefination-lifetime-annotationlar">Metod ta'riflarida(defination) Lifetime Annotationlar</a></h3>
+<p>Biz lifetime bo'lgan strukturada metodlarni qo'llaganimizda, biz 10-11 ro'yxatda ko'rsatilgan generik turdagi parametrlar bilan bir xil sintaksisdan foydalanamiz. Lifetime parametrlarini qayerda e'lon qilishimiz va ishlatishimiz ularning struktura maydonlari yoki metod parametrlari va qaytish(return) qiymatlari bilan bog'liqligiga bog'liq.</p>
+<p>Struct maydonlarining lifetime nomlari har doim <code>impl</code> kalit so'zidan keyin e'lon qilinishi va keyin structning nomidan keyin ishlatilishi kerak, chunki bu lifetimelar strukturaning bir qismidir.</p>
+<p><code>impl</code> blokidagi metod signaturelarida referencelar struct maydonlaridagi referencelar lifetimega bog'langan bo'lishi mumkin yoki ular mustaqil bo'lishi mumkin. Bundan tashqari, lifetime elision qoidalari ko'pincha metod signaturelarida lifetime annotationlar kerak bo'lmasligi uchun shunday qiladi. 10-24 ro'yxatda biz aniqlagan <code>ImportantExcerpt</code> nomli strukturadan foydalanib, ba'zi misollarni ko'rib chiqaylik.</p>
+<p>Birinchidan, biz <code>daraja</code> deb nomlangan metoddan foydalanamiz, uning yagona parametri <code>self</code> ga reference va qaytariladigan qiymati <code>i32</code> bo‘lib, hech narsaga reference emas:</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">struct ImportantExcerpt&lt;'a&gt; {
+</span><span class="boring">    qism: &amp;'a str,
+</span><span class="boring">}
+</span><span class="boring">
+</span>impl&lt;'a&gt; ImportantExcerpt&lt;'a&gt; {
+    fn daraja(&amp;self) -&gt; i32 {
+        3
+    }
+}
+<span class="boring">
+</span><span class="boring">impl&lt;'a&gt; ImportantExcerpt&lt;'a&gt; {
+</span><span class="boring">    fn qismni_elon_qilish_qaytarih(&amp;self, elon_qilish: &amp;str) -&gt; &amp;str {
+</span><span class="boring">        println!(&quot;Diqqat iltimos: {}&quot;, elon_qilish);
+</span><span class="boring">        self.qism
+</span><span class="boring">    }
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">fn main() {
+</span><span class="boring">    let roman = String::from(&quot;Meni yaxshi dasturchi edim. Bir necha yil oldin...&quot;);
+</span><span class="boring">    let birinchi_jumla = roman.split('.').next().expect(&quot;'.' belgisini topib bo'lmadi.&quot;);
+</span><span class="boring">    let i = ImportantExcerpt {
+</span><span class="boring">        qism: birinchi_jumla,
+</span><span class="boring">    };
+</span><span class="boring">}
+</span></code></pre></pre>
+<p><code>impl</code> dan keyin lifetime parametr deklaratsiyasi va tur nomidan keyin foydalanish talab qilinadi, lekin biz birinchi elision qoida tufayli <code>self</code> ga referencening lifetimeni izohlashimiz shart emas.</p>
+<p>Mana uchinchi umr bo'yi elision qoida qo'llaniladigan misol:</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">struct ImportantExcerpt&lt;'a&gt; {
+</span><span class="boring">    qism: &amp;'a str,
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">impl&lt;'a&gt; ImportantExcerpt&lt;'a&gt; {
+</span><span class="boring">    fn daraja(&amp;self) -&gt; i32 {
+</span><span class="boring">        3
+</span><span class="boring">    }
+</span><span class="boring">}
+</span><span class="boring">
+</span>impl&lt;'a&gt; ImportantExcerpt&lt;'a&gt; {
+    fn qismni_elon_qilish_qaytarih(&amp;self, elon_qilish: &amp;str) -&gt; &amp;str {
+        println!(&quot;Diqqat iltimos: {}&quot;, elon_qilish);
+        self.qism
+    }
+}
+<span class="boring">
+</span><span class="boring">fn main() {
+</span><span class="boring">    let roman = String::from(&quot;Meni yaxshi dasturchi edim. Bir necha yil oldin...&quot;);
+</span><span class="boring">    let birinchi_jumla = roman.split('.').next().expect(&quot;'.' belgisini topib bo'lmadi.&quot;);
+</span><span class="boring">    let i = ImportantExcerpt {
+</span><span class="boring">        qism: birinchi_jumla,
+</span><span class="boring">    };
+</span><span class="boring">}
+</span></code></pre></pre>
+<p>Ikkita kirish(input) lifetime bor, shuning uchun Rust birinchi lifetime elision qoidasini qo'llaydi va <code>&amp;self</code> va <code>elon_qilish</code> ga ham o'z lifetimeni beradi. Keyin, parametrlardan biri <code>&amp;self</code> bo'lgani uchun qaytarish(return) turi <code>&amp;self</code> lifetimeni oladi va barcha lifetimelar hisobga olingan.</p>
+<h3 id="statik-lifetime"><a class="header" href="#statik-lifetime">Statik Lifetime</a></h3>
+<p>Muhokama qilishimiz kerak bo'lgan maxsus lifetime bu <code>'static</code> bo'lib, bu ta'sirlangan reference dasturning butun muddati davomida yashashi mumkinligini bildiradi. Barcha satr literallari <code>'static</code> lifetimega ega, biz ularga quyidagicha izoh berishimiz mumkin:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let s: &amp;'static str = &quot;Mening statik lifetimem bor.&quot;;
+<span class="boring">}
+</span></code></pre></pre>
+<p>Ushbu satrning matni to'g'ridan-to'g'ri dasturning binary faylida saqlanadi, u har doim mavjud. Shunday qilib, barcha satr literallarining lifetime <code>'static</code> dir.</p>
+<p>Xato xabarlarida <code>'static</code> lifetimedan foydalanish bo'yicha takliflarni ko'rishingiz mumkin. Biroq, <code>'static</code> ni referencening lifetime sifatida belgilashdan oldin, sizda mavjud bo'lgan reference haqiqatan ham dasturingizning butun ish vaqti davomida yashaydimi yoki yo'qmi va buni xohlaysizmi, deb o'ylab ko'ring. Ko'pincha, <code>'static</code> lifetimeni ko'rsatadigan xato xabari dangling reference yaratishga urinish yoki mavjud bo'lgan lifetimelarning mos kelmasligi natijasida paydo bo'ladi. Bunday hollarda, yechim <code>'static</code> lifetimeni ko'rsatmasdan, bu muammolarni tuzatishdir.</p>
+<h2 id="generik-tur-parametrlari-trait-boundlar-va-birgalikdagi-lifetime"><a class="header" href="#generik-tur-parametrlari-trait-boundlar-va-birgalikdagi-lifetime">Generik tur parametrlari, Trait boundlar va birgalikdagi lifetime</a></h2>
+<p>Keling, generik turdagi parametrlarni, trait boundlarini va lifetimeni bitta funksiyada belgilash sintaksisini qisqacha ko'rib chiqaylik!</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">fn main() {
+</span><span class="boring">    let string1 = String::from(&quot;abcd&quot;);
+</span><span class="boring">    let string2 = &quot;xyz&quot;;
+</span><span class="boring">
+</span><span class="boring">    let natija = elon_bilan_eng_uzun(
+</span><span class="boring">        string1.as_str(),
+</span><span class="boring">        string2,
+</span><span class="boring">        &quot;Bugun kimningdir tug'ilgan kuni!&quot;,
+</span><span class="boring">    );
+</span><span class="boring">    println!(&quot;Eng uzun satr {}&quot;, natija);
+</span><span class="boring">}
+</span><span class="boring">
+</span>use std::fmt::Display;
+
+fn elon_bilan_eng_uzun&lt;'a, T&gt;(
+    x: &amp;'a str,
+    y: &amp;'a str,
+    ann: T,
+) -&gt; &amp;'a str
+where
+    T: Display,
+{
+    println!(&quot;E'lon! {}&quot;, ann);
+    if x.len() &gt; y.len() {
+        x
+    } else {
+        y
+    }
+}
+</code></pre></pre>
+<p>Bu 10-21 roʻyxatdagi <code>eng_uzun</code> funksiya boʻlib, u ikki qatorning uzunroq qismini qaytaradi. Ammo endi u <code>where</code> bandida ko'rsatilgandek <code>Display</code> traitini amalga oshiradigan har qanday tur tomonidan to'ldirilishi mumkin bo'lgan <code>T</code> generik turidagi <code>ann</code> nomli qo'shimcha parametrga ega. Ushbu qo'shimcha parametr <code>{}</code> yordamida chop etiladi, shuning uchun <code>Display</code> trait boundi(trait chegarasi) zarur. Lifetimelar generik tur bo'lganligi sababli, lifetime parametri <code>'a</code> va generik turdagi parametr <code>T</code> funksiya nomidan keyin burchakli qavslar ichida bir xil ro'yxatda joylashgan.</p>
+<h2 id="xulosa"><a class="header" href="#xulosa">Xulosa</a></h2>
+<p>Biz ushbu bobda juda ko'p narsalarni ko'rib chiqdik! Endi siz generik(umumiy) turdagi parametrlar, traitlar va trait boundlari(trait chegaralari) va generik lifetime parametrlari haqida bilganingizdan so'ng, siz ko'p turli vaziyatlarda ishlaydigan kodni takrorlashsiz yozishga tayyorsiz.
+Generik turdagi parametrlar kodni turli turlarga qo'llash imkonini beradi. Traitlar va traitlar boundlari(chegara) turlar generik(umumiy) bo'lsa ham, ular kodga kerak bo'lgan xatti-harakatlarga ega bo'lishini ta'minlaydi. Ushbu moslashuvchan kodda hech qanday dangling referencelar bo'lmasligini ta'minlash uchun lifetime annotationlardan qanday foydalanishni o'rgandingiz. Va bu tahlillarning barchasi kompilyatsiya vaqtida sodir bo'ladi, bu runtimening ishlashiga ta'sir qilmaydi!</p>
+<p>Ishoning yoki ishonmang, biz ushbu bobda muhokama qilgan mavzular bo'yicha ko'p narsalarni o'rganishimiz mumkin: 17-bobda traitlardan foydalanishning yana bir usuli bo'lgan trait ob'ektlari muhokama qilinadi. Bundan tashqari,lifetime annotationlarni o'z ichiga olgan murakkab stsenariylar ham mavjud, ular sizga faqat juda ilg'or stsenariylarda kerak bo'ladi; ular uchun siz <a href="../reference/index.html">Rust Reference</a> ni o'qishingiz kerak. Ammo keyin siz Rust-da testlarni qanday yozishni o'rganasiz, shunda kodingiz kerakli tarzda ishlayotganiga ishonch hosil qilishingiz mumkin.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="ch10-02-traits.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a rel="next" href="ch11-00-testing.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="ch10-02-traits.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a rel="next" href="ch11-00-testing.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        <script type="text/javascript" src="ferris.js"></script>
+    </body>
+</html>

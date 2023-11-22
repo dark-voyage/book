@@ -1,0 +1,330 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Hash Mapda bog&#x27;langan qiymatlarga ega kalitlarni saqlash - Rust dasturlash tili</title>
+        <!-- Custom HTML head -->
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="ferris.css">
+        <link rel="stylesheet" href="theme/2018-edition.css">
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="title-page.html">Rust dasturlash tili</a></li><li class="chapter-item expanded affix "><a href="foreword.html">Muqaddima</a></li><li class="chapter-item expanded affix "><a href="ch00-00-introduction.html">Kirish</a></li><li class="chapter-item expanded "><a href="ch01-00-getting-started.html"><strong aria-hidden="true">1.</strong> Ishni boshlash</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch01-01-installation.html"><strong aria-hidden="true">1.1.</strong> O'rnatish</a></li><li class="chapter-item expanded "><a href="ch01-02-hello-world.html"><strong aria-hidden="true">1.2.</strong> Hello, World!</a></li><li class="chapter-item expanded "><a href="ch01-03-hello-cargo.html"><strong aria-hidden="true">1.3.</strong> Hello, Cargo!</a></li></ol></li><li class="chapter-item expanded "><a href="ch02-00-guessing-game-tutorial.html"><strong aria-hidden="true">2.</strong> Taxmin qilish o'yinini dasturlash</a></li><li class="chapter-item expanded "><a href="ch03-00-common-programming-concepts.html"><strong aria-hidden="true">3.</strong> Umumiy dasturlash tushunchalari</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch03-01-variables-and-mutability.html"><strong aria-hidden="true">3.1.</strong> O'zgaruvchilar va o'zgaruvchanlik</a></li><li class="chapter-item expanded "><a href="ch03-02-data-types.html"><strong aria-hidden="true">3.2.</strong> Ma'lumotlar turlari</a></li><li class="chapter-item expanded "><a href="ch03-03-how-functions-work.html"><strong aria-hidden="true">3.3.</strong> Funksiyalar</a></li><li class="chapter-item expanded "><a href="ch03-04-comments.html"><strong aria-hidden="true">3.4.</strong> Izohlar</a></li><li class="chapter-item expanded "><a href="ch03-05-control-flow.html"><strong aria-hidden="true">3.5.</strong> Control Flow</a></li></ol></li><li class="chapter-item expanded "><a href="ch04-00-understanding-ownership.html"><strong aria-hidden="true">4.</strong> Ownershipni tushunish</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch04-01-what-is-ownership.html"><strong aria-hidden="true">4.1.</strong> Ownership nima?</a></li><li class="chapter-item expanded "><a href="ch04-02-references-and-borrowing.html"><strong aria-hidden="true">4.2.</strong> Referencelar va  Borrowing</a></li><li class="chapter-item expanded "><a href="ch04-03-slices.html"><strong aria-hidden="true">4.3.</strong> Slice turi</a></li></ol></li><li class="chapter-item expanded "><a href="ch05-00-structs.html"><strong aria-hidden="true">5.</strong> Tegishli ma'lumotlarni tuzish uchun Structdan foydalanish</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch05-01-defining-structs.html"><strong aria-hidden="true">5.1.</strong> Structlarni aniqlash va yaratish</a></li><li class="chapter-item expanded "><a href="ch05-02-example-structs.html"><strong aria-hidden="true">5.2.</strong> Structs yordamida namunaviy dastur</a></li><li class="chapter-item expanded "><a href="ch05-03-method-syntax.html"><strong aria-hidden="true">5.3.</strong> Metod sintaksisi</a></li></ol></li><li class="chapter-item expanded "><a href="ch06-00-enums.html"><strong aria-hidden="true">6.</strong> Enumlar va patternlarni moslashtirish</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch06-01-defining-an-enum.html"><strong aria-hidden="true">6.1.</strong> Enumni aniqlash</a></li><li class="chapter-item expanded "><a href="ch06-02-match.html"><strong aria-hidden="true">6.2.</strong> match Control Flow konstruksiyasi</a></li><li class="chapter-item expanded "><a href="ch06-03-if-let.html"><strong aria-hidden="true">6.3.</strong> if let bilan qisqacha Control Flow</a></li></ol></li><li class="chapter-item expanded "><a href="ch07-00-managing-growing-projects-with-packages-crates-and-modules.html"><strong aria-hidden="true">7.</strong> O'sib borayotgan loyihalarni Paketlar, Cratelar va Modullar bilan boshqarish</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch07-01-packages-and-crates.html"><strong aria-hidden="true">7.1.</strong> Paketlar va Cratelar</a></li><li class="chapter-item expanded "><a href="ch07-02-defining-modules-to-control-scope-and-privacy.html"><strong aria-hidden="true">7.2.</strong> Qo'llanish doirasi va maxfiylikni nazorat qilish uchun modullarni aniqlash</a></li><li class="chapter-item expanded "><a href="ch07-03-paths-for-referring-to-an-item-in-the-module-tree.html"><strong aria-hidden="true">7.3.</strong> Modul daraxtidagi elementga murojaat qilish yo'llari</a></li><li class="chapter-item expanded "><a href="ch07-04-bringing-paths-into-scope-with-the-use-keyword.html"><strong aria-hidden="true">7.4.</strong> use kalit so'zi bilan yo'llarni qamrab olish</a></li><li class="chapter-item expanded "><a href="ch07-05-separating-modules-into-different-files.html"><strong aria-hidden="true">7.5.</strong> Modullarni turli fayllarga ajratish</a></li></ol></li><li class="chapter-item expanded "><a href="ch08-00-common-collections.html"><strong aria-hidden="true">8.</strong> Umumiy to'plamlar</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch08-01-vectors.html"><strong aria-hidden="true">8.1.</strong> Vectorlar bilan qiymatlar ro'yxatini saqlash</a></li><li class="chapter-item expanded "><a href="ch08-02-strings.html"><strong aria-hidden="true">8.2.</strong> UTF-8 kodlangan matnni Stringlar bilan saqlash</a></li><li class="chapter-item expanded "><a href="ch08-03-hash-maps.html" class="active"><strong aria-hidden="true">8.3.</strong> Hash Mapda bog'langan qiymatlarga ega kalitlarni saqlash</a></li></ol></li><li class="chapter-item expanded "><a href="ch09-00-error-handling.html"><strong aria-hidden="true">9.</strong> Xatolar bilan ishlash</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch09-01-unrecoverable-errors-with-panic.html"><strong aria-hidden="true">9.1.</strong> panic! bilan tuzatib bo'lmaydigan xatolar</a></li><li class="chapter-item expanded "><a href="ch09-02-recoverable-errors-with-result.html"><strong aria-hidden="true">9.2.</strong> Result bilan tiklanadigan xatolar</a></li><li class="chapter-item expanded "><a href="ch09-03-to-panic-or-not-to-panic.html"><strong aria-hidden="true">9.3.</strong> panic! yoki panic! emas</a></li></ol></li><li class="chapter-item expanded "><a href="ch10-00-generics.html"><strong aria-hidden="true">10.</strong> Umumiy turlar, traitlar va lifetime</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch10-01-syntax.html"><strong aria-hidden="true">10.1.</strong> Generik ma'lumotlar turlari</a></li><li class="chapter-item expanded "><a href="ch10-02-traits.html"><strong aria-hidden="true">10.2.</strong> Traitlar: umumiy xatti-harakatni aniqlash</a></li><li class="chapter-item expanded "><a href="ch10-03-lifetime-syntax.html"><strong aria-hidden="true">10.3.</strong> Referencelarni lifetime bilan tekshirish</a></li></ol></li><li class="chapter-item expanded "><a href="ch11-00-testing.html"><strong aria-hidden="true">11.</strong> Avtomatlashtirilgan testlarni yozish</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch11-01-writing-tests.html"><strong aria-hidden="true">11.1.</strong> Testlarni qanday yozish kerak</a></li><li class="chapter-item expanded "><a href="ch11-02-running-tests.html"><strong aria-hidden="true">11.2.</strong> Sinovlar qanday o'tkazilishini nazorat qilish</a></li><li class="chapter-item expanded "><a href="ch11-03-test-organization.html"><strong aria-hidden="true">11.3.</strong> Test tashkil etish</a></li></ol></li><li class="chapter-item expanded "><a href="ch12-00-an-io-project.html"><strong aria-hidden="true">12.</strong> I/O loyihasi: Buyruqlar qatori dasturini yaratish</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch12-01-accepting-command-line-arguments.html"><strong aria-hidden="true">12.1.</strong> Buyruqlar qatori argumentini qabul qilishs</a></li><li class="chapter-item expanded "><a href="ch12-02-reading-a-file.html"><strong aria-hidden="true">12.2.</strong> Faylni o'qish</a></li><li class="chapter-item expanded "><a href="ch12-03-improving-error-handling-and-modularity.html"><strong aria-hidden="true">12.3.</strong> Modullikni yaxshilash va xatolarni qayta ishlash uchun refactoring</a></li><li class="chapter-item expanded "><a href="ch12-04-testing-the-librarys-functionality.html"><strong aria-hidden="true">12.4.</strong> Sinovga asoslangan ishlab chiqish bilan kutubxonaning funksionalligini rivojlantirish</a></li><li class="chapter-item expanded "><a href="ch12-05-working-with-environment-variables.html"><strong aria-hidden="true">12.5.</strong> Environment o'zgaruvchilari bilan ishlash</a></li><li class="chapter-item expanded "><a href="ch12-06-writing-to-stderr-instead-of-stdout.html"><strong aria-hidden="true">12.6.</strong> Xato xabarlarini standart chiqish o'rniga standart xatoga yozish</a></li></ol></li><li class="chapter-item expanded "><a href="ch13-00-functional-features.html"><strong aria-hidden="true">13.</strong> Funksional til xususiyatlari: iteratorlar va closurelar</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch13-01-closures.html"><strong aria-hidden="true">13.1.</strong> Closurelar: Environmentni qamrab oladigan anonim funksiyalar</a></li><li class="chapter-item expanded "><a href="ch13-02-iterators.html"><strong aria-hidden="true">13.2.</strong> Iteratorlar bilan bir qator elementlarga ishlov berish</a></li><li class="chapter-item expanded "><a href="ch13-03-improving-our-io-project.html"><strong aria-hidden="true">13.3.</strong> I/O loyihamizni takomillashtirish</a></li><li class="chapter-item expanded "><a href="ch13-04-performance.html"><strong aria-hidden="true">13.4.</strong> Ishlash samaradorligini solishtirish: Looplar va iteratorlar</a></li></ol></li><li class="chapter-item expanded "><a href="ch14-00-more-about-cargo.html"><strong aria-hidden="true">14.</strong> Cargo va Crates.io haqida ko'proq</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch14-01-release-profiles.html"><strong aria-hidden="true">14.1.</strong> Reliz profillari bilan structlarni moslashtirish</a></li><li class="chapter-item expanded "><a href="ch14-02-publishing-to-crates-io.html"><strong aria-hidden="true">14.2.</strong> Crateni Crates.io-ga nashr qilish</a></li><li class="chapter-item expanded "><a href="ch14-03-cargo-workspaces.html"><strong aria-hidden="true">14.3.</strong> Cargo Workspacelar</a></li><li class="chapter-item expanded "><a href="ch14-04-installing-binaries.html"><strong aria-hidden="true">14.4.</strong> Binary fayllarni Crates.io'dan cargo install bilan o'rnatish</a></li><li class="chapter-item expanded "><a href="ch14-05-extending-cargo.html"><strong aria-hidden="true">14.5.</strong> Maxsus buyruqlar bilan Cargoni kengaytirish</a></li></ol></li><li class="chapter-item expanded "><a href="ch15-00-smart-pointers.html"><strong aria-hidden="true">15.</strong> Smart Pointerlar</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch15-01-box.html"><strong aria-hidden="true">15.1.</strong> Heapdagi ma'lumotlarni ko'rsatish uchun Box&lt;T&gt; dan foydalanish</a></li><li class="chapter-item expanded "><a href="ch15-02-deref.html"><strong aria-hidden="true">15.2.</strong> Deref Traitidan foydalangan holda oddiy referencelar kabi Smart Pointerlar bilan ishlash</a></li><li class="chapter-item expanded "><a href="ch15-03-drop.html"><strong aria-hidden="true">15.3.</strong> Drop Traiti bilan tozalashda kodni ishga tushirish</a></li><li class="chapter-item expanded "><a href="ch15-04-rc.html"><strong aria-hidden="true">15.4.</strong> Rc&lt;T&gt;, reference hisoblangan Smart Pointer</a></li><li class="chapter-item expanded "><a href="ch15-05-interior-mutability.html"><strong aria-hidden="true">15.5.</strong> RefCell&lt;T&gt; va ichki o'zgaruvchanlik namunasi</a></li><li class="chapter-item expanded "><a href="ch15-06-reference-cycles.html"><strong aria-hidden="true">15.6.</strong> Reference Cycles Can Leak Memory</a></li></ol></li><li class="chapter-item expanded "><a href="ch16-00-concurrency.html"><strong aria-hidden="true">16.</strong> Qo'rqmas parallellik</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch16-01-threads.html"><strong aria-hidden="true">16.1.</strong> Kodni bir vaqtning o'zida ishga tushirish uchun threadlardan foydalanish</a></li><li class="chapter-item expanded "><a href="ch16-02-message-passing.html"><strong aria-hidden="true">16.2.</strong> Threadlar orasidagi ma'lumotlarni uzatish uchun xabar uzatishdan(Message Passing) foydalanish</a></li><li class="chapter-item expanded "><a href="ch16-03-shared-state.html"><strong aria-hidden="true">16.3.</strong> Shared-State Concurrency</a></li><li class="chapter-item expanded "><a href="ch16-04-extensible-concurrency-sync-and-send.html"><strong aria-hidden="true">16.4.</strong> Sync va Send traitlari bilan kengaytiriladigan parallellik</a></li></ol></li><li class="chapter-item expanded "><a href="ch17-00-oop.html"><strong aria-hidden="true">17.</strong> Rustning ob'ektga yo'naltirilgan dasturlash xususiyatlari- OOP</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch17-01-what-is-oo.html"><strong aria-hidden="true">17.1.</strong> Ob'ektga yo'naltirilgan tillarning xususiyatlari</a></li><li class="chapter-item expanded "><a href="ch17-02-trait-objects.html"><strong aria-hidden="true">17.2.</strong> Har xil turdagi qiymatlarga ruxsat beruvchi trait ob'ektlaridan foydalanish</a></li><li class="chapter-item expanded "><a href="ch17-03-oo-design-patterns.html"><strong aria-hidden="true">17.3.</strong> Ob'ektga yo'naltirilgan dizayn patternini implement qilish</a></li></ol></li><li class="chapter-item expanded "><a href="ch18-00-patterns.html"><strong aria-hidden="true">18.</strong> Patternlar va Matching</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch18-01-all-the-places-for-patterns.html"><strong aria-hidden="true">18.1.</strong> All the Places Patterns Can Be Used</a></li><li class="chapter-item expanded "><a href="ch18-02-refutability.html"><strong aria-hidden="true">18.2.</strong> Refutability: Whether a Pattern Might Fail to Match</a></li><li class="chapter-item expanded "><a href="ch18-03-pattern-syntax.html"><strong aria-hidden="true">18.3.</strong> Pattern Sintaksisi</a></li></ol></li><li class="chapter-item expanded "><a href="ch19-00-advanced-features.html"><strong aria-hidden="true">19.</strong> Kengaytirilgan Xususiyatlar</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch19-01-unsafe-rust.html"><strong aria-hidden="true">19.1.</strong> Xavfsiz Rust</a></li><li class="chapter-item expanded "><a href="ch19-03-advanced-traits.html"><strong aria-hidden="true">19.2.</strong> Murakkab Traitlar</a></li><li class="chapter-item expanded "><a href="ch19-04-advanced-types.html"><strong aria-hidden="true">19.3.</strong> Kengaytirilgan Turlar</a></li><li class="chapter-item expanded "><a href="ch19-05-advanced-functions-and-closures.html"><strong aria-hidden="true">19.4.</strong> Kengaytirilgan funksiyalar va closurelar</a></li><li class="chapter-item expanded "><a href="ch19-06-macros.html"><strong aria-hidden="true">19.5.</strong> Makrolar</a></li></ol></li><li class="chapter-item expanded "><a href="ch20-00-final-project-a-web-server.html"><strong aria-hidden="true">20.</strong> Yakuniy loyiha: Ko'p tarmoqli veb-serverni qurish</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch20-01-single-threaded.html"><strong aria-hidden="true">20.1.</strong> Yagona tarmoqli veb-serverni qurish</a></li><li class="chapter-item expanded "><a href="ch20-02-multithreaded.html"><strong aria-hidden="true">20.2.</strong> Bizning yagona tarmoqli serverimizni ko'p tarmoqli serverga aylantirish</a></li><li class="chapter-item expanded "><a href="ch20-03-graceful-shutdown-and-cleanup.html"><strong aria-hidden="true">20.3.</strong> Ajoyib o'chirish va tozalash</a></li></ol></li><li class="chapter-item expanded "><a href="appendix-00.html"><strong aria-hidden="true">21.</strong> Ilova</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="appendix-01-keywords.html"><strong aria-hidden="true">21.1.</strong> A - Kalit so'zlar</a></li><li class="chapter-item expanded "><a href="appendix-02-operators.html"><strong aria-hidden="true">21.2.</strong> B - Operatorlar va Symbollar</a></li><li class="chapter-item expanded "><a href="appendix-03-derivable-traits.html"><strong aria-hidden="true">21.3.</strong> C - Hosilaviy Traitlar</a></li><li class="chapter-item expanded "><a href="appendix-04-useful-development-tools.html"><strong aria-hidden="true">21.4.</strong> D - Foydali Development Toollar</a></li><li class="chapter-item expanded "><a href="appendix-05-editions.html"><strong aria-hidden="true">21.5.</strong> E - Nashrlar</a></li><li class="chapter-item expanded "><a href="appendix-06-translation.html"><strong aria-hidden="true">21.6.</strong> F - Kitobning tarjimalari</a></li><li class="chapter-item expanded "><a href="appendix-07-nightly-rust.html"><strong aria-hidden="true">21.7.</strong> G - Rust qanday yasaladi va “Nightly Rust”</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Rust dasturlash tili</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/rust-lang/book" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h2 id="hash-maplarda-boglangan-qiymatlarga-ega-kalitlarni-saqlash"><a class="header" href="#hash-maplarda-boglangan-qiymatlarga-ega-kalitlarni-saqlash">Hash Maplarda bog'langan qiymatlarga ega kalitlarni saqlash</a></h2>
+<p>Umumiy to'plamlarimizning oxirgisi <em>hash map</em>. <code>HashMap&lt;K, V&gt;</code> turi <code>K</code> turidagi kalitlarning <code>V</code> turidagi qiymatlarga xaritasini <em>xeshlash funksiyasi</em> yordamida saqlaydi, bu kalit va qiymatlarni xotiraga qanday joylashtirishini belgilaydi. Ko'pgina dasturlash tillari bunday ma'lumotlar strukturasini qo'llab-quvvatlaydi, lekin ular ko'pincha bir nechtasini nomlash uchun hash, map, object, hash table, dictionary, yoki associative array kabi boshqa nomlardan foydalanadilar.</p>
+<p>Hash maplar ma'lumotlarni vectorlar bilan bo'lgani kabi indeks yordamida emas, balki har qanday turdagi kalit yordamida qidirmoqchi bo'lsangiz foydali bo'ladi. Misol uchun, o'yinda siz har bir jamoaning balini hesh-mapda kuzatib borishingiz mumkin, unda har bir kalit jamoaning nomi va qiymatlar har bir jamoaning ballidir. Jamoa nomi berilgan bo'lsa, siz uning ballini olishingiz mumkin.</p>
+<p>Ushbu bo'limda biz hesh-mapllarining asosiy API-ni ko'rib chiqamiz, ammo yana ko'plab foydali funksiyalar standart kutubxona tomonidan <code>HashMap&lt;K, V&gt;</code> da belgilangan funksiyalarda yashiringan.
+Har doimgidek, qo'shimcha ma'lumot olish uchun standart kutubxona texnik hujjatlarini tekshiring.</p>
+<h3 id="yangi-hash-map-yaratish"><a class="header" href="#yangi-hash-map-yaratish">Yangi Hash Map yaratish</a></h3>
+<p>Bo'sh hesh mapni yaratishning bir usuli - <code>new</code> dan foydalanish va <code>insert</code> bilan elementlarni qo'shish. 8-20 ro'yxatda biz nomlari <em>Yashil</em> va <em>Sariq</em> bo'lgan ikkita jamoaning ballarini kuzatib boramiz. Yashil jamoa 10 ball bilan, Sariq jamoa esa 50 ball bilan boshlanadi.</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">fn main() {
+</span>    use std::collections::HashMap;
+
+    let mut ballar = HashMap::new();
+
+    ballar.insert(String::from(&quot;Yashil&quot;), 10);
+    ballar.insert(String::from(&quot;Sariq&quot;), 50);
+<span class="boring">}
+</span></code></pre></pre>
+<p><span class="caption">Ro'yxat 8-20: Yangi hesh mapni yaratish va ba'zi kalitlar va qiymatlarni kiritish</span></p>
+<p>E'tibor bering, biz birinchi navbatda standart kutubxonaning to'plamlar qismidagi <code>HashMap</code> dan foydalanishimiz kerak. Bu quyidagicha bo'ladi <code>use std::collections::HashMap;</code>. Bizning uchta keng tarqalgan to'plamlarimiz orasida bu eng kam qo'llaniladi, shuning uchun u muqaddimada avtomatik ravishda kiritilgan funtsiyalarga kiritilmagan. Hash Maplar standart kutubxonadan ham kamroq qo'llab-quvvatlanadi; masalan, ularni yaratish uchun o'rnatilgan makros mavjud emas.</p>
+<p>Vectorlar singari, hash maplar ham o'z ma'lumotlarini heapda saqlaydi. Ushbu <code>HashMap</code>da <code>String</code> turidagi kalitlar va <code>i32</code> turidagi qiymatlar mavjud. Vectorlar singari, hash maplar ham bir xildir: barcha kalitlar bir-biri bilan bir xil turdagi va barcha qiymatlar bir xil turga ega bo'lishi kerak.</p>
+<h3 id="hashmap-dagi-malumotlarga-kirish"><a class="header" href="#hashmap-dagi-malumotlarga-kirish">HashMap-dagi ma'lumotlarga kirish</a></h3>
+<p>Biz 8-21 ro'yxatda ko'rsatilganidek, <code>get</code> metodiga kalitni taqdim etish orqali hash mapdan qiymat olishimiz mumkin.</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">fn main() {
+</span>    use std::collections::HashMap;
+
+    let mut ballar = HashMap::new();
+
+    ballar.insert(String::from(&quot;Yashil&quot;), 10);
+    ballar.insert(String::from(&quot;Sariq&quot;), 50);
+
+    let jamoa_nomi = String::from(&quot;Yashil&quot;);
+    let ball = ballar.get(&amp;jamoa_nomi).copied().unwrap_or(0);
+<span class="boring">}
+</span></code></pre></pre>
+<p><span class="caption">Ro'yxat 8-21: Hesh-Mapda saqlangan Yashil jamoa hisobiga kirish</span></p>
+<p>Bu yerda <code>ball</code> Yashil jamoa bilan bog'liq qiymatga ega bo'ladi va natija <code>10</code> bo'ladi. <code>get</code> metodi <code>Option&lt;&amp;V&gt;</code>ni qaytaradi; agar hesh-mapda ushbu kalit uchun qiymat bo'lmasa, <code>get</code> <code>None</code> ni qaytaradi. Bu dastur <code>Option&lt;&amp;i32&gt;</code> emas, <code>Option&lt;i32&gt;</code> olish uchun <code>copied</code> ga murojaat qilib <code>Option</code>ni boshqaradi, so'ngra <code>unwrap_or</code> <code>ballar</code> da ushbu kalit uchun ma'lumotlar bo'lmasa, ballni nolga o'rnatish uchun.</p>
+<p>Biz hesh-mapdagi har bir kalit/qiymat juftligini vectorlar bilan bo'lgani kabi, <code>for</code> siklidan foydalangan holda takrorlashimiz mumkin:</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">fn main() {
+</span>    use std::collections::HashMap;
+
+    let mut ballar = HashMap::new();
+
+    ballar.insert(String::from(&quot;Yashil&quot;), 10);
+    ballar.insert(String::from(&quot;Sariq&quot;), 50);
+
+    for (key, value) in &amp;scores {
+        println!(&quot;{key}: {value}&quot;);
+    }
+<span class="boring">}
+</span></code></pre></pre>
+<p>Ushbu kod har bir juftlikni tasodifiy tartibda chop etadi:</p>
+<pre><code class="language-text">Sariq: 50
+Yashil: 10
+</code></pre>
+<h3 id="hash-maplar-va-ownershipegalik"><a class="header" href="#hash-maplar-va-ownershipegalik">Hash Maplar va Ownership(Egalik)</a></h3>
+<p><code>Copy</code> traitini amalga oshiradigan turlar uchun, masalan, <code>i32</code>, qiymatlar hesh-mapiga ko'chiriladi. <code>String</code> kabi tegishli qiymatlar uchun qiymatlar boshqa joyga koʻchiriladi va 8-22 roʻyxatda koʻrsatilganidek, hesh-map ushbu qiymatlarning egasi boʻladi.</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">fn main() {
+</span>    use std::collections::HashMap;
+
+    let maydon_nomi = String::from(&quot;Sevimli rang&quot;);
+    let maydon_qiymati = String::from(&quot;Yashil&quot;);
+
+    let mut map = HashMap::new();
+    map.insert(maydon_nomi, maydon_qiymati);
+    // maydon_nomi va maydon_qiymati hozirda yaroqsiz, ulardan foydalanib ko'ring va qanday
+    // kompilyator xatosiga yo'l qo'yganingizni ko'ring!
+<span class="boring">}
+</span></code></pre></pre>
+<p><span class="caption">Ro'yxat 8-22: kalitlar va qiymatlar kiritilgandan so'ng ular hesh-mapda tegishli ekanligini ko'rsatish</span></p>
+<p><code>maydon_nomi</code> va <code>maydon_qiymati</code> o'zgaruvchilari qiymatlari <code>insert</code> metodini chaqirish orqali HashMap-ga ko'chirilgandan keyin foydalana olmaymiz.</p>
+<p>Agar biz HashMap-ga qiymatlarga referencelar kiritsak, ular HashMap-ga ko'chirilmaydi. Murojaatlar ko'rsatadigan qiymatlar hech bo'lmaganda hesh-mapda amal qiladigan vaqt davomida amal qilishi kerak. Biz ushbu muammolar haqida 10-bobning <a href="ch10-03-lifetime-syntax.html#validating-references-with-lifetimes">&quot;Lifetime bilan referencelarni tekshirish&quot;</a><!-- ignore --> bo'limida ko'proq gaplashamiz.</p>
+<h3 id="hash-mapni-yangilash"><a class="header" href="#hash-mapni-yangilash">Hash Mapni yangilash</a></h3>
+<p>Kalit va qiymat juftlarining soni o'sishi mumkin bo'lsa-da, har bir noyob kalit bir vaqtning o'zida u bilan bog'langan faqat bitta qiymatga ega bo'lishi mumkin (lekin aksincha emas: masalan, Yashil jamoa ham, Sariq jamoa ham <code>ballar</code> hash-mapida saqlangan 10 qiymatiga ega bo'lishi mumkin).</p>
+<p>Hash-mapdagi ma'lumotlarni o'zgartirmoqchi bo'lganingizda, kalit allaqachon tayinlangan qiymatga ega bo'lgan holatda qanday ishlashni hal qilishingiz kerak. Eski qiymatni butunlay e'tiborsiz qoldirib, eski qiymatni yangi qiymat bilan almashtirishingiz mumkin. Eski qiymatni saqlab qolishingiz va yangi qiymatni e'tiborsiz qoldirishingiz mumkin, faqat kalitda <em>qiymat bo'lmasa</em>, yangi qiymat qo'shishingiz mumkin. Yoki eski qiymat va yangi qiymatni birlashtira olasiz. Keling, bularning har birini qanday qilishni ko'rib chiqaylik!</p>
+<h4 id="qiymatni-qayta-yozish"><a class="header" href="#qiymatni-qayta-yozish">Qiymatni qayta yozish</a></h4>
+<p>Agar biz kalit va qiymatni hash-mapga kiritsak va keyin boshqa qiymat bilan bir xil kalitni kiritsak, bu kalit bilan bog'langan qiymat almashtiriladi. Ro'yxat 8-23dagi kod ikki marta <code>insert</code> ni chaqirsa ham, hash-mapda faqat bitta kalit/qiymat juftligi bo'ladi, chunki biz har ikki marta Yashil jamoa kaliti qiymatini kiritamiz.</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">fn main() {
+</span>    use std::collections::HashMap;
+
+    let mut ballar = HashMap::new();
+
+    ballar.insert(String::from(&quot;Yashil&quot;), 10);
+    ballar.insert(String::from(&quot;Yashil&quot;), 25);
+
+    println!(&quot;{:?}&quot;, ballar);
+<span class="boring">}
+</span></code></pre></pre>
+<p><span class="caption">Ro'yxat 8-23: Saqlangan qiymatni ma'lum bir kalit bilan almashtirish</span></p>
+<p>Bu kod <code>{&quot;Yashil&quot;: 25}</code>ni chop etadi. <code>10</code>ning asl qiymati ustiga yozildi.</p>
+<!-- Old headings. Do not remove or links may break. -->
+<p><a id="only-inserting-a-value-if-the-key-has-no-value"></a></p>
+<h4 id="kalit-va-qiymatni-faqat-kalit-mavjud-bolmaganda-qoshish"><a class="header" href="#kalit-va-qiymatni-faqat-kalit-mavjud-bolmaganda-qoshish">Kalit va qiymatni faqat kalit mavjud bo'lmaganda qo'shish</a></h4>
+<p>Hash Mapda ma'lum bir kalit allaqachon qiymatga ega yoki yo'qligini tekshirish odatiy holdir, keyin quyidagi amallarni bajaring: agar kalit hash-mapda mavjud bo'lsa, mavjud qiymat avvalgidek qolishi kerak. Agar kalit mavjud bo'lmasa, insert va uning qiymatini kiriting.</p>
+<p>Hash Mapda buning uchun <code>entry</code> deb nomlangan maxsus API mavjud bo'lib, siz tekshirmoqchi bo'lgan kalitni parametr sifatida qabul qiladi. <code>entry</code> metodining qaytish qiymati <code>Entry</code> nomli enum bo‘lib, u mavjud yoki bo‘lmasligi mumkin bo‘lgan qiymatni ifodalaydi. Aytaylik, biz Sariq jamoa uchun kalitning u bilan bog'liq qiymati bor-yo'qligini tekshirmoqchimiz. Agar shunday bo'lmasa, biz 50 qiymatini qo'shishni xohlaymiz va Yashil jamoa uchun ham xuddi shunday. <code>Entry</code> API-dan foydalanib, kod Ro'yxat 8-24 kabi ko'rinadi.</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">fn main() {
+</span>    use std::collections::HashMap;
+
+    let mut ballar = HashMap::new();
+    ballar.insert(String::from(&quot;Yashil&quot;), 10);
+
+    ballar.entry(String::from(&quot;Sariq&quot;)).or_insert(50);
+    ballar.entry(String::from(&quot;Yashil&quot;)).or_insert(50);
+
+    println!(&quot;{:?}&quot;, ballar);
+<span class="boring">}
+</span></code></pre></pre>
+<p><span class="caption">Ro'yxat 8-24: <code>entry</code> metodidan faqat kalitda qiymat mavjud bo'lmasa, kiritish uchun foydalanish</span></p>
+<p><code>Entry</code> da <code>or_insert</code> metodi mos keladigan <code>Entry</code> kaliti qiymatiga o'zgaruvchan referenceni qaytarish uchun belgilangan, agar bu kalit mavjud bo'lsa,  parametrni ushbu kalit uchun yangi qiymat sifatida kiritadi va yangi qiymatga o'zgaruvchan referenceni qaytaradi. Ushbu metod mantiqni o'zingiz yozishdan ko'ra ancha toza va u xavfsizroq va borrowing qoidalariga mos keladi.</p>
+<p>8-24-raqamdagi kodni ishga tushirish <code>{&quot;Sariq&quot;: 50, &quot;Yashil&quot;: 10}</code> chop etiladi. <code>entry</code> ga birinchi chaqiruv 50 qiymatiga ega Sariq jamoa uchun kalitni kiritadi, chunki sariq jamoada allaqachon qiymat yo'q.  <code>entry</code> ga ikkinchi chaqiruv hash-mapni o'zgartirmaydi, chunki Yashil jamoa allaqachon 10 qiymatiga ega.</p>
+<h4 id="eski-qiymat-asosida-yangi-qiymatni-yangilash"><a class="header" href="#eski-qiymat-asosida-yangi-qiymatni-yangilash">Eski qiymat asosida yangi qiymatni yangilash</a></h4>
+<p>Hash-Maplar uchun yana bir keng tarqalgan foydalanish holati kalit qiymatini izlash va keyin uni eski qiymat asosida yangilashdir. Misol uchun, 8-25 ro'yxatda har bir so'z ba'zi matnda necha marta takrorlanganini hisoblaydigan kodni ko'rsatadi. Biz kalit sifatida so'zlar bilan hash-mapdan foydalanamiz va bu so'zni necha marta ko'rganimizni kuzatib borish uchun qiymatni oshiramiz. Agar so'zni birinchi marta ko'rayotgan bo'lsak, avval 0 qiymatini kiritamiz.</p>
+<pre><pre class="playground"><code class="language-rustword"><span class="boring">fn main() {
+</span>    use std::collections::HashMap;
+
+    let matn = &quot;salom rust qiziqarli rust&quot;;
+
+    let mut map = HashMap::new();
+
+    for soz in matn.split_whitespace() {
+        let hisoblash = map.entry(soz).or_insert(0);
+        *hisoblash += 1;
+    }
+
+    println!(&quot;{:?}&quot;, map);
+<span class="boring">}
+</span></code></pre></pre>
+<p><span class="caption">Ro'yxat 8-25: So'zlar va hisoblarni saqlaydigan hash-mapi yordamida so'zlarning necha marta takrorlanganini hisoblash</span></p>
+<p>Bu kod <code>{&quot;qiziqarli&quot;: 1, &quot;salom&quot;: 1, &quot;rust&quot;: 2}</code>ni chop etadi. Siz boshqa tartibda chop etilgan bir xil kalit/qiymat juftliklarini ko'rishingiz mumkin: <a href="#accessing-values-in-a-hash-map">“Hash-Mapdagi qiymatlarga kirish”</a><!-- ignore --> bo'limidan hash-mapni takrorlash ixtiyoriy tartibda sodir bo'lishini eslang.</p>
+<p><code>split_whitespace</code> metodi <code>matn</code> qiymatining bo'sh joy bilan ajratilgan pastki bo'limlari ustidan iteratorni qaytaradi.<code>or_insert</code> metodi belgilangan kalit qiymatiga o'zgaruvchan havolani (<code>&amp;mut V</code>) qaytaradi. Bu yerda biz o'zgaruvchan referenceni <code>hisoblash</code> o'zgaruvchisida saqlaymiz, shuning uchun bu qiymatni belgilash uchun avval yulduzcha (<code>*</code>) yordamida <code>hisoblash</code> ga murojaat qilishimiz kerak. O'zgaruvchan reference <code>for</code> siklining oxirida ko'lamdan chiqib ketadi, shuning uchun bu o'zgarishlarning barchasi xavfsiz va borrowing qoidalari bilan ruxsat etiladi.</p>
+<h3 id="hashing-funksiyalari"><a class="header" href="#hashing-funksiyalari">Hashing funksiyalari</a></h3>
+<p>Odatda, <code>HashMap</code> <em>SipHash</em> nomli hashlash funksiyasidan foydalanadi, u <sup class="footnote-reference"><a href="#siphash">1</a></sup><!-- ignore --> hash-jadvallari ishtirokidagi Xizmatni rad etish (DoS) hujumlariga qarshilik ko'rsatishi mumkin. Bu mavjud bo'lgan eng tezkor hashlash algoritmi emas, lekin ishlashning pasayishi bilan birga keladigan yaxshi xavfsizlik uchun kelishuv bunga arziydi. Agar siz kodingizni profilga kiritsangiz va standart hash funksiyasi sizning maqsadlaringiz uchun juda sekin ekanligini aniqlasangiz, boshqa hasherni belgilash orqali boshqa funksiyaga o'tishingiz mumkin. <em>hasher</em> bu <code>BuildHasher</code> traitini amalga oshiradigan tur. Traitlar va ularni qanday implement qilish haqida 10-bobda gaplashamiz. Siz o'zingizning hasheringizni noldan implement qilishingiz shart emas; <a href="https://crates.io/">crates.io</a><!-- ignore -->-da boshqa Rust foydalanuvchilari tomonidan baham ko'rilgan kutubxonalar mavjud bo'lib, ular ko'plab umumiy hashlash algoritmlarini implement qiladigan hasherlarni ta'minlaydi.</p>
+<div class="footnote-definition" id="siphash"><sup class="footnote-definition-label">1</sup>
+<p><a href="https://en.wikipedia.org/wiki/SipHash">https://en.wikipedia.org/wiki/SipHash</a></p>
+</div>
+<h2 id="xulosa"><a class="header" href="#xulosa">Xulosa</a></h2>
+<p>Vectorlar, stringlar va hash-maplar ma'lumotlarni saqlash, kirish va o'zgartirish kerak bo'lganda dasturlarda zarur bo'lgan katta hajmdagi funksionallikni ta'minlaydi. Mana endi hal qilish uchun tayyorlanishingiz kerak bo'lgan ba'zi mashqlar:</p>
+<ul>
+<li>
+<p>Butun sonlar roʻyxati berilgan boʻlsa, vectordan foydalaning va roʻyxatning medianasini (tartiblanganda, oʻrtadagi qiymat) va  rejimni (koʻpincha sodir boʻladigan qiymat; bu yerda hash-map foydali boʻladi) qaytaring.</p>
+</li>
+<li>
+<p>Satrlarni pig lotin tiliga aylantiring. Har bir so'zning birinchi undoshi so'z oxiriga ko'chiriladi va &quot;ay&quot; qo'shiladi, shuning uchun &quot;birinchi&quot; &quot;birinchi-ay&quot; bo'ladi. Unli tovush bilan boshlangan so‘zlarning oxiriga “hay” qo‘shiladi (“olma” “olma-hay”ga aylanadi). UTF-8 kodlash haqidagi tafsilotlarni yodda tuting!</p>
+</li>
+<li>
+<p>Hash Map va vectorlardan foydalanib, foydalanuvchiga kompaniyadagi bo'limga xodimlarning ismlarini qo'shishga ruxsat berish uchun matn interfeysini yarating. Masalan, &quot;Asilbekni muhandislikka qo'shish&quot; yoki &quot;Sardorni savdoga qo'shish&quot;. Keyin foydalanuvchi bo'limdagi barcha odamlar yoki kompaniyadagi barcha odamlar ro'yxatini bo'limlar bo'yicha, alifbo tartibida tartiblangan holda olishiga ruxsat bering.</p>
+</li>
+</ul>
+<p>Standart kutubxona API texnik hujjatlari vectorlar, stringlar va hash-maplarda ushbu mashqlar uchun foydali bo'lgan usullarni tavsiflaydi!</p>
+<p>Biz operatsiyalar muvaffaqiyatsiz bo'lishi mumkin bo'lgan yanada murakkab dasturlarga kirishmoqdamiz, shuning uchun xatolarni hal qilishni muhokama qilish uchun ajoyib vaqt. Qani kettik.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="ch08-02-strings.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a rel="next" href="ch09-00-error-handling.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="ch08-02-strings.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a rel="next" href="ch09-00-error-handling.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        <script type="text/javascript" src="ferris.js"></script>
+    </body>
+</html>

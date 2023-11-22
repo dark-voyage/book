@@ -1,0 +1,299 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>panic! yoki panic! emas - Rust dasturlash tili</title>
+        <!-- Custom HTML head -->
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="ferris.css">
+        <link rel="stylesheet" href="theme/2018-edition.css">
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="title-page.html">Rust dasturlash tili</a></li><li class="chapter-item expanded affix "><a href="foreword.html">Muqaddima</a></li><li class="chapter-item expanded affix "><a href="ch00-00-introduction.html">Kirish</a></li><li class="chapter-item expanded "><a href="ch01-00-getting-started.html"><strong aria-hidden="true">1.</strong> Ishni boshlash</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch01-01-installation.html"><strong aria-hidden="true">1.1.</strong> O'rnatish</a></li><li class="chapter-item expanded "><a href="ch01-02-hello-world.html"><strong aria-hidden="true">1.2.</strong> Hello, World!</a></li><li class="chapter-item expanded "><a href="ch01-03-hello-cargo.html"><strong aria-hidden="true">1.3.</strong> Hello, Cargo!</a></li></ol></li><li class="chapter-item expanded "><a href="ch02-00-guessing-game-tutorial.html"><strong aria-hidden="true">2.</strong> Taxmin qilish o'yinini dasturlash</a></li><li class="chapter-item expanded "><a href="ch03-00-common-programming-concepts.html"><strong aria-hidden="true">3.</strong> Umumiy dasturlash tushunchalari</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch03-01-variables-and-mutability.html"><strong aria-hidden="true">3.1.</strong> O'zgaruvchilar va o'zgaruvchanlik</a></li><li class="chapter-item expanded "><a href="ch03-02-data-types.html"><strong aria-hidden="true">3.2.</strong> Ma'lumotlar turlari</a></li><li class="chapter-item expanded "><a href="ch03-03-how-functions-work.html"><strong aria-hidden="true">3.3.</strong> Funksiyalar</a></li><li class="chapter-item expanded "><a href="ch03-04-comments.html"><strong aria-hidden="true">3.4.</strong> Izohlar</a></li><li class="chapter-item expanded "><a href="ch03-05-control-flow.html"><strong aria-hidden="true">3.5.</strong> Control Flow</a></li></ol></li><li class="chapter-item expanded "><a href="ch04-00-understanding-ownership.html"><strong aria-hidden="true">4.</strong> Ownershipni tushunish</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch04-01-what-is-ownership.html"><strong aria-hidden="true">4.1.</strong> Ownership nima?</a></li><li class="chapter-item expanded "><a href="ch04-02-references-and-borrowing.html"><strong aria-hidden="true">4.2.</strong> Referencelar va  Borrowing</a></li><li class="chapter-item expanded "><a href="ch04-03-slices.html"><strong aria-hidden="true">4.3.</strong> Slice turi</a></li></ol></li><li class="chapter-item expanded "><a href="ch05-00-structs.html"><strong aria-hidden="true">5.</strong> Tegishli ma'lumotlarni tuzish uchun Structdan foydalanish</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch05-01-defining-structs.html"><strong aria-hidden="true">5.1.</strong> Structlarni aniqlash va yaratish</a></li><li class="chapter-item expanded "><a href="ch05-02-example-structs.html"><strong aria-hidden="true">5.2.</strong> Structs yordamida namunaviy dastur</a></li><li class="chapter-item expanded "><a href="ch05-03-method-syntax.html"><strong aria-hidden="true">5.3.</strong> Metod sintaksisi</a></li></ol></li><li class="chapter-item expanded "><a href="ch06-00-enums.html"><strong aria-hidden="true">6.</strong> Enumlar va patternlarni moslashtirish</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch06-01-defining-an-enum.html"><strong aria-hidden="true">6.1.</strong> Enumni aniqlash</a></li><li class="chapter-item expanded "><a href="ch06-02-match.html"><strong aria-hidden="true">6.2.</strong> match Control Flow konstruksiyasi</a></li><li class="chapter-item expanded "><a href="ch06-03-if-let.html"><strong aria-hidden="true">6.3.</strong> if let bilan qisqacha Control Flow</a></li></ol></li><li class="chapter-item expanded "><a href="ch07-00-managing-growing-projects-with-packages-crates-and-modules.html"><strong aria-hidden="true">7.</strong> O'sib borayotgan loyihalarni Paketlar, Cratelar va Modullar bilan boshqarish</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch07-01-packages-and-crates.html"><strong aria-hidden="true">7.1.</strong> Paketlar va Cratelar</a></li><li class="chapter-item expanded "><a href="ch07-02-defining-modules-to-control-scope-and-privacy.html"><strong aria-hidden="true">7.2.</strong> Qo'llanish doirasi va maxfiylikni nazorat qilish uchun modullarni aniqlash</a></li><li class="chapter-item expanded "><a href="ch07-03-paths-for-referring-to-an-item-in-the-module-tree.html"><strong aria-hidden="true">7.3.</strong> Modul daraxtidagi elementga murojaat qilish yo'llari</a></li><li class="chapter-item expanded "><a href="ch07-04-bringing-paths-into-scope-with-the-use-keyword.html"><strong aria-hidden="true">7.4.</strong> use kalit so'zi bilan yo'llarni qamrab olish</a></li><li class="chapter-item expanded "><a href="ch07-05-separating-modules-into-different-files.html"><strong aria-hidden="true">7.5.</strong> Modullarni turli fayllarga ajratish</a></li></ol></li><li class="chapter-item expanded "><a href="ch08-00-common-collections.html"><strong aria-hidden="true">8.</strong> Umumiy to'plamlar</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch08-01-vectors.html"><strong aria-hidden="true">8.1.</strong> Vectorlar bilan qiymatlar ro'yxatini saqlash</a></li><li class="chapter-item expanded "><a href="ch08-02-strings.html"><strong aria-hidden="true">8.2.</strong> UTF-8 kodlangan matnni Stringlar bilan saqlash</a></li><li class="chapter-item expanded "><a href="ch08-03-hash-maps.html"><strong aria-hidden="true">8.3.</strong> Hash Mapda bog'langan qiymatlarga ega kalitlarni saqlash</a></li></ol></li><li class="chapter-item expanded "><a href="ch09-00-error-handling.html"><strong aria-hidden="true">9.</strong> Xatolar bilan ishlash</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch09-01-unrecoverable-errors-with-panic.html"><strong aria-hidden="true">9.1.</strong> panic! bilan tuzatib bo'lmaydigan xatolar</a></li><li class="chapter-item expanded "><a href="ch09-02-recoverable-errors-with-result.html"><strong aria-hidden="true">9.2.</strong> Result bilan tiklanadigan xatolar</a></li><li class="chapter-item expanded "><a href="ch09-03-to-panic-or-not-to-panic.html" class="active"><strong aria-hidden="true">9.3.</strong> panic! yoki panic! emas</a></li></ol></li><li class="chapter-item expanded "><a href="ch10-00-generics.html"><strong aria-hidden="true">10.</strong> Umumiy turlar, traitlar va lifetime</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch10-01-syntax.html"><strong aria-hidden="true">10.1.</strong> Generik ma'lumotlar turlari</a></li><li class="chapter-item expanded "><a href="ch10-02-traits.html"><strong aria-hidden="true">10.2.</strong> Traitlar: umumiy xatti-harakatni aniqlash</a></li><li class="chapter-item expanded "><a href="ch10-03-lifetime-syntax.html"><strong aria-hidden="true">10.3.</strong> Referencelarni lifetime bilan tekshirish</a></li></ol></li><li class="chapter-item expanded "><a href="ch11-00-testing.html"><strong aria-hidden="true">11.</strong> Avtomatlashtirilgan testlarni yozish</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch11-01-writing-tests.html"><strong aria-hidden="true">11.1.</strong> Testlarni qanday yozish kerak</a></li><li class="chapter-item expanded "><a href="ch11-02-running-tests.html"><strong aria-hidden="true">11.2.</strong> Sinovlar qanday o'tkazilishini nazorat qilish</a></li><li class="chapter-item expanded "><a href="ch11-03-test-organization.html"><strong aria-hidden="true">11.3.</strong> Test tashkil etish</a></li></ol></li><li class="chapter-item expanded "><a href="ch12-00-an-io-project.html"><strong aria-hidden="true">12.</strong> I/O loyihasi: Buyruqlar qatori dasturini yaratish</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch12-01-accepting-command-line-arguments.html"><strong aria-hidden="true">12.1.</strong> Buyruqlar qatori argumentini qabul qilishs</a></li><li class="chapter-item expanded "><a href="ch12-02-reading-a-file.html"><strong aria-hidden="true">12.2.</strong> Faylni o'qish</a></li><li class="chapter-item expanded "><a href="ch12-03-improving-error-handling-and-modularity.html"><strong aria-hidden="true">12.3.</strong> Modullikni yaxshilash va xatolarni qayta ishlash uchun refactoring</a></li><li class="chapter-item expanded "><a href="ch12-04-testing-the-librarys-functionality.html"><strong aria-hidden="true">12.4.</strong> Sinovga asoslangan ishlab chiqish bilan kutubxonaning funksionalligini rivojlantirish</a></li><li class="chapter-item expanded "><a href="ch12-05-working-with-environment-variables.html"><strong aria-hidden="true">12.5.</strong> Environment o'zgaruvchilari bilan ishlash</a></li><li class="chapter-item expanded "><a href="ch12-06-writing-to-stderr-instead-of-stdout.html"><strong aria-hidden="true">12.6.</strong> Xato xabarlarini standart chiqish o'rniga standart xatoga yozish</a></li></ol></li><li class="chapter-item expanded "><a href="ch13-00-functional-features.html"><strong aria-hidden="true">13.</strong> Funksional til xususiyatlari: iteratorlar va closurelar</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch13-01-closures.html"><strong aria-hidden="true">13.1.</strong> Closurelar: Environmentni qamrab oladigan anonim funksiyalar</a></li><li class="chapter-item expanded "><a href="ch13-02-iterators.html"><strong aria-hidden="true">13.2.</strong> Iteratorlar bilan bir qator elementlarga ishlov berish</a></li><li class="chapter-item expanded "><a href="ch13-03-improving-our-io-project.html"><strong aria-hidden="true">13.3.</strong> I/O loyihamizni takomillashtirish</a></li><li class="chapter-item expanded "><a href="ch13-04-performance.html"><strong aria-hidden="true">13.4.</strong> Ishlash samaradorligini solishtirish: Looplar va iteratorlar</a></li></ol></li><li class="chapter-item expanded "><a href="ch14-00-more-about-cargo.html"><strong aria-hidden="true">14.</strong> Cargo va Crates.io haqida ko'proq</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch14-01-release-profiles.html"><strong aria-hidden="true">14.1.</strong> Reliz profillari bilan structlarni moslashtirish</a></li><li class="chapter-item expanded "><a href="ch14-02-publishing-to-crates-io.html"><strong aria-hidden="true">14.2.</strong> Crateni Crates.io-ga nashr qilish</a></li><li class="chapter-item expanded "><a href="ch14-03-cargo-workspaces.html"><strong aria-hidden="true">14.3.</strong> Cargo Workspacelar</a></li><li class="chapter-item expanded "><a href="ch14-04-installing-binaries.html"><strong aria-hidden="true">14.4.</strong> Binary fayllarni Crates.io'dan cargo install bilan o'rnatish</a></li><li class="chapter-item expanded "><a href="ch14-05-extending-cargo.html"><strong aria-hidden="true">14.5.</strong> Maxsus buyruqlar bilan Cargoni kengaytirish</a></li></ol></li><li class="chapter-item expanded "><a href="ch15-00-smart-pointers.html"><strong aria-hidden="true">15.</strong> Smart Pointerlar</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch15-01-box.html"><strong aria-hidden="true">15.1.</strong> Heapdagi ma'lumotlarni ko'rsatish uchun Box&lt;T&gt; dan foydalanish</a></li><li class="chapter-item expanded "><a href="ch15-02-deref.html"><strong aria-hidden="true">15.2.</strong> Deref Traitidan foydalangan holda oddiy referencelar kabi Smart Pointerlar bilan ishlash</a></li><li class="chapter-item expanded "><a href="ch15-03-drop.html"><strong aria-hidden="true">15.3.</strong> Drop Traiti bilan tozalashda kodni ishga tushirish</a></li><li class="chapter-item expanded "><a href="ch15-04-rc.html"><strong aria-hidden="true">15.4.</strong> Rc&lt;T&gt;, reference hisoblangan Smart Pointer</a></li><li class="chapter-item expanded "><a href="ch15-05-interior-mutability.html"><strong aria-hidden="true">15.5.</strong> RefCell&lt;T&gt; va ichki o'zgaruvchanlik namunasi</a></li><li class="chapter-item expanded "><a href="ch15-06-reference-cycles.html"><strong aria-hidden="true">15.6.</strong> Reference Cycles Can Leak Memory</a></li></ol></li><li class="chapter-item expanded "><a href="ch16-00-concurrency.html"><strong aria-hidden="true">16.</strong> Qo'rqmas parallellik</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch16-01-threads.html"><strong aria-hidden="true">16.1.</strong> Kodni bir vaqtning o'zida ishga tushirish uchun threadlardan foydalanish</a></li><li class="chapter-item expanded "><a href="ch16-02-message-passing.html"><strong aria-hidden="true">16.2.</strong> Threadlar orasidagi ma'lumotlarni uzatish uchun xabar uzatishdan(Message Passing) foydalanish</a></li><li class="chapter-item expanded "><a href="ch16-03-shared-state.html"><strong aria-hidden="true">16.3.</strong> Shared-State Concurrency</a></li><li class="chapter-item expanded "><a href="ch16-04-extensible-concurrency-sync-and-send.html"><strong aria-hidden="true">16.4.</strong> Sync va Send traitlari bilan kengaytiriladigan parallellik</a></li></ol></li><li class="chapter-item expanded "><a href="ch17-00-oop.html"><strong aria-hidden="true">17.</strong> Rustning ob'ektga yo'naltirilgan dasturlash xususiyatlari- OOP</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch17-01-what-is-oo.html"><strong aria-hidden="true">17.1.</strong> Ob'ektga yo'naltirilgan tillarning xususiyatlari</a></li><li class="chapter-item expanded "><a href="ch17-02-trait-objects.html"><strong aria-hidden="true">17.2.</strong> Har xil turdagi qiymatlarga ruxsat beruvchi trait ob'ektlaridan foydalanish</a></li><li class="chapter-item expanded "><a href="ch17-03-oo-design-patterns.html"><strong aria-hidden="true">17.3.</strong> Ob'ektga yo'naltirilgan dizayn patternini implement qilish</a></li></ol></li><li class="chapter-item expanded "><a href="ch18-00-patterns.html"><strong aria-hidden="true">18.</strong> Patternlar va Matching</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch18-01-all-the-places-for-patterns.html"><strong aria-hidden="true">18.1.</strong> All the Places Patterns Can Be Used</a></li><li class="chapter-item expanded "><a href="ch18-02-refutability.html"><strong aria-hidden="true">18.2.</strong> Refutability: Whether a Pattern Might Fail to Match</a></li><li class="chapter-item expanded "><a href="ch18-03-pattern-syntax.html"><strong aria-hidden="true">18.3.</strong> Pattern Sintaksisi</a></li></ol></li><li class="chapter-item expanded "><a href="ch19-00-advanced-features.html"><strong aria-hidden="true">19.</strong> Kengaytirilgan Xususiyatlar</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch19-01-unsafe-rust.html"><strong aria-hidden="true">19.1.</strong> Xavfsiz Rust</a></li><li class="chapter-item expanded "><a href="ch19-03-advanced-traits.html"><strong aria-hidden="true">19.2.</strong> Murakkab Traitlar</a></li><li class="chapter-item expanded "><a href="ch19-04-advanced-types.html"><strong aria-hidden="true">19.3.</strong> Kengaytirilgan Turlar</a></li><li class="chapter-item expanded "><a href="ch19-05-advanced-functions-and-closures.html"><strong aria-hidden="true">19.4.</strong> Kengaytirilgan funksiyalar va closurelar</a></li><li class="chapter-item expanded "><a href="ch19-06-macros.html"><strong aria-hidden="true">19.5.</strong> Makrolar</a></li></ol></li><li class="chapter-item expanded "><a href="ch20-00-final-project-a-web-server.html"><strong aria-hidden="true">20.</strong> Yakuniy loyiha: Ko'p tarmoqli veb-serverni qurish</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch20-01-single-threaded.html"><strong aria-hidden="true">20.1.</strong> Yagona tarmoqli veb-serverni qurish</a></li><li class="chapter-item expanded "><a href="ch20-02-multithreaded.html"><strong aria-hidden="true">20.2.</strong> Bizning yagona tarmoqli serverimizni ko'p tarmoqli serverga aylantirish</a></li><li class="chapter-item expanded "><a href="ch20-03-graceful-shutdown-and-cleanup.html"><strong aria-hidden="true">20.3.</strong> Ajoyib o'chirish va tozalash</a></li></ol></li><li class="chapter-item expanded "><a href="appendix-00.html"><strong aria-hidden="true">21.</strong> Ilova</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="appendix-01-keywords.html"><strong aria-hidden="true">21.1.</strong> A - Kalit so'zlar</a></li><li class="chapter-item expanded "><a href="appendix-02-operators.html"><strong aria-hidden="true">21.2.</strong> B - Operatorlar va Symbollar</a></li><li class="chapter-item expanded "><a href="appendix-03-derivable-traits.html"><strong aria-hidden="true">21.3.</strong> C - Hosilaviy Traitlar</a></li><li class="chapter-item expanded "><a href="appendix-04-useful-development-tools.html"><strong aria-hidden="true">21.4.</strong> D - Foydali Development Toollar</a></li><li class="chapter-item expanded "><a href="appendix-05-editions.html"><strong aria-hidden="true">21.5.</strong> E - Nashrlar</a></li><li class="chapter-item expanded "><a href="appendix-06-translation.html"><strong aria-hidden="true">21.6.</strong> F - Kitobning tarjimalari</a></li><li class="chapter-item expanded "><a href="appendix-07-nightly-rust.html"><strong aria-hidden="true">21.7.</strong> G - Rust qanday yasaladi va “Nightly Rust”</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Rust dasturlash tili</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/rust-lang/book" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h2 id="panic-yoki-panic-qoymaslik"><a class="header" href="#panic-yoki-panic-qoymaslik"><code>panic!</code> yoki <code>panic!</code> qo'ymaslik</a></h2>
+<p>Xo'sh, qachon <code>panic!</code> deb murojat qilish va qachon <code>Result</code>ni qaytarish kerakligini qanday hal qilasiz? Kodda panic paydo bo'lganda, uni tiklashning iloji yo'q. Qayta tiklashning mumkin bo'lgan yo'li bormi yoki yo'qmi, har qanday xatolik uchun <code>panic!</code> deb chaiqruv qilishingiz mumkin, lekin siz chaqiruv kodi nomidan vaziyatni tuzatib bo'lmaydi degan qarorga kelasiz. <code>Result</code> qiymatini qaytarishni tanlaganingizda, siz chaqiruv kodini tanlash imkoniyatini berasiz. Chaqiruv kodi vaziyatga mos keladigan tarzda tiklashga urinishi mumkin yoki <code>Err</code>dagi xatoni qayta tiklab bo'lmaydi, deb qaror qilishi va <code>panic!</code> qo'yishi mumkin, bu sizning tiklanadigan xatongizni tuzatib bo'lmaydiganga aylantiradi. Shuning uchun, muvaffaqiyatsiz bo'lishi mumkin bo'lgan funksiyani belgilashda <code>Result</code> ni qaytarish yaxshi standart tanlovdir.</p>
+<p>Misollar, prototip kodi va testlar kabi holatlarda <code>Result</code>ni qaytarish o'rniga panic qo'yadigan kodni yozish maqsadga muvofiqdir. Keling, nima uchun ekanligini ko'rib chiqaylik, keyin kompilyator muvaffaqiyatsizlik mumkin emasligini ayta olmaydigan vaziyatlarni muhokama qilaylik, lekin siz inson sifatida buni qila olasiz. Bob kutubxona kodida panic qo'yish yoki yo'qligini hal qilish bo'yicha ba'zi umumiy ko'rsatmalar bilan yakunlanadi.</p>
+<h3 id="misollar-prototip-kodi-va-testlar"><a class="header" href="#misollar-prototip-kodi-va-testlar">Misollar, Prototip Kodi va Testlar</a></h3>
+<p>Ba'zi bir kontseptsiyani tasvirlash uchun misol yozayotganingizda, shuningdek, xatolarni qayta ishlash kodini o'z ichiga olgan holda, misolni kamroq tushunarli qilish mumkin. Misollarda, panic qo'zg'atishi mumkin bo'lgan <code>unwrap</code> kabi metodga murojaat qilish sizning ilovangiz xatoliklarni qanday hal qilishini xohlayotganingiz uchun to'ldiruvchi sifatida tushuniladi, bu sizning kodingizning qolgan qismi nima qilayotganiga qarab farq qilishi mumkin.</p>
+<p>Xuddi shunday, prototiplashda xatolarni qanday hal qilishni hal qilishdan oldin <code>unwrap</code> va <code>expect</code> metodllari juda qulaydir.
+Dasturingizni yanada mustahkamroq qilishga tayyor bo'lganingizda ular kodingizda aniq belgilar qoldiradilar.</p>
+<p>Agar testda metod chaqiruvi muvaffaqiyatsiz bo'lsa, bu metod sinovdan o'tkazilayotgan funksiya bo'lmasa ham, butun test muvaffaqiyatsiz bo'lishini xohlaysiz. Chunki <code>panic!</code> – bu sinovning muvaffaqiyatsiz deb belgilanishi, <code>unwrap</code> yoki <code>expect</code> deb atalgan narsa aynan shunday bo'lishi kerak.</p>
+<h3 id="siz-kompilyatordan-kora-koproq-malumotga-ega-bolgan-holatlar"><a class="header" href="#siz-kompilyatordan-kora-koproq-malumotga-ega-bolgan-holatlar">Siz kompilyatordan ko'ra ko'proq ma'lumotga ega bo'lgan holatlar</a></h3>
+<p>Agar sizda <code>Result</code> <code>Ok</code> qiymatiga ega bo'lishini ta'minlaydigan boshqa mantiqqa ega bo'lsangiz, <code>unwrap</code> yoki <code>expect</code> ni chaqirish ham o'rinli bo'lardi, ammo mantiq kompilyator tushunadigan narsa emas. Siz hali ham <code>Result</code> qiymatiga ega bo'lasiz, uni hal qilishingiz kerak: siz murojaat qilayotgan har qanday operatsiya sizning vaziyatingizda mantiqan imkonsiz bo'lsa ham, umuman muvaffaqiyatsiz bo'lish ehtimoli bor. Agar siz kodni qo‘lda tekshirish orqali sizda hech qachon <code>Err</code> varianti bo‘lmasligiga ishonch hosil qilsangiz, <code>unwrap</code> deb nomlash juda maqbuldir, va <code>expect</code> matnida hech qachon <code>Err</code> varianti bo'lmaydi deb o'ylagan sababni hujjatlash yaxshiroqdir. Mana bir misol:</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">fn main() {
+</span>    use std::net::IpAddr;
+
+    let asosiy: IpAddr = &quot;127.0.0.1&quot;
+        .parse()
+        .expect(&quot;Qattiq kodlangan IP manzil haqiqiy bo'lishi kerak&quot;);
+<span class="boring">}
+</span></code></pre></pre>
+<p>Qattiq kodlangan stringni tahlil qilish orqali <code>IpAddr</code> misolini yaratmoqdamiz. Biz <code>127.0.0.1</code> to‘g‘ri IP manzil ekanligini ko‘ramiz, shuning uchun bu yerda <code>expect</code> dan foydalanish mumkin. Biroq, qattiq kodlangan, yaroqli satrga ega bo'lish <code>parse</code> metodining qaytish turini o'zgartirmaydi: biz hali ham <code>Result</code> qiymatini olamiz va kompilyator bizni <code>Result</code> bilan ishlashga majbur qiladi, go‘yo <code>Err</code> varianti mumkin, chunki kompilyator bu satr har doim haqiqiy IP manzil ekanligini ko‘rish uchun yetarlicha aqlli emas. Agar IP-manzillar qatori dasturga qattiq kodlanganidan ko'ra foydalanuvchidan kelgan bo'lsa va shuning uchun muvaffaqiyatsizlikka uchragan bo'lsa, biz, albatta, <code>Result</code> ni yanada ishonchli tarzda boshqarishni xohlaymiz.
+Ushbu IP-manzil qattiq kodlangan degan taxminni eslatib o'tsak, agar kelajakda IP-manzilni boshqa manbadan olishimiz kerak bo'lsa, bizni <code>expect</code> ni xatolarni boshqarish kodini yaxshiroq o'zgartirishga undaydi.</p>
+<h3 id="xatolarni-bartaraf-etish-boyicha-korsatmalar"><a class="header" href="#xatolarni-bartaraf-etish-boyicha-korsatmalar">Xatolarni bartaraf etish bo'yicha ko'rsatmalar</a></h3>
+<p>Agar kodingiz yomon holatda bo'lishi mumkin bo'lsa, kodingiz panic qo'yishi tavsiya etiladi. Shu nuqtai nazardan, <em>yomon holat</em> deganda baʼzi taxminlar(assumption), kafolatlar(guarantee), shartnomalar(contract,) yoki oʻzgarmasliklar buzilganda, masalan, notoʻgʻri qiymatlar, qarama-qarshi qiymatlar yoki yetishmayotgan qiymatlar kodingizga oʻtkazilganda, shuningdek quyidagilardan biri yoki bir nechtasi:</p>
+<ul>
+<li>Yomon holat - foydalanuvchi noto'g'ri formatda ma'lumotlarni kiritishi kabi vaqti-vaqti bilan sodir bo'lishi mumkin bo'lgan narsadan farqli o'laroq, kutilmagan narsa.</li>
+<li>Ushbu nuqtadan keyin sizning kodingiz har qadamda muammoni tekshirishdan ko'ra, bu yomon holatda bo'lmaslikka tayanishi kerak.</li>
+<li>Siz foydalanadigan turlarda ushbu ma'lumotni kodlashning yaxshi usuli yo'q. Biz 17-bobning <a href="ch17-03-oo-design-patterns.html#encoding-states-and-behavior-as-types">&quot;Turlar sifatida kodlash holatlari va behaviorlari&quot;</a><!-- ignore --> bo'limida nimani nazarda tutayotganimizni misol qilib ko'rib chiqamiz.</li>
+</ul>
+<p>Agar kimdir sizning kodingizga chaqiruv qilsa va mantiqiy bo'lmagan qiymatlarni o'tkazsa, kutubxona foydalanuvchisi bu holatda nima qilishni xohlashini hal qilishi uchun xatolikni qaytarish yaxshidir. Biroq, davom etish xavfli yoki zararli bo'lishi mumkin bo'lgan hollarda, eng yaxshi tanlov <code>panic!</code> deb chaqiruv qilish va kutubxonangizdan foydalanuvchini kodidagi xatolik haqida ogohlantirish bo'lishi mumkin, shunda ular ishlab chiqish jarayonida uni tuzatishi mumkin. Xuddi shunday, <code>panic!</code>ko'pincha sizning nazoratingizdan tashqarida bo'lgan tashqi kodga chaqiruv qilsangiz va uni tuzatishning imkoni bo'lmagan yaroqsiz holatni qaytarsangiz mos keladi.</p>
+<p>Biroq, muvaffaqiyatsizlik kutilganda, <code>panic!</code> chaqiruv qilishdan ko'ra, <code>Result</code>ni qaytarish maqsadga muvofiqdir. Misollar, tahlilchiga noto'g'ri tuzilgan ma'lumotlar yoki tarif chegarasiga yetganingizni bildiruvchi holatni qaytaruvchi HTTP so'rovini o'z ichiga oladi. Bunday hollarda, <code>Result</code> ni qaytarish, chaqiruv kodi qanday ishlov berishni hal qilishi kerak bo'lgan muvaffaqiyatsizlik kutilgan imkoniyat ekanligini ko'rsatadi.</p>
+<p>Agar kodingiz noto'g'ri qiymatlar yordamida chaqirilgan bo'lsa, foydalanuvchini xavf ostiga qo'yishi mumkin bo'lgan operatsiyani bajarganda, kodingiz avval qiymatlarning haqiqiyligini tekshirishi va qiymatlar noto'g'ri bo'lsa panic qo'yishi kerak.Bu asosan xavfsizlik nuqtai nazaridan: noto'g'ri ma'lumotlar bilan ishlashga urinish kodingizni zaifliklarga olib kelishi mumkin.
+Agar siz chegaradan tashqari xotiraga kirishga harakat qilsangiz, standart kutubxona <code>panic!</code> deb chaqirishining asosiy sababi shu: joriy ma'lumotlar tuzilishiga tegishli bo'lmagan xotiraga kirishga urinish umumiy xavfsizlik muammosidir. Funksiyalarda ko'pincha <em>shartnomalar(contracts)</em> mavjud: agar kirish ma'lum talablarga javob bersa, ularning xatti-harakati kafolatlanadi. Shartnoma buzilganda panic qo'yish mantiqan to'g'ri keladi, chunki shartnoma buzilishi har doim chaqiruv qiluvchi tomonidagi xatolikni ko'rsatadi va bu siz chaqiruv kodini aniq ko'rib chiqishni xohlagan xatolik emas. Aslida, chaqiruv kodini tiklashning oqilona usuli yo'q; kodni chaqiruvchi <em>dasturchilar</em> kodni tuzatishi kerak. Funksiya uchun shartnomalar, ayniqsa buzilish panic keltirib chiqaradigan bo'lsa, funksiya uchun API texnik hujjatlarida tushuntirilishi kerak.</p>
+<p>Biroq, barcha funksiyalaringizda ko'plab xatolarni tekshirish batafsil va zerikarli bo'ladi. Yaxshiyamki, siz Rustning turdagi tizimidan (va shunday qilib, kompilyator tomonidan amalga oshiriladigan turdagi tekshirish) siz uchun ko'plab tekshiruvlarni amalga oshiradi. Agar funksiyangiz parametr sifatida ma'lum bir turga ega bo'lsa, kompilyator sizda haqiqiy qiymatga ega ekanligiga ishonch hosil qilgan holda kodingiz mantig'ini davom ettirishingiz mumkin. Misol uchun, agar sizda <code>Option</code> emas, balki turingiz bo'lsa, dasturingiz <em>nothing(hech narsa)</em> emas, balki <em>something(nimadir)</em> bo'lishini kutadi. Sizning kodingiz <code>Some</code> va <code>None</code> variantlari uchun ikkita holatni ko'rib chiqishi shart emas: aniq qiymatga ega bo'lish uchun faqat bitta holat bo'ladi. Funksiyangizga hech narsa o'tkazmaslikka harakat qiladigan kodni kompilyatsiya qilinmaydi, shuning uchun funksiyangiz runtimeda bu holatni tekshirishi shart emas.
+Yana bir misol, parametr hech qachon manfiy bo'lmasligini ta'minlaydigan <code>u32</code> kabi belgisiz butun son turidan foydalanishdir.</p>
+<h3 id="tasdiqlash-uchun-maxsus-turlarni-yaratish"><a class="header" href="#tasdiqlash-uchun-maxsus-turlarni-yaratish">Tasdiqlash uchun maxsus turlarni yaratish</a></h3>
+<p>Keling, bir qadam oldin haqiqiy qiymatga ega ekanligimizga ishonch hosil qilish uchun Rust turi tizimidan foydalanish g'oyasini olaylik va tekshirish uchun maxsus turni yaratishni ko'rib chiqaylik. 2-bobdagi taxmin qilish o'yinini eslang, unda bizning kodimiz foydalanuvchidan 1 dan 100 gacha bo'lgan raqamni taxmin qilishni so'radi. Biz hech qachon foydalanuvchining taxmini o'sha raqamlar o'rtasida ekanligini tasdiqlaganimiz yo'q, uni bizning maxfiy raqamimizga nisbatan tekshirishdan oldin; biz faqat taxmin ijobiy ekanligini tasdiqladik. Bunday holda, natijalar unchalik dahshatli emas edi: bizning &quot;Raqam katta!&quot; yoki &quot;Raqam Kichik!&quot; chiqishimiz hali ham to'g'ri bo'lar edi. Lekin foydalanuvchini to'g'ri taxmin qilishga va foydalanuvchi diapazondan tashqaridagi raqamni taklif qilganda va foydalanuvchi, masalan, raqamlar o'rniga harflarni kiritganda, boshqacha xatti-harakatlarga ega bo'lishga undash yaxshi bo'lardi.</p>
+<p>Buning usullaridan biri potentsial manfiy raqamlarga ruxsat berish uchun taxminni faqat <code>u32</code> o‘rniga <code>i32</code> sifatida tahlil qilish va keyin diapazondagi raqamni tekshirishni qo‘shishdir, masalan:</p>
+<pre><code class="language-rust ignore"><span class="boring">use rand::Rng;
+</span><span class="boring">use std::cmp::Ordering;
+</span><span class="boring">use std::io;
+</span><span class="boring">
+</span><span class="boring">fn main() {
+</span><span class="boring">    println!(&quot;Raqamni topish o'yini!&quot;);
+</span><span class="boring">
+</span><span class="boring">    let yashirin_raqam = rand::thread_rng().gen_range(1..=100);
+</span><span class="boring">
+</span>    loop {
+        // --snip--
+
+<span class="boring">        println!(&quot;Iltimos, taxminingizni kiriting.&quot;);
+</span><span class="boring">
+</span><span class="boring">        let mut taxmin = String::new();
+</span><span class="boring">
+</span><span class="boring">        io::stdin()
+</span><span class="boring">            .read_line(&amp;mut taxmin)
+</span><span class="boring">            .expect(&quot;Satrni o‘qib bo‘lmadi&quot;);
+</span><span class="boring">
+</span>        let taxmin: i32 = match taxmin.trim().parse() {
+            Ok(num) =&gt; num,
+            Err(_) =&gt; continue,
+        };
+
+        if taxmin &lt; 1 || taxmin &gt; 100 {
+            println!(&quot;Yashirin raqam 1 dan 100 gacha bo'ladi.&quot;);
+            continue;
+        }
+
+        match taxmin.cmp(&amp;yashirin_raqam) {
+            // --snip--
+<span class="boring">            Ordering::Less =&gt; println!(&quot;Raqam Kichik!&quot;),
+</span><span class="boring">            Ordering::Greater =&gt; println!(&quot;Raqam katta!&quot;),
+</span><span class="boring">            Ordering::Equal =&gt; {
+</span><span class="boring">                println!(&quot;Siz yutdingiz!&quot;);
+</span><span class="boring">                break;
+</span><span class="boring">            }
+</span><span class="boring">        }
+</span>    }
+<span class="boring">}
+</span></code></pre>
+<p><code>If</code> ifodasi bizning qiymatimiz diapazondan tashqarida yoki yo‘qligini tekshiradi, foydalanuvchiga muammo haqida xabar beradi va siklning keyingi iteratsiyasini boshlash uchun <code>continue</code> ni chaqiradi va yana bir taxminni so‘raydi. <code>if</code> ifodasidan keyin <code>taxmin</code> 1 dan 100 gacha ekanligini bilgan holda <code>taxmin</code> va maxfiy raqam o‘rtasidagi taqqoslashni davom ettirishimiz mumkin.</p>
+<p>Biroq, bu ideal echim emas: agar dastur faqat 1 dan 100 gacha bo'lgan qiymatlarda ishlaganligi juda muhim bo'lsa va bu talab bilan ko'plab funksiyalarga ega bo'lsa, har bir funksiyada bunday tekshiruvga ega bo'lish zerikarli bo'ladi (va ishlashga ta'sir qilishi mumkin).</p>
+<p>Buning o'rniga, biz yangi turni yaratishimiz va tekshirishlarni hamma joyda takrorlashdan ko'ra, turdagi namunani yaratish uchun funksiyaga qo'yishimiz mumkin. Shunday qilib, funksiyalar o'zlarining imzolarida yangi turdan foydalanishlari va ular olgan qiymatlardan ishonchli foydalanishlari xavfsiz bo'ladi. 9-13 roʻyxatda <code>Taxmin</code> turini aniqlashning bir usuli koʻrsatilgan, bu <code>new</code> funksiya 1 dan 100 gacha boʻlgan qiymatni qabul qilsagina <code>Taxmin</code> misolini yaratadi.</p>
+<!-- Deliberately not using rustdoc_include here; the `main` function in the
+file requires the `rand` crate. We do want to include it for reader
+experimentation purposes, but don't want to include it for rustdoc testing
+purposes. -->
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub struct Taxmin {
+    qiymat: i32,
+}
+
+impl Taxmin {
+    pub fn new(qiymat: i32) -&gt; Taxmin {
+        if qiymat &lt; 1 || qiymat &gt; 100 {
+            panic!(&quot;Taxmin qilingan qiymat 1 dan 100 gacha bo'lishi kerak, {} qabul qilnmaydi.&quot;, qiymat);
+        }
+
+        Taxmin { qiymat }
+    }
+
+    pub fn qiymat(&amp;self) -&gt; i32 {
+        self.qiymat
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p><span class="caption">Roʻyxat 9-13: <code>Taxmin</code> turi, u faqat 1 dan 100 gacha qiymatlar bilan davom etadi</span></p>
+<p>Birinchidan, biz <code>i32</code> ga ega <code>qiymat</code> nomli maydonga ega <code>Taxmin</code> nomli structni aniqlaymiz. Bu yerda raqam saqlanadi.</p>
+<p>Keyin biz <code>Taxmin</code> da <code>new</code> nomli bog'langan funktsiyani amalga oshiramiz, u <code>Taxmin</code> qiymatlari misollarini yaratadi. <code>new</code> funksiya <code>i32</code> turidagi <code>qiymat</code> nomli bitta parametrga ega bo‘lishi va <code>Taxmin</code>ni qaytarishi uchun belgilangan. <code>new</code> funksiyaning asosiy qismidagi kod <code>qiymat</code>ni 1 dan 100 gacha ekanligiga ishonch hosil qilish uchun tekshiradi.
+Agar <code>qiymat</code> bu sinovdan o‘tmasa, biz <code>panic!</code> chaqiruvini qilamiz, bu chaqiruv kodini yozayotgan dasturchini tuzatishi kerak bo‘lgan xatolik haqida ogohlantiradi, chunki bu diapazondan tashqarida <code>qiymat</code> bilan <code>Taxmin</code> yaratish <code>Taxmin::new</code> tayanadigan qoidani buzadi. <code>Taxmin::new</code> panic qo'zg'atishi mumkin bo'lgan shartlar uning API texnik hujjatlarida muhokama qilinishi kerak; biz 14-bobda yaratgan API texnik hujjatlarida <code>panic!</code> ehtimolini ko‘rsatuvchi hujjatlar konventsiyalarini qamrab olamiz. Agar <code>qiymat</code> testdan o'tgan bo'lsa, biz uning <code>qiymat</code> maydoni <code>qiymat</code> parametriga o'rnatilgan yangi <code>Taxmin</code> yaratamiz va <code>Taxmin</code>ni qaytaramiz.</p>
+<p>Keyinchalik, biz <code>self</code> ni oladigan, boshqa parametrlarga ega bo'lmagan va <code>i32</code> ni qaytaradigan <code>qiymat</code> nomli metodni qo'llaymiz. Bunday usul ba'zan <em>getter(oluvchi)</em> deb ataladi, chunki uning maqsadi o'z maydonlaridan ba'zi ma'lumotlarni olish va uni qaytarishdir. Ushbu umumiy metod zarur, chunki <code>Taxmin</code> strukturasining <code>qiymat</code> maydoni shaxsiydir(private). <code>qiymat</code> maydoni shaxsiy(private) bo'lishi juda muhim, shuning uchun <code>Taxmin</code> strukturasi yordamida kod to'g'ridan-to'g'ri <code>qiymat</code> ni o'rnatishga ruxsat berilmaydi: moduldan tashqaridagi kod <code>Taxmin::new</code> funksiyasidan <code>Taxmin</code> misolini yaratish uchun foydalanishi kerak, shunday qilib, <code>Taxmin</code> ning <code>Taxmin::new</code> funksiyasidagi shartlar bo‘yicha tekshirilmagan <code>qiymat</code>ga ega bo‘lishining imkoni yo‘qligini ta’minlaydi.</p>
+<p>Parametrga ega bo'lgan yoki faqat 1 dan 100 gacha bo'lgan raqamlarni qaytaradigan funksiya o'z imzosida <code>i32</code> emas, <code>Taxmin</code> ni olishi yoki qaytarishi va uning tanasida qo'shimcha tekshiruvlar o'tkazishga hojat qolmasligini e'lon qilishi mumkin.</p>
+<h2 id="xulosa"><a class="header" href="#xulosa">Xulosa</a></h2>
+<p>Rust-ning xatolarni boshqarish xususiyatlari sizga yanada mustahkam kod yozishga yordam berish uchun mo'ljallangan.
+<code>panic!</code> makrosi dasturingiz u bardosh bera olmaydigan holatda ekanligini bildiradi va noto‘g‘ri yoki noto‘g‘ri qiymatlar bilan davom etish o‘rniga jarayonni to‘xtatishni aytish imkonini beradi. <code>Result</code> enumi operatsiyalar muvaffaqiyatsiz bo'lishi va kodingiz tiklanishi mumkinligini bildirish uchun Rust turdagi tizimdan foydalanadi. Kodingizga chaqiruv qiladigan kod potentsial muvaffaqiyat yoki muvaffaqiyatsizlikni hal qilishi kerakligini aytish uchun <code>Result</code> dan foydalanishingiz mumkin. Tegishli vaziyatlarda <code>panic!</code> va <code>Result</code> dan foydalanish muqarrar muammolar oldida kodingizni yanada ishonchli qiladi.</p>
+<p>Endi siz standart kutubxonada <code>Option</code> va <code>Result</code> enumlari bilan generiklardan foydalanishning foydali usullarini ko'rganingizdan so'ng, biz generiklar qanday ishlashi va ularni kodingizda qanday ishlatishingiz haqida gaplashamiz.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="ch09-02-recoverable-errors-with-result.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a rel="next" href="ch10-00-generics.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="ch09-02-recoverable-errors-with-result.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a rel="next" href="ch10-00-generics.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        <script type="text/javascript" src="ferris.js"></script>
+    </body>
+</html>

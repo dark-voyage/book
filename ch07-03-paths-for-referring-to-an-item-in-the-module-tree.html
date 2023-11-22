@@ -1,0 +1,414 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Modul daraxtidagi elementga murojaat qilish yo&#x27;llari - Rust dasturlash tili</title>
+        <!-- Custom HTML head -->
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="ferris.css">
+        <link rel="stylesheet" href="theme/2018-edition.css">
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="title-page.html">Rust dasturlash tili</a></li><li class="chapter-item expanded affix "><a href="foreword.html">Muqaddima</a></li><li class="chapter-item expanded affix "><a href="ch00-00-introduction.html">Kirish</a></li><li class="chapter-item expanded "><a href="ch01-00-getting-started.html"><strong aria-hidden="true">1.</strong> Ishni boshlash</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch01-01-installation.html"><strong aria-hidden="true">1.1.</strong> O'rnatish</a></li><li class="chapter-item expanded "><a href="ch01-02-hello-world.html"><strong aria-hidden="true">1.2.</strong> Hello, World!</a></li><li class="chapter-item expanded "><a href="ch01-03-hello-cargo.html"><strong aria-hidden="true">1.3.</strong> Hello, Cargo!</a></li></ol></li><li class="chapter-item expanded "><a href="ch02-00-guessing-game-tutorial.html"><strong aria-hidden="true">2.</strong> Taxmin qilish o'yinini dasturlash</a></li><li class="chapter-item expanded "><a href="ch03-00-common-programming-concepts.html"><strong aria-hidden="true">3.</strong> Umumiy dasturlash tushunchalari</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch03-01-variables-and-mutability.html"><strong aria-hidden="true">3.1.</strong> O'zgaruvchilar va o'zgaruvchanlik</a></li><li class="chapter-item expanded "><a href="ch03-02-data-types.html"><strong aria-hidden="true">3.2.</strong> Ma'lumotlar turlari</a></li><li class="chapter-item expanded "><a href="ch03-03-how-functions-work.html"><strong aria-hidden="true">3.3.</strong> Funksiyalar</a></li><li class="chapter-item expanded "><a href="ch03-04-comments.html"><strong aria-hidden="true">3.4.</strong> Izohlar</a></li><li class="chapter-item expanded "><a href="ch03-05-control-flow.html"><strong aria-hidden="true">3.5.</strong> Control Flow</a></li></ol></li><li class="chapter-item expanded "><a href="ch04-00-understanding-ownership.html"><strong aria-hidden="true">4.</strong> Ownershipni tushunish</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch04-01-what-is-ownership.html"><strong aria-hidden="true">4.1.</strong> Ownership nima?</a></li><li class="chapter-item expanded "><a href="ch04-02-references-and-borrowing.html"><strong aria-hidden="true">4.2.</strong> Referencelar va  Borrowing</a></li><li class="chapter-item expanded "><a href="ch04-03-slices.html"><strong aria-hidden="true">4.3.</strong> Slice turi</a></li></ol></li><li class="chapter-item expanded "><a href="ch05-00-structs.html"><strong aria-hidden="true">5.</strong> Tegishli ma'lumotlarni tuzish uchun Structdan foydalanish</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch05-01-defining-structs.html"><strong aria-hidden="true">5.1.</strong> Structlarni aniqlash va yaratish</a></li><li class="chapter-item expanded "><a href="ch05-02-example-structs.html"><strong aria-hidden="true">5.2.</strong> Structs yordamida namunaviy dastur</a></li><li class="chapter-item expanded "><a href="ch05-03-method-syntax.html"><strong aria-hidden="true">5.3.</strong> Metod sintaksisi</a></li></ol></li><li class="chapter-item expanded "><a href="ch06-00-enums.html"><strong aria-hidden="true">6.</strong> Enumlar va patternlarni moslashtirish</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch06-01-defining-an-enum.html"><strong aria-hidden="true">6.1.</strong> Enumni aniqlash</a></li><li class="chapter-item expanded "><a href="ch06-02-match.html"><strong aria-hidden="true">6.2.</strong> match Control Flow konstruksiyasi</a></li><li class="chapter-item expanded "><a href="ch06-03-if-let.html"><strong aria-hidden="true">6.3.</strong> if let bilan qisqacha Control Flow</a></li></ol></li><li class="chapter-item expanded "><a href="ch07-00-managing-growing-projects-with-packages-crates-and-modules.html"><strong aria-hidden="true">7.</strong> O'sib borayotgan loyihalarni Paketlar, Cratelar va Modullar bilan boshqarish</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch07-01-packages-and-crates.html"><strong aria-hidden="true">7.1.</strong> Paketlar va Cratelar</a></li><li class="chapter-item expanded "><a href="ch07-02-defining-modules-to-control-scope-and-privacy.html"><strong aria-hidden="true">7.2.</strong> Qo'llanish doirasi va maxfiylikni nazorat qilish uchun modullarni aniqlash</a></li><li class="chapter-item expanded "><a href="ch07-03-paths-for-referring-to-an-item-in-the-module-tree.html" class="active"><strong aria-hidden="true">7.3.</strong> Modul daraxtidagi elementga murojaat qilish yo'llari</a></li><li class="chapter-item expanded "><a href="ch07-04-bringing-paths-into-scope-with-the-use-keyword.html"><strong aria-hidden="true">7.4.</strong> use kalit so'zi bilan yo'llarni qamrab olish</a></li><li class="chapter-item expanded "><a href="ch07-05-separating-modules-into-different-files.html"><strong aria-hidden="true">7.5.</strong> Modullarni turli fayllarga ajratish</a></li></ol></li><li class="chapter-item expanded "><a href="ch08-00-common-collections.html"><strong aria-hidden="true">8.</strong> Umumiy to'plamlar</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch08-01-vectors.html"><strong aria-hidden="true">8.1.</strong> Vectorlar bilan qiymatlar ro'yxatini saqlash</a></li><li class="chapter-item expanded "><a href="ch08-02-strings.html"><strong aria-hidden="true">8.2.</strong> UTF-8 kodlangan matnni Stringlar bilan saqlash</a></li><li class="chapter-item expanded "><a href="ch08-03-hash-maps.html"><strong aria-hidden="true">8.3.</strong> Hash Mapda bog'langan qiymatlarga ega kalitlarni saqlash</a></li></ol></li><li class="chapter-item expanded "><a href="ch09-00-error-handling.html"><strong aria-hidden="true">9.</strong> Xatolar bilan ishlash</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch09-01-unrecoverable-errors-with-panic.html"><strong aria-hidden="true">9.1.</strong> panic! bilan tuzatib bo'lmaydigan xatolar</a></li><li class="chapter-item expanded "><a href="ch09-02-recoverable-errors-with-result.html"><strong aria-hidden="true">9.2.</strong> Result bilan tiklanadigan xatolar</a></li><li class="chapter-item expanded "><a href="ch09-03-to-panic-or-not-to-panic.html"><strong aria-hidden="true">9.3.</strong> panic! yoki panic! emas</a></li></ol></li><li class="chapter-item expanded "><a href="ch10-00-generics.html"><strong aria-hidden="true">10.</strong> Umumiy turlar, traitlar va lifetime</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch10-01-syntax.html"><strong aria-hidden="true">10.1.</strong> Generik ma'lumotlar turlari</a></li><li class="chapter-item expanded "><a href="ch10-02-traits.html"><strong aria-hidden="true">10.2.</strong> Traitlar: umumiy xatti-harakatni aniqlash</a></li><li class="chapter-item expanded "><a href="ch10-03-lifetime-syntax.html"><strong aria-hidden="true">10.3.</strong> Referencelarni lifetime bilan tekshirish</a></li></ol></li><li class="chapter-item expanded "><a href="ch11-00-testing.html"><strong aria-hidden="true">11.</strong> Avtomatlashtirilgan testlarni yozish</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch11-01-writing-tests.html"><strong aria-hidden="true">11.1.</strong> Testlarni qanday yozish kerak</a></li><li class="chapter-item expanded "><a href="ch11-02-running-tests.html"><strong aria-hidden="true">11.2.</strong> Sinovlar qanday o'tkazilishini nazorat qilish</a></li><li class="chapter-item expanded "><a href="ch11-03-test-organization.html"><strong aria-hidden="true">11.3.</strong> Test tashkil etish</a></li></ol></li><li class="chapter-item expanded "><a href="ch12-00-an-io-project.html"><strong aria-hidden="true">12.</strong> I/O loyihasi: Buyruqlar qatori dasturini yaratish</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch12-01-accepting-command-line-arguments.html"><strong aria-hidden="true">12.1.</strong> Buyruqlar qatori argumentini qabul qilishs</a></li><li class="chapter-item expanded "><a href="ch12-02-reading-a-file.html"><strong aria-hidden="true">12.2.</strong> Faylni o'qish</a></li><li class="chapter-item expanded "><a href="ch12-03-improving-error-handling-and-modularity.html"><strong aria-hidden="true">12.3.</strong> Modullikni yaxshilash va xatolarni qayta ishlash uchun refactoring</a></li><li class="chapter-item expanded "><a href="ch12-04-testing-the-librarys-functionality.html"><strong aria-hidden="true">12.4.</strong> Sinovga asoslangan ishlab chiqish bilan kutubxonaning funksionalligini rivojlantirish</a></li><li class="chapter-item expanded "><a href="ch12-05-working-with-environment-variables.html"><strong aria-hidden="true">12.5.</strong> Environment o'zgaruvchilari bilan ishlash</a></li><li class="chapter-item expanded "><a href="ch12-06-writing-to-stderr-instead-of-stdout.html"><strong aria-hidden="true">12.6.</strong> Xato xabarlarini standart chiqish o'rniga standart xatoga yozish</a></li></ol></li><li class="chapter-item expanded "><a href="ch13-00-functional-features.html"><strong aria-hidden="true">13.</strong> Funksional til xususiyatlari: iteratorlar va closurelar</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch13-01-closures.html"><strong aria-hidden="true">13.1.</strong> Closurelar: Environmentni qamrab oladigan anonim funksiyalar</a></li><li class="chapter-item expanded "><a href="ch13-02-iterators.html"><strong aria-hidden="true">13.2.</strong> Iteratorlar bilan bir qator elementlarga ishlov berish</a></li><li class="chapter-item expanded "><a href="ch13-03-improving-our-io-project.html"><strong aria-hidden="true">13.3.</strong> I/O loyihamizni takomillashtirish</a></li><li class="chapter-item expanded "><a href="ch13-04-performance.html"><strong aria-hidden="true">13.4.</strong> Ishlash samaradorligini solishtirish: Looplar va iteratorlar</a></li></ol></li><li class="chapter-item expanded "><a href="ch14-00-more-about-cargo.html"><strong aria-hidden="true">14.</strong> Cargo va Crates.io haqida ko'proq</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch14-01-release-profiles.html"><strong aria-hidden="true">14.1.</strong> Reliz profillari bilan structlarni moslashtirish</a></li><li class="chapter-item expanded "><a href="ch14-02-publishing-to-crates-io.html"><strong aria-hidden="true">14.2.</strong> Crateni Crates.io-ga nashr qilish</a></li><li class="chapter-item expanded "><a href="ch14-03-cargo-workspaces.html"><strong aria-hidden="true">14.3.</strong> Cargo Workspacelar</a></li><li class="chapter-item expanded "><a href="ch14-04-installing-binaries.html"><strong aria-hidden="true">14.4.</strong> Binary fayllarni Crates.io'dan cargo install bilan o'rnatish</a></li><li class="chapter-item expanded "><a href="ch14-05-extending-cargo.html"><strong aria-hidden="true">14.5.</strong> Maxsus buyruqlar bilan Cargoni kengaytirish</a></li></ol></li><li class="chapter-item expanded "><a href="ch15-00-smart-pointers.html"><strong aria-hidden="true">15.</strong> Smart Pointerlar</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch15-01-box.html"><strong aria-hidden="true">15.1.</strong> Heapdagi ma'lumotlarni ko'rsatish uchun Box&lt;T&gt; dan foydalanish</a></li><li class="chapter-item expanded "><a href="ch15-02-deref.html"><strong aria-hidden="true">15.2.</strong> Deref Traitidan foydalangan holda oddiy referencelar kabi Smart Pointerlar bilan ishlash</a></li><li class="chapter-item expanded "><a href="ch15-03-drop.html"><strong aria-hidden="true">15.3.</strong> Drop Traiti bilan tozalashda kodni ishga tushirish</a></li><li class="chapter-item expanded "><a href="ch15-04-rc.html"><strong aria-hidden="true">15.4.</strong> Rc&lt;T&gt;, reference hisoblangan Smart Pointer</a></li><li class="chapter-item expanded "><a href="ch15-05-interior-mutability.html"><strong aria-hidden="true">15.5.</strong> RefCell&lt;T&gt; va ichki o'zgaruvchanlik namunasi</a></li><li class="chapter-item expanded "><a href="ch15-06-reference-cycles.html"><strong aria-hidden="true">15.6.</strong> Reference Cycles Can Leak Memory</a></li></ol></li><li class="chapter-item expanded "><a href="ch16-00-concurrency.html"><strong aria-hidden="true">16.</strong> Qo'rqmas parallellik</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch16-01-threads.html"><strong aria-hidden="true">16.1.</strong> Kodni bir vaqtning o'zida ishga tushirish uchun threadlardan foydalanish</a></li><li class="chapter-item expanded "><a href="ch16-02-message-passing.html"><strong aria-hidden="true">16.2.</strong> Threadlar orasidagi ma'lumotlarni uzatish uchun xabar uzatishdan(Message Passing) foydalanish</a></li><li class="chapter-item expanded "><a href="ch16-03-shared-state.html"><strong aria-hidden="true">16.3.</strong> Shared-State Concurrency</a></li><li class="chapter-item expanded "><a href="ch16-04-extensible-concurrency-sync-and-send.html"><strong aria-hidden="true">16.4.</strong> Sync va Send traitlari bilan kengaytiriladigan parallellik</a></li></ol></li><li class="chapter-item expanded "><a href="ch17-00-oop.html"><strong aria-hidden="true">17.</strong> Rustning ob'ektga yo'naltirilgan dasturlash xususiyatlari- OOP</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch17-01-what-is-oo.html"><strong aria-hidden="true">17.1.</strong> Ob'ektga yo'naltirilgan tillarning xususiyatlari</a></li><li class="chapter-item expanded "><a href="ch17-02-trait-objects.html"><strong aria-hidden="true">17.2.</strong> Har xil turdagi qiymatlarga ruxsat beruvchi trait ob'ektlaridan foydalanish</a></li><li class="chapter-item expanded "><a href="ch17-03-oo-design-patterns.html"><strong aria-hidden="true">17.3.</strong> Ob'ektga yo'naltirilgan dizayn patternini implement qilish</a></li></ol></li><li class="chapter-item expanded "><a href="ch18-00-patterns.html"><strong aria-hidden="true">18.</strong> Patternlar va Matching</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch18-01-all-the-places-for-patterns.html"><strong aria-hidden="true">18.1.</strong> All the Places Patterns Can Be Used</a></li><li class="chapter-item expanded "><a href="ch18-02-refutability.html"><strong aria-hidden="true">18.2.</strong> Refutability: Whether a Pattern Might Fail to Match</a></li><li class="chapter-item expanded "><a href="ch18-03-pattern-syntax.html"><strong aria-hidden="true">18.3.</strong> Pattern Sintaksisi</a></li></ol></li><li class="chapter-item expanded "><a href="ch19-00-advanced-features.html"><strong aria-hidden="true">19.</strong> Kengaytirilgan Xususiyatlar</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch19-01-unsafe-rust.html"><strong aria-hidden="true">19.1.</strong> Xavfsiz Rust</a></li><li class="chapter-item expanded "><a href="ch19-03-advanced-traits.html"><strong aria-hidden="true">19.2.</strong> Murakkab Traitlar</a></li><li class="chapter-item expanded "><a href="ch19-04-advanced-types.html"><strong aria-hidden="true">19.3.</strong> Kengaytirilgan Turlar</a></li><li class="chapter-item expanded "><a href="ch19-05-advanced-functions-and-closures.html"><strong aria-hidden="true">19.4.</strong> Kengaytirilgan funksiyalar va closurelar</a></li><li class="chapter-item expanded "><a href="ch19-06-macros.html"><strong aria-hidden="true">19.5.</strong> Makrolar</a></li></ol></li><li class="chapter-item expanded "><a href="ch20-00-final-project-a-web-server.html"><strong aria-hidden="true">20.</strong> Yakuniy loyiha: Ko'p tarmoqli veb-serverni qurish</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch20-01-single-threaded.html"><strong aria-hidden="true">20.1.</strong> Yagona tarmoqli veb-serverni qurish</a></li><li class="chapter-item expanded "><a href="ch20-02-multithreaded.html"><strong aria-hidden="true">20.2.</strong> Bizning yagona tarmoqli serverimizni ko'p tarmoqli serverga aylantirish</a></li><li class="chapter-item expanded "><a href="ch20-03-graceful-shutdown-and-cleanup.html"><strong aria-hidden="true">20.3.</strong> Ajoyib o'chirish va tozalash</a></li></ol></li><li class="chapter-item expanded "><a href="appendix-00.html"><strong aria-hidden="true">21.</strong> Ilova</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="appendix-01-keywords.html"><strong aria-hidden="true">21.1.</strong> A - Kalit so'zlar</a></li><li class="chapter-item expanded "><a href="appendix-02-operators.html"><strong aria-hidden="true">21.2.</strong> B - Operatorlar va Symbollar</a></li><li class="chapter-item expanded "><a href="appendix-03-derivable-traits.html"><strong aria-hidden="true">21.3.</strong> C - Hosilaviy Traitlar</a></li><li class="chapter-item expanded "><a href="appendix-04-useful-development-tools.html"><strong aria-hidden="true">21.4.</strong> D - Foydali Development Toollar</a></li><li class="chapter-item expanded "><a href="appendix-05-editions.html"><strong aria-hidden="true">21.5.</strong> E - Nashrlar</a></li><li class="chapter-item expanded "><a href="appendix-06-translation.html"><strong aria-hidden="true">21.6.</strong> F - Kitobning tarjimalari</a></li><li class="chapter-item expanded "><a href="appendix-07-nightly-rust.html"><strong aria-hidden="true">21.7.</strong> G - Rust qanday yasaladi va “Nightly Rust”</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Rust dasturlash tili</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/rust-lang/book" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h2 id="modul-daraxtidagi-elementga-murojaat-qilish-yollari"><a class="header" href="#modul-daraxtidagi-elementga-murojaat-qilish-yollari">Modul daraxtidagi elementga murojaat qilish yo'llari</a></h2>
+<p>Rust-ga modul daraxtidagi elementni qayerdan topish mumkinligini ko'rsatish uchun biz fayl tizimida harakat qilishda qanday yo'l(path) ishlatgan bo'lsak, xuddi shunday yo'ldan foydalanamiz. Funksiyani chaqirish uchun biz uning yo'lini bilishimiz kerak.</p>
+<p>Yo'l ikki shaklda bo'lishi mumkin:</p>
+<ul>
+<li><em>Absolyut yo'l</em> - bu crate ildizidan boshlanadigan to'liq yo'l; tashqi cretedagi kod uchun mutlaq yo'l crate nomidan boshlanadi va joriy cratedagi kod uchun esa <code>crate</code> bilan boshlanadi..</li>
+<li><em>N   isbiy yo‘l</em> joriy moduldan boshlanadi va joriy modulda <code>self</code>, <code>super</code> yoki identifikatordan foydalanadi.</li>
+</ul>
+<p>Mutlaq va nisbiy yo‘llardan keyin ikki nuqta (<code>::</code>) bilan ajratilgan bir yoki bir nechta identifikatorlar keladi.</p>
+<p>7-1 ro'yxatiga qaytsak, biz <code>navbat_listiga_qoshish</code> funksiyasini chaqirmoqchimiz deylik.
+Bu so'rash bilan bir xil: <code>navbat_listiga_qoshish</code> funksiyasining yo'li nima?
+7-3 ro'yxatda 7-1 ro'yxati mavjud bo'lib, ba'zi modullar va funksiyalar olib tashlangan.</p>
+<p>Biz crate ildizida belgilangan yangi <code>restoranda_ovqatlanish</code> funksiyasidan <code>navbat_listiga_qoshish</code> funksiyasini chaqirishning ikkita usulini ko‘rsatamiz. Bu yoʻllar toʻgʻri, ammo bu misolni avvalgidek tuzishga toʻsqinlik qiladigan yana bir muammo bor. Sababini birozdan keyin tushuntiramiz.</p>
+<p><code>restoranda_ovqatlanish</code> funksiyasi kutubxonamizning ommaviy API-ning bir qismidir, shuning uchun biz uni <code>pub</code> kalit so'zi bilan belgilaymiz. <a href="ch07-03-paths-for-referring-to-an-item-in-the-module-tree.html#exposing-paths-with-the-pub-keyword">“<code>pub</code> kalit so'zi bilan yo'llarni ochish”</a><!-- ignore --> bo‘limida biz <code>pub</code> haqida batafsilroq to‘xtalib o'tamiz.</p>
+<p><span class="filename">Fayl nomi: src/lib.rs</span></p>
+<pre><code class="language-rust ignore does_not_compile">mod uyning_oldi {
+    mod xizmat {
+        fn navbat_listiga_qoshish() {}
+    }
+}
+
+pub fn restoranda_ovqatlanish() {
+    // Mutlaq yo'l (Absolute path)
+    crate::uyning_oldi::xizmat::navbat_listiga_qoshish();
+
+    // Nisbiy yo'l (Relative path)
+    uyning_oldi::xizmat::navbat_listiga_qoshish();
+}
+</code></pre>
+<p><span class="caption">Ro'yxat 7-3: <code>navbat_listiga_qoshish</code> funksiyasini mutlaq va nisbiy yo'llar yordamida chaqirish</span></p>
+<p>Biz birinchi marta <code>restoranda_ovqatlanish</code> ichida <code>navbat_listiga_qoshish</code> funksiyasini chaqirganimizda mutlaq yo'ldan foydalanamiz. <code>navbat_listiga_qoshish</code> funksiyasi <code>restoranda_ovqatlanish</code> bilan bir xil crateda belgilangan, ya'ni mutlaq yoʻlni boshlash uchun <code>crate</code> kalit soʻzidan foydalanishimiz mumkin. Keyin biz <code>navbat_listiga_qoshish</code> ga o'tgunimizcha ketma-ket modullarning har birini o'z ichiga olamiz. Siz bir xil strukturaga ega fayl tizimini tasavvur qilishingiz mumkin: biz <code>navbat_listiga_qoshish</code> dasturini ishga tushirish uchun <code>/uyning_oldi/xizmat/navbat_listiga_qoshish</code> yo'lini belgilaymiz; crate ildizidan boshlash uchun <code>crate</code> nomidan foydalanish shelldagi fayl tizimi ildizidan boshlash uchun <code>/</code> dan foydalanishga o'xshaydi.</p>
+<p>Biz <code>restoranda_ovqatlanish</code> ichida <code>navbat_listiga_qoshish</code> ni ikkinchi marta chaqirganimizda nisbiy yo'ldan foydalanamiz. Yo'l <code>uyning_oldi</code> bilan boshlanadi, modul nomi <code>restoranda_ovqatlanish</code> bilan bir xil modul daraxti darajasida belgilangan. Bu yerda fayl tizimi ekvivalenti <code>uyning_oldi/xizmat/navbat_listiga_qoshish</code> yo'lidan foydalaniladi. Modul nomi bilan boshlash yo'l nisbiy ekanligini bildiradi.</p>
+<p>Nisbiy yoki mutlaq yo‘ldan foydalanishni tanlash loyihangiz asosida qabul qilinadigan qaror bo‘lib, element definitioni kodini elementdan foydalanadigan koddan alohida yoki birga ko‘chirish ehtimoli ko‘proq ekanligiga bog‘liq.
+Masalan, <code>uyning_oldi</code> moduli va <code>restoranda_ovqatlanish</code> funksiyasini <code>mijoz_tajribasi</code> nomli modulga o‘tkazsak, mutlaq yo‘lni <code>navbat_listiga_qoshish</code>ga yangilashimiz kerak bo‘ladi, lekin nisbiy yo‘l baribir amal qiladi.
+Biroq, agar biz <code>restoranda_ovqatlanish</code> funksiyasini <code>ovqatlanish</code> nomli modulga alohida ko'chirsak, <code>restoranda_ovqatlanish</code> chaqiruvining mutlaq yo'li bir xil bo'lib qoladi, lekin nisbiy yo'l yangilanishi kerak bo'ladi. Umuman olganda, bizning afzal ko'rganimiz mutlaq yo'llarni belgilashdir, chunki biz kod definitionlari va element chaqiruvlarini bir-biridan mustaqil ravishda ko'chirishni xohlaymiz.</p>
+<p>Keling, 7-3 ro'yxatini kompilatsiya qilishga harakat qilaylik va nima uchun u hali kompilatsiya bo'lmaganligini bilib olaylik! Biz olgan xato 7-4 ro'yxatda ko'rsatilgan.</p>
+<pre><code class="language-console">$ cargo build
+   Compiling restaurant v0.1.0 (file:///projects/restaurant)
+error[E0603]: module `xizmat` is private
+ --&gt; src/lib.rs:9:28
+  |
+9 |     crate::uyning_oldi::xizmat::navbat_listiga_qoshish();
+  |                            ^^^^^^^ private module
+  |
+note: the module `xizmat` is defined here
+ --&gt; src/lib.rs:2:5
+  |
+2 |     mod xizmat {
+  |     ^^^^^^^^^^^
+
+error[E0603]: module `xizmat` is private
+  --&gt; src/lib.rs:12:21
+   |
+12 |     uyning_oldi::xizmat::navbat_listiga_qoshish();
+   |                     ^^^^^^^ private module
+   |
+note: the module `xizmat` is defined here
+  --&gt; src/lib.rs:2:5
+   |
+2  |     mod xizmat {
+   |     ^^^^^^^^^^^
+
+For more information about this error, try `rustc --explain E0603`.
+error: could not compile `restaurant` due to 2 previous errors
+</code></pre>
+<p><span class="caption">Ro'yxat 7-4: 7-3 ro'yxatdagi kodni kompilyatsiya qilishda kompilyator xatolari</span></p>
+<p>Xato xabarlari <code>xizmat</code> moduli shaxsiy ekanligini aytadi. Boshqacha qilib aytadigan bo'lsak, bizda <code>xizmat</code> moduli va <code>navbat_listiga_qoshish</code> funksiyasi uchun to'g'ri yo'llar mavjud, ammo Rust ulardan foydalanishimizga ruxsat bermaydi, chunki u shaxsiy bo'limlarga kirish imkoniga ega emas. Rust-da barcha elementlar (funktsiyalar, metodlar, structlar, enumlar, modullar va konstantalar) standart bo'yicha ota-modullar uchun shaxsiydir. Agar siz funksiya yoki struktura kabi elementni yaratmoqchi bo'lsangiz, uni modulga joylashtirasiz.</p>
+<p>Ota-moduldagi elementlar ichki modullar ichidagi shaxsiy elementlardan foydalana olmaydi, lekin bolalar modullaridagi elementlar o'zlarining ota-modullaridagi elementlardan foydalanishi mumkin. Buning sababi shundaki, bolalar modullari o'zlarining amalga oshirish tafsilotlarini o'rab oladi va yashiradi, lekin bolalar modullari ular aniqlangan kontekstni ko'rishlari mumkin. Bizning metaforamizni davom ettirish uchun, maxfiylik qoidalarini restoranning orqa ofisi kabi tasavvur qiling: u erda nima sodir bo'layotgani restoran mijozlari uchun shaxsiy, ammo ofis menejerlari o'zlari ishlayotgan restoranda hamma narsani ko'rishlari va qilishlari mumkin.</p>
+<p>Rust modul tizimining shu tarzda ishlashini tanladi, shuning uchun ichki dastur tafsilotlarini yashirish standart bo'yichadir. Shunday qilib, siz ichki kodning qaysi qismlarini tashqi kodni buzmasdan o'zgartirishingiz mumkinligini bilasiz. Biroq, Rust sizga obyektni hammaga ochiq qilish uchun <code>pub</code> kalit so'zidan foydalanib, tashqi ajdod modullariga ichki modullar kodining ichki qismlarini ochish imkoniyatini beradi.</p>
+<h3 id="pub-kalit-sozi-bilan-yollarni-ochish"><a class="header" href="#pub-kalit-sozi-bilan-yollarni-ochish"><code>pub</code> kalit so'zi bilan yo'llarni ochish</a></h3>
+<p>Keling, 7-4 ro'yxatdagi xatoga qaytaylik, bu bizga <code>xizmat</code> moduli shaxsiy ekanligini aytdi. Biz ota-moduldagi <code>restoranda_ovqatlanish</code> funksiyasi bolalar modulidagi <code>navbat_listiga_qoshish</code> funksiyasiga kirishini xohlaymiz, shuning uchun biz <code>xizmat</code> modulini <code>pub</code> kalit so'zi bilan belgilaymiz, ro'yxat 7-5da ko`rsatilganidek.</p>
+<p><span class="filename">Fayl nomi: src/lib.rs</span></p>
+<pre><code class="language-rust ignore does_not_compile">mod uyning_oldi {
+    pub mod xizmat {
+        fn navbat_listiga_qoshish() {}
+    }
+}
+
+pub fn restoranda_ovqatlanish() {
+    // Mutlaq yo'l (Absolute path)
+    crate::uyning_oldi::xizmat::navbat_listiga_qoshish();
+
+    // Nisbiy yo'l (Relative path)
+    uyning_oldi::xizmat::navbat_listiga_qoshish();
+}
+</code></pre>
+<p><span class="caption">Ro'yxat 7-5: <code>xizmat</code> modulini <code>restoranda_ovqatlanish</code> dan foydalanish uchun <code>pub</code> deb e'lon qilish</span></p>
+<p>Afsuski, 7-5 ro'yxatdagi kod hali ham 7-6 ro'yxatda ko'rsatilganidek xatolikka olib keladi.</p>
+<pre><code class="language-console">$ cargo build
+   Compiling restaurant v0.1.0 (file:///projects/restaurant)
+error[E0603]: function `navbat_listiga_qoshish` is private
+ --&gt; src/lib.rs:9:37
+  |
+9 |     crate::uyning_oldi::xizmat::navbat_listiga_qoshish();
+  |                                     ^^^^^^^^^^^^^^^ private function
+  |
+note: the function `navbat_listiga_qoshish` is defined here
+ --&gt; src/lib.rs:3:9
+  |
+3 |         fn navbat_listiga_qoshish() {}
+  |         ^^^^^^^^^^^^^^^^^^^^
+
+error[E0603]: function `navbat_listiga_qoshish` is private
+  --&gt; src/lib.rs:12:30
+   |
+12 |     uyning_oldi::xizmat::navbat_listiga_qoshish();
+   |                              ^^^^^^^^^^^^^^^ private function
+   |
+note: the function `navbat_listiga_qoshish` is defined here
+  --&gt; src/lib.rs:3:9
+   |
+3  |         fn navbat_listiga_qoshish() {}
+   |         ^^^^^^^^^^^^^^^^^^^^
+
+For more information about this error, try `rustc --explain E0603`.
+error: could not compile `restaurant` due to 2 previous errors
+</code></pre>
+<p><span class="caption">Ro'yxat 7-6: 7-5 ro'yxatdagi kodni build qilishda kompilyator xatolari</span></p>
+<p>Nima bo'ldi? <code>mod xizmat</code> oldiga <code>pub</code> kalit so‘zini qo‘shish modulni hammaga ochiq qiladi. Ushbu o'zgarish bilan, agar biz <code>uyning_oldi</code> ga kira olsak, biz <code>xizmat</code> ga kira olamiz. Lekin <code>xizmat</code> ning <em>tarkibi</em> hamon shaxsiy; modulni ommaviy qilish uning mazmunini ochiq qilmaydi. Moduldagi <code>pub</code> kalit so‘zi faqat uning ota-modullaridagi kodni unga murojaat qilish imkonini beradi, uning ichki kodiga kirishga ruxsat bermaydi.
+Modullar konteyner bo'lgani uchun modulni faqat ommaviy qilish orqali biz ko'p narsa qila olmaymiz; biz oldinga borishimiz va modul ichidagi bir yoki bir nechta narsalarni ham hammaga ochiq qilishni tanlashimiz kerak.</p>
+<p>7-6 roʻyxatdagi xatolar <code>navbat_listiga_qoshish</code> funksiyasi shaxsiy ekanligini bildiradi.
+Maxfiylik qoidalari structlar, enumlar, funksiyalar va metodlar hamda modullarga nisbatan qo'llaniladi.</p>
+<p>7-7 ro'yxatda ko'rsatilganidek, definitiondan oldin <code>pub</code> kalit so'zini qo'shish orqali <code>navbat_listiga_qoshish</code> funksiyasini ham hammaga ochiq qilaylik.</p>
+<p><span class="filename">Fayl nomi: src/lib.rs</span></p>
+<pre><code class="language-rust noplayground test_harness">mod uyning_oldi {
+    pub mod xizmat {
+        pub fn navbat_listiga_qoshish() {}
+    }
+}
+
+pub fn restoranda_ovqatlanish() {
+    // Mutlaq yo'l (Absolute path)
+    crate::uyning_oldi::xizmat::navbat_listiga_qoshish();
+
+    // Nisbiy yo'l (Relative path)
+    uyning_oldi::xizmat::navbat_listiga_qoshish();
+}
+</code></pre>
+<p><span class="caption">Ro'yxat 7-7: <code>mod xizmat</code> va <code>fn navbat_listiga_qoshish</code> ga <code>pub</code> kalit so'zini qo'shish bizga <code>restoranda_ovqatlanish</code> funksiyasini chaqirish imkonini beradi.</span></p>
+<p>Endi kod kompilyatsiya qilinadi! Nima uchun<code>pub</code> kalit soʻzini qoʻshish ushbu yoʻllardan <code>navbat_listiga_qoshish</code> da maxfiylik qoidalariga nisbatan foydalanish imkonini berishini bilish uchun mutlaq va nisbiy yoʻllarni koʻrib chiqamiz.</p>
+<p>Mutlaq yo'lda biz crate modul daraxtining ildizi bo'lgan <code>crate</code> dan boshlaymiz. <code>uyning_oldi</code> moduli crate ildizida belgilangan. <code>uyning_oldi</code> ochiq boʻlmasa-da, <code>restoranda_ovqatlanish</code> funksiyasi <code>uyning_oldi</code> bilan bir xil modulda aniqlanganligi sababli (yaʼni, <code>restoranda_ovqatlanish</code> va <code>uyning_oldi</code> siblingdir ya'ni aka-uka), biz <code>restoranda_ovqatlanish</code> dan <code>uyning_oldi</code>ga murojaat qilishimiz mumkin. Keyingi o'rinda <code>pub</code> bilan belgilangan <code>xizmat</code> moduli. Biz <code>xizmat</code> ning ota-moduliga kira olamiz, shuning uchun biz <code>xizmat</code> ga kira olamiz. Nihoyat, <code>navbat_listiga_qoshish</code> funksiyasi <code>pub</code> bilan belgilangan va biz uning asosiy moduliga kira olamiz, shuning uchun bu funksiya chaqiruvi ishlaydi!</p>
+<p>Nisbiy yo'lda mantiq birinchi qadamdan tashqari mutlaq yo'l bilan bir xil bo'ladi: yo'l crate ildizidan emas, <code>uyning_oldi</code>dan boshlanadi. <code>uyning_oldi</code> moduli <code>restoranda_ovqatlanish</code> bilan bir xil modul ichida aniqlanadi, shuning uchun <code>restoranda_ovqatlanish</code> belgilangan moduldan boshlanadigan nisbiy yo‘l ishlaydi. Keyin, <code>xizmat</code> va <code>navbat_listiga_qoshish</code> <code>pub</code> bilan belgilanganligi sababli, qolgan yo‘l ishlaydi va bu funksiya chaqiruvi amal qiladi!</p>
+<p>Agar siz kutubxona crateyingizni boshqa loyihalar sizning kodingizdan foydalanishi uchun baham ko'rishni rejalashtirmoqchi bo'lsangiz, ommaviy API sizning crateyingiz foydalanuvchilari bilan tuzilgan shartnoma bo'lib, ular sizning kodingiz bilan qanday aloqada bo'lishini belgilaydi. Odamlar sizning crateyingizga bog'liq bo'lishini osonlashtirish uchun ommaviy API-ga o'zgartirishlarni boshqarish bo'yicha ko'plab fikrlar mavjud. Bu mulohazalar ushbu kitob doirasidan tashqarida; agar sizni ushbu mavzu qiziqtirsa, <a href="https://rust-lang.github.io/api-guidelines/">Rust API ko'rsatmalari</a>ga qarang.</p>
+<blockquote>
+<h4 id="binary-va-kutubxonaga-ega-paketlar-uchun-eng-yaxshi-amaliyotlar"><a class="header" href="#binary-va-kutubxonaga-ega-paketlar-uchun-eng-yaxshi-amaliyotlar">Binary va kutubxonaga ega paketlar uchun eng yaxshi amaliyotlar</a></h4>
+<p>Paketda <em>src/main.rs</em> binary crate ildizi ham, <em>src/lib.rs</em> kutubxona cratesi ildizi
+ham bo‘lishi mumkinligini aytib o'tdik va ikkala crate ham standart bo‘yicha
+paket nomiga ega bo‘ladi. Odatda, kutubxona va binary crateni o'z ichiga olgan
+ushbu patternli paketlar kutubxona cratesi bilan kod chaqiradigan bajariladigan
+faylni ishga tushirish uchun binary crateda yetarli kodga ega bo'ladi. Bu boshqa
+loyihalarga paket taqdim etadigan eng ko'p funksiyalardan foydalanish imkonini
+beradi, chunki kutubxona cratesi kodi ommaviy bo'lishi mumkin.</p>
+<p>Modul daraxti <em>src/lib.rs</em> da aniqlanishi kerak. Keyin har qanday ommaviy obyektlar
+binary crateda paket nomi bilan yo'llarni boshlash orqali ishlatilishi mumkin.
+Binary crate kutubxona cratesidan foydalanuvchiga aylanadi, xuddi butunlay tashqi
+crate kutubxona cratesidan foydalanadi: u faqat ommaviy APIdan foydalanishi mumkin.
+Bu sizga yaxshi API yaratishga yordam beradi; Siz nafaqat muallif, balki
+mijoz hamsiz!</p>
+<p><a href="ch12-00-an-io-project.html">12-bobda</a><!-- ignore --> biz ushbu tashkiliy amaliyotni binary crate va
+kutubxona cratesini o'z ichiga olgan buyruq qatori dasturi bilan ko'rsatamiz.</p>
+</blockquote>
+<h3 id="nisbiy-yollarni-super-bilan-boshlash"><a class="header" href="#nisbiy-yollarni-super-bilan-boshlash">Nisbiy yo'llarni <code>super</code> bilan boshlash</a></h3>
+<p>Yo'l boshida <code>super</code> dan foydalanib, joriy modul yoki crate ildizi emas, balki ota-modulda boshlanadigan nisbiy yo'llarni qurishimiz mumkin. Bu fayl tizimi yoʻlini <code>..</code> sintaksisi bilan boshlashga oʻxshaydi. <code>super</code> dan foydalanish bizga ota-modulda ekanligini biladigan elementga murojaat qilish imkonini beradi, bu modul ota-ona bilan chambarchas bog'liq bo'lsa, modul daraxtini qayta tartibga solishni osonlashtiradi, lekin ota-ona bir kun kelib modul daraxtining boshqa joyiga ko'chirilishi mumkin.</p>
+<p>7-8 ro'yxatdagi kodni ko'rib chiqing, unda oshpaz noto'g'ri buyurtmani tuzatgan va uni mijozga shaxsan yetkazgan vaziyatni modellashtiradi. <code>uyning_orqasi</code> modulida aniqlangan <code>buyurtmani_tuzatish</code> funksiyasi <code>super</code> bilan boshlanadigan <code>yetkazib_berish</code> yo‘lini belgilash orqali asosiy modulda belgilangan <code>yetkazib_berish</code> funksiyasini chaqiradi:</p>
+<p><span class="filename">Fayl nomi: src/lib.rs</span></p>
+<pre><code class="language-rust noplayground test_harness">fn yetkazib_berish() {}
+
+mod uyning_orqasi {
+    fn buyurtmani_tuzatish() {
+        oshpaz();
+        super::yetkazib_berish();
+    }
+
+    fn oshpaz() {}
+}
+</code></pre>
+<p><span class="caption">Ro'yxat 7-8: <code>super</code> bilan boshlanadigan nisbiy yo'l yordamida funksiyani chaqirish</span></p>
+<p><code>buyurtmani_tuzatish</code> funksiyasi <code>uyning_orqasi</code> modulida joylashgan, shuning uchun biz <code>super</code> dan <code>uyning_orqasi</code> ota-moduliga o'tishimiz mumkin. U yerdan <code>yetkazib_berish</code> ni qidiramiz va uni topamiz.
+Muvaffaqiyat! Bizning fikrimizcha, <code>uyning_orqasi</code> moduli va <code>yetkazib_berish</code> funksiyasi bir-biri bilan bir xil munosabatda bo'lib qoladi va agar biz cratening modul daraxtini qayta tashkil etishga qaror qilsak, birgalikda harakatlanadi. Shu sababli, biz <code>super</code> dan foydalandik, shuning uchun kelajakda bu kod boshqa modulga ko‘chirilsa, kodni yangilash uchun kamroq joylarga ega bo‘lamiz.</p>
+<h3 id="structlar-va-enumlarni-ommaviy-qilishpublic"><a class="header" href="#structlar-va-enumlarni-ommaviy-qilishpublic">Structlar va Enumlarni ommaviy qilish(Public)</a></h3>
+<p>Shuningdek, structlar va enumlarni ommaviy sifatida belgilash uchun <code>pub</code> dan foydalanishimiz mumkin, ammo <code>pub</code> dan structlar va enumlar bilan foydalanish uchun qo'shimcha tafsilotlar mavjud. Agar struct definitiondan oldin <code>pub</code> dan foydalansak, biz structni hammaga ommaviy qilamiz, lekin structning maydonlari hali ham shaxsiy bo'lib qoladi. Biz har bir sohani alohida-alohida ommaviy qilishimiz yoki qilmasligimiz mumkin. 7-9 roʻyxatda biz ommaviy <code>qizdirilgan_non</code> maydoni, lekin shaxsiy <code>mavsumiy_meva</code> maydoni bilan ommaviy <code>uyning_orqasi:: nonushta</code> structini belgilab oldik. Bu restoranda mijoz ovqat bilan birga keladigan non turini tanlashi mumkin bo'lgan holatni modellashtiradi, ammo oshpaz qaysi meva mavsumda va omborda borligiga qarab ovqatga hamroh bo'lishini hal qiladi. Mavjud mevalar tezda o'zgaradi, shuning uchun mijozlar mevani tanlay olmaydi yoki hatto qaysi mevani olishini ko'ra olmaydi.</p>
+<p><span class="filename">Fayl nomi: src/lib.rs</span></p>
+<pre><code class="language-rust noplayground">mod uyning_orqasi {
+    pub struct Nonushta {
+        pub yopilgan_non: String,
+        mavsumiy_meva: String,
+    }
+
+    impl Nonushta {
+        pub fn yoz(yopilgan_non: &amp;str) -&gt; Nonushta {
+            Nonushta {
+                yopilgan_non: String::from(yopilgan_non),
+                mavsumiy_meva: String::from(&quot;shaftoli&quot;),
+            }
+        }
+    }
+}
+
+pub fn restoranda_ovqatlanish() {
+    // Yozda javdar yopilgan noni bilan nonushta buyurtma qiling
+    let mut ovqat = uyning_orqasi::Nonushta::yoz(&quot;Javdar&quot;);
+    // Qaysi nonni xohlashimiz haqidagi fikrimizni o'zgartiring
+    ovqat.yopilgan_non = String::from(&quot;Bug'doy&quot;);
+    println!(&quot;Iltimos, {}li yopilgan nonni istayman&quot;, ovqat.yopilgan_non);
+
+    // Agar izohni olib tashlasak, keyingi qator kompilyatsiya qilinmaydi;
+    // ovqat bilan birga keladigan mavsumiy mevalarni ko'rish yoki 
+    // o'zgartirishga ruxsat berilmagan
+    // ovqat.mavsumiy_meva = String::from(&quot;ko'katlar&quot;);
+}
+</code></pre>
+<p><span class="caption">Ro'yxat 7-9: Ba'zi ommaviy maydonlari va ba'zilari bo'lgan struct
+xususiy maydonlar</span></p>
+<p><code>uyning_orqasi::Nonushta</code> structdagi <code>yopilgan_non</code> maydoni ommaviy bo'lgani uchun <code>restoranda_ovqatlanish</code> da biz <code>yopilgan_non</code> maydoniga nuqta belgisi yordamida yozishimiz va o'qishimiz mumkin. Esda tutingki, biz <code>mavsumiy_meva</code> maydonidan <code>restoranda_ovqatlanish</code>da foydalana olmaymiz, chunki <code>mavsumiy_meva</code> shaxsiydir. Qaysi xatoga yo'l qo'yganingizni bilish uchun <code>mavsumiy_meva</code> maydoni qiymatini o'zgartiruvchi qatorni izohdan chiqarib ko'ring!</p>
+<p>Shuni ham yodda tutingki, <code>uyning_orqasi::Nonushta</code> shaxsiy maydonga ega bo'lgani uchun struct <code>Nonushta</code> misolini yaratuvchi ommaviy bog'langan funksiyani ta'minlashi kerak (biz uni bu yerda <code>yoz</code> deb nomladik).Agar <code>Nonushta</code> bunday funksiyaga ega boʻlmagan boʻlsa, biz <code>restoranda_ovqatlanish</code>da <code>Nonushta</code> misolini yarata olmadik, chunki biz <code>restoranda_ovqatlanish</code>da shaxsiy <code>mavsumiy_meva</code> maydonining qiymatini oʻrnata olmadik.</p>
+<p>Aksincha, agar biz enumni ommaviy qilsak, uning barcha variantlari ommaviy bo'ladi. 7 10 roʻyxatda koʻrsatilganidek, bizga faqat <code>enum</code> kalit soʻzidan oldin <code>pub</code> kerak boʻladi.</p>
+<p><span class="filename">Fayl nomi: src/lib.rs</span></p>
+<pre><code class="language-rust noplayground">mod uyning_orqasi {
+    pub enum Taom {
+        Palov,
+        Salat,
+    }
+}
+
+pub fn restoranda_ovqatlanish() {
+    let buyurtma1 = uyning_orqasi::Taom::Palov;
+    let buyurtma2 = uyning_orqasi::Taom::Salat;
+}
+</code></pre>
+<p><span class="caption">Ro'yxat 7-10: Enumni ommaviy deb belgilash uning barcha variantlarini hammaga ochiq qiladi</span></p>
+<p>Biz <code>Taom</code> ro‘yxatini hammaga ommaviy qilganimiz uchun <code>restoranda_ovqatlanish</code>da <code>Palov</code> va <code>Salat</code> variantlaridan foydalanishimiz mumkin.</p>
+<p>Enumlar, agar ularning variantlari ommaviy bo'lmasa, unchalik foydali emas; Har bir holatda <code>pub</code> bilan barcha enum variantlariga izoh qo'yish zerikarli bo'lar edi, shuning uchun enum variantlari uchun standart umumiy bo'lishi kerak. Structlar ko'pincha maydonlari ommaviy bo'lmasdan foydali bo'ladi, shuning uchun struct maydonlari, agar <code>pub</code> bilan izohlanmagan bo'lsa, standart bo'yicha hamma narsa shaxsiy bo'lishining umumiy qoidasiga amal qiladi.</p>
+<p><code>pub</code> bilan bog'liq yana bir holat bor, biz uni ko'rib chiqmaganmiz va bu bizning modul tizimining oxirgi xususiyati: <code>use</code> kalit so'zi. Biz avval <code>use</code> ni o'z ichiga olamiz, so'ngra <code>pub</code> va <code>use</code> ni qanday birlashtirishni ko'rsatamiz.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="ch07-02-defining-modules-to-control-scope-and-privacy.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a rel="next" href="ch07-04-bringing-paths-into-scope-with-the-use-keyword.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="ch07-02-defining-modules-to-control-scope-and-privacy.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a rel="next" href="ch07-04-bringing-paths-into-scope-with-the-use-keyword.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        <script type="text/javascript" src="ferris.js"></script>
+    </body>
+</html>

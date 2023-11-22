@@ -1,0 +1,439 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>UTF-8 kodlangan matnni Stringlar bilan saqlash - Rust dasturlash tili</title>
+        <!-- Custom HTML head -->
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="ferris.css">
+        <link rel="stylesheet" href="theme/2018-edition.css">
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="title-page.html">Rust dasturlash tili</a></li><li class="chapter-item expanded affix "><a href="foreword.html">Muqaddima</a></li><li class="chapter-item expanded affix "><a href="ch00-00-introduction.html">Kirish</a></li><li class="chapter-item expanded "><a href="ch01-00-getting-started.html"><strong aria-hidden="true">1.</strong> Ishni boshlash</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch01-01-installation.html"><strong aria-hidden="true">1.1.</strong> O'rnatish</a></li><li class="chapter-item expanded "><a href="ch01-02-hello-world.html"><strong aria-hidden="true">1.2.</strong> Hello, World!</a></li><li class="chapter-item expanded "><a href="ch01-03-hello-cargo.html"><strong aria-hidden="true">1.3.</strong> Hello, Cargo!</a></li></ol></li><li class="chapter-item expanded "><a href="ch02-00-guessing-game-tutorial.html"><strong aria-hidden="true">2.</strong> Taxmin qilish o'yinini dasturlash</a></li><li class="chapter-item expanded "><a href="ch03-00-common-programming-concepts.html"><strong aria-hidden="true">3.</strong> Umumiy dasturlash tushunchalari</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch03-01-variables-and-mutability.html"><strong aria-hidden="true">3.1.</strong> O'zgaruvchilar va o'zgaruvchanlik</a></li><li class="chapter-item expanded "><a href="ch03-02-data-types.html"><strong aria-hidden="true">3.2.</strong> Ma'lumotlar turlari</a></li><li class="chapter-item expanded "><a href="ch03-03-how-functions-work.html"><strong aria-hidden="true">3.3.</strong> Funksiyalar</a></li><li class="chapter-item expanded "><a href="ch03-04-comments.html"><strong aria-hidden="true">3.4.</strong> Izohlar</a></li><li class="chapter-item expanded "><a href="ch03-05-control-flow.html"><strong aria-hidden="true">3.5.</strong> Control Flow</a></li></ol></li><li class="chapter-item expanded "><a href="ch04-00-understanding-ownership.html"><strong aria-hidden="true">4.</strong> Ownershipni tushunish</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch04-01-what-is-ownership.html"><strong aria-hidden="true">4.1.</strong> Ownership nima?</a></li><li class="chapter-item expanded "><a href="ch04-02-references-and-borrowing.html"><strong aria-hidden="true">4.2.</strong> Referencelar va  Borrowing</a></li><li class="chapter-item expanded "><a href="ch04-03-slices.html"><strong aria-hidden="true">4.3.</strong> Slice turi</a></li></ol></li><li class="chapter-item expanded "><a href="ch05-00-structs.html"><strong aria-hidden="true">5.</strong> Tegishli ma'lumotlarni tuzish uchun Structdan foydalanish</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch05-01-defining-structs.html"><strong aria-hidden="true">5.1.</strong> Structlarni aniqlash va yaratish</a></li><li class="chapter-item expanded "><a href="ch05-02-example-structs.html"><strong aria-hidden="true">5.2.</strong> Structs yordamida namunaviy dastur</a></li><li class="chapter-item expanded "><a href="ch05-03-method-syntax.html"><strong aria-hidden="true">5.3.</strong> Metod sintaksisi</a></li></ol></li><li class="chapter-item expanded "><a href="ch06-00-enums.html"><strong aria-hidden="true">6.</strong> Enumlar va patternlarni moslashtirish</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch06-01-defining-an-enum.html"><strong aria-hidden="true">6.1.</strong> Enumni aniqlash</a></li><li class="chapter-item expanded "><a href="ch06-02-match.html"><strong aria-hidden="true">6.2.</strong> match Control Flow konstruksiyasi</a></li><li class="chapter-item expanded "><a href="ch06-03-if-let.html"><strong aria-hidden="true">6.3.</strong> if let bilan qisqacha Control Flow</a></li></ol></li><li class="chapter-item expanded "><a href="ch07-00-managing-growing-projects-with-packages-crates-and-modules.html"><strong aria-hidden="true">7.</strong> O'sib borayotgan loyihalarni Paketlar, Cratelar va Modullar bilan boshqarish</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch07-01-packages-and-crates.html"><strong aria-hidden="true">7.1.</strong> Paketlar va Cratelar</a></li><li class="chapter-item expanded "><a href="ch07-02-defining-modules-to-control-scope-and-privacy.html"><strong aria-hidden="true">7.2.</strong> Qo'llanish doirasi va maxfiylikni nazorat qilish uchun modullarni aniqlash</a></li><li class="chapter-item expanded "><a href="ch07-03-paths-for-referring-to-an-item-in-the-module-tree.html"><strong aria-hidden="true">7.3.</strong> Modul daraxtidagi elementga murojaat qilish yo'llari</a></li><li class="chapter-item expanded "><a href="ch07-04-bringing-paths-into-scope-with-the-use-keyword.html"><strong aria-hidden="true">7.4.</strong> use kalit so'zi bilan yo'llarni qamrab olish</a></li><li class="chapter-item expanded "><a href="ch07-05-separating-modules-into-different-files.html"><strong aria-hidden="true">7.5.</strong> Modullarni turli fayllarga ajratish</a></li></ol></li><li class="chapter-item expanded "><a href="ch08-00-common-collections.html"><strong aria-hidden="true">8.</strong> Umumiy to'plamlar</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch08-01-vectors.html"><strong aria-hidden="true">8.1.</strong> Vectorlar bilan qiymatlar ro'yxatini saqlash</a></li><li class="chapter-item expanded "><a href="ch08-02-strings.html" class="active"><strong aria-hidden="true">8.2.</strong> UTF-8 kodlangan matnni Stringlar bilan saqlash</a></li><li class="chapter-item expanded "><a href="ch08-03-hash-maps.html"><strong aria-hidden="true">8.3.</strong> Hash Mapda bog'langan qiymatlarga ega kalitlarni saqlash</a></li></ol></li><li class="chapter-item expanded "><a href="ch09-00-error-handling.html"><strong aria-hidden="true">9.</strong> Xatolar bilan ishlash</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch09-01-unrecoverable-errors-with-panic.html"><strong aria-hidden="true">9.1.</strong> panic! bilan tuzatib bo'lmaydigan xatolar</a></li><li class="chapter-item expanded "><a href="ch09-02-recoverable-errors-with-result.html"><strong aria-hidden="true">9.2.</strong> Result bilan tiklanadigan xatolar</a></li><li class="chapter-item expanded "><a href="ch09-03-to-panic-or-not-to-panic.html"><strong aria-hidden="true">9.3.</strong> panic! yoki panic! emas</a></li></ol></li><li class="chapter-item expanded "><a href="ch10-00-generics.html"><strong aria-hidden="true">10.</strong> Umumiy turlar, traitlar va lifetime</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch10-01-syntax.html"><strong aria-hidden="true">10.1.</strong> Generik ma'lumotlar turlari</a></li><li class="chapter-item expanded "><a href="ch10-02-traits.html"><strong aria-hidden="true">10.2.</strong> Traitlar: umumiy xatti-harakatni aniqlash</a></li><li class="chapter-item expanded "><a href="ch10-03-lifetime-syntax.html"><strong aria-hidden="true">10.3.</strong> Referencelarni lifetime bilan tekshirish</a></li></ol></li><li class="chapter-item expanded "><a href="ch11-00-testing.html"><strong aria-hidden="true">11.</strong> Avtomatlashtirilgan testlarni yozish</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch11-01-writing-tests.html"><strong aria-hidden="true">11.1.</strong> Testlarni qanday yozish kerak</a></li><li class="chapter-item expanded "><a href="ch11-02-running-tests.html"><strong aria-hidden="true">11.2.</strong> Sinovlar qanday o'tkazilishini nazorat qilish</a></li><li class="chapter-item expanded "><a href="ch11-03-test-organization.html"><strong aria-hidden="true">11.3.</strong> Test tashkil etish</a></li></ol></li><li class="chapter-item expanded "><a href="ch12-00-an-io-project.html"><strong aria-hidden="true">12.</strong> I/O loyihasi: Buyruqlar qatori dasturini yaratish</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch12-01-accepting-command-line-arguments.html"><strong aria-hidden="true">12.1.</strong> Buyruqlar qatori argumentini qabul qilishs</a></li><li class="chapter-item expanded "><a href="ch12-02-reading-a-file.html"><strong aria-hidden="true">12.2.</strong> Faylni o'qish</a></li><li class="chapter-item expanded "><a href="ch12-03-improving-error-handling-and-modularity.html"><strong aria-hidden="true">12.3.</strong> Modullikni yaxshilash va xatolarni qayta ishlash uchun refactoring</a></li><li class="chapter-item expanded "><a href="ch12-04-testing-the-librarys-functionality.html"><strong aria-hidden="true">12.4.</strong> Sinovga asoslangan ishlab chiqish bilan kutubxonaning funksionalligini rivojlantirish</a></li><li class="chapter-item expanded "><a href="ch12-05-working-with-environment-variables.html"><strong aria-hidden="true">12.5.</strong> Environment o'zgaruvchilari bilan ishlash</a></li><li class="chapter-item expanded "><a href="ch12-06-writing-to-stderr-instead-of-stdout.html"><strong aria-hidden="true">12.6.</strong> Xato xabarlarini standart chiqish o'rniga standart xatoga yozish</a></li></ol></li><li class="chapter-item expanded "><a href="ch13-00-functional-features.html"><strong aria-hidden="true">13.</strong> Funksional til xususiyatlari: iteratorlar va closurelar</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch13-01-closures.html"><strong aria-hidden="true">13.1.</strong> Closurelar: Environmentni qamrab oladigan anonim funksiyalar</a></li><li class="chapter-item expanded "><a href="ch13-02-iterators.html"><strong aria-hidden="true">13.2.</strong> Iteratorlar bilan bir qator elementlarga ishlov berish</a></li><li class="chapter-item expanded "><a href="ch13-03-improving-our-io-project.html"><strong aria-hidden="true">13.3.</strong> I/O loyihamizni takomillashtirish</a></li><li class="chapter-item expanded "><a href="ch13-04-performance.html"><strong aria-hidden="true">13.4.</strong> Ishlash samaradorligini solishtirish: Looplar va iteratorlar</a></li></ol></li><li class="chapter-item expanded "><a href="ch14-00-more-about-cargo.html"><strong aria-hidden="true">14.</strong> Cargo va Crates.io haqida ko'proq</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch14-01-release-profiles.html"><strong aria-hidden="true">14.1.</strong> Reliz profillari bilan structlarni moslashtirish</a></li><li class="chapter-item expanded "><a href="ch14-02-publishing-to-crates-io.html"><strong aria-hidden="true">14.2.</strong> Crateni Crates.io-ga nashr qilish</a></li><li class="chapter-item expanded "><a href="ch14-03-cargo-workspaces.html"><strong aria-hidden="true">14.3.</strong> Cargo Workspacelar</a></li><li class="chapter-item expanded "><a href="ch14-04-installing-binaries.html"><strong aria-hidden="true">14.4.</strong> Binary fayllarni Crates.io'dan cargo install bilan o'rnatish</a></li><li class="chapter-item expanded "><a href="ch14-05-extending-cargo.html"><strong aria-hidden="true">14.5.</strong> Maxsus buyruqlar bilan Cargoni kengaytirish</a></li></ol></li><li class="chapter-item expanded "><a href="ch15-00-smart-pointers.html"><strong aria-hidden="true">15.</strong> Smart Pointerlar</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch15-01-box.html"><strong aria-hidden="true">15.1.</strong> Heapdagi ma'lumotlarni ko'rsatish uchun Box&lt;T&gt; dan foydalanish</a></li><li class="chapter-item expanded "><a href="ch15-02-deref.html"><strong aria-hidden="true">15.2.</strong> Deref Traitidan foydalangan holda oddiy referencelar kabi Smart Pointerlar bilan ishlash</a></li><li class="chapter-item expanded "><a href="ch15-03-drop.html"><strong aria-hidden="true">15.3.</strong> Drop Traiti bilan tozalashda kodni ishga tushirish</a></li><li class="chapter-item expanded "><a href="ch15-04-rc.html"><strong aria-hidden="true">15.4.</strong> Rc&lt;T&gt;, reference hisoblangan Smart Pointer</a></li><li class="chapter-item expanded "><a href="ch15-05-interior-mutability.html"><strong aria-hidden="true">15.5.</strong> RefCell&lt;T&gt; va ichki o'zgaruvchanlik namunasi</a></li><li class="chapter-item expanded "><a href="ch15-06-reference-cycles.html"><strong aria-hidden="true">15.6.</strong> Reference Cycles Can Leak Memory</a></li></ol></li><li class="chapter-item expanded "><a href="ch16-00-concurrency.html"><strong aria-hidden="true">16.</strong> Qo'rqmas parallellik</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch16-01-threads.html"><strong aria-hidden="true">16.1.</strong> Kodni bir vaqtning o'zida ishga tushirish uchun threadlardan foydalanish</a></li><li class="chapter-item expanded "><a href="ch16-02-message-passing.html"><strong aria-hidden="true">16.2.</strong> Threadlar orasidagi ma'lumotlarni uzatish uchun xabar uzatishdan(Message Passing) foydalanish</a></li><li class="chapter-item expanded "><a href="ch16-03-shared-state.html"><strong aria-hidden="true">16.3.</strong> Shared-State Concurrency</a></li><li class="chapter-item expanded "><a href="ch16-04-extensible-concurrency-sync-and-send.html"><strong aria-hidden="true">16.4.</strong> Sync va Send traitlari bilan kengaytiriladigan parallellik</a></li></ol></li><li class="chapter-item expanded "><a href="ch17-00-oop.html"><strong aria-hidden="true">17.</strong> Rustning ob'ektga yo'naltirilgan dasturlash xususiyatlari- OOP</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch17-01-what-is-oo.html"><strong aria-hidden="true">17.1.</strong> Ob'ektga yo'naltirilgan tillarning xususiyatlari</a></li><li class="chapter-item expanded "><a href="ch17-02-trait-objects.html"><strong aria-hidden="true">17.2.</strong> Har xil turdagi qiymatlarga ruxsat beruvchi trait ob'ektlaridan foydalanish</a></li><li class="chapter-item expanded "><a href="ch17-03-oo-design-patterns.html"><strong aria-hidden="true">17.3.</strong> Ob'ektga yo'naltirilgan dizayn patternini implement qilish</a></li></ol></li><li class="chapter-item expanded "><a href="ch18-00-patterns.html"><strong aria-hidden="true">18.</strong> Patternlar va Matching</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch18-01-all-the-places-for-patterns.html"><strong aria-hidden="true">18.1.</strong> All the Places Patterns Can Be Used</a></li><li class="chapter-item expanded "><a href="ch18-02-refutability.html"><strong aria-hidden="true">18.2.</strong> Refutability: Whether a Pattern Might Fail to Match</a></li><li class="chapter-item expanded "><a href="ch18-03-pattern-syntax.html"><strong aria-hidden="true">18.3.</strong> Pattern Sintaksisi</a></li></ol></li><li class="chapter-item expanded "><a href="ch19-00-advanced-features.html"><strong aria-hidden="true">19.</strong> Kengaytirilgan Xususiyatlar</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch19-01-unsafe-rust.html"><strong aria-hidden="true">19.1.</strong> Xavfsiz Rust</a></li><li class="chapter-item expanded "><a href="ch19-03-advanced-traits.html"><strong aria-hidden="true">19.2.</strong> Murakkab Traitlar</a></li><li class="chapter-item expanded "><a href="ch19-04-advanced-types.html"><strong aria-hidden="true">19.3.</strong> Kengaytirilgan Turlar</a></li><li class="chapter-item expanded "><a href="ch19-05-advanced-functions-and-closures.html"><strong aria-hidden="true">19.4.</strong> Kengaytirilgan funksiyalar va closurelar</a></li><li class="chapter-item expanded "><a href="ch19-06-macros.html"><strong aria-hidden="true">19.5.</strong> Makrolar</a></li></ol></li><li class="chapter-item expanded "><a href="ch20-00-final-project-a-web-server.html"><strong aria-hidden="true">20.</strong> Yakuniy loyiha: Ko'p tarmoqli veb-serverni qurish</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch20-01-single-threaded.html"><strong aria-hidden="true">20.1.</strong> Yagona tarmoqli veb-serverni qurish</a></li><li class="chapter-item expanded "><a href="ch20-02-multithreaded.html"><strong aria-hidden="true">20.2.</strong> Bizning yagona tarmoqli serverimizni ko'p tarmoqli serverga aylantirish</a></li><li class="chapter-item expanded "><a href="ch20-03-graceful-shutdown-and-cleanup.html"><strong aria-hidden="true">20.3.</strong> Ajoyib o'chirish va tozalash</a></li></ol></li><li class="chapter-item expanded "><a href="appendix-00.html"><strong aria-hidden="true">21.</strong> Ilova</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="appendix-01-keywords.html"><strong aria-hidden="true">21.1.</strong> A - Kalit so'zlar</a></li><li class="chapter-item expanded "><a href="appendix-02-operators.html"><strong aria-hidden="true">21.2.</strong> B - Operatorlar va Symbollar</a></li><li class="chapter-item expanded "><a href="appendix-03-derivable-traits.html"><strong aria-hidden="true">21.3.</strong> C - Hosilaviy Traitlar</a></li><li class="chapter-item expanded "><a href="appendix-04-useful-development-tools.html"><strong aria-hidden="true">21.4.</strong> D - Foydali Development Toollar</a></li><li class="chapter-item expanded "><a href="appendix-05-editions.html"><strong aria-hidden="true">21.5.</strong> E - Nashrlar</a></li><li class="chapter-item expanded "><a href="appendix-06-translation.html"><strong aria-hidden="true">21.6.</strong> F - Kitobning tarjimalari</a></li><li class="chapter-item expanded "><a href="appendix-07-nightly-rust.html"><strong aria-hidden="true">21.7.</strong> G - Rust qanday yasaladi va “Nightly Rust”</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Rust dasturlash tili</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/rust-lang/book" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h2 id="utf-8-kodlangan-matnni-string-bilan-saqlash"><a class="header" href="#utf-8-kodlangan-matnni-string-bilan-saqlash">UTF-8 kodlangan matnni String bilan saqlash</a></h2>
+<p>Biz 4-bobda stringlar haqida gapirgan edik, ammo hozir ularni batafsil ko'rib chiqamiz.
+Yangi Rustaceanlar odatda uchta sababning kombinatsiyasiga ko'ra stringlarga yopishib qolishadi: Rustning mumkin bo'lgan xatolarni ochishga moyilligi, stringlar ko'plab dasturchilar tushunganidan ko'ra murakkabroq ma'lumotlar tuzilishi va UTF-8. Bu omillar shunday birlashadiki, agar siz boshqa dasturlash tillaridan kelgan bo'lsangiz, mavzu murakkab ko'rinishi mumkin.</p>
+<p>To'plamlar kontekstida stringlarni muhokama qilish foydalidir, chunki stringlar baytlar to'plami sifatida amalga oshiriladi, shuningdek, bu baytlar matn sifatida talqin qilinganda foydali funksiyalarni ta'minlashning ba'zi usullari. Ushbu bo'limda biz <code>String</code> bo'yicha har bir to'plam turiga ega bo'lgan yaratish, yangilash va o'qish kabi operatsiyalar haqida gapiramiz. Shuningdek, biz <code>String</code> ning boshqa to'plamlardan qanday farq qilishini, ya'ni <code>String</code> ga indekslash odamlar va kompyuterlarning <code>String</code> ma'lumotlarini qanday talqin qilishlari o'rtasidagi farqlar tufayli qanday murakkablashishini muhokama qilamiz.</p>
+<h3 id="string-nima"><a class="header" href="#string-nima">String nima?</a></h3>
+<p>Biz birinchi navbatda <em>string</em> atamasi bilan nimani nazarda tutayotganimizni aniqlaymiz. Rust asosiy tilda faqat bitta string turiga ega, bu <code>str</code> qator slice boʻlib, odatda uning <code>&amp;str</code> shaklida koʻrinadi. 4-bobda biz boshqa joyda saqlangan ba'zi UTF-8 kodlangan string ma'lumotlariga referencelar bo'lgan <em>string slicelar</em> haqida gaplashdik. Masalan, satr literallari dasturning binary tizimida saqlanadi va shuning uchun satr slicedir.</p>
+<p>Rust standart kutubxonasi tomonidan taqdim etilgan <code>String</code> turi asosiy tilga o'rnatilmagan va kengaytiriladigan, o'zgaruvchan, ega bo'lgan, UTF-8 kodlangan string turidir. Rustaceanlar Rust tilidagi &quot;stringlar&quot; ga murojaat qilganda, ular bu turlardan birini emas, balki <code>String</code> yoki string slice <code>&amp;str</code> turlarini nazarda tutishi mumkin. Garchi bu bo'lim asosan String haqida bo'lsa-da, ikkala tur ham Rust standart kutubxonasida ko'p qo'llaniladi, <code>String</code> va string slicelari UTF-8 da kodlangan.</p>
+<h3 id="yangi-string-yaratish"><a class="header" href="#yangi-string-yaratish">Yangi String yaratish</a></h3>
+<p><code>Vec&lt;T&gt;</code> bilan mavjud bo'lgan bir xil amallarning ko'pchiligi <code>String</code> bilan ham mavjud, chunki <code>String</code> aslida qo'shimcha kafolatlar, cheklovlar va imkoniyatlarga ega baytlar vectori atrofida o'rash sifatida amalga oshiriladi. <code>Vec&lt;T&gt;</code> va <code>String</code> bilan bir xil ishlaydigan funksiyaga misol qilib, 8-11 ro'yxatda ko'rsatilgan yangi turdagi misolni yaratuvchi <code>new</code> funksiyadir.</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">fn main() {
+</span>    let mut s = String::new();
+<span class="boring">}
+</span></code></pre></pre>
+<p><span class="caption">Ro'yxat 8-11: Yangi, bo'sh <code>String</code> yaratish</span></p>
+<p>Ushbu satr <code>s</code> deb nomlangan yangi bo'sh qatorni yaratadi, biz keyin unga ma'lumotlarni yuklashimiz mumkin. Ko'pincha, biz stringni boshlamoqchi bo'lgan dastlabki ma'lumotlarga ega bo'lamiz. Buning uchun biz string literallari kabi <code>Display</code> traittini amalga oshiradigan har qanday turda mavjud bo'lgan <code>to_string</code> metotidan foydalanamiz. Ro'yxat 8-12 ikkita misolni ko'rsatadi.</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">fn main() {
+</span>    let malumot = &quot;dastlabki tarkib&quot;;
+
+    let s = malumot.to_string();
+
+    // the method also works on a literal directly:
+    let s = &quot;dastlabki tarkib&quot;.to_string();
+<span class="boring">}
+</span></code></pre></pre>
+<p><span class="caption">Ro'yxat 8-12: string literalidan <code>String</code> yaratish uchun <code>to_string</code> metodidan foydalanish</span></p>
+<p>Bu kod <code>dastlabki tarkib</code>ni o‘z ichiga olgan stringni yaratadi.</p>
+<p>Satr literalidan <code>String</code> yaratish uchun <code>String::from</code> funksiyasidan ham foydalanishimiz mumkin. 8-13 ro'yxatdagi kod <code>to_string</code> funksiyasidan foydalanadigan 8-12 ro'yxatdagi kodga teng:</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">fn main() {
+</span>    let s = String::from(&quot;dastlabki tarkib&quot;);
+<span class="boring">}
+</span></code></pre></pre>
+<p><span class="caption">Ro'yxat 8-13: string literalidan <code>String</code> yaratish uchun <code>String::from</code> funksiyasidan foydalanish</span></p>
+<p>Stringlar juda ko'p narsalar uchun ishlatilganligi sababli, biz stringlar uchun juda ko'p turli xil umumiy API'lardan foydalanishimiz mumkin, bu bizga juda ko'p imkoniyatlarni taqdim etadi. Ulardan ba'zilari ortiqcha bo'lib tuyulishi mumkin, ammo ularning barchasi o'z joylariga ega! Bunday holda, <code>String::from</code> va <code>to_string</code> bir xil ishni bajaradi, shuning uchun tanlov sizga eng yoqqan uslubga bog'liq.</p>
+<p>Yodda tutingki, stringlar UTF-8 bilan kodlangan, shuning uchun 8-14 ro'yxatda ko'rsatilganidek, biz ularga har qanday to'g'ri kodlangan ma'lumotlarni kiritishimiz mumkin.</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">fn main() {
+</span>    let hello = String::from(&quot;السلام عليكم&quot;);
+    let hello = String::from(&quot;Dobrý den&quot;);
+    let hello = String::from(&quot;Hello&quot;);
+    let hello = String::from(&quot;שָׁלוֹם&quot;);
+    let hello = String::from(&quot;नमस्ते&quot;);
+    let hello = String::from(&quot;こんにちは&quot;);
+    let hello = String::from(&quot;안녕하세요&quot;);
+    let hello = String::from(&quot;你好&quot;);
+    let hello = String::from(&quot;Olá&quot;);
+    let hello = String::from(&quot;Salom&quot;);
+    let hello = String::from(&quot;Здравствуйте&quot;);
+    let hello = String::from(&quot;Hola&quot;);
+<span class="boring">}
+</span></code></pre></pre>
+<p><span class="caption">Ro'yxat 8-14: Salom so'zini turli tillarda stringlarda saqlash</span></p>
+<p>Bularning barchasi yaroqli <code>String</code> qiymatlari.</p>
+<h3 id="stringni-yangilash"><a class="header" href="#stringni-yangilash">Stringni yangilash</a></h3>
+<p>Agar siz unga ko'proq ma'lumot kiritsangiz, <code>String</code> hajmi kattalashishi mumkin va uning tarkibi <code>Vec&lt;T&gt;</code> tarkibidagi kabi o'zgarishi mumkin. Bundan tashqari, <code>String</code> qiymatlarini birlashtirish uchun <code>+</code> operatori yoki <code>format!</code> makrosidan qulay foydalanish mumkin.</p>
+<h4 id="push_str-va-push-yordamida-stringga-biriktirish"><a class="header" href="#push_str-va-push-yordamida-stringga-biriktirish"><code>push_str</code> va <code>push</code> yordamida stringga biriktirish</a></h4>
+<p>Biz 8-15 roʻyxatda koʻrsatilganidek, string boʻlagini qoʻshish uchun <code>push_str</code> metodidan foydalanib <code>String</code>ni kengaytirishimiz mumkin.</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">fn main() {
+</span>    let mut s = String::from(&quot;dastur&quot;);
+    s.push_str(&quot;chi&quot;);
+<span class="boring">}
+</span></code></pre></pre>
+<p><span class="caption">Roʻyxat 8-15: <code>push_str</code> metodi yordamida <code>String</code> ga satr boʻlagini qoʻshish</span></p>
+<p>Ushbu ikki qatordan keyin <code>s</code> tarkibida <code>dasturchi</code> bo'ladi. <code>push_str</code> metodi string bo'lagini oladi, chunki biz parametrga egalik qilishni xohlamaymiz. Masalan, 8-16 roʻyxatdagi kodda biz uning mazmunini <code>s1</code> ga qoʻshgandan soʻng <code>s2</code> dan foydalanish imkoniyatiga ega boʻlishni xohlaymiz.</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">fn main() {
+</span>    let mut s1 = String::from(&quot;dastur&quot;);
+    let s2 = &quot;chi&quot;;
+    s1.push_str(s2);
+    println!(&quot;s2 - {s2}&quot;);
+<span class="boring">}
+</span></code></pre></pre>
+<p><span class="caption">Ro'yxat 8-16: Tarkibni <code>String</code> ga qo'shgandan so'ng, string bo'lagidan foydalanish</span></p>
+<p>Agar <code>push_str</code> metodi <code>s2</code> ga egalik qilgan bo‘lsa, biz uning qiymatini oxirgi satrda chop eta olmaymiz. Biroq, bu kod biz kutgandek ishlaydi!</p>
+<p><code>push</code> metodi parametr sifatida bitta belgini oladi va uni <code>String</code> ga qo'shadi. 8-17 ro'yxatda <code>push</code> metodi yordamida <code>String</code> ga <code>v</code> harfi qo'shiladi.</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">fn main() {
+</span>    let mut s = String::from(&quot;su&quot;);
+    s.push('v');
+<span class="boring">}
+</span></code></pre></pre>
+<p><span class="caption">Roʻyxat 8-17: <code>push</code> yordamida <code>String</code> qiymatiga bitta belgi qoʻshish</span></p>
+<p>Natijada, <code>s</code> tarkibida <code>suv</code> bo'ladi.</p>
+<h4 id="-operatori-yoki-format-makrosidan-foydalanib-satrlarni-birlashtirish"><a class="header" href="#-operatori-yoki-format-makrosidan-foydalanib-satrlarni-birlashtirish"><code>+</code> operatori yoki <code>format!</code> makrosidan foydalanib satrlarni birlashtirish</a></h4>
+<p>Ko'pincha siz ikkita mavjud satrni birlashtirishni xohlaysiz. Buning usullaridan biri 8-18 ro'yxatda ko'rsatilganidek, <code>+</code> operatoridan foydalanishdir.</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">fn main() {
+</span>    let s1 = String::from(&quot;Salom, &quot;);
+    let s2 = String::from(&quot;Rust!&quot;);
+    let s3 = s1 + &amp;s2; // note s1 has been moved here and can no longer be used
+<span class="boring">}
+</span></code></pre></pre>
+<p><span class="caption">Roʻyxat 8-18: Ikkita <code>String</code> qiymatini yangi <code>String</code> qiymatiga birlashtirish uchun <code>+</code> operatoridan foydalanish</span></p>
+<p><code>s3</code> qatorida <code>Salom, Rust!</code> bo'ladi. Qo‘shishdan keyin <code>s1</code> ning endi haqiqiy emasligi va <code>s2</code>ga referenceni qo‘llaganimiz sababi <code>+</code> operatoridan foydalanganda chaqirilayotgan metodning imzosi bilan bog‘liq.
+<code>+</code> operatori <code>add</code> metodidan foydalanadi, uning imzosi quyidagicha ko'rinadi:</p>
+<pre><code class="language-rust ignore">fn add(self, s: &amp;str) -&gt; String {
+</code></pre>
+<p>Standart kutubxonada siz umumiy va tegishli turlar yordamida aniqlangan <code>add</code>ni ko'rasiz. Bu erda biz aniq turlarni almashtirdik, bu metodni <code>String</code> qiymatlari bilan chaqirganimizda sodir bo'ladi. Biz 10-bobda generiklarni muhokama qilamiz.
+Ushbu imzo bizga <code>+</code> operatorining murakkab bitlarini tushunishimiz kerak bo'lgan maslahatlarni beradi.</p>
+<p>Birinchidan, <code>s2</code> <code>&amp;</code> belgisiga ega, ya'ni biz birinchi satrga ikkinchi satrning <em>reference</em>ni qo'shmoqdamiz. Buning sababi <code>add</code> funksiyasidagi <code>s</code> parametri: biz faqat <code>String</code>ga <code>&amp;str</code> qo'shishimiz mumkin; biz ikkita <code>String</code> qiymatini qo'sha olmaymiz. Lekin kuting – <code>&amp;s2</code> turi <code>add</code> uchun ikkinchi parametrda ko‘rsatilganidek, <code>&amp;str</code> emas, <code>&amp;String</code>dir. Xo'sh, nima uchun 8-18 ro'yxatdagi kod kompilyatsiya bo'ladi?</p>
+<p><code>add</code> chaqiruvida <code>&amp;s2</code> dan foydalanishimiz sababi shundaki, kompilyator <code>&amp;String</code> argumentini <code>&amp;str</code> ga <em>majburlashi(coerce)</em> mumkin. Biz <code>add</code> metodini chaqirganimizda Rust <em>deref coercion</em> dan foydalanadi, bu erda <code>&amp;s2</code> ni <code>&amp;s2[..]</code> ga aylantiradi.
+Biz 15-bobda coercion haqida batafsilroq gaplashamiz. <code>add</code> <code>s</code> parametriga egalik qilmaganligi sababli, <code>s2</code> bu amaldan keyin ham haqiqiy <code>String</code> bo'lib qoladi.</p>
+<p>Ikkinchidan, imzoda <code>add</code> <code>self</code> egalik qilishini ko'rishimiz mumkin, chunki <code>self</code>da <code>&amp;</code> <em>yo'q</em>. Bu shuni anglatadiki, 8-18-sonli ro'yxatdagi <code>s1</code> <code>add</code> chaqiruviga o'tkaziladi va bundan keyin endi yaroqsiz bo'ladi. Shunday qilib, <code>let s3 = s1 + &amp;s2;</code> har ikkala satrdan nusxa ko'chiradigan va yangisini yaratadiganga o'xshasa-da, bu statement aslida <code>s1</code>ga egalik qiladi va <code>s2</code> mazmunining nusxasini qo'shadi, va keyin natijaga egalik huquqini qaytaradi. Boshqacha qilib aytganda, u juda ko'p nusxa ko'chirayotganga o'xshaydi, lekin unday emas; implement qilish nusxalashdan ko'ra samaraliroq.</p>
+<p>Agar biz bir nechta satrlarni birlashtirishimiz kerak bo'lsa, <code>+</code> operatorining xatti-harakati noqulay bo'ladi:</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">fn main() {
+</span>    let s1 = String::from(&quot;tic&quot;);
+    let s2 = String::from(&quot;tac&quot;);
+    let s3 = String::from(&quot;toe&quot;);
+
+    let s = s1 + &quot;-&quot; + &amp;s2 + &quot;-&quot; + &amp;s3;
+<span class="boring">}
+</span></code></pre></pre>
+<p>Bu vaqtda <code>s</code> <code>tic-tac-toe</code> bo'ladi. Barcha <code>+</code> va <code>&quot;</code> belgilar bilan nima sodir bo'layotganini ko'rish qiyin. Murakkab qatorlarni birlashtirish uchun biz <code>format!</code> makrosidan foydalanishimiz mumkin:</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">fn main() {
+</span>    let s1 = String::from(&quot;tic&quot;);
+    let s2 = String::from(&quot;tac&quot;);
+    let s3 = String::from(&quot;toe&quot;);
+
+    let s = format!(&quot;{s1}-{s2}-{s3}&quot;);
+<span class="boring">}
+</span></code></pre></pre>
+<p>Ushbu kod <code>s</code> ni <code>tic-tac-toe</code> ga ham o'rnatadi. <code>format!</code> makrosi <code>println!</code> kabi ishlaydi, lekin natijani ekranga chop etish o'rniga mazmuni bilan <code>String</code>ni qaytaradi. Kodning <code>format!</code> dan foydalanilgan versiyasini o‘qish ancha oson va <code>format!</code> makrosi tomonidan yaratilgan kod bu chaqiruv uning parametrlaridan birortasiga egalik qilmasligi uchun havolalardan foydalanadi.</p>
+<h3 id="stringlarni-indekslash"><a class="header" href="#stringlarni-indekslash">Stringlarni indekslash</a></h3>
+<p>Ko'pgina boshqa dasturlash tillarida stringdagi alohida belgilarga indeks bo'yicha murojaat qilish orqali kirish to'g'ri va keng tarqalgan operatsiya hisoblanadi. Biroq, agar siz Rust-da indekslash sintaksisidan foydalanib, <code>String</code> qismlariga kirishga harakat qilsangiz, xatoga duch kelasiz. 8-19 ro'yxatdagi noto'g'ri kodni ko'rib chiqing.</p>
+<pre><code class="language-rust ignore does_not_compile"><span class="boring">fn main() {
+</span>    let s1 = String::from(&quot;salom&quot;);
+    let h = s1[0];
+<span class="boring">}
+</span></code></pre>
+<p><span class="caption">Ro'yxat 8-19: String bilan indekslash sintaksisidan foydalanishga urinish</span></p>
+<p>Ushbu kod quyidagi xatoga olib keladi:</p>
+<pre><code class="language-console">$ cargo run
+   Compiling collections v0.1.0 (file:///projects/collections)
+error[E0277]: the type `String` cannot be indexed by `{integer}`
+ --&gt; src/main.rs:3:13
+  |
+3 |     let h = s1[0];
+  |             ^^^^^ `String` cannot be indexed by `{integer}`
+  |
+  = help: the trait `Index&lt;{integer}&gt;` is not implemented for `String`
+  = help: the following other types implement trait `Index&lt;Idx&gt;`:
+            &lt;String as Index&lt;RangeFrom&lt;usize&gt;&gt;&gt;
+            &lt;String as Index&lt;RangeFull&gt;&gt;
+            &lt;String as Index&lt;RangeInclusive&lt;usize&gt;&gt;&gt;
+            &lt;String as Index&lt;RangeTo&lt;usize&gt;&gt;&gt;
+            &lt;String as Index&lt;RangeToInclusive&lt;usize&gt;&gt;&gt;
+            &lt;String as Index&lt;std::ops::Range&lt;usize&gt;&gt;&gt;
+
+For more information about this error, try `rustc --explain E0277`.
+error: could not compile `collections` due to previous error
+</code></pre>
+<p>Xato va eslatma Rust indekslashni qo'llab-quvvatlamasligini aytadi. Lekin nega yo'q? Bu savolga javob berish uchun Rust stringlarni xotirada qanday saqlashini muhokama qilishimiz kerak.</p>
+<h4 id="ichki-vakillik"><a class="header" href="#ichki-vakillik">Ichki vakillik</a></h4>
+<p><code>String</code> turi - bu <code>Vec&lt;u8&gt;</code> turidagi wrapper. Keling, 8-14 ro'yxatdagi to'g'ri kodlangan UTF-8 misol stringlarini ko'rib chiqaylik. Birinchidan, bu:</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">fn main() {
+</span><span class="boring">    let hello = String::from(&quot;السلام عليكم&quot;);
+</span><span class="boring">    let hello = String::from(&quot;Dobrý den&quot;);
+</span><span class="boring">    let hello = String::from(&quot;Hello&quot;);
+</span><span class="boring">    let hello = String::from(&quot;שָׁלוֹם&quot;);
+</span><span class="boring">    let hello = String::from(&quot;नमस्ते&quot;);
+</span><span class="boring">    let hello = String::from(&quot;こんにちは&quot;);
+</span><span class="boring">    let hello = String::from(&quot;안녕하세요&quot;);
+</span><span class="boring">    let hello = String::from(&quot;你好&quot;);
+</span><span class="boring">    let hello = String::from(&quot;Olá&quot;);
+</span><span class="boring">    let hello = String::from(&quot;Salom&quot;);
+</span><span class="boring">    let hello = String::from(&quot;Здравствуйте&quot;);
+</span><span class="boring">    let hello = String::from(&quot;Hola&quot;);
+</span><span class="boring">}
+</span></code></pre></pre>
+<p>Bunday holda, <code>len</code> 4 bo'ladi, ya'ni &quot;Hola&quot; qatorini saqlaydigan vektor 4 bayt uzunlikda. Bu harflarning har biri UTF-8 da kodlanganda 1 baytni oladi. Biroq, keyingi qator sizni hayratda qoldirishi mumkin. (E'tibor bering, bu qator arabcha 3 raqami emas, kirill alifbosining bosh harfi Ze bilan boshlanadi.)</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">fn main() {
+</span><span class="boring">    let hello = String::from(&quot;السلام عليكم&quot;);
+</span><span class="boring">    let hello = String::from(&quot;Dobrý den&quot;);
+</span><span class="boring">    let hello = String::from(&quot;Hello&quot;);
+</span><span class="boring">    let hello = String::from(&quot;שָׁלוֹם&quot;);
+</span><span class="boring">    let hello = String::from(&quot;नमस्ते&quot;);
+</span><span class="boring">    let hello = String::from(&quot;こんにちは&quot;);
+</span><span class="boring">    let hello = String::from(&quot;안녕하세요&quot;);
+</span><span class="boring">    let hello = String::from(&quot;你好&quot;);
+</span><span class="boring">    let hello = String::from(&quot;Olá&quot;);
+</span><span class="boring">    let hello = String::from(&quot;Salom&quot;);
+</span><span class="boring">    let hello = String::from(&quot;Здравствуйте&quot;);
+</span><span class="boring">    let hello = String::from(&quot;Hola&quot;);
+</span><span class="boring">}
+</span></code></pre></pre>
+<p>String uzunligi so'ralganda, siz 12 deb aytishingiz mumkin. Aslida, Rustning javobi 24: bu UTF 8 da “Здравствуйте” ni kodlash uchun zarur bo'lgan baytlar soni, chunki bu satrdagi har bir Unicode skalyar qiymati 2 bayt xotirani oladi. Shuning uchun, satr baytlaridagi indeks har doim ham haqiqiy Unicode skalyar qiymatiga mos kelmaydi. Namoyish qilish uchun ushbu yaroqsiz Rust kodini ko'rib chiqing:</p>
+<pre><code class="language-rust ignore does_not_compile">let salom = &quot;Здравствуйте&quot;;
+let javob = &amp;salom[0];
+</code></pre>
+<p>Siz allaqachon bilasizki, <code>javob</code> birinchi harf bo'lgan <code>З</code> bo'lmaydi. UTF-8 da kodlanganda, <code>З</code> birinchi bayti <code>208</code>, ikkinchisi esa <code>151</code>, shuning uchun <code>javob</code> aslida <code>208</code> bo'lishi kerakdek tuyuladi, lekin <code>208</code> o'z-o'zidan haqiqiy belgi emas. Agar foydalanuvchi ushbu qatorning birinchi harfini so'ragan bo'lsa, <code>208</code> ni qaytarish, ehtimol bu emas; ammo, bu Rust bayt indeksi 0 bo'lgan yagona ma'lumotdir. Foydalanuvchilar odatda bayt qiymatini qaytarishni xohlamaydilar, hatto satrda faqat lotin harflari bo‘lsa ham: agar <code>&amp;“hello”[0]</code> bayt qiymatini qaytaruvchi yaroqli kod bo‘lsa, u <code>h</code> emas, <code>104</code>ni qaytaradi. .</p>
+<p>Javob shundaki, kutilmagan qiymatni qaytarmaslik va darhol topilmasligi mumkin bo'lgan xatolarni keltirib chiqarmaslik uchun Rust ushbu kodni umuman kompilyatsiya qilmaydi va ishlab chiqish jarayonida tushunmovchiliklarning oldini oladi.</p>
+<h4 id="baytlar-va-skalyar-qiymatlar-va-grafema-klasterlari"><a class="header" href="#baytlar-va-skalyar-qiymatlar-va-grafema-klasterlari">Baytlar va skalyar qiymatlar va grafema klasterlari!</a></h4>
+<p>UTF-8 bilan bog'liq yana bir nuqta shundaki, Rust nuqtai nazaridan satrlarga qarashning uchta mos usuli mavjud: baytlar, skalyar qiymatlar va grafema klasterlari (biz <em>harflar</em> deb ataydigan narsaga eng yaqin narsa).</p>
+<p>Devanagari skriptida yozilgan hindcha “नमस्ते” so'ziga qarasak, u <code>u8</code> qiymatlari vektori sifatida saqlanadi, bu quyidagicha ko'rinadi:</p>
+<pre><code class="language-text">[224, 164, 168, 224, 164, 174, 224, 164, 184, 224, 165, 141, 224, 164, 164,
+224, 165, 135]
+</code></pre>
+<p>Bu 18 bayt va kompyuterlar oxir-oqibat bu ma'lumotlarni qanday saqlaydi. Agar biz ularni Rustning <code>char</code> turiga ega bo'lgan Unicode skalyar qiymatlari sifatida qarasak, bu baytlar quyidagicha ko'rinadi:</p>
+<pre><code class="language-text">['न', 'म', 'स', '्', 'त', 'े']
+</code></pre>
+<p>Bu yerda oltita <code>char</code> qiymati bor, lekin to'rtinchi va oltinchi harflar emas: ular o'z-o'zidan ma'noga ega bo'lmagan diakritikdir. Nihoyat, agar baytlarni grafema klasterlari sifatida ko'rib chiqsak, inson to'rt harfli hindcha so'z deb ataydigan narsani olamiz:</p>
+<pre><code class="language-text">[&quot;न&quot;, &quot;म&quot;, &quot;स्&quot;, &quot;ते&quot;]
+</code></pre>
+<p>Rust kompyuterlar saqlaydigan ma'lumotlar qatorini talqin qilishning turli usullarini taqdim etadi, shunda ma'lumotlar qaysi inson tilida bo'lishidan qat'i nazar, har bir dastur kerakli talqinni tanlashi mumkin.</p>
+<p>Rust bizga belgini olish uchun <code>String</code> ga indekslashga ruxsat bermasligining yakuniy sababi shundaki, indekslash operatsiyalari doimo konstanta(doimiy) vaqtni oladi (O(1)). Ammo <code>Strin</code>g bilan ishlashni kafolatlab bo‘lmaydi, chunki Rust qancha to‘g‘ri belgilar mavjudligini aniqlash uchun tarkibni boshidan indeksgacha bosib o‘tishi kerak edi.</p>
+<h3 id="string-bolaklari"><a class="header" href="#string-bolaklari">String bo'laklari</a></h3>
+<p>Satrni indekslash ko'pincha noto'g'ri fikrdir, chunki satrni indekslash operatsiyasining qaytish turi qanday bo'lishi kerakligi aniq emas: bayt qiymati, belgi, grafema klasteri yoki satr bo'lagi. Agar chindan ham string bo'laklarini yaratish uchun indekslardan foydalanish kerak bo'lsa, Rust sizdan aniqroq bo'lishingizni so'raydi.</p>
+<p>Bitta raqam bilan <code>[]</code> yordamida indeksatsiya qilish o'rniga, muayyan baytlarni o'z ichiga olgan string bo'laklarini yaratish uchun diapazon bilan <code>[]</code> dan foydalanishingiz mumkin:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let salom = &quot;Здравствуйте&quot;;
+
+let s = &amp;salom[0..4];
+<span class="boring">}
+</span></code></pre></pre>
+<p>Bu erda <code>s</code> qatorning dastlabki 4 baytini o'z ichiga olgan <code>&amp;str</code> bo'ladi.
+Avvalroq, biz ushbu belgilarning har biri 2 baytdan iborat bo'lganligini aytib o'tgan edik, ya'ni <code>s</code> <code>Зд</code> bo'ladi.</p>
+<p>Agar biz <code>&amp;salom[0..1]</code> kabi belgi baytlarining faqat bir qismini kesishga harakat qilsak, Rust ish runtimeda xuddi vektordagi yaroqsiz indeksga kirish kabi panic qo'yadi:</p>
+<pre><code class="language-console">$ cargo run
+   Compiling collections v0.1.0 (file:///projects/collections)
+    Finished dev [unoptimized + debuginfo] target(s) in 0.43s
+     Running `target/debug/collections`
+thread 'main' panicked at 'byte index 1 is not a char boundary; it is inside 'З' (bytes 0..2) of `Здравствуйте`', src/main.rs:4:14
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+</code></pre>
+<p>Ehtiyotkorlik bilan string bo'laklarni yaratish uchun diapazonlardan foydalanishingiz kerak, chunki bu dasturni buzishi mumkin.</p>
+<h3 id="stringlarni-takrorlash-usullari"><a class="header" href="#stringlarni-takrorlash-usullari">Stringlarni takrorlash usullari</a></h3>
+<p>String bo'laklari bilan ishlashning eng yaxshi usuli - belgilar yoki baytlarni xohlaysizmi, aniq bo'lishdir. Unicode skalyar qiymatlari uchun <code>chars</code> metodidan foydalaning. “Зд” da <code>chars</code>ni chaqirish <code>char</code> turidagi ikkita qiymatni ajratib turadi va qaytaradi va har bir elementga kirish uchun natijani takrorlashingiz mumkin:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>for c in &quot;Зд&quot;.chars() {
+    println!(&quot;{c}&quot;);
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>Ushbu kod quyidagilarni chop etadi:</p>
+<pre><code class="language-text">З
+д
+</code></pre>
+<p>Shu bilan bir qatorda, <code>bytes</code> metodi boshqa domenga mos kelishi mumkin bo'lgan har bir baytni qaytaradi:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>for b in &quot;Зд&quot;.bytes() {
+    println!(&quot;{b}&quot;);
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>Ushbu kod ushbu satrni tashkil etuvchi to'rt baytni chop etadi:</p>
+<pre><code class="language-text">208
+151
+208
+180
+</code></pre>
+<p>Lekin esda tutingki, joriy Unicode skalyar qiymatlari 1 baytdan ortiq bo'lishi mumkin.</p>
+<p>Devanagari skriptidagi kabi satrlardan grafema klasterlarini olish juda murakkab, shuning uchun bu funksiya standart kutubxona tomonidan ta'minlanmagan. Agar sizga ushbu funksiya kerak bo'lsa, <a href="https://crates.io/">crates.io</a><!-- ignore --> saytida cratelar mavjud.</p>
+<h3 id="stringlar-unchalik-oddiy-emas"><a class="header" href="#stringlar-unchalik-oddiy-emas">Stringlar unchalik oddiy emas</a></h3>
+<p>Xulosa qilib aytganda, satrlar murakkab. Turli xil dasturlash tillari ushbu murakkablikni dasturchiga qanday taqdim etish bo'yicha turli xil tanlovlar qiladi. Rust <code>String</code> ma'lumotlarini to'g'ri ishlashni barcha Rust dasturlari uchun standart xatti-harakatga aylantirishni tanladi, bu esa dasturchilar UTF-8 ma'lumotlari bilan ishlash haqida oldindan ko'proq o'ylashlari kerakligini anglatadi. Ushbu o'zaro kelishuv boshqa dasturlash tillarida ko'rinadiganidan ko'ra ko'proq stringlarning murakkabligini ochib beradi, lekin keyinchalik ishlab chiqish jarayonida paydo bo'lishi mumkin bo'lgan ASCII bo'lmagan belgilar xatolarini qayta ishlash zaruratini oldini oladi.</p>
+<p>Yaxshi xabar shundaki, standart kutubxona ushbu murakkab vaziyatlarni to'g'ri hal qilishga yordam beradigan <code>String</code> va <code>&amp;str</code> turlaridan iborat ko'plab funksiyalarni taklif etadi. Satrda qidirish uchun <code>contains</code> va qator qismlarini boshqa satr bilan almashtirish uchun <code>replace</code> kabi foydali metodlar uchun texnik hujjatlarni ko'rib chiqing.</p>
+<p>Keling, biroz murakkabroq narsaga o'taylik: HashMap!</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="ch08-01-vectors.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a rel="next" href="ch08-03-hash-maps.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="ch08-01-vectors.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a rel="next" href="ch08-03-hash-maps.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        <script type="text/javascript" src="ferris.js"></script>
+    </body>
+</html>

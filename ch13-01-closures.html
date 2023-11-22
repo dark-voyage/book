@@ -1,0 +1,553 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Closurelar: Environmentni qamrab oladigan anonim funksiyalar - Rust dasturlash tili</title>
+        <!-- Custom HTML head -->
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="ferris.css">
+        <link rel="stylesheet" href="theme/2018-edition.css">
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="title-page.html">Rust dasturlash tili</a></li><li class="chapter-item expanded affix "><a href="foreword.html">Muqaddima</a></li><li class="chapter-item expanded affix "><a href="ch00-00-introduction.html">Kirish</a></li><li class="chapter-item expanded "><a href="ch01-00-getting-started.html"><strong aria-hidden="true">1.</strong> Ishni boshlash</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch01-01-installation.html"><strong aria-hidden="true">1.1.</strong> O'rnatish</a></li><li class="chapter-item expanded "><a href="ch01-02-hello-world.html"><strong aria-hidden="true">1.2.</strong> Hello, World!</a></li><li class="chapter-item expanded "><a href="ch01-03-hello-cargo.html"><strong aria-hidden="true">1.3.</strong> Hello, Cargo!</a></li></ol></li><li class="chapter-item expanded "><a href="ch02-00-guessing-game-tutorial.html"><strong aria-hidden="true">2.</strong> Taxmin qilish o'yinini dasturlash</a></li><li class="chapter-item expanded "><a href="ch03-00-common-programming-concepts.html"><strong aria-hidden="true">3.</strong> Umumiy dasturlash tushunchalari</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch03-01-variables-and-mutability.html"><strong aria-hidden="true">3.1.</strong> O'zgaruvchilar va o'zgaruvchanlik</a></li><li class="chapter-item expanded "><a href="ch03-02-data-types.html"><strong aria-hidden="true">3.2.</strong> Ma'lumotlar turlari</a></li><li class="chapter-item expanded "><a href="ch03-03-how-functions-work.html"><strong aria-hidden="true">3.3.</strong> Funksiyalar</a></li><li class="chapter-item expanded "><a href="ch03-04-comments.html"><strong aria-hidden="true">3.4.</strong> Izohlar</a></li><li class="chapter-item expanded "><a href="ch03-05-control-flow.html"><strong aria-hidden="true">3.5.</strong> Control Flow</a></li></ol></li><li class="chapter-item expanded "><a href="ch04-00-understanding-ownership.html"><strong aria-hidden="true">4.</strong> Ownershipni tushunish</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch04-01-what-is-ownership.html"><strong aria-hidden="true">4.1.</strong> Ownership nima?</a></li><li class="chapter-item expanded "><a href="ch04-02-references-and-borrowing.html"><strong aria-hidden="true">4.2.</strong> Referencelar va  Borrowing</a></li><li class="chapter-item expanded "><a href="ch04-03-slices.html"><strong aria-hidden="true">4.3.</strong> Slice turi</a></li></ol></li><li class="chapter-item expanded "><a href="ch05-00-structs.html"><strong aria-hidden="true">5.</strong> Tegishli ma'lumotlarni tuzish uchun Structdan foydalanish</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch05-01-defining-structs.html"><strong aria-hidden="true">5.1.</strong> Structlarni aniqlash va yaratish</a></li><li class="chapter-item expanded "><a href="ch05-02-example-structs.html"><strong aria-hidden="true">5.2.</strong> Structs yordamida namunaviy dastur</a></li><li class="chapter-item expanded "><a href="ch05-03-method-syntax.html"><strong aria-hidden="true">5.3.</strong> Metod sintaksisi</a></li></ol></li><li class="chapter-item expanded "><a href="ch06-00-enums.html"><strong aria-hidden="true">6.</strong> Enumlar va patternlarni moslashtirish</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch06-01-defining-an-enum.html"><strong aria-hidden="true">6.1.</strong> Enumni aniqlash</a></li><li class="chapter-item expanded "><a href="ch06-02-match.html"><strong aria-hidden="true">6.2.</strong> match Control Flow konstruksiyasi</a></li><li class="chapter-item expanded "><a href="ch06-03-if-let.html"><strong aria-hidden="true">6.3.</strong> if let bilan qisqacha Control Flow</a></li></ol></li><li class="chapter-item expanded "><a href="ch07-00-managing-growing-projects-with-packages-crates-and-modules.html"><strong aria-hidden="true">7.</strong> O'sib borayotgan loyihalarni Paketlar, Cratelar va Modullar bilan boshqarish</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch07-01-packages-and-crates.html"><strong aria-hidden="true">7.1.</strong> Paketlar va Cratelar</a></li><li class="chapter-item expanded "><a href="ch07-02-defining-modules-to-control-scope-and-privacy.html"><strong aria-hidden="true">7.2.</strong> Qo'llanish doirasi va maxfiylikni nazorat qilish uchun modullarni aniqlash</a></li><li class="chapter-item expanded "><a href="ch07-03-paths-for-referring-to-an-item-in-the-module-tree.html"><strong aria-hidden="true">7.3.</strong> Modul daraxtidagi elementga murojaat qilish yo'llari</a></li><li class="chapter-item expanded "><a href="ch07-04-bringing-paths-into-scope-with-the-use-keyword.html"><strong aria-hidden="true">7.4.</strong> use kalit so'zi bilan yo'llarni qamrab olish</a></li><li class="chapter-item expanded "><a href="ch07-05-separating-modules-into-different-files.html"><strong aria-hidden="true">7.5.</strong> Modullarni turli fayllarga ajratish</a></li></ol></li><li class="chapter-item expanded "><a href="ch08-00-common-collections.html"><strong aria-hidden="true">8.</strong> Umumiy to'plamlar</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch08-01-vectors.html"><strong aria-hidden="true">8.1.</strong> Vectorlar bilan qiymatlar ro'yxatini saqlash</a></li><li class="chapter-item expanded "><a href="ch08-02-strings.html"><strong aria-hidden="true">8.2.</strong> UTF-8 kodlangan matnni Stringlar bilan saqlash</a></li><li class="chapter-item expanded "><a href="ch08-03-hash-maps.html"><strong aria-hidden="true">8.3.</strong> Hash Mapda bog'langan qiymatlarga ega kalitlarni saqlash</a></li></ol></li><li class="chapter-item expanded "><a href="ch09-00-error-handling.html"><strong aria-hidden="true">9.</strong> Xatolar bilan ishlash</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch09-01-unrecoverable-errors-with-panic.html"><strong aria-hidden="true">9.1.</strong> panic! bilan tuzatib bo'lmaydigan xatolar</a></li><li class="chapter-item expanded "><a href="ch09-02-recoverable-errors-with-result.html"><strong aria-hidden="true">9.2.</strong> Result bilan tiklanadigan xatolar</a></li><li class="chapter-item expanded "><a href="ch09-03-to-panic-or-not-to-panic.html"><strong aria-hidden="true">9.3.</strong> panic! yoki panic! emas</a></li></ol></li><li class="chapter-item expanded "><a href="ch10-00-generics.html"><strong aria-hidden="true">10.</strong> Umumiy turlar, traitlar va lifetime</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch10-01-syntax.html"><strong aria-hidden="true">10.1.</strong> Generik ma'lumotlar turlari</a></li><li class="chapter-item expanded "><a href="ch10-02-traits.html"><strong aria-hidden="true">10.2.</strong> Traitlar: umumiy xatti-harakatni aniqlash</a></li><li class="chapter-item expanded "><a href="ch10-03-lifetime-syntax.html"><strong aria-hidden="true">10.3.</strong> Referencelarni lifetime bilan tekshirish</a></li></ol></li><li class="chapter-item expanded "><a href="ch11-00-testing.html"><strong aria-hidden="true">11.</strong> Avtomatlashtirilgan testlarni yozish</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch11-01-writing-tests.html"><strong aria-hidden="true">11.1.</strong> Testlarni qanday yozish kerak</a></li><li class="chapter-item expanded "><a href="ch11-02-running-tests.html"><strong aria-hidden="true">11.2.</strong> Sinovlar qanday o'tkazilishini nazorat qilish</a></li><li class="chapter-item expanded "><a href="ch11-03-test-organization.html"><strong aria-hidden="true">11.3.</strong> Test tashkil etish</a></li></ol></li><li class="chapter-item expanded "><a href="ch12-00-an-io-project.html"><strong aria-hidden="true">12.</strong> I/O loyihasi: Buyruqlar qatori dasturini yaratish</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch12-01-accepting-command-line-arguments.html"><strong aria-hidden="true">12.1.</strong> Buyruqlar qatori argumentini qabul qilishs</a></li><li class="chapter-item expanded "><a href="ch12-02-reading-a-file.html"><strong aria-hidden="true">12.2.</strong> Faylni o'qish</a></li><li class="chapter-item expanded "><a href="ch12-03-improving-error-handling-and-modularity.html"><strong aria-hidden="true">12.3.</strong> Modullikni yaxshilash va xatolarni qayta ishlash uchun refactoring</a></li><li class="chapter-item expanded "><a href="ch12-04-testing-the-librarys-functionality.html"><strong aria-hidden="true">12.4.</strong> Sinovga asoslangan ishlab chiqish bilan kutubxonaning funksionalligini rivojlantirish</a></li><li class="chapter-item expanded "><a href="ch12-05-working-with-environment-variables.html"><strong aria-hidden="true">12.5.</strong> Environment o'zgaruvchilari bilan ishlash</a></li><li class="chapter-item expanded "><a href="ch12-06-writing-to-stderr-instead-of-stdout.html"><strong aria-hidden="true">12.6.</strong> Xato xabarlarini standart chiqish o'rniga standart xatoga yozish</a></li></ol></li><li class="chapter-item expanded "><a href="ch13-00-functional-features.html"><strong aria-hidden="true">13.</strong> Funksional til xususiyatlari: iteratorlar va closurelar</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch13-01-closures.html" class="active"><strong aria-hidden="true">13.1.</strong> Closurelar: Environmentni qamrab oladigan anonim funksiyalar</a></li><li class="chapter-item expanded "><a href="ch13-02-iterators.html"><strong aria-hidden="true">13.2.</strong> Iteratorlar bilan bir qator elementlarga ishlov berish</a></li><li class="chapter-item expanded "><a href="ch13-03-improving-our-io-project.html"><strong aria-hidden="true">13.3.</strong> I/O loyihamizni takomillashtirish</a></li><li class="chapter-item expanded "><a href="ch13-04-performance.html"><strong aria-hidden="true">13.4.</strong> Ishlash samaradorligini solishtirish: Looplar va iteratorlar</a></li></ol></li><li class="chapter-item expanded "><a href="ch14-00-more-about-cargo.html"><strong aria-hidden="true">14.</strong> Cargo va Crates.io haqida ko'proq</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch14-01-release-profiles.html"><strong aria-hidden="true">14.1.</strong> Reliz profillari bilan structlarni moslashtirish</a></li><li class="chapter-item expanded "><a href="ch14-02-publishing-to-crates-io.html"><strong aria-hidden="true">14.2.</strong> Crateni Crates.io-ga nashr qilish</a></li><li class="chapter-item expanded "><a href="ch14-03-cargo-workspaces.html"><strong aria-hidden="true">14.3.</strong> Cargo Workspacelar</a></li><li class="chapter-item expanded "><a href="ch14-04-installing-binaries.html"><strong aria-hidden="true">14.4.</strong> Binary fayllarni Crates.io'dan cargo install bilan o'rnatish</a></li><li class="chapter-item expanded "><a href="ch14-05-extending-cargo.html"><strong aria-hidden="true">14.5.</strong> Maxsus buyruqlar bilan Cargoni kengaytirish</a></li></ol></li><li class="chapter-item expanded "><a href="ch15-00-smart-pointers.html"><strong aria-hidden="true">15.</strong> Smart Pointerlar</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch15-01-box.html"><strong aria-hidden="true">15.1.</strong> Heapdagi ma'lumotlarni ko'rsatish uchun Box&lt;T&gt; dan foydalanish</a></li><li class="chapter-item expanded "><a href="ch15-02-deref.html"><strong aria-hidden="true">15.2.</strong> Deref Traitidan foydalangan holda oddiy referencelar kabi Smart Pointerlar bilan ishlash</a></li><li class="chapter-item expanded "><a href="ch15-03-drop.html"><strong aria-hidden="true">15.3.</strong> Drop Traiti bilan tozalashda kodni ishga tushirish</a></li><li class="chapter-item expanded "><a href="ch15-04-rc.html"><strong aria-hidden="true">15.4.</strong> Rc&lt;T&gt;, reference hisoblangan Smart Pointer</a></li><li class="chapter-item expanded "><a href="ch15-05-interior-mutability.html"><strong aria-hidden="true">15.5.</strong> RefCell&lt;T&gt; va ichki o'zgaruvchanlik namunasi</a></li><li class="chapter-item expanded "><a href="ch15-06-reference-cycles.html"><strong aria-hidden="true">15.6.</strong> Reference Cycles Can Leak Memory</a></li></ol></li><li class="chapter-item expanded "><a href="ch16-00-concurrency.html"><strong aria-hidden="true">16.</strong> Qo'rqmas parallellik</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch16-01-threads.html"><strong aria-hidden="true">16.1.</strong> Kodni bir vaqtning o'zida ishga tushirish uchun threadlardan foydalanish</a></li><li class="chapter-item expanded "><a href="ch16-02-message-passing.html"><strong aria-hidden="true">16.2.</strong> Threadlar orasidagi ma'lumotlarni uzatish uchun xabar uzatishdan(Message Passing) foydalanish</a></li><li class="chapter-item expanded "><a href="ch16-03-shared-state.html"><strong aria-hidden="true">16.3.</strong> Shared-State Concurrency</a></li><li class="chapter-item expanded "><a href="ch16-04-extensible-concurrency-sync-and-send.html"><strong aria-hidden="true">16.4.</strong> Sync va Send traitlari bilan kengaytiriladigan parallellik</a></li></ol></li><li class="chapter-item expanded "><a href="ch17-00-oop.html"><strong aria-hidden="true">17.</strong> Rustning ob'ektga yo'naltirilgan dasturlash xususiyatlari- OOP</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch17-01-what-is-oo.html"><strong aria-hidden="true">17.1.</strong> Ob'ektga yo'naltirilgan tillarning xususiyatlari</a></li><li class="chapter-item expanded "><a href="ch17-02-trait-objects.html"><strong aria-hidden="true">17.2.</strong> Har xil turdagi qiymatlarga ruxsat beruvchi trait ob'ektlaridan foydalanish</a></li><li class="chapter-item expanded "><a href="ch17-03-oo-design-patterns.html"><strong aria-hidden="true">17.3.</strong> Ob'ektga yo'naltirilgan dizayn patternini implement qilish</a></li></ol></li><li class="chapter-item expanded "><a href="ch18-00-patterns.html"><strong aria-hidden="true">18.</strong> Patternlar va Matching</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch18-01-all-the-places-for-patterns.html"><strong aria-hidden="true">18.1.</strong> All the Places Patterns Can Be Used</a></li><li class="chapter-item expanded "><a href="ch18-02-refutability.html"><strong aria-hidden="true">18.2.</strong> Refutability: Whether a Pattern Might Fail to Match</a></li><li class="chapter-item expanded "><a href="ch18-03-pattern-syntax.html"><strong aria-hidden="true">18.3.</strong> Pattern Sintaksisi</a></li></ol></li><li class="chapter-item expanded "><a href="ch19-00-advanced-features.html"><strong aria-hidden="true">19.</strong> Kengaytirilgan Xususiyatlar</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch19-01-unsafe-rust.html"><strong aria-hidden="true">19.1.</strong> Xavfsiz Rust</a></li><li class="chapter-item expanded "><a href="ch19-03-advanced-traits.html"><strong aria-hidden="true">19.2.</strong> Murakkab Traitlar</a></li><li class="chapter-item expanded "><a href="ch19-04-advanced-types.html"><strong aria-hidden="true">19.3.</strong> Kengaytirilgan Turlar</a></li><li class="chapter-item expanded "><a href="ch19-05-advanced-functions-and-closures.html"><strong aria-hidden="true">19.4.</strong> Kengaytirilgan funksiyalar va closurelar</a></li><li class="chapter-item expanded "><a href="ch19-06-macros.html"><strong aria-hidden="true">19.5.</strong> Makrolar</a></li></ol></li><li class="chapter-item expanded "><a href="ch20-00-final-project-a-web-server.html"><strong aria-hidden="true">20.</strong> Yakuniy loyiha: Ko'p tarmoqli veb-serverni qurish</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch20-01-single-threaded.html"><strong aria-hidden="true">20.1.</strong> Yagona tarmoqli veb-serverni qurish</a></li><li class="chapter-item expanded "><a href="ch20-02-multithreaded.html"><strong aria-hidden="true">20.2.</strong> Bizning yagona tarmoqli serverimizni ko'p tarmoqli serverga aylantirish</a></li><li class="chapter-item expanded "><a href="ch20-03-graceful-shutdown-and-cleanup.html"><strong aria-hidden="true">20.3.</strong> Ajoyib o'chirish va tozalash</a></li></ol></li><li class="chapter-item expanded "><a href="appendix-00.html"><strong aria-hidden="true">21.</strong> Ilova</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="appendix-01-keywords.html"><strong aria-hidden="true">21.1.</strong> A - Kalit so'zlar</a></li><li class="chapter-item expanded "><a href="appendix-02-operators.html"><strong aria-hidden="true">21.2.</strong> B - Operatorlar va Symbollar</a></li><li class="chapter-item expanded "><a href="appendix-03-derivable-traits.html"><strong aria-hidden="true">21.3.</strong> C - Hosilaviy Traitlar</a></li><li class="chapter-item expanded "><a href="appendix-04-useful-development-tools.html"><strong aria-hidden="true">21.4.</strong> D - Foydali Development Toollar</a></li><li class="chapter-item expanded "><a href="appendix-05-editions.html"><strong aria-hidden="true">21.5.</strong> E - Nashrlar</a></li><li class="chapter-item expanded "><a href="appendix-06-translation.html"><strong aria-hidden="true">21.6.</strong> F - Kitobning tarjimalari</a></li><li class="chapter-item expanded "><a href="appendix-07-nightly-rust.html"><strong aria-hidden="true">21.7.</strong> G - Rust qanday yasaladi va “Nightly Rust”</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Rust dasturlash tili</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/rust-lang/book" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <!-- Old heading. Do not remove or links may break. -->
+<p><a id="closures-anonymous-functions-that-can-capture-their-environment"></a></p>
+<h2 id="closurelar-environmentni-qamrab-oladigan-anonim-funksiyalar"><a class="header" href="#closurelar-environmentni-qamrab-oladigan-anonim-funksiyalar">Closurelar: Environmentni qamrab oladigan anonim funksiyalar</a></h2>
+<p>Rustning closureri - bu o'zgaruvchida saqlashingiz yoki boshqa funksiyalarga argument sifatida o'tishingiz mumkin bo'lgan anonim funktsiyalar. Closureni bir joyda yaratishingiz va keyin uni boshqa kontekstda baholash uchun boshqa joyga murojaat qilishingiz mumkin. Funksiyalardan farqli o'laroq, closurelar ular belgilangan doiradagi qiymatlarni olishlari mumkin.
+Ushbu closure xususiyatlari kodni qayta ishlatish va xatti-harakatlarni moslashtirishga(behavior customization) qanday imkon berishini ko'rsatamiz.</p>
+<!-- Old headings. Do not remove or links may break. -->
+<p><a id="creating-an-abstraction-of-behavior-with-closures"></a>
+<a id="refactoring-using-functions"></a>
+<a id="refactoring-with-closures-to-store-code"></a></p>
+<h3 id="environmentni-closurelar-bilan-qolga-olish"><a class="header" href="#environmentni-closurelar-bilan-qolga-olish">Environmentni closurelar bilan qo'lga olish</a></h3>
+<p>Avvalo, keyinchalik foydalanish uchun ular belgilangan muhitdan(environment) qiymatlarni olish uchun closurelardan qanday foydalanishimiz mumkinligini ko'rib chiqamiz.Bu senariy: Ko'pincha bizning futbolka kompaniyamiz reklama ro'yxatidagi kimgadir eksklyuziv, cheklangan nashrdagi futbolkani sovg'a sifatida taqdim etadi. Pochta ro'yxatidagi odamlar ixtiyoriy ravishda o'z profillariga sevimli ranglarini qo'shishlari mumkin. Agar bepul futbolka uchun tanlangan kishi o'zining sevimli ranglar to'plamiga ega bo'lsa, u rangdagi futbolkani oladi. Agar biror kishi sevimli rangni ko'rsatmagan bo'lsa, u kompaniyada eng ko'p bo'lgan rangni oladi.</p>
+<p>Buni amalga oshirishning ko'plab usullari mavjud. Ushbu misol uchun biz <code>Qizil</code> va <code>Moviy</code> variantlariga ega <code>FutbolkaRangi</code> nomli enumdan foydalanamiz (oddiylik uchun mavjud ranglar sonini cheklaydi). Biz kompaniya inventarini <code>Inventarizatsiya</code> strukturasi bilan ifodalaymiz, unda <code>futbolkalar</code> deb nomlangan maydon mavjud bo‘lib, unda hozirda mavjud bo‘lgan futbolka ranglarini ifodalovchi <code>Vec&lt;FutbolkaRangi&gt;</code> mavjud.
+<code>Inventarizatsiya</code> da belgilangan <code>yutuq</code> metodi bepul futbolka g‘olibining ixtiyoriy futbolka rangini afzal ko‘radi va odam oladigan futbolka rangini qaytaradi. Ushbu sozlash 13-1 ro'yxatda ko'rsatilgan:</p>
+<p><span class="filename">Fayl nomi: src/main.rs</span></p>
+<pre><code class="language-rust noplayground">#[derive(Debug, PartialEq, Copy, Clone)]
+enum FutbolkaRangi {
+    Qizil,
+    Moviy,
+}
+
+struct Inventarizatsiya {
+    futbolkalar: Vec&lt;FutbolkaRangi&gt;,
+}
+
+impl Inventarizatsiya {
+    fn yutuq(&amp;self, foydalanuvchi_afzalligi: Option&lt;FutbolkaRangi&gt;) -&gt; FutbolkaRangi {
+        foydalanuvchi_afzalligi.unwrap_or_else(|| self.most_stocked())
+    }
+
+    fn most_stocked(&amp;self) -&gt; FutbolkaRangi {
+        let mut qizil_raqam = 0;
+        let mut moviy_raqam = 0;
+
+        for rang in &amp;self.futbolkalar {
+            match rang {
+                FutbolkaRangi::Qizil =&gt; qizil_raqam += 1,
+                FutbolkaRangi::Moviy =&gt; moviy_raqam += 1,
+            }
+        }
+        if qizil_raqam &gt; moviy_raqam {
+            FutbolkaRangi::Qizil
+        } else {
+            FutbolkaRangi::Moviy
+        }
+    }
+}
+
+fn main() {
+    let store = Inventarizatsiya {
+        futbolkalar: vec![FutbolkaRangi::Moviy, FutbolkaRangi::Qizil, FutbolkaRangi::Moviy],
+    };
+
+    let user_pref1 = Some(FutbolkaRangi::Qizil);
+    let yutuq1 = store.yutuq(user_pref1);
+    println!(
+        &quot;{:?} afzalligi bilan foydalanuvchi {:?} oladi&quot;,
+        user_pref1, yutuq1
+    );
+
+    let user_pref2 = None;
+    let yutuq2 = store.yutuq(user_pref2);
+    println!(
+        &quot;{:?} afzalligi bilan foydalanuvchi {:?} oladi&quot;,
+        user_pref2, yutuq2
+    );
+}
+</code></pre>
+<p><span class="caption">Ro'yxat 13-1: Futbolka kompaniyasining sovg'a holati</span></p>
+<p><code>main</code> boʻlimida belgilangan <code>dokon</code> ikkita moviy futbolka va bitta qizil futbolka qolgan. Qizil ko'ylakni afzal ko'rgan foydalanuvchi va hech qanday imtiyozsiz foydalanuvchi uchun <code>yutuq</code> metodini chaqiramiz.</p>
+<p>Shunga qaramay, ushbu kod ko'p jihatdan amalga oshirilishi mumkin va bu yerda, closurelarga e'tibor qaratish uchun biz siz allaqachon o'rgangan tushunchalarga yopishib oldik, closuredan foydalanadigan <code>yutuq</code> metodidan tashqari. <code>yutuq</code> metodida biz <code>Option&lt;FutbolkaRangi&gt;</code> turidagi parametr sifatida foydalanuvchi imtiyozini olamiz va <code>foydalanuvchi_afzalligi</code> da <code>unwrap_or_else</code> metodini chaqiramiz. <a href="../std/option/enum.Option.html#method.unwrap_or_else"><code>Option&lt;T&gt;</code> da <code>unwrap_or_else</code></a><!-- ignore --> metodi standart kutubxona tomonidan aniqlanadi. Buning uchun bitta argument kerak bo‘ladi: <code>T</code> qiymatini qaytaruvchi hech qanday argumentsiz closure (<code>Option&lt;T&gt;</code> enumning <code>Some</code> variantida, bizning holatimizda <code>FutbolkaRangi</code>da tugaydigan qiymat turiga aylantiriladi). Agar <code>Option&lt;T&gt;</code> <code>Some</code> varianti bo'lsa, <code>unwrap_or_else</code> qiymatini <code>Some</code> ichidan qaytaradi. Agar <code>Option&lt;T&gt;</code> <code>None</code> varianti bo'lsa, <code>unwrap_or_else</code> closureni chaqiradi va closure orqali qaytarilgan qiymatni qaytaradi.</p>
+<p>Biz closure ifodasini belgilaymiz <code>|| self.most_stocked()</code>ni <code>unwrap_or_else</code> argumenti sifatida. Bu hech qanday parametrlarni o'zi qabul qilmaydigan closuredir (agar closure parametrlari bo'lsa, ular ikkita vertikal chiziq orasida paydo bo'ladi). Closurening asosiy qismi <code>self.most_stocked()</code> ni chaqiradi. Biz bu yerda closureni aniqlayapmiz va <code>unwrap_or_else</code> ni amalga oshirish, agar natija kerak bo‘lsa, keyinroq closureni baholaydi.</p>
+<p>Ushbu kodni ishga tushirsak quyidagi natijani chop etadi:</p>
+<pre><code class="language-console">$ cargo run
+   Compiling shirt-company v0.1.0 (file:///projects/shirt-company)
+    Finished dev [unoptimized + debuginfo] target(s) in 0.27s
+     Running `target/debug/shirt-company`
+The user with preference Some(Red) gets Red
+The user with preference None gets Blue
+</code></pre>
+<p>Qiziqarli tomoni shundaki, biz joriy <code>Inventarizatsiya</code> misolida <code>self.most_stocked()</code> deb nomlanuvchi closuredan o‘tdik. Standart kutubxona biz belgilagan <code>Inventarizatsiya</code> yoki <code>FutbolkaRangi</code> turlari yoki biz ushbu senariyda foydalanmoqchi bo'lgan mantiq haqida hech narsa bilishi shart emas edi. Closure <code>self</code>  <code>Inventarizatsiya</code> misoliga o'zgarmas(immutable) referenceni oladi va uni biz belgilagan kod bilan <code>unwrap_or_else</code> metodiga uzatadi. Funksiyalar esa o'z muhitini(environmentini) shu tarzda ushlab tura olmaydi.</p>
+<h3 id="closure-typi-inference-va-annotation"><a class="header" href="#closure-typi-inference-va-annotation">Closure typi Inference va Annotation</a></h3>
+<p>Funksiyalar va closurelar o'rtasida ko'proq farqlar mavjud. Closurelar odatda parametrlar turlarini yoki <code>fn</code> funksiyalari kabi qaytarish qiymatini(return value) izohlashni talab qilmaydi. Funksiyalar uchun tur annotationlari talab qilinadi, chunki turlar foydalanuvchilarga ochiq interfeysning bir qismidir. Ushbu interfeysni qat'iy belgilash, har bir kishi funksiya qanday turdagi qiymatlardan foydalanishi va qaytarishi(return) haqida kelishib olishini ta'minlash uchun muhimdir. Boshqa tomondan, closurelar bu kabi ochiq interfeysda ishlatilmaydi: ular o'zgaruvchilarda saqlanadi va ularni nomlamasdan va kutubxonamiz foydalanuvchilariga ko'rsatmasdan foydalaniladi.</p>
+<p>Closurelar odatda qisqa va har qanday ixtiyoriy senariyda emas, faqat tor kontekstda tegishli. Ushbu cheklangan kontekstlarda kompilyator ko'pgina o'zgaruvchilarning turlarini qanday aniqlashga qodir bo'lganiga o'xshab, parametrlarning turlarini va qaytish turini taxmin qilishi mumkin (kompilyatorga closure turi annotationlari ham kerak bo'lgan kamdan-kam holatlar mavjud).</p>
+<p>O'zgaruvchilarda bo'lgani kabi, agar biz aniqlik va ravshanlikni oshirishni xohlasak, zarur bo'lgandan ko'ra batafsilroq bo'lish uchun turdagi annotationlarni qo'shishimiz mumkin. Closure uchun turlarga izoh(annotation) qo'yish 13-2 ro'yxatda ko'rsatilgan definitionga o'xshaydi. Ushbu misolda biz closureni aniqlaymiz va uni 13-1 ro'yxatda bo'lgani kabi argument sifatida topshirgan joyda closureni belgilash o'rniga uni o'zgaruvchida saqlaymiz.</p>
+<p><span class="filename">Fayl nomi: src/main.rs</span></p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">use std::thread;
+</span><span class="boring">use std::time::Duration;
+</span><span class="boring">
+</span><span class="boring">fn generate_workout(intensity: u32, random_number: u32) {
+</span>    let expensive_closure = |num: u32| -&gt; u32 {
+        println!(&quot;calculating slowly...&quot;);
+        thread::sleep(Duration::from_secs(2));
+        num
+    };
+<span class="boring">
+</span><span class="boring">    if intensity &lt; 25 {
+</span><span class="boring">        println!(&quot;Today, do {} pushups!&quot;, expensive_closure(intensity));
+</span><span class="boring">        println!(&quot;Next, do {} situps!&quot;, expensive_closure(intensity));
+</span><span class="boring">    } else {
+</span><span class="boring">        if random_number == 3 {
+</span><span class="boring">            println!(&quot;Take a break today! Remember to stay hydrated!&quot;);
+</span><span class="boring">        } else {
+</span><span class="boring">            println!(
+</span><span class="boring">                &quot;Today, run for {} minutes!&quot;,
+</span><span class="boring">                expensive_closure(intensity)
+</span><span class="boring">            );
+</span><span class="boring">        }
+</span><span class="boring">    }
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">fn main() {
+</span><span class="boring">    let simulated_user_specified_value = 10;
+</span><span class="boring">    let simulated_random_number = 7;
+</span><span class="boring">
+</span><span class="boring">    generate_workout(simulated_user_specified_value, simulated_random_number);
+</span><span class="boring">}
+</span></code></pre></pre>
+<p><span class="caption">Ro'yxat 13-2: Ixtiyoriy turdagi annotationlarni qo'shish
+closureda parametr va qaytariladigan qiymat turlari</span></p>
+<p>Turga annotationlar qoʻshilishi bilan closure sintaksisi funksiyalar sintaksisiga koʻproq oʻxshaydi. Bu yerda biz taqqoslash uchun parametriga 1 qo'shadigan funksiyani va bir xil xatti-harakatlarga ega bo'lgan closureni aniqlaymiz. Tegishli qismlarni bir qatorga qo'yish uchun bir nechta bo'shliqlar qo'shdik. Bu pipelardan foydalanish va ixtiyoriy bo'lgan sintaksis miqdori bundan mustasno, closure sintaksisi funksiya sintaksisiga qanchalik o'xshashligini ko'rsatadi:</p>
+<pre><code class="language-rust ignore">fn  bitta_v1_qoshish    (x: u32) -&gt; u32 { x + 1 }
+let bitta_v2_qoshish =  |x: u32| -&gt; u32 { x + 1 };
+let bitta_v3_qoshish =  |x|             { x + 1 };
+let bitta_v4_qoshish =  |x|               x + 1  ;
+</code></pre>
+<p>Birinchi qatorda funksiya taʼrifi(definition), ikkinchi qatorda esa toʻliq izohlangan closure definitioni koʻrsatilgan. Uchinchi qatorda biz closure definitiondan turdagi annotationlarni olib tashlaymiz. To'rtinchi qatorda biz qavslarni olib tashlaymiz, ular ixtiyoriy, chunki closure tanas(body) faqat bitta ifodaga(expression) ega. Bularning barchasi to'g'ri definitionlar bo'lib, ular chaqirilganda bir xil xatti-harakatlarni keltirib chiqaradi. <code>bitta_v3_qoshish</code> va <code>bitta_v4_qoshish</code> qatorlari kompilyatsiya qilish uchun closurelarni baholashni talab qiladi, chunki turlar ulardan foydalanishdan kelib chiqadi. Bu <code>let v = Vec::new();</code> ga o'xshash bo'lib, Rust turini aniqlay olishi uchun <code>Vec</code> ga turiga izohlar(annotation) yoki ba'zi turdagi qiymatlar kiritilishi kerak.</p>
+<p>Closure definitionlari uchun kompilyator ularning har bir parametri va ularning qaytish(return) qiymati uchun bitta aniq turdagi xulosa chiqaradi. Masalan, 13-3 ro'yxatda parametr sifatida qabul qilingan qiymatni qaytaradigan qisqa closure definitioni ko'rsatilgan. Ushbu closure ushbu misol maqsadlaridan tashqari juda foydali emas. E'tibor bering, biz definitionga hech qanday annotation qo'shmaganmiz.
+Hech qanday turdagi annotationlar mavjud emasligi sababli, biz bu yerda birinchi marta <code>String</code> bilan qilgan har qanday turdagi closureni chaqirishimiz mumkin. Agar biz <code>namuna_closure</code> ni butun(integer) son bilan chaqirishga harakat qilsak, xatoga yo'l qo'yamiz.</p>
+<p><span class="filename">Fayl nomi: src/main.rs</span></p>
+<pre><code class="language-rust ignore does_not_compile"><span class="boring">fn main() {
+</span>    let namuna_closure = |x| x;
+
+    let s = namuna_closure(String::from(&quot;salom&quot;));
+    let n = namuna_closure(5);
+<span class="boring">}
+</span></code></pre>
+<p><span class="caption">Ro'yxat 13-3: Ikki xil turga ega bo'lgan closureni chaqirishga urinish</span></p>
+<p>Kompilyator bizga quyidagi xatoni beradi:</p>
+<pre><code class="language-console">$ cargo run
+   Compiling namuna_closure v0.1.0 (file:///projects/namuna_closure)
+error[E0308]: mismatched types
+ --&gt; src/main.rs:5:29
+  |
+5 |     let n = namuna_closure(5);
+  |             --------------- ^- help: try using a conversion method: `.to_string()`
+  |             |               |
+  |             |               expected struct `String`, found integer
+  |             arguments to this function are incorrect
+  |
+note: closure parameter defined here
+ --&gt; src/main.rs:2:28
+  |
+2 |     let namuna_closure = |x| x;
+  |                            ^
+
+For more information about this error, try `rustc --explain E0308`.
+error: could not compile `namuna_closure` due to previous error
+</code></pre>
+<p>Birinchi marta <code>namuna_closure</code> <code>String</code> qiymati bilan chaqirilganda, kompilyator <code>x</code> turini va  closurening qaytish turini <code>String</code> deb hisoblaydi. Keyin bu turlar(type) <code>namuna_closure</code> bo'limida yopiladi va biz bir xil closure(yopilish) bilan boshqa turdan foydalanishga uringanimizda xatoga duch kelamiz.</p>
+<h3 id="malumot-olish-yoki-egalikownership-huquqini-kochirish"><a class="header" href="#malumot-olish-yoki-egalikownership-huquqini-kochirish">Malumot olish yoki Egalik(Ownership) huquqini ko'chirish</a></h3>
+<p>Closurelar o'z muhitidan qiymatlarni uchta usulda olishlari mumkin, ular to'g'ridan-to'g'ri funksiya parametr olishi mumkin bo'lgan uchta usulga mos keladi: immutably borrowing (o'zgarmas borrowing(qarz olish)), mutably borrowing (o'zgaruvchan borrowing(qarz olish)) va egalik qilish(ownership). Closure funksiya tanasi(body) olingan qiymatlar bilan nima qilishiga qarab ulardan qaysi birini ishlatishni hal qiladi.</p>
+<p>13-4 ro'yxatda biz <code>list</code> deb nomlangan vectorga immutable(o'zgarmas) referencei qamrab oluvchi closureni aniqlaymiz, chunki u qiymatni chop etish uchun faqat immutable referencega muhtoj:</p>
+<p><span class="filename">Fayl nomi: src/main.rs</span></p>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    let list = vec![1, 2, 3];
+    println!(&quot;Closureni belgilashdan oldin: {:?}&quot;, list);
+
+    let faqat_borrow = || println!(&quot;Closuredan: {:?}&quot;, list);
+
+    println!(&quot;Closureni chaqirishdan oldin: {:?}&quot;, list);
+    faqat_borrow();
+    println!(&quot;Chaqirilgandan keyin closure: {:?}&quot;, list);
+}
+</code></pre></pre>
+<p><span class="caption">Ro'yxat 13-4: Buni closureni aniqlash va chaqirish
+immutable referenceni ushlaydi</span></p>
+<p>Ushbu misol, shuningdek, o'zgaruvchining closure definitioniga bog'lanishi mumkinligini ko'rsatadi va biz keyinchalik o'zgaruvchi nomi va qavslar yordamida o'zgaruvchi nomi funksiya nomiga o'xshab yopishni chaqirishimiz mumkin.</p>
+<p>Biz bir vaqtning o'zida bir nechta immutable(o'zgarmas) referencelarga ega bo'lishimiz mumkin bo'lgan <code>list</code> uchun, <code>list</code> closure definitionidan oldin, closure definitionidan keyin, lekin closure chaqirilishidan oldin va closure chaqirilgandan keyin hali ham koddan foydalanish mumkin. Ushbu kod kompilyatsiya bo'ladi, ishlaydi va chop etadi:</p>
+<pre><code class="language-console">$ cargo run
+   Compiling namuna_closure v0.1.0 (file:///projects/namuna_closure)
+    Finished dev [unoptimized + debuginfo] target(s) in 0.43s
+     Running `target/debug/namuna_closure`
+Closureni belgilashdan oldin: [1, 2, 3]
+Closureni chaqirishdan oldin: [1, 2, 3]
+Closuredan: [1, 2, 3]
+Chaqirilgandan keyin closure: [1, 2, 3]
+</code></pre>
+<p>Keyinchalik, 13-5 ro'yxatda biz closure bodysini <code>list</code> vectoriga element qo'shishi uchun o'zgartiramiz. Closure endi mutable(o'zgaruvchan) referenceni oladi:</p>
+<p><span class="filename">Fayl nomi: src/main.rs</span></p>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    let mut list = vec![1, 2, 3];
+    println!(&quot;Closureni aniqlashdan oldin: {:?}&quot;, list);
+
+    let mut ozgaruvchan_borrow = || list.push(7);
+
+    ozgaruvchan_borrow();
+    println!(&quot;Chaqirilgandan keyin closure: {:?}&quot;, list);
+}
+</code></pre></pre>
+<p><span class="caption">Ro'yxat 13-5: Mutable(o'zgaruvchan) referenceni ushlaydigan closureni aniqlash va chaqirish</span></p>
+<p>Ushbu kod kompilyatsiya bo'ladi, ishlaydi va chop etadi:</p>
+<pre><code class="language-console">$ cargo run
+   Compiling namuna_closure v0.1.0 (file:///projects/namuna_closure)
+    Finished dev [unoptimized + debuginfo] target(s) in 0.43s
+     Running `target/debug/namuna_closure`
+Closureni aniqlashdan oldin: [1, 2, 3]
+Chaqirilgandan keyin closure: [1, 2, 3, 7]
+</code></pre>
+<p>E'tibor bering, <code>ozgaruvchan_borrow</code> closurening ta'rifi(definition) va chaqiruvi o'rtasida endi <code>println!</code> belgisi yo'q: <code>ozgaruvchan_borrow</code> aniqlanganda, u <code>list</code>ga o'zgaruvchan(mutable) referenceni oladi. Closure chaqirilgandan keyin biz closureni qayta ishlatmaymiz, shuning uchun mutable borrow(o'zgaruvchan qarz) tugaydi. Closure definationi va closure chaqiruvi o'rtasida chop etish uchun immutable(o'zgarmas) borrowga ruxsat berilmaydi, chunki mutable borrow mavjud bo'lganda boshqa borrowlarga ruxsat berilmaydi. Qaysi xato xabari borligini bilish uchun u yerga <code>println!</code> qo'shib ko'ring!</p>
+<p>Agar closurening asosiy qismi ownershipga(egalik) muhtoj bo'lmasa ham, uni environmentda foydalanadigan qiymatlarga ownershiplik qilishga harakat qilmoqchi bo'lsangiz, parametrlar ro'yxatidan oldin <code>move</code> kalit so'zidan foydalanishingiz mumkin.</p>
+<p>Ushbu uslub asosan ma'lumotlarni yangi threadga tegishli bo'lishi uchun ko'chirish uchun yangi threadga closureni o'tkazishda foydalidir. Biz 16-bobda parallellik(concurrency) haqida gapirganda, thereadlarni va nima uchun ulardan foydalanishni xohlashingizni batafsil muhokama qilamiz, ammo hozircha <code>move</code> kalit so'ziga muhtoj bo'lgan closure yordamida yangi threadni yaratishni qisqacha ko'rib chiqamiz. 13-6 ro'yxat vektorni asosiy thredda emas, balki yangi threadda chop etish uchun o'zgartirilgan 13-4 ro'yxatini ko'rsatadi:</p>
+<p><span class="filename">Fayl nomi: src/main.rs</span></p>
+<pre><pre class="playground"><code class="language-rust">use std::thread;
+
+fn main() {
+    let list = vec![1, 2, 3];
+    println!(&quot;Closureni aniqlashdan oldin: {:?}&quot;, list);
+
+    thread::spawn(move || println!(&quot;{:?} threaddan&quot;, list))
+        .join()
+        .unwrap();
+}
+</code></pre></pre>
+<p><span class="caption">Roʻyxat 13-6: <code>list</code>ga ownershiplik  qilish uchun threadni yopishni majburlash uchun <code>move</code> dan foydalanish</span></p>
+<p>Biz argument sifatida ishlash uchun threadni yopish(closure) imkonini berib, yangi threadni yaratamiz. Closure tanasi(body) listni chop etadi. Roʻyxat 13-4, closure faqat oʻzgarmas(immutable) reference yordamida <code>list</code>ni yozib oldi, chunki bu uni chop etish uchun zarur boʻlgan <code>list</code>ga kirishning eng kam miqdori. Ushbu misolda, closure tanasi(body) hali ham faqat o'zgarmas(immutable) referencega muhtoj bo'lsa ham, biz closure definationing boshiga <code>move</code> kalit so'zini qo'yish orqali <code>list</code> closurega ko'chirilishi kerakligini ko'rsatishimiz kerak. Yangi thread asosiy threadning qolgan qismi tugashidan oldin tugashi yoki asosiy thread birinchi bo'lib tugashi mumkin. Agar asosiy thread <code>list</code>ga ownershiplikni saqlab qolgan boʻlsa-da, lekin yangi thread paydo boʻlishidan oldin tugasa va <code>list</code>ni tashlab qoʻysa, threaddagi immutable(oʻzgarmas) reference yaroqsiz boʻladi. Shuning uchun, kompilyator <code>list</code>ni yangi threadga berilgan closurega ko'chirishni talab qiladi, shuning uchun reference haqiqiy bo'ladi. Kompilyatorda qanday xatolarga yo'l qo'yganingizni ko'rish uchun closure aniqlangandan so'ng, <code>move</code> kalit so'zini olib tashlang yoki asosiy threaddagi <code>list</code> dan foydalaning!</p>
+<!-- Old headings. Do not remove or links may break. -->
+<p><a id="storing-closures-using-generic-parameters-and-the-fn-traits"></a>
+<a id="limitations-of-the-cacher-implementation"></a>
+<a id="moving-captured-values-out-of-the-closure-and-the-fn-traits"></a></p>
+<h3 id="qabul-qilingan-qiymatlarni-closuredan-va-fn-traitlaridan-kochirish"><a class="header" href="#qabul-qilingan-qiymatlarni-closuredan-va-fn-traitlaridan-kochirish">Qabul qilingan qiymatlarni closuredan va <code>Fn</code> traitlaridan ko'chirish</a></h3>
+<p>Closure ma'lumotnomani qo'lga kiritgandan so'ng(shunday qilib, agar biror narsa bo'lsa, closurega ko'chirilgan narsaga ta'sir qiladi) yoki closure aniqlangan environmentdan qiymatga ownershiplikni qo'lga kiritgandan so'ng,(agar biror narsa bo'lsa, closuredan ko'chirilgan narsaga ta'sir qiladi) closurening asosiy qismidagi kod closure keyinroq baholanganda referencelar yoki qiymatlar bilan nima sodir bo'lishini belgilaydi. </p>
+<p>Closure tanasi(body) quyidagilardan birini amalga oshirishi mumkin: olingan qiymatni closuredan tashqariga ko'chirish(move), olingan qiymatni mutatsiyalash, qiymatni ko'chirish yoki mutatsiyalash yoki boshlash uchun environmentdan hech narsa olmaslik.</p>
+<p>Yopishning environmentdan handlelarni ushlash(capture) va boshqarish usuli closure implementlarining qaysi traitlariga ta'sir qiladi va traitlar funksiyalar va structlar qanday closure turlaridan foydalanishi mumkinligini ko'rsatishi mumkin. Closurelar ushbu <code>Fn</code> belgilarining bittasi, ikkitasi yoki uchtasini avtomatik ravishda qo'shimcha usulda, closure tanasi qiymatlarni(value) qanday boshqarishiga qarab implement qilinadi:</p>
+<ol>
+<li><code>FnOnce</code> bir marta chaqirilishi mumkin bo'lgan closurelar uchun amal qiladi. Barcha closurelar hech bo'lmaganda ushbu traitni amalga oshiradi(implement qiladi), chunki barcha closurelar chaqirilishi mumkin. Qabul qilingan qiymatlarni(value) tanasidan tashqariga ko'chiradigan closure faqat <code>FnOnce</code> ni implement qiladi va boshqa <code>Fn</code> traitlarining hech birini implement qilmaydi, chunki uni faqat bir marta chaqirish mumkin.</li>
+<li><code>FnMut</code> qo'lga kiritilgan qiymatlarni(value) tanasidan tashqariga olib chiqmaydigan, lekin olingan qiymatlarni o'zgartirishi mumkin bo'lgan closurelarga nisbatan qo'llaniladi.Ushbu closurelarni bir necha marta chaqirish mumkin. </li>
+<li><code>Fn</code> qo'lga kiritilgan qiymatlarni tanasidan tashqariga chiqarmaydigan va olingan qiymatlarni o'zgartirmaydigan closurelar, shuningdek, environmentdan hech narsani ushlab(capture) turmaydigan closurelar uchun amal qiladi. Ushbu closurelar environmentni o'zgartirmasdan bir necha marta chaqirilishi mumkin, bu bir vaqtning o'zida bir necha marta closureni chaqirish kabi holatlarda muhimdir.</li>
+</ol>
+<p>Keling, 13-1 ro'yxatda biz qo'llagan <code>Option&lt;T&gt;</code> bo'yicha <code>unwrap_or_else</code> metodining definitionini ko'rib chiqaylik:</p>
+<pre><code class="language-rust ignore">impl&lt;T&gt; Option&lt;T&gt; {
+    pub fn unwrap_or_else&lt;F&gt;(self, f: F) -&gt; T
+    where
+        F: FnOnce() -&gt; T
+    {
+        match self {
+            Some(x) =&gt; x,
+            None =&gt; f(),
+        }
+    }
+}
+</code></pre>
+<p>Eslatib oʻtamiz, <code>T</code> <code>Option</code>ning <code>Some</code> variantidagi qiymat turini ifodalovchi umumiy turdir(generic type). Bu <code>T</code> turi, shuningdek, <code>unwrap_or_else</code> funksiyasining qaytish(return) turidir: masalan, <code>Option&lt;String&gt;</code>da <code>unwrap_or_else</code> ni chaqiruvchi kod, <code>String</code> oladi.</p>
+<p>Keyin, <code>unwrap_or_else</code> funksiyasi qo'shimcha <code>F</code> umumiy turdagi parametrga ega ekanligiga e'tibor bering. <code>F</code> turi <code>f</code> nomli parametrning turi(type) bo'lib, biz <code>unwrap_or_else</code> ga chaqiruv(call) qilganimizda ta`minlovchi closuredir.</p>
+<p>Generic <code>F</code> turida belgilangan belgi <code>FnOnce() -&gt; T</code> bo'lib, bu <code>F</code> bir marta chaqirilishi, hech qanday argumentga ega bo'lmasligi va <code>T</code> qaytarilishini bildiradi. Trait bound-da <code>FnOnce</code> dan foydalanish <code>unwrap_or_else</code> faqat bir marta <code>f</code> ni chaqirishi mumkin bo'lgan cheklovni ifodalaydi. <code>unwrap_or_else</code> matnida biz <code>Option</code> <code>Some</code> bo‘lsa, <code>f</code> chaqirilmasligini ko‘rishimiz mumkin. Agar <code>Option</code> <code>None</code> bo'lsa, <code>f</code> bir marta chaqiriladi. Barcha closurelar <code>FnOnce</code> ni implement qilganligi sababli, <code>unwrap_or_else</code> eng har xil turdagi closurelarni qabul qiladi va imkon qadar moslashuvchan.</p>
+<blockquote>
+<p>Eslatma: Funksiyalar uchta <code>Fn</code> traitlarini ham implement qilishi mumkin. Agar biz
+qilmoqchi bo'lgan narsa environmentdan qiymat olishni(*capture value) talab qilmasa,
+biz <code>Fn</code> traitlaridan birini implement qiladigan narsa kerak bo'lganda closure o'rniga
+funksiya nomidan foydalanishimiz mumkin. Masalan, <code>Option&lt;Vec&lt;T&gt;&gt;</code> qiymatida,
+agar qiymat <code>None</code> bo'lsa, yangi, bo'sh vektorni olish uchun <code>unwrap_or_else(Vec::new)</code> ni
+chaqirishimiz mumkin.</p>
+</blockquote>
+<p>Endi keling, slicelarda aniqlangan standart kutubxona metodini ko‘rib chiqamiz, bu <code>unwrap_or_else</code>dan qanday farq qilishini va nima uchun  <code>sort_by_key</code> trait bound uchun <code>FnOnce</code> o‘rniga <code>FnMut</code> dan foydalanishini ko‘raylik. Closure ko'rib chiqilayotgan qismdagi joriy elementga reference ko'rinishida bitta argument oladi va order qilinishi mumkin bo'lgan <code>K</code> turidagi qiymatni qaytaradi. Ushbu funksiya har bir elementning ma'lum bir atributi bo'yicha sliceni saralashni xohlaganingizda foydalidir. 13-7 ro'yxatda bizda <code>Kvadrat</code> misollar listi mavjud va biz ularni <code>kenglik</code> atributi bo'yicha pastdan yuqoriga tartiblash uchun <code>sort_by_key</code> dan foydalanamiz:</p>
+<p><span class="filename">Fayl nomi: src/main.rs</span></p>
+<pre><pre class="playground"><code class="language-rust">#[derive(Debug)]
+struct Kvatrat {
+    kengligi: u32,
+    balandligi: u32,
+}
+
+fn main() {
+    let mut list = [
+        Kvatrat { kengligi: 10, balandligi: 1 },
+        Kvatrat { kengligi: 3, balandligi: 5 },
+        Kvatrat { kengligi: 7, balandligi: 12 },
+    ];
+
+    list.sort_by_key(|r| r.kengligi);
+    println!(&quot;{:#?}&quot;, list);
+}
+</code></pre></pre>
+<p><span class="caption">Ro'yxat 13-7: Kvadratlarlarni kengligi bo'yicha tartiblash uchun <code>sort_by_key</code> dan foydalaning</span></p>
+<p>Ushbu kod quyidagi natijani chop etadi:</p>
+<pre><code class="language-console">$ cargo run
+   Compiling Kvadrats v0.1.0 (file:///projects/Kvadrats)
+    Finished dev [unoptimized + debuginfo] target(s) in 0.41s
+     Running `target/debug/Kvadratlar`
+[
+    Kvadrat {
+        kengligi: 3,
+        balandligi: 5,
+    },
+    Kvadrat {
+        kengligi: 7,
+        balandligi: 12,
+    },
+    Kvadrat {
+        kengligi: 10,
+        balandligi: 1,
+    },
+]
+</code></pre>
+<p><code>sort_by_key</code> <code>FnMut</code> closureni olish uchun aniqlanganining sababi shundaki, u closureni bir necha marta chaqiradi: slicedagi har bir element uchun bir marta. <code>|r| r.kengligi</code> o'z environmentidan hech narsani ushlamaydi(capture), mutatsiyaga uchramaydi yoki boshqa joyga ko'chirmaydi, shuning uchun u trait bound bo'lgan talablarga javob beradi.</p>
+<p>Bundan farqli o'laroq, 13-8 ro'yxat faqat <code>FnOnce</code> traitini amalga oshiradigan closure misolini ko'rsatadi, chunki u qiymatni environmentdan tashqariga ko'chiradi. Kompilyator bu closureni <code>sort_by_key</code> bilan ishlatishimizga ruxsat bermaydi:</p>
+<p><span class="filename">Fayl nomi: src/main.rs</span></p>
+<pre><code class="language-rust ignore does_not_compile">#[derive(Debug)]
+struct Rectangle {
+    kengligi: u32,
+    balandligi: u32,
+}
+
+fn main() {
+    let mut list = [
+        Rectangle { kengligi: 10, balandligi: 1 },
+        Rectangle { kengligi: 3, balandligi: 5 },
+        Rectangle { kengligi: 7, balandligi: 12 },
+    ];
+
+    let mut saralash_operatsiyalari = vec![];
+    let qiymat = String::from(&quot;chaqirilgan kalit orqali&quot;);
+
+    list.sort_by_key(|r| {
+        saralash_operatsiyalari.push(qiymat);
+        r.kengligi
+    });
+    println!(&quot;{:#?}&quot;, list);
+}
+</code></pre>
+<p><span class="caption">Ro'yxat 13-8: <code>sort_by_key</code> yordamida <code>FnOnce</code> closuredan foydalanishga urinish</span></p>
+<p>Bu <code>list</code>ni saralashda <code>sort_by_key</code> necha marta chaqirilishini hisoblashning oʻylab topilgan (bu ishlamaydi) usulidir. Ushbu kod closure environmentidan  <code>qiymat</code>—a <code>String</code> ni <code>saralash_operatsiyalari</code> vektoriga surish(push) orqali hisoblashni amalga oshirishga harakat qiladi. Closure <code>qiymat</code>ni ushlaydi, so‘ngra <code>qiymat</code> ownershipligini <code>saralash_operatsiyalari</code> vektoriga o‘tkazish orqali <code>qiymat</code>ni closuredan chiqaradi. Ushbu closureni bir marta chaqirish mumkin; uni ikkinchi marta chaqirishga urinish ishlamaydi, chunki <code>qiymat</code> endi <code>saralash_operatsiyalari</code> ga push qilinadigan environmentda(muhitda) bo'lmaydi! Shuning uchun, bu closure faqat <code>FnOnce</code> ni amalga oshiradi(implement qiladi). Ushbu kodni kompilyatsiya qilmoqchi bo'lganimizda, biz <code>qiymat</code> ni closuredan chiqarib bo'lmaydigan xatoni olamiz, chunki closure <code>FnMut</code> ni implement qilishi kerak:</p>
+<pre><code class="language-console">$ cargo run
+   Compiling kvadratlar v0.1.0 (file:///projects/kvadratlar)
+error[E0507]: cannot move out of `qiymat`, a captured variable in an `FnMut` closure
+  --&gt; src/main.rs:18:30
+   |
+15 |     let qiymat = String::from(&quot;chaqirilgan kalit orqali&quot;);
+   |         ----- captured outer variable
+16 |
+17 |     list.sort_by_key(|r| {
+   |                      --- captured by this `FnMut` closure
+18 |         saralash_operatsiyalari.push(qiymat);
+   |                              ^^^^^ move occurs because `qiymat` has type `String`, which does not implement the `Copy` trait
+
+For more information about this error, try `rustc --explain E0507`.
+error: could not compile `kvadratlar` due to previous error
+</code></pre>
+<p>Xato <code>qiymat</code>ni environmentdan tashqariga olib chiqadigan closure tanasidagi(body) chiziqqa(line) ishora qiladi. Buni tuzatish uchun biz closure tanasini qiymatlarni environmentdan ko'chirmasligi uchun o'zgartirishimiz kerak. <code>sort_by_key</code> necha marta chaqirilishini hisoblash uchun hisoblagichni(counter) environment saqlash va uning qiymatini closure tanasida oshirish buni hisoblashning yanada sodda usuli hisoblanadi. 13-9 ro'yxatdagi closure <code>sort_by_key</code> bilan ishlaydi, chunki u faqat <code>raqam_saralash_operatsiyalari</code> counteriga mutable(o'zgaruvchan) referenceni oladi va shuning uchun uni bir necha marta chaqirish mumkin:</p>
+<p><span class="filename">Fayl nomi: src/main.rs</span></p>
+<pre><pre class="playground"><code class="language-rust">#[derive(Debug)]
+struct Kvadrat {
+    kengligi: u32,
+    balandligi: u32,
+}
+
+fn main() {
+    let mut list = [
+        Kvadrat { kengligi: 10, balandligi: 1 },
+        Kvadrat { kengligi: 3, balandligi: 5 },
+        Kvadrat { kengligi: 7, balandligi: 12 },
+    ];
+
+    let mut raqam_saralash_operatsiyalari = 0;
+    list.sort_by_key(|r| {
+        raqam_saralash_operatsiyalari += 1;
+        r.kengligi
+    });
+    println!(&quot;{:#?}, {raqam_saralash_operatsiyalari} operatsiyalarida tartiblangan&quot;, list);
+}
+</code></pre></pre>
+<p><span class="caption">Roʻyxat 13-9: <code>sort_by_key</code> bilan <code>FnMut</code> closuredan foydalanishga ruxsat berilgan</span></p>
+<p><code>Fn</code> traitlari closurelardan foydalanadigan funksiyalar yoki turlarni belgilash yoki ishlatishda muhim ahamiyatga ega. Keyingi bo'limda biz iteratorlarni muhokama qilamiz. Ko'pgina iterator metodlari closure argumentlarini oladi, shuning uchun biz davom etayotganda ushbu closure tafsilotlarini(details) yodda tuting!</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="ch13-00-functional-features.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a rel="next" href="ch13-02-iterators.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="ch13-00-functional-features.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a rel="next" href="ch13-02-iterators.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        <script type="text/javascript" src="ferris.js"></script>
+    </body>
+</html>

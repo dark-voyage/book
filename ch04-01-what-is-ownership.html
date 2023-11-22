@@ -1,0 +1,527 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Ownership nima? - Rust dasturlash tili</title>
+        <!-- Custom HTML head -->
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="ferris.css">
+        <link rel="stylesheet" href="theme/2018-edition.css">
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="title-page.html">Rust dasturlash tili</a></li><li class="chapter-item expanded affix "><a href="foreword.html">Muqaddima</a></li><li class="chapter-item expanded affix "><a href="ch00-00-introduction.html">Kirish</a></li><li class="chapter-item expanded "><a href="ch01-00-getting-started.html"><strong aria-hidden="true">1.</strong> Ishni boshlash</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch01-01-installation.html"><strong aria-hidden="true">1.1.</strong> O'rnatish</a></li><li class="chapter-item expanded "><a href="ch01-02-hello-world.html"><strong aria-hidden="true">1.2.</strong> Hello, World!</a></li><li class="chapter-item expanded "><a href="ch01-03-hello-cargo.html"><strong aria-hidden="true">1.3.</strong> Hello, Cargo!</a></li></ol></li><li class="chapter-item expanded "><a href="ch02-00-guessing-game-tutorial.html"><strong aria-hidden="true">2.</strong> Taxmin qilish o'yinini dasturlash</a></li><li class="chapter-item expanded "><a href="ch03-00-common-programming-concepts.html"><strong aria-hidden="true">3.</strong> Umumiy dasturlash tushunchalari</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch03-01-variables-and-mutability.html"><strong aria-hidden="true">3.1.</strong> O'zgaruvchilar va o'zgaruvchanlik</a></li><li class="chapter-item expanded "><a href="ch03-02-data-types.html"><strong aria-hidden="true">3.2.</strong> Ma'lumotlar turlari</a></li><li class="chapter-item expanded "><a href="ch03-03-how-functions-work.html"><strong aria-hidden="true">3.3.</strong> Funksiyalar</a></li><li class="chapter-item expanded "><a href="ch03-04-comments.html"><strong aria-hidden="true">3.4.</strong> Izohlar</a></li><li class="chapter-item expanded "><a href="ch03-05-control-flow.html"><strong aria-hidden="true">3.5.</strong> Control Flow</a></li></ol></li><li class="chapter-item expanded "><a href="ch04-00-understanding-ownership.html"><strong aria-hidden="true">4.</strong> Ownershipni tushunish</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch04-01-what-is-ownership.html" class="active"><strong aria-hidden="true">4.1.</strong> Ownership nima?</a></li><li class="chapter-item expanded "><a href="ch04-02-references-and-borrowing.html"><strong aria-hidden="true">4.2.</strong> Referencelar va  Borrowing</a></li><li class="chapter-item expanded "><a href="ch04-03-slices.html"><strong aria-hidden="true">4.3.</strong> Slice turi</a></li></ol></li><li class="chapter-item expanded "><a href="ch05-00-structs.html"><strong aria-hidden="true">5.</strong> Tegishli ma'lumotlarni tuzish uchun Structdan foydalanish</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch05-01-defining-structs.html"><strong aria-hidden="true">5.1.</strong> Structlarni aniqlash va yaratish</a></li><li class="chapter-item expanded "><a href="ch05-02-example-structs.html"><strong aria-hidden="true">5.2.</strong> Structs yordamida namunaviy dastur</a></li><li class="chapter-item expanded "><a href="ch05-03-method-syntax.html"><strong aria-hidden="true">5.3.</strong> Metod sintaksisi</a></li></ol></li><li class="chapter-item expanded "><a href="ch06-00-enums.html"><strong aria-hidden="true">6.</strong> Enumlar va patternlarni moslashtirish</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch06-01-defining-an-enum.html"><strong aria-hidden="true">6.1.</strong> Enumni aniqlash</a></li><li class="chapter-item expanded "><a href="ch06-02-match.html"><strong aria-hidden="true">6.2.</strong> match Control Flow konstruksiyasi</a></li><li class="chapter-item expanded "><a href="ch06-03-if-let.html"><strong aria-hidden="true">6.3.</strong> if let bilan qisqacha Control Flow</a></li></ol></li><li class="chapter-item expanded "><a href="ch07-00-managing-growing-projects-with-packages-crates-and-modules.html"><strong aria-hidden="true">7.</strong> O'sib borayotgan loyihalarni Paketlar, Cratelar va Modullar bilan boshqarish</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch07-01-packages-and-crates.html"><strong aria-hidden="true">7.1.</strong> Paketlar va Cratelar</a></li><li class="chapter-item expanded "><a href="ch07-02-defining-modules-to-control-scope-and-privacy.html"><strong aria-hidden="true">7.2.</strong> Qo'llanish doirasi va maxfiylikni nazorat qilish uchun modullarni aniqlash</a></li><li class="chapter-item expanded "><a href="ch07-03-paths-for-referring-to-an-item-in-the-module-tree.html"><strong aria-hidden="true">7.3.</strong> Modul daraxtidagi elementga murojaat qilish yo'llari</a></li><li class="chapter-item expanded "><a href="ch07-04-bringing-paths-into-scope-with-the-use-keyword.html"><strong aria-hidden="true">7.4.</strong> use kalit so'zi bilan yo'llarni qamrab olish</a></li><li class="chapter-item expanded "><a href="ch07-05-separating-modules-into-different-files.html"><strong aria-hidden="true">7.5.</strong> Modullarni turli fayllarga ajratish</a></li></ol></li><li class="chapter-item expanded "><a href="ch08-00-common-collections.html"><strong aria-hidden="true">8.</strong> Umumiy to'plamlar</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch08-01-vectors.html"><strong aria-hidden="true">8.1.</strong> Vectorlar bilan qiymatlar ro'yxatini saqlash</a></li><li class="chapter-item expanded "><a href="ch08-02-strings.html"><strong aria-hidden="true">8.2.</strong> UTF-8 kodlangan matnni Stringlar bilan saqlash</a></li><li class="chapter-item expanded "><a href="ch08-03-hash-maps.html"><strong aria-hidden="true">8.3.</strong> Hash Mapda bog'langan qiymatlarga ega kalitlarni saqlash</a></li></ol></li><li class="chapter-item expanded "><a href="ch09-00-error-handling.html"><strong aria-hidden="true">9.</strong> Xatolar bilan ishlash</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch09-01-unrecoverable-errors-with-panic.html"><strong aria-hidden="true">9.1.</strong> panic! bilan tuzatib bo'lmaydigan xatolar</a></li><li class="chapter-item expanded "><a href="ch09-02-recoverable-errors-with-result.html"><strong aria-hidden="true">9.2.</strong> Result bilan tiklanadigan xatolar</a></li><li class="chapter-item expanded "><a href="ch09-03-to-panic-or-not-to-panic.html"><strong aria-hidden="true">9.3.</strong> panic! yoki panic! emas</a></li></ol></li><li class="chapter-item expanded "><a href="ch10-00-generics.html"><strong aria-hidden="true">10.</strong> Umumiy turlar, traitlar va lifetime</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch10-01-syntax.html"><strong aria-hidden="true">10.1.</strong> Generik ma'lumotlar turlari</a></li><li class="chapter-item expanded "><a href="ch10-02-traits.html"><strong aria-hidden="true">10.2.</strong> Traitlar: umumiy xatti-harakatni aniqlash</a></li><li class="chapter-item expanded "><a href="ch10-03-lifetime-syntax.html"><strong aria-hidden="true">10.3.</strong> Referencelarni lifetime bilan tekshirish</a></li></ol></li><li class="chapter-item expanded "><a href="ch11-00-testing.html"><strong aria-hidden="true">11.</strong> Avtomatlashtirilgan testlarni yozish</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch11-01-writing-tests.html"><strong aria-hidden="true">11.1.</strong> Testlarni qanday yozish kerak</a></li><li class="chapter-item expanded "><a href="ch11-02-running-tests.html"><strong aria-hidden="true">11.2.</strong> Sinovlar qanday o'tkazilishini nazorat qilish</a></li><li class="chapter-item expanded "><a href="ch11-03-test-organization.html"><strong aria-hidden="true">11.3.</strong> Test tashkil etish</a></li></ol></li><li class="chapter-item expanded "><a href="ch12-00-an-io-project.html"><strong aria-hidden="true">12.</strong> I/O loyihasi: Buyruqlar qatori dasturini yaratish</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch12-01-accepting-command-line-arguments.html"><strong aria-hidden="true">12.1.</strong> Buyruqlar qatori argumentini qabul qilishs</a></li><li class="chapter-item expanded "><a href="ch12-02-reading-a-file.html"><strong aria-hidden="true">12.2.</strong> Faylni o'qish</a></li><li class="chapter-item expanded "><a href="ch12-03-improving-error-handling-and-modularity.html"><strong aria-hidden="true">12.3.</strong> Modullikni yaxshilash va xatolarni qayta ishlash uchun refactoring</a></li><li class="chapter-item expanded "><a href="ch12-04-testing-the-librarys-functionality.html"><strong aria-hidden="true">12.4.</strong> Sinovga asoslangan ishlab chiqish bilan kutubxonaning funksionalligini rivojlantirish</a></li><li class="chapter-item expanded "><a href="ch12-05-working-with-environment-variables.html"><strong aria-hidden="true">12.5.</strong> Environment o'zgaruvchilari bilan ishlash</a></li><li class="chapter-item expanded "><a href="ch12-06-writing-to-stderr-instead-of-stdout.html"><strong aria-hidden="true">12.6.</strong> Xato xabarlarini standart chiqish o'rniga standart xatoga yozish</a></li></ol></li><li class="chapter-item expanded "><a href="ch13-00-functional-features.html"><strong aria-hidden="true">13.</strong> Funksional til xususiyatlari: iteratorlar va closurelar</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch13-01-closures.html"><strong aria-hidden="true">13.1.</strong> Closurelar: Environmentni qamrab oladigan anonim funksiyalar</a></li><li class="chapter-item expanded "><a href="ch13-02-iterators.html"><strong aria-hidden="true">13.2.</strong> Iteratorlar bilan bir qator elementlarga ishlov berish</a></li><li class="chapter-item expanded "><a href="ch13-03-improving-our-io-project.html"><strong aria-hidden="true">13.3.</strong> I/O loyihamizni takomillashtirish</a></li><li class="chapter-item expanded "><a href="ch13-04-performance.html"><strong aria-hidden="true">13.4.</strong> Ishlash samaradorligini solishtirish: Looplar va iteratorlar</a></li></ol></li><li class="chapter-item expanded "><a href="ch14-00-more-about-cargo.html"><strong aria-hidden="true">14.</strong> Cargo va Crates.io haqida ko'proq</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch14-01-release-profiles.html"><strong aria-hidden="true">14.1.</strong> Reliz profillari bilan structlarni moslashtirish</a></li><li class="chapter-item expanded "><a href="ch14-02-publishing-to-crates-io.html"><strong aria-hidden="true">14.2.</strong> Crateni Crates.io-ga nashr qilish</a></li><li class="chapter-item expanded "><a href="ch14-03-cargo-workspaces.html"><strong aria-hidden="true">14.3.</strong> Cargo Workspacelar</a></li><li class="chapter-item expanded "><a href="ch14-04-installing-binaries.html"><strong aria-hidden="true">14.4.</strong> Binary fayllarni Crates.io'dan cargo install bilan o'rnatish</a></li><li class="chapter-item expanded "><a href="ch14-05-extending-cargo.html"><strong aria-hidden="true">14.5.</strong> Maxsus buyruqlar bilan Cargoni kengaytirish</a></li></ol></li><li class="chapter-item expanded "><a href="ch15-00-smart-pointers.html"><strong aria-hidden="true">15.</strong> Smart Pointerlar</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch15-01-box.html"><strong aria-hidden="true">15.1.</strong> Heapdagi ma'lumotlarni ko'rsatish uchun Box&lt;T&gt; dan foydalanish</a></li><li class="chapter-item expanded "><a href="ch15-02-deref.html"><strong aria-hidden="true">15.2.</strong> Deref Traitidan foydalangan holda oddiy referencelar kabi Smart Pointerlar bilan ishlash</a></li><li class="chapter-item expanded "><a href="ch15-03-drop.html"><strong aria-hidden="true">15.3.</strong> Drop Traiti bilan tozalashda kodni ishga tushirish</a></li><li class="chapter-item expanded "><a href="ch15-04-rc.html"><strong aria-hidden="true">15.4.</strong> Rc&lt;T&gt;, reference hisoblangan Smart Pointer</a></li><li class="chapter-item expanded "><a href="ch15-05-interior-mutability.html"><strong aria-hidden="true">15.5.</strong> RefCell&lt;T&gt; va ichki o'zgaruvchanlik namunasi</a></li><li class="chapter-item expanded "><a href="ch15-06-reference-cycles.html"><strong aria-hidden="true">15.6.</strong> Reference Cycles Can Leak Memory</a></li></ol></li><li class="chapter-item expanded "><a href="ch16-00-concurrency.html"><strong aria-hidden="true">16.</strong> Qo'rqmas parallellik</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch16-01-threads.html"><strong aria-hidden="true">16.1.</strong> Kodni bir vaqtning o'zida ishga tushirish uchun threadlardan foydalanish</a></li><li class="chapter-item expanded "><a href="ch16-02-message-passing.html"><strong aria-hidden="true">16.2.</strong> Threadlar orasidagi ma'lumotlarni uzatish uchun xabar uzatishdan(Message Passing) foydalanish</a></li><li class="chapter-item expanded "><a href="ch16-03-shared-state.html"><strong aria-hidden="true">16.3.</strong> Shared-State Concurrency</a></li><li class="chapter-item expanded "><a href="ch16-04-extensible-concurrency-sync-and-send.html"><strong aria-hidden="true">16.4.</strong> Sync va Send traitlari bilan kengaytiriladigan parallellik</a></li></ol></li><li class="chapter-item expanded "><a href="ch17-00-oop.html"><strong aria-hidden="true">17.</strong> Rustning ob'ektga yo'naltirilgan dasturlash xususiyatlari- OOP</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch17-01-what-is-oo.html"><strong aria-hidden="true">17.1.</strong> Ob'ektga yo'naltirilgan tillarning xususiyatlari</a></li><li class="chapter-item expanded "><a href="ch17-02-trait-objects.html"><strong aria-hidden="true">17.2.</strong> Har xil turdagi qiymatlarga ruxsat beruvchi trait ob'ektlaridan foydalanish</a></li><li class="chapter-item expanded "><a href="ch17-03-oo-design-patterns.html"><strong aria-hidden="true">17.3.</strong> Ob'ektga yo'naltirilgan dizayn patternini implement qilish</a></li></ol></li><li class="chapter-item expanded "><a href="ch18-00-patterns.html"><strong aria-hidden="true">18.</strong> Patternlar va Matching</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch18-01-all-the-places-for-patterns.html"><strong aria-hidden="true">18.1.</strong> All the Places Patterns Can Be Used</a></li><li class="chapter-item expanded "><a href="ch18-02-refutability.html"><strong aria-hidden="true">18.2.</strong> Refutability: Whether a Pattern Might Fail to Match</a></li><li class="chapter-item expanded "><a href="ch18-03-pattern-syntax.html"><strong aria-hidden="true">18.3.</strong> Pattern Sintaksisi</a></li></ol></li><li class="chapter-item expanded "><a href="ch19-00-advanced-features.html"><strong aria-hidden="true">19.</strong> Kengaytirilgan Xususiyatlar</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch19-01-unsafe-rust.html"><strong aria-hidden="true">19.1.</strong> Xavfsiz Rust</a></li><li class="chapter-item expanded "><a href="ch19-03-advanced-traits.html"><strong aria-hidden="true">19.2.</strong> Murakkab Traitlar</a></li><li class="chapter-item expanded "><a href="ch19-04-advanced-types.html"><strong aria-hidden="true">19.3.</strong> Kengaytirilgan Turlar</a></li><li class="chapter-item expanded "><a href="ch19-05-advanced-functions-and-closures.html"><strong aria-hidden="true">19.4.</strong> Kengaytirilgan funksiyalar va closurelar</a></li><li class="chapter-item expanded "><a href="ch19-06-macros.html"><strong aria-hidden="true">19.5.</strong> Makrolar</a></li></ol></li><li class="chapter-item expanded "><a href="ch20-00-final-project-a-web-server.html"><strong aria-hidden="true">20.</strong> Yakuniy loyiha: Ko'p tarmoqli veb-serverni qurish</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch20-01-single-threaded.html"><strong aria-hidden="true">20.1.</strong> Yagona tarmoqli veb-serverni qurish</a></li><li class="chapter-item expanded "><a href="ch20-02-multithreaded.html"><strong aria-hidden="true">20.2.</strong> Bizning yagona tarmoqli serverimizni ko'p tarmoqli serverga aylantirish</a></li><li class="chapter-item expanded "><a href="ch20-03-graceful-shutdown-and-cleanup.html"><strong aria-hidden="true">20.3.</strong> Ajoyib o'chirish va tozalash</a></li></ol></li><li class="chapter-item expanded "><a href="appendix-00.html"><strong aria-hidden="true">21.</strong> Ilova</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="appendix-01-keywords.html"><strong aria-hidden="true">21.1.</strong> A - Kalit so'zlar</a></li><li class="chapter-item expanded "><a href="appendix-02-operators.html"><strong aria-hidden="true">21.2.</strong> B - Operatorlar va Symbollar</a></li><li class="chapter-item expanded "><a href="appendix-03-derivable-traits.html"><strong aria-hidden="true">21.3.</strong> C - Hosilaviy Traitlar</a></li><li class="chapter-item expanded "><a href="appendix-04-useful-development-tools.html"><strong aria-hidden="true">21.4.</strong> D - Foydali Development Toollar</a></li><li class="chapter-item expanded "><a href="appendix-05-editions.html"><strong aria-hidden="true">21.5.</strong> E - Nashrlar</a></li><li class="chapter-item expanded "><a href="appendix-06-translation.html"><strong aria-hidden="true">21.6.</strong> F - Kitobning tarjimalari</a></li><li class="chapter-item expanded "><a href="appendix-07-nightly-rust.html"><strong aria-hidden="true">21.7.</strong> G - Rust qanday yasaladi va “Nightly Rust”</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Rust dasturlash tili</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/rust-lang/book" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h2 id="ownership-nima"><a class="header" href="#ownership-nima">Ownership Nima?</a></h2>
+<p><em>Ownership</em>(Egalik) bu Rust dasturi xotirani qanday boshqarishini boshqaradigan qoidalar to'plami.
+Barcha dasturlar ishlayotgan vaqtda kompyuter xotirasidan qanday foydalanishini boshqarishi kerak.
+Ba'zi tillarda axlat yig'ish(garbage collection) mavjud bo'lib, ular dastur ishlayotgan paytda ishlatilmaydigan xotirani muntazam ravishda qidiradi; boshqa tillarda dasturchi xotirani aniq ajratishi va bo'shatishi kerak. Rust uchinchi yondashuvdan foydalanadi: xotira kompilyator tekshiradigan qoidalar to'plamiga ownership tizimi orqali boshqariladi. Agar biron bir qoidalar buzilgan bo'lsa, dastur kompilatsiya qilinmaydi. Ownership xususiyatlarining hech biri dasturingiz ishlayotgan vaqtda sekinlashtirmaydi.</p>
+<p>Ownership ko'plab dasturchilar uchun yangi tushuncha bo'lganligi sababli, unga ko'nikish uchun biroz vaqt kerak bo'ladi. Yaxshi xabar shundaki, siz Rust va ownership tizimi qoidalari bilan qanchalik tajribali bo'lsangiz, xavfsiz va samarali kodni tabiiy ravishda ishlab chiqish osonroq bo'ladi. Unda davom etamiz!</p>
+<p>Ownershipni tushunganingizda, Rustni noyob qiladigan xususiyatlarni tushunish uchun mustahkam asosga ega bo'lasiz. Ushbu bobda, siz juda keng tarqalgan ma'lumotlar tuzilishiga qaratilgan ba'zi misollarni orqali  ownershipni ishlashini o'rganasiz: string.</p>
+<blockquote>
+<h3 id="stack-va-heap"><a class="header" href="#stack-va-heap">Stack va Heap</a></h3>
+<p>Ko'pgina dasturlash tillari stack va heap haqida tez-tez o'ylashingizni talab qilmaydi.
+Ammo Rust kabi tizim dasturlash tilida qiymat stackda yoki heapda bo'ladimi,
+til o'zini qanday tutishiga ta'sir qiladi va nima uchun siz ma'lum qarorlar
+qabul qilishingiz kerak. Ownershipning qismlari stack va heapga nisbatan keyinchalik
+ushbu bobda tasvirlanadi, shuning uchun bu yerda tayyorgarlik jarayonida qisqacha 
+tushuntirish berilgan.</p>
+<p>Stack ham, heap ham runtimeda foydalanish uchun kodingiz uchun mavjud bo'lgan 
+xotira qismlaridir, lekin ular turli yo'llar bilan tuzilgan. Stack qiymatlarni
+ularni olgan tartibda saqlaydi va qiymatlarni teskari tartibda o'chiradi
+Bu <em>oxirgi kelgan, birinchi chiqqan</em> deb ataladi. Plitalar stackini o'ylab
+ko'ring: ko'proq plastinka qo'shsangiz, ularni qoziqning ustiga qo'yasiz va plastinka
+kerak bo'lganda, siz yuqoridan birini olib qo'yasiz. Plitalarni o'rtadan yoki pastdan
+qo'shish yoki olib tashlash ham ishlamaydi! Ma'lumotlarni qo'shish <em>stackga qo'shish</em>,
+ma'lumotlarni olib tashlash esa <em>stackdan o'chirish</em> deb ataladi. Stackda saqlangan
+barcha ma'lumotlar ma'lum, qat'iy belgilangan hajmga ega bo'lishi kerak. Kompilyatsiya vaqtida
+noma'lum o'lchamli yoki o'zgarishi mumkin bo'lgan o'lchamdagi ma'lumotlar esa heapda
+saqlanishi kerak.</p>
+<p>heap kamroq tartibga solingan: ma'lumotlarni heapga qo'yganingizda, ma'lum miqdorda
+bo'sh joy talab qilasiz. Xotira ajratuvchisi(memory allocator) heapda yetarlicha katta bo'lgan bo'sh joyni
+topadi, uni ishlatilayotgan deb belgilaydi va o'sha joyning manzili bo'lgan
+<em>pointerni</em> ni qaytaradi. Bu jarayon <em>heap allocating</em> deb ataladi va ba'zan
+faqat <em>allocating</em> deb qisqartiriladi (qiymatlarni stackga qo'shish ajratish
+hisoblanmaydi). Heapga pointer ma'lum, qat'iy o'lcham bo'lgani uchun siz
+pointerni stackda saqlashingiz mumkin, lekin yaroqli ma'lumotlarni
+olishni istasangiz, pointergaga amal qilishingiz kerak. Restoranda o'tirganingizni
+o'ylab ko'ring. Kirish paytida siz guruhingizdagi odamlar sonini bildirasiz
+va uy egasi hammaga mos keladigan bo'sh stol topadi va sizni u yerga olib boradi.
+Agar guruhingizdagi kimdir kechikib kelsa, sizni topish uchun qayerda o'tirganingizni
+so'rashi mumkin.</p>
+<p>stackga qo'shish heapda allocating qilishdan tezroq bo'ladi, chunki allacator hech
+qachon yangi ma'lumotlarni saqlash uchun joy izlamasligi kerak; bu joy har doim
+stackning yuqori qismida joylashgan. Nisbatan, heapda bo'sh joy ajratish ko'proq
+mehnat talab qiladi, chunki allacator avval ma'lumotlarni saqlash uchun yetarlicha
+katta joy topishi va keyingi allocatinga tayyorgarlik ko'rish uchun buxgalteriya
+hisobini amalga oshirishi kerak.</p>
+<p>Heapdagi ma'lumotlarga kirish stackdagi ma'lumotlarga kirishdan ko'ra sekinroq, chunki u yerga 
+borish uchun pointerga amal qilishingiz kerak. Zamonaviy protsessorlar xotirada
+kamroq o'tishsa, tezroq ishlaydi. O'xshashlikni davom ettirib, ko'plab jadvallardan
+buyurtmalarni qabul qiladigan restoran serverini ko'rib chiqing. Keyingi stolga o'tishdan oldin
+barcha buyurtmalarni bitta stolda olish eng samarali hisoblanadi. A jadvalidan
+buyurtma olish, keyin B jadvalidan buyurtma olish, keyin yana A dan va yana B dan bitta
+buyurtma olish ancha sekinroq jarayon bo'ladi. Xuddi shu qoidaga ko'ra,
+protsessor uzoqroqda emas (u heapda bo'lishi mumkin) emas, balki boshqa
+ma'lumotlarga yaqin (stackdagi kabi) ma'lumotlarda ishlasa, o'z ishini yaxshiroq
+bajarishi mumkin.</p>
+<p>Sizning kodingiz funksiyani chaqirganda, funksiyaga o'tgan qiymatlar (shu jumladan, potentsial,
+heapdagi ma'lumotlarga pointerlar) va funksiyaning mahalliy o'zgaruvchilari
+stackga qo'shiladi. Funktsiya tugagach, bu qiymatlar stackdan chiqariladi.</p>
+<p>Kodning qaysi qismlari heapda qaysi ma'lumotlardan foydalanayotganini kuzatib borish,
+heapdagi takroriy ma'lumotlar miqdorini minimallashtirish va bo'sh joy qolmasligi uchun
+heapdagi foydalanilmagan ma'lumotlarni tozalash - bularning barchasi ownership hal qiladigan 
+muammolardir. Ownershipni tushunganingizdan so'ng, stack va heap haqida tez-tez
+o'ylashingiz shart emas, lekin ownership qilishning asosiy maqsadi heap
+ma'lumotlarni boshqarish ekanligini bilish uning nima uchun shunday ishlashini
+tushuntirishga yordam beradi.</p>
+</blockquote>
+<h3 id="ownership-qoidalari"><a class="header" href="#ownership-qoidalari">Ownership qoidalari</a></h3>
+<p>Birinchidan, ownership qoidalarini ko'rib chiqaylik.Biz ularni ko'rsatadigan misollar bilan ishlashda ushbu qoidalarni yodda tuting:</p>
+<ul>
+<li>Rust-dagi har bir qiymat <em>owner</em>ga ega.</li>
+<li>Bir vaqtning o'zida faqat bitta owneri bo'lishi mumkin.</li>
+<li>Owneri amaldan tashqariga chiqsa, qiymat o'chiriladi.</li>
+</ul>
+<h3 id="ozgaruvchan-scope"><a class="header" href="#ozgaruvchan-scope">O'zgaruvchan Scope</a></h3>
+<p>Endi biz Rustning asosiy sintaksisidan o‘tganimiz uchun, biz barcha <code>fn main() {</code> kodini misollarga kiritmaymiz, shuning uchun agar kuzatib boradigan bo‘lsangiz, quyidagi misollarni <code>main</code> funksiyasiga qo‘lda kiritganingizga ishonch hosil qiling. Natijada, bizning misollarimiz biroz ixchamroq bo'ladi, bu bizga boilerplate kodiga emas, balki haqiqiy tafsilotlarga e'tibor berishga imkon beradi.</p>
+<p>Ownershipning birinchi misoli sifatida biz ba'zi o'zgaruvchilarning <em>scope</em>ni ko'rib chiqamiz. Scope - dastur doirasidagi element amal qiladigan diapazon. Quyidagi o'zgaruvchini oling:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let s = &quot;salom&quot;;
+<span class="boring">}
+</span></code></pre></pre>
+<p><code>s</code> o'zgaruvchisi satr literaliga ishora qiladi, bu yerda satr qiymati dasturimiz matniga qattiq kodlangan. O'zgaruvchi e'lon qilingan paytdan boshlab joriy <em>scopning</em> oxirigacha amal qiladi. 4-1 ro'yxatida <code>s</code> o'zgaruvchisi qayerda to'g'ri bo'lishini izohlovchi izohlar bilan dastur ko'rsatilgan.</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">fn main() {
+</span>    {                      // s bu erda haqiqiy emas, u hali e'lon qilinmagan
+        let s = &quot;salom&quot;;   // s shu nuqtadan boshlab amal qiladi
+
+        // s bilan ish bajaring
+    }                      // bu scope endi tugadi va s endi haqiqiy emas
+<span class="boring">}
+</span></code></pre></pre>
+<p><span class="caption">Ro'yxat 4-1: O'zgaruvchi va uning amal qiladigan doirasi</span></p>
+<p>Boshqacha qilib aytganda, bu yerda ikkita muhim nuqta bor:</p>
+<ul>
+<li>Qachonki <code>s</code> <em>scopega</em> kirsa, u amal qiladi.</li>
+<li>U scopedan tashqariga <em>chiqmaguncha</em> amal qiladi.</li>
+</ul>
+<p>Ushbu nuqtada, scopelar va o'zgaruvchilarning yaroqliligi o'rtasidagi munosabatlar boshqa dasturlash tillaridagiga o'xshaydi. Endi biz <code>String</code> turini joriy qilish orqali ushbu tushunchaga asoslanamiz.</p>
+<h3 id="string-turi"><a class="header" href="#string-turi"><code>String</code> turi</a></h3>
+<p>Ownership qoidalarini tasvirlash uchun bizga 3-bobning <a href="ch03-02-data-types.html#data-types">”Ma'lumotlar turlari”</a><!-- ignore -->
+bo'limida ko'rib chiqilganlarga qaraganda murakkabroq ma'lumotlar turi kerak. Oldin ko'rib chiqilgan turlar ma'lum o'lchamga ega bo'lib, ular stackda saqlanishi va qo'llanilish doirasi tugagach, stackdan o'chirilishi mumkin va agar kodning boshqa qismi foydalanishi kerak bo'lsa yangi, mustaqil misol yaratish uchun tez va ahamiyatsiz nusxa ko'chirilishi mumkin kodning boshqa qismi bir xil qiymatni boshqa doirada ishlatishi kerak. Ammo biz heapda saqlangan ma'lumotlarni ko'rib chiqmoqchimiz va Rust bu ma'lumotlarni qachon tozalashni bilishini o'rganmoqchimiz va <code>String</code> turi ajoyib misoldir.</p>
+<p>Biz <code>String</code> ning ownership bilan bog'liq qismlariga e'tibor qaratamiz. Ushbu jihatlar standart kutubxona tomonidan taqdim etilganmi yoki siz yaratganmi, boshqa murakkab ma'lumotlar turlariga ham tegishli.
+Biz <a href="ch08-02-strings.html">8-bobda</a><!-- ignore --> <code>String</code>ni chuqurroq muhokama qilamiz.</p>
+<p>Biz allaqachon string literallarini ko'rdik, bu yerda string qiymati bizning dasturimizga qattiq kodlangan. String literallari qulay, ammo ular biz matndan foydalanmoqchi bo'lgan har qanday vaziyatga mos kelmaydi. Buning sabablaridan biri shundaki, ular o'zgarmasdir. Yana bir narsa shundaki, biz kodni yozganimizda har bir satr qiymatini bilish mumkin emas: masalan, agar biz foydalanuvchi ma'lumotlarini olib, uni saqlamoqchi bo'lsak-chi? Bunday holatlar uchun Rust ikkinchi string turiga ega, <code>String</code>. Bu tur heapda ajratilgan ma'lumotlarni boshqaradi va shuning uchun kompilyatsiya vaqtida bizga noma'lum bo'lgan matn miqdorini saqlashi mumkin. Siz <code>from</code> funksiyasidan foydalanib satr literalidan <code>String</code> yaratishingiz mumkin, masalan:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let s = String::from(&quot;salom&quot;);
+<span class="boring">}
+</span></code></pre></pre>
+<p>Ikki nuqtali <code>::</code> operatori bizga <code>string_from</code> kabi qandaydir nomdan foydalanish o'rniga <code>String</code> turi ostida ushbu <code>from</code> funksiyasini nom maydoniga qo`yish imkonini beradi.
+Biz ushbu sintaksisni 5-bobning <a href="ch05-03-method-syntax.html#method-syntax">”Metod sintaksisi”</a><!-- ignore --> bo'limida ko'proq muhokama qilamiz va 7-bobdagi <a href="ch07-03-paths-for-referring-to-an-item-in-the-module-tree.html">”Modul treedagi elementga murojaat qilish yo'llari”</a><!-- ignore --> da modullar bilan nomlar oralig'i haqida gapiramiz.</p>
+<p>Ushbu turdagi <em>string</em> mutatsiyaga uchragan bo'lishi mumkin:</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">fn main() {
+</span>    let mut s = String::from(&quot;salom&quot;);
+
+    s.push_str(&quot;, dunyo!&quot;); // push_str() satrga literal qo'shadi
+
+    println!(&quot;{}&quot;, s); // Bu “salom, dunyo!” deb chop etiladi
+<span class="boring">}
+</span></code></pre></pre>
+<p>Xo'sh, bu yerda qanday farq bor? Nima uchun <code>String</code> ni mutatsiyaga solish mumkin, lekin harflarni o'zgartirish mumkin emas? Farqi bu ikki turning xotira bilan qanday munosabatda bo'lishida.</p>
+<h3 id="xotira-va-taqsimlashallocation"><a class="header" href="#xotira-va-taqsimlashallocation">Xotira va Taqsimlash(Allocation)</a></h3>
+<p>String literalida biz kompilyatsiya vaqtida tarkibni bilamiz, shuning uchun matn to'g'ridan-to'g'ri yakuniy bajariladigan faylga qattiq kodlangan.Shuning uchun string literallari tez va samarali. Ammo bu xususiyatlar faqat satr literalining o'zgarmasligidan kelib chiqadi. Afsuski, kompilyatsiya vaqtida hajmi noma'lum bo'lgan va dasturni ishga tushirishda hajmi o'zgarishi mumkin bo'lgan har bir matn bo'lagi uchun biz binary faylga bir bo'lak xotira qo'ya olmaymiz.</p>
+<p><code>String</code> turida o'zgaruvchan, o'sib boradigan matn qismini qo'llab-quvvatlash uchun tarkibni saqlash uchun kompilyatsiya vaqtida noma'lum bo'lgan xotira hajmini yig'ishda ajratishimiz kerak. Buning ma'nosi:</p>
+<ul>
+<li>Xotira runtimeda xotira allactoridan so'ralishi kerak.</li>
+<li><code>String</code> bilan ishlashni tugatgandan so'ng, bizga ushbu xotirani allacatoriga qaytarish usuli kerak.</li>
+</ul>
+<p>Bu birinchi qism biz tomonimizdan amalga oshiriladi: biz <code>String::from</code> deb chaqirganimizda, uni implementi kerakli xotirani talab qiladi. Bu dasturlash tillarida deyarli universaldir.</p>
+<p>Biroq, ikkinchi qism boshqacha. <em>Garbage Collector (GC)</em> bo'lgan tillarda GC endi ishlatilmayotgan xotirani kuzatib boradi va tozalaydi va bu haqda o'ylashimiz shart emas. Ko'pgina tillarda GC bo'lmaganda, xotiradan qachon foydalanilmayotganini aniqlash va uni aniq bo'shatish uchun kodni chaqirish, xuddi biz so'raganimizdek, bizning burchimizdir. Buni to'g'ri bajarish tarixan qiyin dasturlash muammosi bo'lgan. Agar unutsak, xotirani behuda sarflaymiz. Agar biz buni juda erta qilsak, bizda noto'g'ri o'zgaruvchi bo'ladi. Agar buni ikki marta qilsak, bu ham xato. Aynan bitta <code>allocate</code>ni bitta <code>bo'sh</code> bilan birlashtirishimiz kerak.</p>
+<p>Rust boshqa yo'lni egallaydi: unga ega bo'lgan o'zgaruvchi amaldan tashqariga chiqqandan so'ng xotira avtomatik ravishda qaytariladi. Bu yerda 4-1 roʻyxatdagi misolimiz satr harfi oʻrniga <code>String</code> yordamida berilgan:</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">fn main() {
+</span>    {
+        let s = String::from(&quot;salom&quot;); // s shu nuqtadan boshlab amal qiladi
+
+        // s bilan ish bajaring
+    }                                  // bu scope endi tugadi va s yo'q
+                                       // uzoqroq amal qiladi
+<span class="boring">}
+</span></code></pre></pre>
+<p>Biz <code>String</code> kerak bo'lgan xotirani ajratuvchiga qaytarishimiz mumkin bo'lgan tabiiy nuqta bor: <code>s</code> scopedan chiqib ketganda. O'zgaruvchi scopedan chiqib ketganda, Rust biz uchun maxsus funksiyani chaqiradi.Ushbu funktsiya <a href="../std/ops/trait.Drop.html#tymethod.drop"><code>drop</code></a><!-- ignore --> deb ataladi va u yerda <code>String</code> muallifi xotirani qaytarish uchun kodni qo'yishi mumkin. Rust yopilgan jingalak qavsda avtomatik ravishda <code>drop</code> ni chaqiradi.</p>
+<blockquote>
+<p>Eslatma: C++ da, elementning ishlash muddati oxirida resurslarni taqsimlashning bunday sxemasi ba'zan
+<em>Resource Acquisition Is Initialization (RAII)</em>(Resurslarni yig'ish - ishga tushirish (RAII) deb ataladi.
+Agar siz RAII patternlaridan foydalangan bo'lsangiz, Rust-dagi <code>drop</code>
+funksiyasi sizga tanish bo'ladi.</p>
+</blockquote>
+<p>Ushbu pattern Rust kodini yozish usuliga chuqur ta'sir qiladi. Bu hozir oddiy bo'lib tuyulishi mumkin, ammo biz bir nechta o'zgaruvchilar biz yig'ilgan ma'lumotlardan foydalanishni xohlayotganimizda, murakkabroq holatlarda kodning harakati kutilmagan bo'lishi mumkin. Keling, ushbu vaziyatlarning ba'zilarini ko'rib chiqaylik.</p>
+<!-- Old heading. Do not remove or links may break. -->
+<p><a id="ways-variables-and-data-interact-move"></a></p>
+<h4 id="move-bilan-ozaro-tasir-qiluvchi-ozgaruvchilar-va-malumotlar"><a class="header" href="#move-bilan-ozaro-tasir-qiluvchi-ozgaruvchilar-va-malumotlar">Move bilan o'zaro ta'sir qiluvchi o'zgaruvchilar va ma'lumotlar</a></h4>
+<p>Rustda bir nechta o'zgaruvchilar bir xil ma'lumotlar bilan turli yo'llar bilan o'zaro ta'sir qilishi mumkin.
+4-2 ro'yxatda integer sondan foydalanish misolini ko'rib chiqaylik.</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">fn main() {
+</span>    let x = 5;
+    let y = x;
+<span class="boring">}
+</span></code></pre></pre>
+<p><span class="caption">4-2 roʻyxat: <code>x</code> oʻzgaruvchisining butun qiymatini <code>y</code> ga belgilash</span></p>
+<p>Bu nima qilayotganini taxmin qilishimiz mumkin: <code>5</code> qiymatini <code>x</code> ga bog‘lang; keyin <code>x</code> dagi qiymatdan nusxa oling va uni <code>y</code> ga bog'lang. Endi bizda ikkita o'zgaruvchi bor, <code>x</code> va <code>y</code> va ikkalasi ham <code>5</code> ga teng. Bu haqiqatan ham sodir bo'lmoqda, chunki butun sonlar ma'lum, qat'iy o'lchamga ega oddiy qiymatlardir va bu ikkita <code>5</code> qiymat stackga qo'shiladi.</p>
+<p>Endi <code>String</code> versiyasini ko'rib chiqamiz:</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">fn main() {
+</span>    let s1 = String::from(&quot;salom&quot;);
+    let s2 = s1;
+<span class="boring">}
+</span></code></pre></pre>
+<p>Bu juda o'xshash ko'rinadi, shuning uchun biz uning ishlash metodi bir xil bo'ladi deb taxmin qilishimiz mumkin: ya'ni ikkinchi qator <code>s1</code> qiymatining nusxasini yaratadi va uni <code>s2</code> bilan bog'laydi. Ammo bu sodir bo'ladigan narsa emas.</p>
+<p>Qopqoq ostidagi <code>String</code> bilan nima sodir bo'layotganini ko'rish uchun 4-1-rasmga qarang. <code>String</code> chap tomonda ko'rsatilgan uchta qismdan iborat: satr tarkibini saqlaydigan xotiraga ko'rsatgich, uzunlik(len) va sig'im(capacity).
+Ushbu ma'lumotlar guruhi stackda saqlanadi. O'ng tomonda tarkibni saqlaydigan heap xotira joylashgan.</p>
+<p><img alt="Two tables: the first table contains the representation of s1 on the
+stack, consisting of its length (5), capacity (5), and a pointer to the first
+value in the second table. The second table contains the representation of the
+string data on the heap, byte by byte." src="img/trpl04-01.png" class="center"
+style="width: 50%;" /></p>
+<p><span class="caption">4-1-rasm: <code>s1</code> ga bog‘langan <code>salom</code> qiymatiga ega <code>String</code> xotirasidagi tasvir</span></p>
+<p>Uzunlik - <code>String</code> mazmuni hozirda qancha xotira, baytlarda foydalanayotganligi. Sig'im(capacity) - bu <code>String</code> allacatordan olgan xotiraning umumiy hajmi, baytlarda. Uzunlik va si'gimlar o'rtasidagi farq muhim, ammo bu kontekstda emas, shuning uchun hozircha si'gimlarni e'tiborsiz qoldirish yaxshi.</p>
+<p><code>s1</code> ni <code>s2</code> ga belgilaganimizda, <code>String</code> ma'lumotlari nusxalanadi, ya'ni biz stackdagi pointer, uzunlik va sig`imdan nusxa olamiz. Biz pointer(ko'rsatkich) ko'rsatgan to'plamdagi ma'lumotlarni ko'chirmaymiz. Boshqacha qilib aytganda, ma'lumotlarning xotirada ko'rinishi 4-2-rasmga o'xshaydi.</p>
+<p><img alt="Three tables: tables s1 and s2 representing those strings on the
+stack, respectively, and both pointing to the same string data on the heap."
+src="img/trpl04-02.png" class="center" style="width: 50%;" /></p>
+<p><span class="caption">4-2-rasm: <code>s1</code> pointeri, uzunligi va sigʻimi nusxasiga ega <code>s2</code> oʻzgaruvchisi xotirasida koʻrsatilishi</span></p>
+<p>Tasvir 4-3-rasmga <em>o'xshamaydi</em>, agar Rust o'rniga heap ma'lumotlarni ko'chirsa, xotira qanday ko'rinishga ega bo'lardi. Agar Rust buni amalga oshirgan bo'lsa, <code>s2 = s1</code> operatsiyasi, agar heapdagi ma'lumotlar katta bo'lsa, runtimening ishlashi nuqtai nazaridan juda qimmat bo'lishi mumkin.</p>
+<p><img alt="Four tables: two tables representing the stack data for s1 and s2,
+and each points to its own copy of string data on the heap."
+src="img/trpl04-03.png" class="center" style="width: 50%;" /></p>
+<p><span class="caption">4-3-rasm: Rust heap ma'lumotlarni ham nusxalagan bo'lsa, <code>s2 = s1</code> nima qilishi mumkin bo'lgan yana bir imkoniyat</span></p>
+<p>Avvalroq biz aytgan edikki, o‘zgaruvchi qo‘llanish doirasidan chiqib ketganda, Rust avtomatik ravishda <code>drop</code> funksiyasini chaqiradi va bu o‘zgaruvchi uchun heap xotirani tozalaydi. Ammo 4-2-rasmda ikkala ma'lumot pointeri bir xil joyga ishora qiladi. Bu muammo: <code>s2</code> va <code>s1</code> scopedan chiqib ketganda, ikkalasi ham bir xil xotirani bo'shatishga harakat qiladi. Bu <em>double free</em>(ikki marta bo'sh)xato sifatida tanilgan va biz avval aytib o'tgan xotira xavfsizligi xatolaridan biridir. Xotirani ikki marta bo'shatish xotira buzilishiga olib kelishi mumkin, bu esa xavfsizlik zaifliklariga olib kelishi mumkin.</p>
+<p>Xotira xavfsizligini ta'minlash uchun <code>let s2 = s1;</code> qatoridan keyin Rust <code>s1</code> ni endi yaroqsiz deb hisoblaydi. Shuning uchun, <code>s1</code> qo'llanilgandan tashqariga chiqqanda Rust hech narsani bo'shatishi shart emas. <code>s2</code> yaratilgandan keyin <code>s1</code> dan foydalanmoqchi bo'lganingizda nima sodir bo`lishini tekshiring; u ishlamaydi:</p>
+<pre><code class="language-rust ignore does_not_compile"><span class="boring">fn main() {
+</span>    let s1 = String::from(&quot;salom&quot;);
+    let s2 = s1;
+
+    println!(&quot;{}, dunyo!&quot;, s1);
+<span class="boring">}
+</span></code></pre>
+<p>Siz shunday xatoga yo'l qo'yasiz, chunki Rust bekor qilingan havoladan foydalanishga to'sqinlik qiladi:</p>
+<pre><code class="language-console">$ cargo run
+   Compiling ownership v0.1.0 (file:///projects/ownership)
+error[E0382]: borrow of moved value: `s1`
+ --&gt; src/main.rs:5:28
+  |
+2 |     let s1 = String::from(&quot;salom&quot;);
+  |         -- move occurs because `s1` has type `String`, which does not implement the `Copy` trait
+3 |     let s2 = s1;
+  |              -- value moved here
+4 | 
+5 |     println!(&quot;{}, dunyo!&quot;, s1);
+  |                            ^^ value borrowed here after move
+  |
+  = note: this error originates in the macro `$crate::format_args_nl` which comes from the expansion of the macro `println` (in Nightly builds, run with -Z macro-backtrace for more info)
+help: consider cloning the value if the performance cost is acceptable
+  |
+3 |     let s2 = s1.clone();
+  |                ++++++++
+
+For more information about this error, try `rustc --explain E0382`.
+error: could not compile `ownership` due to previous error
+</code></pre>
+<p>Agar siz boshqa tillar bilan ishlashda <em>shallow copy</em> va <em>deep copy</em> so‘zlarini eshitgan bo‘lsangiz, pointerni nusxalash tushunchasi, ma'lumotlardan nusxa ko'chirmasdan uzunligi va sig'imi olish, ehtimol shallow copy kabi eshitiladi. Ammo Rust birinchi o'zgaruvchini ham bekor qilganligi sababli, shallow copy deb nomlanish o'rniga u <em>move</em>(ko'chirish) deb nomlanadi. Bu misolda <code>s1</code> <code>s2</code> ga <em>ko'chirilgan</em> deb aytamiz. Shunday qilib, aslida nima sodir bo'lishi 4-4-rasmda ko'rsatilgan.</p>
+<p><img alt="Three tables: tables s1 and s2 representing those strings on the
+stack, respectively, and both pointing to the same string data on the heap.
+Table s1 is grayed out be-cause s1 is no longer valid; only s2 can be used to
+access the heap data." src="img/trpl04-04.png" class="center" style="width:
+50%;" /></p>
+<p><span class="caption">4-4-rasm: <code>s1</code> dan keyin xotiradagi ko`rinish bekor qilingan</span></p>
+<p>Bu bizning muammomizni hal qiladi! Faqatgina <code>s2</code> amal qilganda, u scopedan tashqariga chiqsa, u faqat xotirani bo'shatadi va biz tugatdik.</p>
+<p>Bundan tashqari, dizayn tanlovi ham mavjud: Rust hech qachon avtomatik ravishda ma'lumotlaringizning &quot;deep copyni&quot; yaratmaydi. Shuning uchun, har qanday <em>avtomatik</em> nusxa ko'chirish runtimening ishlashi nuqtai nazaridan arzon deb taxmin qilish mumkin.</p>
+<!-- Old heading. Do not remove or links may break. -->
+<p><a id="ways-variables-and-data-interact-clone"></a></p>
+<h4 id="clone-bilan-ozaro-tasir-qiluvchi-ozgaruvchilar-va-malumotlar"><a class="header" href="#clone-bilan-ozaro-tasir-qiluvchi-ozgaruvchilar-va-malumotlar">Clone bilan o'zaro ta'sir qiluvchi o'zgaruvchilar va ma'lumotlar</a></h4>
+<p>Agar biz faqat stack ma'lumotlarini emas, balki <code>String</code> ning heap ma'lumotlarini deeply copyni istasak, <code>clone</code> deb nomlangan umumiy metoddan foydalanishimiz mumkin. Metod sintaksisini 5-bobda muhokama qilamiz, lekin metodlar ko‘p dasturlash tillarida umumiy xususiyat bo‘lgani uchun siz ularni avval ko‘rgan bo‘lsangiz kerak.</p>
+<p>Mana amaldagi <code>clone</code> metodiga misol:</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">fn main() {
+</span>    let s1 = String::from(&quot;salom&quot;);
+    let s2 = s1.clone();
+
+    println!(&quot;s1 = {}, s2 = {}&quot;, s1, s2);
+<span class="boring">}
+</span></code></pre></pre>
+<p>Bu juda yaxshi ishlaydi va 4-3-rasmda ko'rsatilgan xatti-harakatni aniq ishlab chiqaradi, bu yerda heap ma'lumotlar nusxalanadi.</p>
+<p><code>clone</code> ga murojatni ko'rsangiz, ba'zi bir ixtiyoriy kod bajarilayotganini va bu kod qimmat bo'lishi mumkinligini bilasiz. Bu boshqa narsa sodir bo'layotganining vizual ko'rsatkichidir.</p>
+<h4 id="faqat-stack-malumotlari-nusxalash"><a class="header" href="#faqat-stack-malumotlari-nusxalash">Faqat stack ma'lumotlari: nusxalash</a></h4>
+<p>Biz hali gapirmagan yana bir narsa bor. Integer sonlardan foydalanadigan ushbu kod - bir qismi 4-2 ro'yxatda ko'rsatilgan - ishlaydi va amal qiladi:</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">fn main() {
+</span>    let x = 5;
+    let y = x;
+
+    println!(&quot;x = {}, y = {}&quot;, x, y);
+<span class="boring">}
+</span></code></pre></pre>
+<p>Ammo bu kod biz bilib olgan narsaga zid ko'rinadi: bizda <code>clone</code> uchun murojat yo'q, lekin <code>x</code> hali ham amal qiladi va <code>y</code> ga o'tkazilmagan.</p>
+<p>Sababi, kompilyatsiya vaqtida ma'lum o'lchamga ega bo'lgan integer sonlar kabi turlar to'liq stackda saqlanadi, shuning uchun haqiqiy qiymatlarning nusxalari tezda tayyorlanadi. Bu shuni anglatadiki, biz <code>y</code> o'zgaruvchisini yaratganimizdan keyin <code>x</code> ning haqiqiy bo'lishiga to'sqinlik qilish uchun hech qanday sabab yo'q. Boshqacha qilib aytadigan bo'lsak, bu yerda deep va shallow nusxa ko'chirish o'rtasida farq yo'q, shuning uchun <code>clone</code> ni chaqirish odatdagi shallow copydan farq qilmaydi va biz uni tark etishimiz mumkin.</p>
+<p>Rust <code>Copy</code> traiti deb nomlangan maxsus annotationga ega bo'lib, uni butun sonlar kabi stackda saqlanadigan turlarga joylashtirishimiz mumkin (biz <a href="ch10-02-traits.html">10-bobda</a><!-- ignore --> traitlar haqida ko'proq gaplashamiz). Agar tur  <code>Copy</code> traitini amalga oshirsa, undan foydalanadigan o‘zgaruvchilar harakatlanmaydi, aksincha, ahamiyatsiz tarzda ko‘chiriladi, bu esa boshqa o‘zgaruvchiga tayinlangandan keyin ham amal qiladi.</p>
+<p>Rust turi yoki uning biron bir qismi <code>Drop</code> traitini qo‘llagan bo‘lsa, <code>Copy</code> bilan turga annotation qo‘yishimizga ruxsat bermaydi. Qiymat doirasidan chiqib ketganda turga maxsus biror narsa kerak bo'lsa va biz ushbu turga <code>Copy</code> annotationni qo'shsak, biz kompilyatsiya vaqtida xatolikni olamiz. Traitni amalga oshirish uchun turingizga <code>Copy</code> annotationni qanday qo‘shish haqida bilish uchun C ilovasidagi <a href="appendix-03-derivable-traits.html">“Derivable Traitlar”</a><!-- ignore -->ga qarang.</p>
+<p>Xo'sh, <code>Copy</code> traitini qaysi turlar amalga oshiradi? Ishonch hosil qilish uchun berilgan tur uchun texnik hujjatlarni tekshirishingiz mumkin, lekin umumiy qoida sifatida har qanday oddiy skalyar qiymatlar guruhi <code>Copy</code> ni amalga oshirishi mumkin va ajratishni talab qiladigan yoki biron bir manba shakli bo‘lgan hech narsa <code>Copy</code> ni amalga oshira olmaydi. <code>Copy</code> ni amalga oshiradigan ba'zi turlar:</p>
+<ul>
+<li><code>u32</code> kabi barcha integer turlari.</li>
+<li>Boolean turi, <code>bool</code>, <code>true</code> va <code>false</code> qiymatlari bilan.</li>
+<li>Barcha floating-point turlari, masalan, <code>f64</code>.</li>
+<li>Belgi turi, <code>char</code>.</li>
+<li>Tuplelar, agar ular faqat <code>Copy</code> ni ham implement qiladigan turlarni o'z ichiga olsa. Masalan, <code>(i32, i32)</code> <code>Copy</code> ni implement qiladi, lekin <code>(i32, String)</code> bajarmaydi.</li>
+</ul>
+<h3 id="ownership-va-funksiyalar"><a class="header" href="#ownership-va-funksiyalar">Ownership va Funksiyalar</a></h3>
+<p>Funksiyaga qiymat berish mexanikasi o'zgaruvchiga qiymat berish mexanikasiga o'xshaydi. O'zgaruvchini funksiyaga o'tkazish, xuddi assignment kabi ko'chiriladi yoki nusxalanadi. 4-3 ro'yxatda o'zgaruvchilarning qayerga kirishi va tashqariga chiqishini ko'rsatadigan ba'zi izohlar bilan misol mavjud.</p>
+<p><span class="filename">Fayl nomi: src/main.rs</span></p>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    let s = String::from(&quot;salom&quot;);  // s scopega kiradi
+
+    ownershiplik_qiladi(s);             // s qiymati funksiyaga o'tadi ...
+                                    // ... va shuning uchun bu yerda endi amal qilmaydi
+
+    let x = 5;                      // x scopega kiradi
+
+    nusxasini_yaratadi(x);                  // x funksiyaga o'tadi,
+                                    // lekin i32 nusxa ko'chirish, shuning uchun tinch qo'yish yaxshidir
+                                    // keyin x dan foydalaning
+
+} // Bu erda x scopedan chiqib ketadi, keyin s. Lekin s qiymati ko'chirilganligi sababli, hech
+  // qanday maxsus narsa sodir bo'lmaydi.
+
+fn ownershiplik_qiladi(some_string: String) { // some_string scopega kiradi
+    println!(&quot;{}&quot;, some_string);
+} // Bu yerda some_string scopedan chiqib ketadi va `drop` deb ataladi. Qo'llab-quvvatlovchi
+  // xotira bo'shatiladi.
+
+fn nusxasini_yaratadi(some_integer: i32) { // some_integer scopega kiradi
+    println!(&quot;{}&quot;, some_integer);
+} // Bu erda some_integer scopedan tashqariga chiqadi. Hech qanday maxsus narsa bo'lmaydi.
+</code></pre></pre>
+<p><span class="caption">Ro'yxat 4-3: ownership va scope izohlangan funksiyalar</span></p>
+<p>Agar biz <code>ownershiplik_qiladi</code> chaqiruvidan keyin <code>s</code> dan foydalanmoqchi bo'lsak, Rust kompilyatsiya vaqtida xatolikka yo'l qo'yadi. Ushbu statik tekshiruvlar bizni xatolardan himoya qiladi. <code>s</code> va <code>x</code> dan foydalanadigan <code>main</code> ga kod qo‘shib ko‘ring va ulardan qayerda foydalanishingiz mumkinligini va ownership qoidalari bunga xalaqit beradigan joyni ko‘ring.</p>
+<h3 id="return-qiymatlari-va-scope"><a class="header" href="#return-qiymatlari-va-scope">Return qiymatlari va Scope</a></h3>
+<p>Return qilingan qiymatlar ownershipni ham o'tkazishi mumkin. 4-4 ro'yxatda 4-3 ro'yxatdagi kabi izohlar bilan ba'zi qiymatlarni qaytaradigan funksiya misoli ko'rsatilgan.</p>
+<p><span class="filename">Fayl nomi: src/main.rs</span></p>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    let s1 = egalik_beradi();         // egalik_beradi o'zining return qiymatini
+                                        // s1 ga o'tkazadi
+
+    let s2 = String::from(&quot;salom&quot;);     // s2 scopega kiradi
+
+    let s3 = oladi_va_qaytaradi(s2);  // s2 oladi_va_qaytaradi ichiga 
+                                        // ko'chiriladi, u ham o'zining return
+                                        // qiymatini s3 ga o'tkazadi
+} // Bu erda s3 scopedan chiqib ketadi va o'chiriladi. s2 ko'chirildi, shuning uchun
+  // hech narsa sodir bo'lmaydi. s1 scopedan chiqib ketadi va o'chiriladi.
+
+fn egalik_beradi() -&gt; String {             // egalik_beradi o'zining return
+                                             // qiymatini uni chaqiradigan
+                                             // funksiyaga o'tkazadi
+
+    let some_string = String::from(&quot;rust&quot;); // some_string scopea kiradi
+
+    some_string                              // some_string return qilinadi va
+                                             // chaqiruv funksiyasiga 
+                                             // o'tadi
+}
+
+// Bu funksiya Stringni oladi va bittasini qaytaradi
+fn oladi_va_qaytaradi(a_string: String) -&gt; String { // a_string scopega 
+                                                      // kiradi
+
+    a_string  // a_string qaytariladi va chaqiruv funksiyasiga o'tadi
+}
+</code></pre></pre>
+<p><span class="caption">Ro'yxat 4-4: Return ownershipni o'tkazish
+qiymatlar</span></p>
+<p>O'zgaruvchiga ownership har safar bir xil patternga amal qiladi: boshqa o'zgaruvchiga qiymat berish uni ko'chiradi. Heapdagi maʼlumotlarni oʻz ichiga olgan oʻzgaruvchi scopedan tashqariga chiqsa, agar maʼlumotlarga ownership boshqa oʻzgaruvchiga oʻtkazilmagan boʻlsa, qiymat <code>drop</code> orqali tozalanadi.</p>
+<p>Bu ishlayotganda, ownership va keyin har bir funksiyaga ownershipini qaytarish biroz zerikarli. Agar funksiyaga qiymatdan foydalanishiga ruxsat bermoqchi bo'lsak, lekin ownershiplik qilmasak nima bo'ladi? Bu juda zerikarli, agar biz uni qayta ishlatmoqchi bo'lsak, biz kiritgan har qanday narsa, shuningdek, biz qaytarishni xohlashimiz mumkin bo'lgan funktsiya tanasidan kelib chiqadigan har qanday ma'lumotlarga qo'shimcha ravishda qaytarib berilishi kerak.</p>
+<p>Rust 4-5 ro'yxatda ko'rsatilganidek, tuple yordamida bir nechta qiymatlarni return qilish imkon beradi.</p>
+<p><span class="filename">Fayl nomi: src/main.rs</span></p>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    let s1 = String::from(&quot;salom&quot;);
+
+    let (s2, len) = uzunlikni_hisoblash(s1);
+
+    println!(&quot;'{}' uzunligi {}.&quot;, s2, len);
+}
+
+fn uzunlikni_hisoblash(s: String) -&gt; (String, usize) {
+    let length = s.len(); // len() string uzunligini qaytaradi
+
+    (s, length)
+}
+</code></pre></pre>
+<p><span class="caption">Ro'yxat 4-5: Parametrlarga ownershipni qaytarish</span></p>
+<p>Ammo bu umumiy bo'lishi kerak bo'lgan kontseptsiya uchun juda ko'p funksiya va juda ko'p ish. Yaxshiyamki, Rustda qiymatni ownershipni o'tkazmasdan ishlatish xususiyati mavjud, uni <em>reference</em> deb atashadi.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="ch04-00-understanding-ownership.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a rel="next" href="ch04-02-references-and-borrowing.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="ch04-00-understanding-ownership.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a rel="next" href="ch04-02-references-and-borrowing.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        <script type="text/javascript" src="ferris.js"></script>
+    </body>
+</html>
